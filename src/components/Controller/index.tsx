@@ -1,20 +1,21 @@
 import "./style.css"
 
 import cn from "classnames"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
 import type { DownloadableMedia, Variant } from "~modules/Injector"
 
-import DownloadButton from "./Buttons/Download"
+// import DownloadButton from "./Buttons/Download"
 import VolumeButton from "./Buttons/Volume"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
 import SmartContainer from "./SmartContainer"
 
 type Props = {
+  id: string
   downloadableMedia?: DownloadableMedia
   video: HTMLVideoElement
   variant?: Variant
@@ -29,6 +30,7 @@ export function Volume({ variant }: { variant?: Variant }) {
     "better-instagram-videos-muted",
     false
   )
+
   const [volumeDragging, setVolumeDragging] = useState(false)
   const [maxVolumeBalance] = useStorage("bigv-max-volume-balance", 100)
 
@@ -51,6 +53,7 @@ export function Volume({ variant }: { variant?: Variant }) {
 }
 
 export default function Controller({
+  id,
   video,
   downloadableMedia,
   variant
@@ -130,9 +133,9 @@ export default function Controller({
   return (
     <>
       {variant !== "stories" && <Volume />}
-      {variant === "default" && downloadableMedia && (
+      {/* {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
-      )}
+      )} */}
       <div className={cn("better-ig-controller", variant)}>
         {video && (
           <ProgressBarHorizontal

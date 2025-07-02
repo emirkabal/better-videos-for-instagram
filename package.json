@@ -1,7 +1,7 @@
 {
   "name": "better-videos-for-instagram",
   "displayName": "Better Videos for Instagram",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "Easily control the playback and volume of Instagram videos.",
   "author": "Emir Kabal <me@emirkabal.com>",
   "scripts": {
@@ -16,7 +16,7 @@
     "@plasmohq/storage": "^1.15.0",
     "classnames": "^2.5.1",
     "lodash.debounce": "^4.0.8",
-    "plasmo": "0.90.3",
+    "plasmo": "0.90.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "usehooks-ts": "^3.1.1"

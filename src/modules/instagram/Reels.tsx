@@ -1,4 +1,5 @@
-import { createRoot } from "react-dom/client"
+import { unmountComponentAtNode } from "react-dom"
+import { createRoot, type Root } from "react-dom/client"
 
 import { Storage } from "@plasmohq/storage"
 
@@ -13,6 +14,7 @@ import IntervalInjector, {
 export default class Reels extends IntervalInjector {
   private commentsInterval: NodeJS.Timeout | null = null
   private pauseOnComments = true
+  private list: [Root, HTMLElement, HTMLElement][] = []
 
   constructor(options?: IntervalInjectorOptions) {
     super({
@@ -45,6 +47,23 @@ export default class Reels extends IntervalInjector {
       clearInterval(this.commentsInterval)
       this.commentsInterval = null
     }
+
+    for (const [root, container] of this.list) {
+      root.unmount()
+      container.remove()
+    }
+  }
+
+  public onDelete(id: string): void {
+    const index = this.list.findIndex(
+      ([_, __, controller]) => controller.id === id
+    )
+    if (index !== -1) {
+      const [root, container] = this.list[index]
+      root.unmount()
+      container.remove()
+      this.list.splice(index, 1)
+    }
   }
 
   public injected(props: InjectedProps): void {
@@ -61,9 +80,13 @@ export default class Reels extends IntervalInjector {
     buttons.classList.add("bigv-buttons")
     container.insertAdjacentElement("afterbegin", buttons)
 
-    createRoot(buttons).render(
+    const root = createRoot(buttons)
+
+    root.render(
       <Buttons ctx={{ download: props.downloadableMedia ?? undefined }} />
     )
+
+    this.list.push([root, buttons, this.lastInjected[2]])
 
     if (this.commentsInterval) clearInterval(this.commentsInterval)
 

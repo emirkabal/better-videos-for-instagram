@@ -1,9 +1,10 @@
-import { createRoot } from "react-dom/client"
+import { unmountComponentAtNode } from "react-dom"
+import { createRoot, type Root } from "react-dom/client"
 
 import Controller from "~components/Controller"
 import { IG_STORIES_VOLUME_INDICATOR } from "~utils/constants"
 
-export type Injected = [HTMLVideoElement, HTMLElement][]
+export type Injected = [HTMLVideoElement, HTMLElement, HTMLElement, Root][]
 export type DownloadableMedia = {
   id: string
   index?: number
@@ -27,9 +28,10 @@ export interface InjectedProps {
 }
 
 export default class Injector {
-  private improvePerformance = false
+  private improvePerformance = true
   private minRemoveCount = 4
   private removeCount = 3
+
   variant: Variant = Variant.Default
 
   private injectedList: Injected = []
@@ -111,6 +113,19 @@ export default class Injector {
    */
   public wayToInject(): void {}
 
+  /**
+   * This method is called when an injected element is deleted.
+   * @param id {string} - The ID of the controller that was deleted.
+   * @example
+   * ```ts
+   * const injector = new Injector();
+   * injector.onDelete = (id) => {
+   *  console.log(`Controller with ID ${id} was deleted.`);
+   * }
+   * ```
+   */
+  public onDelete(id: string) {}
+
   get lastInjected() {
     return this.injectedList[this.injectedList.length - 1]
   }
@@ -121,8 +136,12 @@ export default class Injector {
       this.improvePerformance
     ) {
       for (let i = 0; i < this.removeCount; i++) {
-        const [_, parent] = this.injectedList.shift()!
-        parent.remove()
+        const [video, _, controller, root] = this.injectedList.shift()!
+        if (!controller || !video) continue
+        video.removeAttribute("bigv-injected")
+        this.onDelete(controller.id)
+        root.unmount()
+        controller.remove()
       }
     }
   }
@@ -133,9 +152,14 @@ export default class Injector {
    */
   public delete() {
     this.beforeDelete()
-    this.injectedList.forEach(([_, parent]) => {
+    for (let i = 0; i < this.injectedList.length; i++) {
+      const [video, parent, controller, root] = this.injectedList[i]
+
+      video.removeAttribute("bigv-injected")
+      controller.remove()
+      root.unmount()
       parent.remove()
-    })
+    }
     this.injectedList.splice(0, this.injectedList.length)
     this.deleted()
   }
@@ -161,6 +185,7 @@ export default class Injector {
     video.setAttribute("bigv-injected", "")
 
     const controller = document.createElement("div")
+    controller.id = crypto.randomUUID()
     controller.setAttribute("bigv-inject", "")
 
     if (this.variant === Variant.Stories) {
@@ -184,8 +209,10 @@ export default class Injector {
       variant: this.variant
     }
 
-    createRoot(controller).render(
+    const root = createRoot(controller)
+    root.render(
       <Controller
+        id={controller.id}
         video={video}
         variant={this.variant}
         downloadableMedia={
@@ -194,7 +221,7 @@ export default class Injector {
       />
     )
 
-    this.injectedList.push([video, parent])
+    this.injectedList.push([video, parent, controller, root])
 
     this.injected({
       video,

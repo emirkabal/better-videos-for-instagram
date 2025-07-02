@@ -18,8 +18,6 @@ export default class Stories extends IntervalInjector {
   }
 
   public injected(): void {
-    console.log("IGStories injected")
-
     const igVolumeControl = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
     if (!igVolumeControl) return
 

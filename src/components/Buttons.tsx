@@ -1,7 +1,7 @@
 import type { DownloadableMedia } from "~modules/Injector"
 
 import Autoskip from "./Controller/Buttons/Autoskip"
-import DownloadButton from "./Controller/Buttons/Download"
+// import DownloadButton from "./Controller/Buttons/Download"
 
 import "./Controller/style.css"
 
@@ -15,7 +15,7 @@ export default function Buttons({
   return (
     <>
       <Autoskip />
-      {ctx.download && <DownloadButton data={ctx.download} />}
+      {/* {ctx.download && <DownloadButton data={ctx.download} />} */}
     </>
   )
 }

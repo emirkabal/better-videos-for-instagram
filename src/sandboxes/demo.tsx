@@ -22,7 +22,7 @@ export default function App() {
             src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ref={videoRef}></video>
 
-          {video && <Controller video={video} />}
+          {video && <Controller id="test" video={video} />}
         </div>
       </div>
     </>

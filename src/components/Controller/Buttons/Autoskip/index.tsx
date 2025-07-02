@@ -7,7 +7,7 @@ export default function Autoskip() {
 
   return (
     <div>
-      <label htmlFor={id}>
+      <label className="bigv-switch">
         <input
           id={id}
           type="checkbox"
@@ -15,7 +15,9 @@ export default function Autoskip() {
           onChange={() => setAutoSkip(!autoSkip)}
         />
         <span className="bigv-slider"></span>
-        <span>{chrome.i18n.getMessage("autoskipLabel")}</span>
+      </label>
+      <label htmlFor={id} className="bigv-switch-text">
+        {chrome.i18n.getMessage("autoskipLabel")}
       </label>
     </div>
   )

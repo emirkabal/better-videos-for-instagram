@@ -1,3 +1,21 @@
+:root {
+  --switch-width: 40px;
+  --switch-height: 22px;
+  --knob-size: 12px;
+  --active-color: #0c1014;
+  --inactive-color: #dbdfe4;
+  --knob-color: #fff;
+  --active-knob-color: #f8f9f9;
+  --animation-speed: 150ms;
+}
+
+.__fb-dark-mode:root {
+  --active-color: #f8f9f9;
+  --inactive-color: #2c2f33;
+  --knob-color: #ffffff;
+  --active-knob-color: #0c1014;
+}
+
 .better-ig-controller {
   display: flex;
   flex-direction: column;
@@ -56,59 +74,83 @@
   height: 44px;
 }
 
-.bigv-buttons label {
-  display: flex;
-  flex-direction: column;
+.bigv-switch {
   position: relative;
-  width: auto;
-  height: 24px;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  cursor: pointer;
+
+  flex-direction: column;
   gap: 24px;
-  line-height: 2;
   user-select: none;
   cursor: pointer;
-  scale: 0.72;
 }
 
-.bigv-buttons label input {
+.bigv-switch-text {
+  display: block;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  width: auto;
+  color: var(--active-color);
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.bigv-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.bigv-buttons label .bigv-slider {
+.bigv-slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
+  background-color: var(--inactive-color);
+  border-radius: var(--switch-height);
+  transition: background-color var(--animation-speed) ease-in-out;
 }
 
-.bigv-buttons label .bigv-slider:before {
+.bigv-slider:before {
   position: absolute;
   content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
+  height: var(--knob-size);
+  width: var(--knob-size);
+
+  left: calc((var(--switch-height) - var(--knob-size)) / 2);
+  bottom: calc((var(--switch-height) - var(--knob-size)) / 2);
+
+  background-color: var(--knob-color);
   border-radius: 50%;
+  transition: transform var(--animation-speed) ease-in-out;
 }
 
-.bigv-buttons label input:checked + .bigv-slider {
-  background-color: #2196f3;
+.bigv-switch input:checked + .bigv-slider:before {
+  background-color: var(--active-knob-color);
 }
 
-.bigv-buttons label input:focus + .bigv-slider {
-  box-shadow: 0 0 1px #2196f3;
+.bigv-switch input:checked + .bigv-slider:hover {
+  background-color: var(--active-color);
 }
 
-.bigv-buttons label input:checked + .bigv-slider:before {
-  -webkit-transform: translateX(32px);
-  -ms-transform: translateX(32px);
-  transform: translateX(32x);
+input:checked + .bigv-slider {
+  background-color: var(--active-color);
+}
+
+input:focus-visible + .bigv-slider {
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px var(--active-color);
+}
+
+input:checked + .bigv-slider:before {
+  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
 }
 
 .bigv-buttons svg {
