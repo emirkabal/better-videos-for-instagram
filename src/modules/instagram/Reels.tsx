@@ -70,7 +70,7 @@ export default class Reels extends IntervalInjector {
     if (!this.lastInjected) return
 
     const container =
-      this.lastInjected[1]?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.querySelector(
+      this.lastInjected[1]?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.querySelector(
         "&>:last-child"
       )
     if (!container) return
