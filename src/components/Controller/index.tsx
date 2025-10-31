@@ -7,6 +7,7 @@ import { useLocalStorage } from "usehooks-ts"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import type { DownloadableMedia, Variant } from "~modules/Injector"
+import { IG_REELS_SNAP } from "~utils/constants"
 
 // import DownloadButton from "./Buttons/Download"
 import VolumeButton from "./Buttons/Volume"
@@ -101,7 +102,7 @@ export default function Controller({
       autoSkip === "true" &&
       document.location.pathname.startsWith("/reels")
     ) {
-      const snap = document.querySelector('[role="main"]>:last-child')
+      const snap = document.querySelector(IG_REELS_SNAP)
       if (snap) snap.scrollBy(0, 1000)
     }
   }, [videoRef])
