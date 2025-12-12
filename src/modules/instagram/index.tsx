@@ -1,5 +1,5 @@
-import Home from "./Home"
+import Global from "./Global"
 import Reels from "./Reels"
 import Stories from "./Stories"
 
-export { Home, Reels, Stories }
+export { Global, Reels, Stories }

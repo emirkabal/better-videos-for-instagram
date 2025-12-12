@@ -7,7 +7,7 @@ import "./style.css"
 export default function Popup() {
   const [pauseOnComments, setPauseOnComments] = useStorage(
     "bigv-pause-on-comments",
-    true
+    false
   )
   const [volumeReduction, setVolumeReduction] = useStorage(
     "bigv-max-volume-balance",

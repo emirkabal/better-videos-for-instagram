@@ -4,7 +4,7 @@ import { createRoot, type Root } from "react-dom/client"
 import { Storage } from "@plasmohq/storage"
 
 import Buttons from "~components/Buttons"
-import { IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
+import { IG_NEW_VOLUME_INDICATOR, IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
 
 import { Variant, type InjectedProps } from "../Injector"
 import IntervalInjector, {
@@ -36,10 +36,8 @@ export default class Reels extends IntervalInjector {
   }
 
   public beforeInject(): void {
-    // Remove the mute & unmute button
-    document.querySelectorAll(IG_REELS_VOLUME_INDICATOR).forEach((svg) => {
-      svg.parentElement?.remove()
-    })
+    this.removeElements(IG_REELS_VOLUME_INDICATOR, true)
+    this.removeElements(IG_NEW_VOLUME_INDICATOR, false)
   }
 
   public beforeDelete(): void {
@@ -69,16 +67,25 @@ export default class Reels extends IntervalInjector {
   public injected(props: InjectedProps): void {
     if (!this.lastInjected) return
 
-    const container =
-      this.lastInjected[1]?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement.querySelector(
-        "&>:last-child"
+    let el = this.lastInjected[1]
+    while (
+      el &&
+      !(
+        el.lastElementChild &&
+        !el.lastElementChild.hasAttribute("style") &&
+        el.lastElementChild.classList.contains("html-div")
       )
-    if (!container) return
+    ) {
+      el = el.parentElement
+    }
+
+    const target = el?.lastElementChild
+    if (!target) return
 
     const buttons = document.createElement("div")
     buttons.setAttribute("bigv-inject", "")
     buttons.classList.add("bigv-buttons")
-    container.insertAdjacentElement("afterbegin", buttons)
+    target.insertAdjacentElement("afterbegin", buttons)
 
     const root = createRoot(buttons)
 

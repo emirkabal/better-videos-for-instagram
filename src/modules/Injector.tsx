@@ -145,6 +145,12 @@ export default class Injector {
     }
   }
 
+  public removeElements(selector: string, removeParent: boolean): void {
+    for (const el of document.querySelectorAll(selector)) {
+      removeParent ? el.parentElement?.remove() : el.remove()
+    }
+  }
+
   /**
    * This method deletes the injected elements.
    * @returns {void}
@@ -170,6 +176,7 @@ export default class Injector {
    * @returns {void}
    */
   public inject(video: HTMLVideoElement, parent: HTMLElement): void {
+
     if (
       !video ||
       !video?.parentElement ||
@@ -179,6 +186,7 @@ export default class Injector {
       return
 
     this.beforeInject()
+    
     this.clear()
 
     video.setAttribute("bigv-injected", "")
