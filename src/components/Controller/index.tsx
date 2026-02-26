@@ -68,6 +68,7 @@ export default function Controller({
     "better-instagram-videos-muted",
     false
   )
+  const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
 
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
@@ -91,7 +92,8 @@ export default function Controller({
 
   const play = useCallback(() => {
     updateAudio()
-  }, [updateAudio])
+    videoRef.current.playbackRate = playbackSpeed
+  }, [updateAudio, playbackSpeed])
 
   const ended = useCallback(() => {
     videoRef.current.currentTime = 0
@@ -125,6 +127,10 @@ export default function Controller({
   useEffect(() => {
     updateAudio()
   }, [videoRef, volume, muted])
+
+  useEffect(() => {
+    videoRef.current.playbackRate = playbackSpeed
+  }, [videoRef, playbackSpeed])
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
