@@ -102,9 +102,9 @@ export default class Reels extends IntervalInjector {
 
       const commentsDialog = document.querySelector("div[role='dialog']")
       if (commentsDialog) {
-        document.querySelectorAll("video").forEach((v) => {
-          if (!v.paused) v.pause()
-        })
+        localStorage.setItem('bigv-comments-opened', '1')
+      } else {
+        localStorage.removeItem('bigv-comments-opened')
       }
     }, 750)
   }

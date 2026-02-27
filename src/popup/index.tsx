@@ -7,7 +7,7 @@ import "./style.css"
 export default function Popup() {
   const [pauseOnComments, setPauseOnComments] = useStorage(
     "bigv-pause-on-comments",
-    false
+    true
   )
   const [volumeReduction, setVolumeReduction] = useStorage(
     "bigv-max-volume-balance",
@@ -52,7 +52,7 @@ export default function Popup() {
         <div className="settings-category">
           <h2>Reels</h2>
           <div className="setting-item checkbox">
-            <span>Pause video when comments are opened</span>
+            <span>Pause auto-skip when comments are opened</span>
             <label className="switch">
               <input
                 type="checkbox"

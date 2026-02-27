@@ -69,6 +69,7 @@ export default function Controller({
     false
   )
   const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
+  const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
 
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
@@ -102,6 +103,7 @@ export default function Controller({
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
+      (!pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
