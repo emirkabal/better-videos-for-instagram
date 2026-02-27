@@ -103,7 +103,7 @@ export default function Controller({
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
-      (!pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
+      (pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
