@@ -181,6 +181,7 @@ export default class Injector {
       !video ||
       !video?.parentElement ||
       !video?.src ||
+      !video.src.startsWith('blob:') ||
       video?.hasAttribute("bigv-injected")
     )
       return
@@ -229,7 +230,6 @@ export default class Injector {
     )
 
     this.injectedList.push([video, parent, controller, root])
-
     this.injected({
       video,
       downloadableMedia:

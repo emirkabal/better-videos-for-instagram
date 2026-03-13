@@ -24,6 +24,7 @@ export default class IntervalInjector extends Injector {
     if (videos.length === 0) return
     for (let i = 0; i < videos.length; i++) {
       const video = videos[i]
+      if (!video?.src.startsWith('blob:')) continue
       if (
         this.isInjected(video as HTMLVideoElement) ||
         video.hasAttribute("bigv-attached-listeners")
