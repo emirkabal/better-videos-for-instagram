@@ -11,6 +11,7 @@ import { IG_REELS_SNAP } from "~utils/constants"
 
 // import DownloadButton from "./Buttons/Download"
 import VolumeButton from "./Buttons/Volume"
+import PlaybackSpeed from "./Buttons/PlaybackSpeed"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
 import SmartContainer from "./SmartContainer"
@@ -49,6 +50,7 @@ export function Volume({ variant }: { variant?: Variant }) {
           if (!_) setVolume(volume)
         }}
       />
+      <PlaybackSpeed />
     </SmartContainer>
   )
 }
@@ -68,8 +70,14 @@ export default function Controller({
     "better-instagram-videos-muted",
     false
   )
-  const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
+  const [playbackSpeed] = useStorage("bigv-playback-speed", 1)
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
+
+  // Ref que espelha playbackSpeed para uso sem closure stale nos event listeners
+  const playbackSpeedRef = useRef(playbackSpeed)
+  useEffect(() => {
+    playbackSpeedRef.current = playbackSpeed
+  }, [playbackSpeed])
 
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
@@ -111,33 +119,57 @@ export default function Controller({
     }
   }, [videoRef])
 
+  // Único efeito para garantir que a velocidade seja respeitada contra interferência do Instagram
   useEffect(() => {
-    videoRef.current.addEventListener("timeupdate", timeUpdate)
-    videoRef.current.addEventListener("play", play)
-    videoRef.current.addEventListener("ended", ended)
-    videoRef.current.addEventListener("volumechange", updateAudio)
-    videoRef.current.addEventListener("seeked", updateAudio)
-    return () => {
-      videoRef.current.removeEventListener("timeupdate", timeUpdate)
-      videoRef.current.removeEventListener("play", play)
-      videoRef.current.removeEventListener("ended", ended)
-      videoRef.current.removeEventListener("volumechange", updateAudio)
-      videoRef.current.removeEventListener("seeked", updateAudio)
+    const el = videoRef.current
+    if (!el) return
+
+    const applySpeed = () => {
+      const desired = playbackSpeedRef.current
+      if (typeof desired === "number" && Math.abs(el.playbackRate - desired) > 0.01) {
+        // Tenta aplicar a velocidade. Alguns players de terceiros podem lançar erros ao mudar playbackRate.
+        try {
+          el.playbackRate = desired
+        } catch (e) {
+          console.error("Erro ao aplicar velocidade: ", e)
+        }
+      }
     }
-  }, [videoRef, timeUpdate, play, ended, updateAudio])
+
+    // Heartbeat: garante que a velocidade seja resetada mesmo que não tenhamos capturado um evento
+    const interval = setInterval(applySpeed, 350)
+
+    // Listeners em múltiplos eventos de controle do player
+    el.addEventListener("play", applySpeed)
+    el.addEventListener("playing", applySpeed)
+    el.addEventListener("ratechange", applySpeed)
+    el.addEventListener("timeupdate", timeUpdate)
+    el.addEventListener("ended", ended)
+    el.addEventListener("volumechange", updateAudio)
+    el.addEventListener("seeked", updateAudio)
+
+    applySpeed()
+
+    return () => {
+      clearInterval(interval)
+      el.removeEventListener("play", applySpeed)
+      el.removeEventListener("playing", applySpeed)
+      el.removeEventListener("ratechange", applySpeed)
+      el.removeEventListener("timeupdate", timeUpdate)
+      el.removeEventListener("ended", ended)
+      el.removeEventListener("volumechange", updateAudio)
+      el.removeEventListener("seeked", updateAudio)
+    }
+  }, [videoRef, timeUpdate, ended, updateAudio])
 
   useEffect(() => {
     updateAudio()
-  }, [videoRef, volume, muted])
-
-  useEffect(() => {
-    videoRef.current.playbackRate = playbackSpeed
-  }, [videoRef, playbackSpeed])
+  }, [videoRef, volume, muted, updateAudio])
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
     else videoRef.current.play().catch(() => {})
-  }, [dragging])
+  }, [videoRef, dragging])
 
   return (
     <>

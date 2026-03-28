@@ -6,24 +6,24 @@ import {
   useState,
   type CSSProperties
 } from "react"
-import { useLocalStorage } from "usehooks-ts"
+import { useStorage } from "@plasmohq/storage/hook"
 
 import SpeedometerIcon from "./SpeedometerIcon"
-
-const SPEED_OPTIONS = [0.25, 0.5, 1, 1.25, 1.5, 2] as const
+const SPEED_OPTIONS = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] as const
 
 const SPEED_ANGLE: Record<typeof SPEED_OPTIONS[number], number> = {
   0.25: -90,
   0.5: -45,
+  0.75: -22.5,
   1: 0,
   1.25: 22.5,
   1.5: 45,
+  1.75: 67.5,
   2: 90
 }
-
 export default function PlaybackSpeed() {
   const id = useId()
-  const [playbackSpeed, setPlaybackSpeed] = useLocalStorage(
+  const [playbackSpeed, setPlaybackSpeed] = useStorage(
     "bigv-playback-speed",
     1
   )
@@ -82,7 +82,10 @@ export default function PlaybackSpeed() {
         title={`Playback speed: ${speed}x`}
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen(!open)}>
+        onClick={(e) => {
+          e.stopPropagation()
+          setOpen(!open)
+        }}>
         <SpeedometerIcon handStyle={speedStyle} />
       </button>
 
@@ -95,21 +98,22 @@ export default function PlaybackSpeed() {
           className="bigv-speed-popup"
           role="listbox"
           aria-label="Playback speed">
-          {SPEED_OPTIONS.map((value) => (
-            <button
-              key={value}
-              role="option"
-              type="button"
-              className="bigv-speed-option"
-              aria-selected={speed === value}
-              data-active={speed === value}
-              onClick={() => {
-                setPlaybackSpeed(value)
-                setOpen(false)
-              }}>
-              {value}x
-            </button>
-          ))}
+            {SPEED_OPTIONS.map((value) => (
+              <button
+                key={value}
+                role="option"
+                type="button"
+                className="bigv-speed-option"
+                aria-selected={speed === value}
+                data-active={speed === value}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setPlaybackSpeed(value)
+                  setOpen(false)
+                }}>
+                {value}x
+              </button>
+            ))}
         </div>
       )}
     </div>
