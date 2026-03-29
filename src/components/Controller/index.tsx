@@ -1,7 +1,7 @@
 import "./style.css"
 
 import cn from "classnames"
-import { useCallback, useEffect, useId, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
 import { useStorage } from "@plasmohq/storage/hook"
@@ -73,74 +73,104 @@ export default function Controller({
   const [playbackSpeed] = useStorage("bigv-playback-speed", 1)
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
 
-  // Ref que espelha playbackSpeed para uso sem closure stale nos event listeners
+  // Mirror ref: always contains the current playbackSpeed value without creating
+  // stale closures in native DOM event listeners.
   const playbackSpeedRef = useRef(playbackSpeed)
   useEffect(() => {
     playbackSpeedRef.current = playbackSpeed
   }, [playbackSpeed])
 
-  // ig reels start
-  // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
+  // Strategy 1: IntersectionObserver — only applies speed when the video
+  // is visible on screen. Prevents conflicts with Instagram's list virtualization.
+  const isVisibleRef = useRef(false)
+
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting
+      },
+      { threshold: 0.5 } // at least 50% visible
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [videoRef])
 
   const updateAudio = useCallback(() => {
+    const el = videoRef.current
+    // Strategy 2: checks if the element is still in the DOM before manipulating
+    if (!el || !document.contains(el)) return
+
     const normalizedVolume = Math.min(volume, 1)
-    videoRef.current.volume = normalizedVolume
-    if (
-      "userActivation" in navigator &&
-      !navigator.userActivation.hasBeenActive
-    )
+    el.volume = normalizedVolume
+    if ("userActivation" in navigator && !navigator.userActivation.hasBeenActive)
       setMuted(true)
-    videoRef.current.muted = muted
+    el.muted = muted
   }, [videoRef, volume, muted])
 
   const timeUpdate = useCallback(() => {
-    setProgress(
-      (videoRef.current.currentTime / videoRef.current.duration) * 100
-    )
+    const el = videoRef.current
+    if (!el || !document.contains(el)) return
+    setProgress((el.currentTime / el.duration) * 100)
   }, [videoRef])
 
-  const play = useCallback(() => {
-    updateAudio()
-    videoRef.current.playbackRate = playbackSpeed
-  }, [updateAudio, playbackSpeed])
-
   const ended = useCallback(() => {
-    videoRef.current.currentTime = 0
-    videoRef.current.play()
+    const el = videoRef.current
+    if (!el || !document.contains(el)) return
+    el.currentTime = 0
+    el.play()
 
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
-      (pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
+      (pauseOnComments &&
+        localStorage.getItem("bigv-comments-opened") !== "1") &&
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
       if (snap) snap.scrollBy(0, 1000)
     }
-  }, [videoRef])
+  }, [videoRef, pauseOnComments])
 
-  // Único efeito para garantir que a velocidade seja respeitada contra interferência do Instagram
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
 
+    // Guard flag: prevents feedback loop
+    // ratechange → applySpeed → sets playbackRate → ratechange → ...
+    let isApplying = false
+
     const applySpeed = () => {
+      // Strategy 1: only operates on the visible video
+      if (!isVisibleRef.current) return
+      // Strategy 2: checks DOM presence
+      if (!document.contains(el)) return
+      if (isApplying) return
+
       const desired = playbackSpeedRef.current
-      if (typeof desired === "number" && Math.abs(el.playbackRate - desired) > 0.01) {
-        // Tenta aplicar a velocidade. Alguns players de terceiros podem lançar erros ao mudar playbackRate.
-        try {
-          el.playbackRate = desired
-        } catch (e) {
-          console.error("Erro ao aplicar velocidade: ", e)
-        }
+      if (typeof desired !== "number" || Math.abs(el.playbackRate - desired) <= 0.01) return
+
+      try {
+        isApplying = true
+        el.playbackRate = desired
+      } catch (_) {
+        // Native player might silently reject the change
+      } finally {
+        isApplying = false
       }
     }
 
-    // Heartbeat: garante que a velocidade seja resetada mesmo que não tenhamos capturado um evento
-    const interval = setInterval(applySpeed, 350)
+    const onPlay = () => {
+      updateAudio()
+      // Strategy 3: 150ms delay ensures that the native player has finished
+      // its initialization before we try to change the speed.
+      setTimeout(applySpeed, 150)
+    }
 
-    // Listeners em múltiplos eventos de controle do player
-    el.addEventListener("play", applySpeed)
+    el.addEventListener("play", onPlay)
     el.addEventListener("playing", applySpeed)
     el.addEventListener("ratechange", applySpeed)
     el.addEventListener("timeupdate", timeUpdate)
@@ -148,11 +178,12 @@ export default function Controller({
     el.addEventListener("volumechange", updateAudio)
     el.addEventListener("seeked", updateAudio)
 
-    applySpeed()
+    // Strategy 3: delay also on initial application
+    const initialTimer = setTimeout(applySpeed, 150)
 
     return () => {
-      clearInterval(interval)
-      el.removeEventListener("play", applySpeed)
+      clearTimeout(initialTimer)
+      el.removeEventListener("play", onPlay)
       el.removeEventListener("playing", applySpeed)
       el.removeEventListener("ratechange", applySpeed)
       el.removeEventListener("timeupdate", timeUpdate)
@@ -166,9 +197,26 @@ export default function Controller({
     updateAudio()
   }, [videoRef, volume, muted, updateAudio])
 
+  // When the user changes the speed in the menu, apply with a delay so it doesn't
+  // interfere with ongoing buffering operations
   useEffect(() => {
-    if (dragging) videoRef.current.pause()
-    else videoRef.current.play().catch(() => {})
+    const el = videoRef.current
+    if (!el || !document.contains(el)) return
+    const timer = setTimeout(() => {
+      if (document.contains(el)) {
+        try {
+          el.playbackRate = playbackSpeed ?? 1
+        } catch (_) {}
+      }
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [videoRef, playbackSpeed])
+
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+    if (dragging) el.pause()
+    else el.play().catch(() => {})
   }, [videoRef, dragging])
 
   return (

@@ -240,4 +240,24 @@ export default class Injector {
   public isInjected(video: HTMLVideoElement): boolean {
     return video.hasAttribute("bigv-injected")
   }
+
+  /**
+   * Removes the React controller associated with a single specific video.
+   * Used by the MutationInjector when Instagram unmounts a video.
+   */
+  public removeByVideo(video: HTMLVideoElement): void {
+    const index = this.injectedList.findIndex(([v]) => v === video)
+    if (index === -1) return
+
+    const [v, _, controller, root] = this.injectedList[index]
+    try {
+      v.removeAttribute("bigv-injected")
+      this.onDelete(controller.id)
+      root.unmount()
+      controller.remove()
+    } catch (_) {
+      // Element may already be removed from the DOM
+    }
+    this.injectedList.splice(index, 1)
+  }
 }

@@ -1,22 +1,22 @@
-import { unmountComponentAtNode } from "react-dom"
 import { createRoot, type Root } from "react-dom/client"
 
 import { Storage } from "@plasmohq/storage"
 
 import Buttons from "~components/Buttons"
-import { IG_NEW_VOLUME_INDICATOR, IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
+import {
+  IG_NEW_VOLUME_INDICATOR,
+  IG_REELS_VOLUME_INDICATOR
+} from "~utils/constants"
 
-import { Variant, type InjectedProps } from "../Injector"
-import IntervalInjector, {
-  type IntervalInjectorOptions
-} from "../IntervalInjector"
+import { Variant, type InjectedProps, type InjectorOptions } from "../Injector"
+import MutationInjector from "../MutationInjector"
 
-export default class Reels extends IntervalInjector {
+export default class Reels extends MutationInjector {
   private commentsInterval: NodeJS.Timeout | null = null
   private pauseOnComments = true
   private list: [Root, HTMLElement, HTMLElement][] = []
 
-  constructor(options?: IntervalInjectorOptions) {
+  constructor(options?: InjectorOptions) {
     super({
       ...options,
       variant: Variant.Reels
@@ -50,6 +50,15 @@ export default class Reels extends IntervalInjector {
       root.unmount()
       container.remove()
     }
+    this.list = []
+  }
+
+  /**
+   * Override deleted() to call beforeDelete() and then the MutationInjector's cleanup
+   */
+  public deleted(): void {
+    this.beforeDelete()
+    super.deleted()
   }
 
   public onDelete(id: string): void {
@@ -58,8 +67,10 @@ export default class Reels extends IntervalInjector {
     )
     if (index !== -1) {
       const [root, container] = this.list[index]
-      root.unmount()
-      container.remove()
+      try {
+        root.unmount()
+        container.remove()
+      } catch (_) {}
       this.list.splice(index, 1)
     }
   }
@@ -102,9 +113,9 @@ export default class Reels extends IntervalInjector {
 
       const commentsDialog = document.querySelector("div[role='dialog']")
       if (commentsDialog) {
-        localStorage.setItem('bigv-comments-opened', '1')
+        localStorage.setItem("bigv-comments-opened", "1")
       } else {
-        localStorage.removeItem('bigv-comments-opened')
+        localStorage.removeItem("bigv-comments-opened")
       }
     }, 750)
   }
