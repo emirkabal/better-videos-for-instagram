@@ -27,7 +27,7 @@ const load = () => {
   if (first === "reels") {
     globalInjector.delete()
     storiesInjector.delete()
-    reelsInjector.wayToInject()
+    reelsInjector.delete() // DISABLE EXTENSION ON REELS
   } else if (first === "stories") {
     globalInjector.delete()
     reelsInjector.delete()

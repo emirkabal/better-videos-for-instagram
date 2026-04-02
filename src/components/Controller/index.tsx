@@ -73,35 +73,11 @@ export default function Controller({
   const [playbackSpeed] = useStorage("bigv-playback-speed", 1)
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
 
-  // Mirror ref: always contains the current playbackSpeed value without creating
-  // stale closures in native DOM event listeners.
-  const playbackSpeedRef = useRef(playbackSpeed)
-  useEffect(() => {
-    playbackSpeedRef.current = playbackSpeed
-  }, [playbackSpeed])
-
-  // Strategy 1: IntersectionObserver — only applies speed when the video
-  // is visible on screen. Prevents conflicts with Instagram's list virtualization.
-  const isVisibleRef = useRef(false)
-
-  useEffect(() => {
-    const el = videoRef.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisibleRef.current = entry.isIntersecting
-      },
-      { threshold: 0.5 } // at least 50% visible
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [videoRef])
+  // Ref espelho removido: como usamos o patch.ts global, as referências stale
+  // não afetam mais a interface, uma vez que a velocidade é gerida pelo `postMessage`.
 
   const updateAudio = useCallback(() => {
     const el = videoRef.current
-    // Strategy 2: checks if the element is still in the DOM before manipulating
     if (!el || !document.contains(el)) return
 
     const normalizedVolume = Math.min(volume, 1)
@@ -139,57 +115,30 @@ export default function Controller({
     const el = videoRef.current
     if (!el) return
 
-    // Guard flag: prevents feedback loop
-    // ratechange → applySpeed → sets playbackRate → ratechange → ...
-    let isApplying = false
-
-    const applySpeed = () => {
-      // Strategy 1: only operates on the visible video
-      if (!isVisibleRef.current) return
-      // Strategy 2: checks DOM presence
-      if (!document.contains(el)) return
-      if (isApplying) return
-
-      const desired = playbackSpeedRef.current
-      if (typeof desired !== "number" || Math.abs(el.playbackRate - desired) <= 0.01) return
-
-      try {
-        isApplying = true
-        el.playbackRate = desired
-      } catch (_) {
-        // Native player might silently reject the change
-      } finally {
-        isApplying = false
-      }
-    }
-
     const onPlay = () => {
       updateAudio()
-      // Strategy 3: 150ms delay ensures that the native player has finished
-      // its initialization before we try to change the speed.
-      setTimeout(applySpeed, 150)
     }
+    
+    // STEALTH MODE: Prevents Instagram from detecting buffered "lag" errors
+    // caused by playing the video at 2x metadata speed
+    const stopPropagation = (e: Event) => e.stopImmediatePropagation()
 
     el.addEventListener("play", onPlay)
-    el.addEventListener("playing", applySpeed)
-    el.addEventListener("ratechange", applySpeed)
     el.addEventListener("timeupdate", timeUpdate)
     el.addEventListener("ended", ended)
     el.addEventListener("volumechange", updateAudio)
     el.addEventListener("seeked", updateAudio)
-
-    // Strategy 3: delay also on initial application
-    const initialTimer = setTimeout(applySpeed, 150)
+    el.addEventListener("waiting", stopPropagation, true)
+    el.addEventListener("stalled", stopPropagation, true)
 
     return () => {
-      clearTimeout(initialTimer)
       el.removeEventListener("play", onPlay)
-      el.removeEventListener("playing", applySpeed)
-      el.removeEventListener("ratechange", applySpeed)
       el.removeEventListener("timeupdate", timeUpdate)
       el.removeEventListener("ended", ended)
       el.removeEventListener("volumechange", updateAudio)
       el.removeEventListener("seeked", updateAudio)
+      el.removeEventListener("waiting", stopPropagation, true)
+      el.removeEventListener("stalled", stopPropagation, true)
     }
   }, [videoRef, timeUpdate, ended, updateAudio])
 
@@ -197,20 +146,10 @@ export default function Controller({
     updateAudio()
   }, [videoRef, volume, muted, updateAudio])
 
-  // When the user changes the speed in the menu, apply with a delay so it doesn't
-  // interfere with ongoing buffering operations
+  // Notifies the MAIN world script (patch.ts) to natively sink the new speed value globally
   useEffect(() => {
-    const el = videoRef.current
-    if (!el || !document.contains(el)) return
-    const timer = setTimeout(() => {
-      if (document.contains(el)) {
-        try {
-          el.playbackRate = playbackSpeed ?? 1
-        } catch (_) {}
-      }
-    }, 100)
-    return () => clearTimeout(timer)
-  }, [videoRef, playbackSpeed])
+    window.postMessage({ type: "BIGV_SPEED_CHANGE", speed: playbackSpeed ?? 1 }, "*")
+  }, [playbackSpeed])
 
   useEffect(() => {
     const el = videoRef.current
