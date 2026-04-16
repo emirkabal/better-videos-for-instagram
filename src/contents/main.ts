@@ -3,7 +3,8 @@ import type { PlasmoCSConfig } from "plasmo"
 import { Global, Reels, Stories } from "~modules/instagram"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://www.instagram.com/*"]
+  matches: ["https://www.instagram.com/*"],
+  exclude_matches: ["https://www.instagram.com/reels/*", "https://www.instagram.com/reels"]
 }
 
 const REGEX =
@@ -15,20 +16,26 @@ const storiesInjector = new Stories()
 
 let currentPathname = ""
 
+const isOnReels = () => location.pathname.startsWith("/reels")
+
 const load = () => {
   // Ignore if the route hasn't changed (prevents unnecessary re-initialization)
   const pathname = location.pathname
   if (pathname === currentPathname) return
   currentPathname = pathname
 
+  // ABSOLUTE GUARD: If on Reels, destroy everything and bail out entirely
+  if (isOnReels()) {
+    globalInjector.delete()
+    reelsInjector.delete()
+    storiesInjector.delete()
+    return
+  }
+
   const match = pathname.match(REGEX)
   const first = match?.[1]
 
-  if (first === "reels") {
-    globalInjector.delete()
-    storiesInjector.delete()
-    reelsInjector.delete() // DISABLE EXTENSION ON REELS
-  } else if (first === "stories") {
+  if (first === "stories") {
     globalInjector.delete()
     reelsInjector.delete()
     storiesInjector.wayToInject()

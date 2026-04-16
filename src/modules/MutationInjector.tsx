@@ -22,6 +22,8 @@ export default class MutationInjector extends Injector {
     HTMLVideoElement,
     ReturnType<typeof setTimeout>
   >()
+  
+  private isActive = false
 
   constructor(options?: InjectorOptions) {
     super(options)
@@ -39,6 +41,7 @@ export default class MutationInjector extends Injector {
     if (video.hasAttribute("bigv-mutation-watching")) return
 
     const tryInject = () => {
+      if (!this.isActive) return
       this.pendingTimers.delete(video)
 
       // Check if the element is still in the DOM before operating on it
@@ -62,6 +65,8 @@ export default class MutationInjector extends Injector {
         video.removeEventListener("playing", onReady)
         video.removeEventListener("timeupdate", onReady)
         video.removeAttribute("bigv-mutation-watching")
+        
+        if (!this.isActive) return
         const timer = setTimeout(tryInject, 250)
         this.pendingTimers.set(video, timer)
       }
@@ -96,7 +101,13 @@ export default class MutationInjector extends Injector {
   }
 
   public wayToInject(): void {
+    // ABSOLUTE GUARD: Never inject on Reels
+    if (location.pathname.startsWith("/reels")) {
+      this.deleted()
+      return
+    }
     this.deleted() // ensures that any previous observer is disconnected
+    this.isActive = true
 
     this.observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
@@ -126,6 +137,7 @@ export default class MutationInjector extends Injector {
   }
 
   public deleted(): void {
+    this.isActive = false
     if (this.observer) {
       this.observer.disconnect()
       this.observer = null

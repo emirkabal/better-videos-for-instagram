@@ -163,7 +163,6 @@ export default class Injector {
       video.removeAttribute("bigv-injected")
       controller.remove()
       root.unmount()
-      parent.remove()
     }
     this.injectedList.splice(0, this.injectedList.length)
     this.deleted()

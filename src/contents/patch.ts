@@ -2,15 +2,18 @@ import type { PlasmoCSConfig } from "plasmo"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.instagram.com/*"],
+  exclude_matches: ["https://www.instagram.com/reels/*", "https://www.instagram.com/reels"],
   world: "MAIN",
   run_at: "document_start"
 }
 
+// Dynamic guard: covers SPA navigation from / to /reels/ without page reload
+const isOnReels = () => location.pathname.startsWith("/reels")
+
 // 1. Intercept global addEventListener for 'unload' and 'afterunload' to avoid Comet crashes
 const originalAddEventListener = window.addEventListener
 window.addEventListener = function (type, listener, options) {
-  // Bypass if on Reels
-  if (location.pathname.startsWith("/reels/")) {
+  if (isOnReels()) {
     return originalAddEventListener.call(this, type, listener, options)
   }
 
@@ -26,8 +29,7 @@ window.addEventListener = function (type, listener, options) {
 // This prevents the Main Thread from freezing by trying to draw red logs in the console
 const nativeConsoleError = console.error
 console.error = function (...args) {
-  // Bypass if on Reels
-  if (location.pathname.startsWith("/reels/")) {
+  if (isOnReels()) {
     return nativeConsoleError.apply(console, args)
   }
 
@@ -61,6 +63,7 @@ window.addEventListener(
 window.addEventListener(
   "error",
   (e) => {
+    if (isOnReels()) return
     if (e.message?.includes("unload") || e.message?.includes("Permissions policy")) {
       e.stopImmediatePropagation()
       e.preventDefault()
@@ -76,8 +79,7 @@ window.addEventListener("message", (event) => {
   if (event.data?.type === "BIGV_SPEED_CHANGE") {
     activeSpeed = event.data.speed
     
-    // Bypass if on Reels
-    if (location.pathname.startsWith("/reels/")) return
+    if (isOnReels()) return
 
     // Force the new speed on all existing video elements immediately
     document.querySelectorAll('video').forEach(video => {
@@ -95,14 +97,14 @@ const rawPlaybackRate = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototy
 if (rawPlaybackRate) {
   Object.defineProperty(HTMLMediaElement.prototype, 'playbackRate', {
     set: function(value) {
-      if (location.pathname.startsWith("/reels/")) {
+      if (isOnReels()) {
         return rawPlaybackRate.set.call(this, value)
       }
       // Ignore whatever Instagram wants, force our active speed
       return rawPlaybackRate.set.call(this, activeSpeed)
     },
     get: function() {
-      if (location.pathname.startsWith("/reels/")) {
+      if (isOnReels()) {
         return rawPlaybackRate.get.call(this)
       }
       // STEALTH MODE: Instagram monitors the speed to sync its UI.
