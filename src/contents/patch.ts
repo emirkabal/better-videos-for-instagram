@@ -2,72 +2,103 @@ import type { PlasmoCSConfig } from "plasmo"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.instagram.com/*"],
-  exclude_matches: ["https://www.instagram.com/reels/*", "https://www.instagram.com/reels"],
   world: "MAIN",
-  run_at: "document_start"
+  run_at: "document_start",
+  all_frames: true
 }
 
 // Dynamic guard: covers SPA navigation from / to /reels/ without page reload
 const isOnReels = () => location.pathname.startsWith("/reels")
 
-// 1. Intercept global addEventListener for 'unload' and 'afterunload' to avoid Comet crashes
-const originalAddEventListener = window.addEventListener
-window.addEventListener = function (type, listener, options) {
-  if (isOnReels()) {
-    return originalAddEventListener.call(this, type, listener, options)
-  }
+// =============================================================================
+// DEFENSIVE LAYER — Runs on ALL pages (including /reels/ and iframes)
+// Purpose: Neutralize Instagram's unload event registrations that cause
+// Permissions Policy violations and RunComet freeze loops.
+// =============================================================================
 
-  // If Instagram tries to register an 'unload', silently swap for 'pagehide'
-  // This avoids the policy violation and RunComet freeze loop
-  if (type === "unload" || type === "afterunload") {
-    return originalAddEventListener.call(this, "pagehide", listener, options)
+// LEVEL 1: Intercept at EventTarget.prototype (the ROOT of all addEventListener calls).
+// This catches everything — even if Instagram's bundled code captured a reference to
+// addEventListener BEFORE our script ran, the prototype method is what ultimately executes.
+const originalAEL = EventTarget.prototype.addEventListener
+EventTarget.prototype.addEventListener = function (
+  type: string,
+  listener: EventListenerOrEventListenerObject | null,
+  options?: boolean | AddEventListenerOptions
+) {
+  // Only intercept 'unload'/'afterunload' on Window targets
+  if (
+    (type === "unload" || type === "afterunload") &&
+    this instanceof Window
+  ) {
+    return originalAEL.call(this, "pagehide", listener, options)
   }
-  return originalAddEventListener.call(this, type, listener, options)
+  return originalAEL.call(this, type, listener, options)
 }
 
-// Extra Shield: Silence the violation error log
-// This prevents the Main Thread from freezing by trying to draw red logs in the console
-const nativeConsoleError = console.error
-console.error = function (...args) {
-  if (isOnReels()) {
-    return nativeConsoleError.apply(console, args)
-  }
+// LEVEL 2: Trap window.onunload property assignment.
+// Instagram may use `window.onunload = handler` which bypasses addEventListener entirely.
+Object.defineProperty(window, "onunload", {
+  set(_fn) {
+    // Silently discard — the handler will never fire anyway due to Permissions Policy
+  },
+  get() {
+    return null
+  },
+  configurable: true
+})
 
+// LEVEL 3: Silence violation logs from console.error AND console.warn.
+// The browser may log violations via either channel depending on Chrome version.
+const nativeConsoleError = console.error
+const nativeConsoleWarn = console.warn
+
+console.error = function (...args: unknown[]) {
+  const msg = typeof args[0] === "string" ? args[0] : ""
   if (
-    typeof args[0] === "string" &&
-    args[0].includes("Permissions policy violation")
+    msg.includes("Permissions policy violation") ||
+    msg.includes("unload") && msg.includes("deprecated")
   ) {
     return
   }
   nativeConsoleError.apply(console, args)
 }
 
-// bfcache lifecycle handler
-window.addEventListener(
-  "pagehide",
-  (event) => {
-    if (event.persisted) {
-      // The page went into the bfcache (it was not destroyed).
-      // Since our patch.ts has no setIntervals or rAF, we are safe.
-      // This is here to ensure compliance with the extension's performance rules.
-    } else {
-      // The page is truly being closed/destroyed.
+console.warn = function (...args: unknown[]) {
+  const msg = typeof args[0] === "string" ? args[0] : ""
+  if (
+    msg.includes("Permissions policy violation") ||
+    msg.includes("unload") && msg.includes("deprecated")
+  ) {
+    return
+  }
+  nativeConsoleWarn.apply(console, args)
+}
+
+// LEVEL 4: Error event shield — kill unload/policy errors before they reach RunComet.
+originalAEL.call(
+  window,
+  "error",
+  (e: ErrorEvent) => {
+    if (
+      e.message?.includes("unload") ||
+      e.message?.includes("Permissions policy")
+    ) {
+      e.stopImmediatePropagation()
+      e.preventDefault()
     }
   },
   true
 )
 
-// 2. Error Shield (Silent Kill)
-// RunComet generates massive error logs when the video is accelerated.
-// We silently kill the 'Permissions Policy' or 'unload' errors that flood the CPU.
-window.addEventListener(
-  "error",
-  (e) => {
-    if (isOnReels()) return
-    if (e.message?.includes("unload") || e.message?.includes("Permissions policy")) {
-      e.stopImmediatePropagation()
-      e.preventDefault()
+// bfcache lifecycle handler
+originalAEL.call(
+  window,
+  "pagehide",
+  (event: PageTransitionEvent) => {
+    if (event.persisted) {
+      // Page entered bfcache — our patch has no timers/rAF, so we're safe.
     }
+    // If !event.persisted, page is truly being destroyed — nothing to clean up.
   },
   true
 )
