@@ -2,51 +2,51 @@
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 999;
   margin: 12px;
-  /* padding: 4px 6px 10px 6px; */
-  opacity: 0.5;
-  overflow: hidden;
-  height: 30px;
   width: 30px;
-  transition: all 0.2s ease-in-out;
+  height: 30px;
   border-radius: 9999px;
   background: rgba(35, 35, 35, 0.75);
-  border: 1px solid rgb(109, 101, 101, 0.7);
+  border: 1px solid rgba(109, 101, 101, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  opacity: 0.5;
   box-sizing: border-box;
-  z-index: 999;
-  /* box-shadow:
-    rgba(17, 17, 26, 0.1) 0px 4px 16px,
-    rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px; */
+  transition: all 0.2s ease-in-out;
 }
 
-.bgv-smart-container.stories {
-  position: absolute;
-  margin: 0;
-  top: 2px;
-  right: 38px;
-  height: 30px;
-  width: 30px;
-  opacity: 1;
-}
-
-.bgv-smart-container:hover .bgv-smart-container {
-  opacity: 1;
-  height: 96px;
-}
-
+.bgv-smart-container:hover,
 .bgv-smart-container.active {
   opacity: 1;
   height: 96px;
 }
 
+.bgv-smart-container.stories {
+  margin: 0;
+  top: 2px;
+  right: 38px;
+  opacity: 1;
+}
+
+.bgv-smart-container.default {
+  top: auto;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .bgv-smart-container .content {
-  box-sizing: border-box;
-  margin: 5px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px 0;
+  gap: 8px;
+  margin: 5px auto;
+  box-sizing: border-box;
+}
+
+.bgv-smart-container.default .content {
+  flex-direction: column-reverse;
 }

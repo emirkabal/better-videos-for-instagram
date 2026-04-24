@@ -75,15 +75,21 @@ export default function Controller({
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
 
   const updateAudio = useCallback(() => {
-    const normalizedVolume = Math.min(volume, 1)
-    videoRef.current.volume = normalizedVolume
-    if (
-      "userActivation" in navigator &&
-      !navigator.userActivation.hasBeenActive
-    )
-      setMuted(true)
-    videoRef.current.muted = muted
-  }, [videoRef, volume, muted])
+    const video = videoRef.current;
+    if (!video) return;
+
+    const normalizedVolume = Math.min(volume, 1);
+    video.volume = normalizedVolume;
+
+    if ("userActivation" in navigator && !navigator.userActivation.hasBeenActive) {
+      console.warn("User has not interacted with the page yet. Muting video to allow autoplay.");
+      video.muted = true;
+      setMuted(true);
+      return;
+    }
+
+    video.muted = muted;
+  }, [videoRef, volume, muted]);
 
   const timeUpdate = useCallback(() => {
     setProgress(
@@ -136,12 +142,12 @@ export default function Controller({
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
-    else videoRef.current.play().catch(() => {})
+    else videoRef.current.play().catch(() => { })
   }, [dragging])
 
   return (
     <>
-      {variant !== "stories" && <Volume />}
+      {variant !== "stories" && <Volume variant={variant} />}
       {/* {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
       )} */}

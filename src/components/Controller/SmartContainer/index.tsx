@@ -49,6 +49,10 @@ export default function SmartContainer({ children, dragging, variant }: Props) {
         },
         variant
       )}
+      onClick={(event) => {
+        event.stopPropagation()
+        event.preventDefault()
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={debouncedHandleMouseLeave}>
       <div className="content">{children}</div>

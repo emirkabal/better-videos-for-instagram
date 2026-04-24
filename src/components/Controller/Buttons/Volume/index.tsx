@@ -11,7 +11,7 @@ type Props = {
 export default function VolumeButton({ muted, onChange }: Props) {
   return (
     <div
-      className="better-ig-volume-button"
+      className="better-ig-volume-button bigv-control"
       onClick={() => {
         onChange(!muted)
       }}>

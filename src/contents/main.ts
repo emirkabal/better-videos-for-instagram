@@ -16,18 +16,21 @@ let previousUrl = ""
 const load = () => {
   const match = location.pathname.match(REGEX)
   const first = match?.[1]
-  if (first === "reels") {
-    global.delete()
-    stories.delete()
-    reels.wayToInject()
-  } else if (first === "stories") {
-    global.delete()
-    reels.delete()
-    stories.wayToInject()
-  } else {
-    reels.delete()
-    stories.delete()
-    global.wayToInject()
+  switch (first) {
+    case "reels":
+      global.delete()
+      stories.delete()
+      reels.wayToInject()
+      break
+    case "stories":
+      global.delete()
+      reels.delete()
+      stories.wayToInject()
+      break
+    default:
+      reels.delete()
+      stories.delete()
+      global.wayToInject()
   }
 }
 

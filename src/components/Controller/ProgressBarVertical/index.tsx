@@ -92,7 +92,7 @@ export default function ProgressBarVertical({
 
   return (
     <div
-      className="better-ig-progress-bar-vertical"
+      className="better-ig-progress-bar-vertical bigv-control"
       style={isDragging ? { opacity: 1 } : undefined}>
       <div className="baseline">
         <div
