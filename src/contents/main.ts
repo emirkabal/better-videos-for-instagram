@@ -7,16 +7,19 @@ export const config: PlasmoCSConfig = {
 }
 
 const REGEX =
-  /^(?:https?:\/\/(?:www\.)?instagram\.com)?(?:\/[\w.-]+)?\/(stories|reels)\/([\w.-]+)(?:\/([\w.-]+))?\/?$/i
+  /^(?:https?:\/\/(?:www\.)?instagram\.com)?(?:\/[\w.-]+)?\/(stories|reel|reels)\/([\w.-]+)(?:\/([\w.-]+))?\/?$/i
 const global = new Global()
 const reels = new Reels()
 const stories = new Stories()
+
+reels.ensureQuickShareReady()
 
 let previousUrl = ""
 const load = () => {
   const match = location.pathname.match(REGEX)
   const first = match?.[1]
   switch (first) {
+    case "reel":
     case "reels":
       global.delete()
       stories.delete()
