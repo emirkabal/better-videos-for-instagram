@@ -62,6 +62,9 @@ export default function Controller({
   const videoRef = useRef<HTMLVideoElement>(video)
   const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const [duration, setDuration] = useState(
+    Number.isFinite(video.duration) ? video.duration : 0
+  )
 
   const [volume] = useLocalStorage("better-instagram-videos-volume", 0.5)
   const [muted, setMuted] = useLocalStorage(
@@ -75,27 +78,46 @@ export default function Controller({
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
 
   const updateAudio = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const video = videoRef.current
+    if (!video) return
 
-    const normalizedVolume = Math.min(volume, 1);
-    video.volume = normalizedVolume;
+    const normalizedVolume = Math.min(volume, 1)
+    video.volume = normalizedVolume
 
-    if ("userActivation" in navigator && !navigator.userActivation.hasBeenActive) {
-      console.warn("User has not interacted with the page yet. Muting video to allow autoplay.");
-      video.muted = true;
-      setMuted(true);
-      return;
+    if (
+      "userActivation" in navigator &&
+      !navigator.userActivation.hasBeenActive
+    ) {
+      console.warn(
+        "User has not interacted with the page yet. Muting video to allow autoplay."
+      )
+      video.muted = true
+      setMuted(true)
+      return
     }
 
-    video.muted = muted;
-  }, [videoRef, volume, muted]);
+    video.muted = muted
+  }, [videoRef, volume, muted])
 
   const timeUpdate = useCallback(() => {
+    if (
+      !Number.isFinite(videoRef.current.duration) ||
+      videoRef.current.duration <= 0
+    ) {
+      setProgress(0)
+      return
+    }
+
     setProgress(
       (videoRef.current.currentTime / videoRef.current.duration) * 100
     )
   }, [videoRef])
+
+  const metadataLoaded = useCallback(() => {
+    const duration = videoRef.current.duration
+    setDuration(Number.isFinite(duration) ? duration : 0)
+    timeUpdate()
+  }, [videoRef, timeUpdate])
 
   const play = useCallback(() => {
     updateAudio()
@@ -109,7 +131,8 @@ export default function Controller({
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
-      (pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
+      pauseOnComments &&
+      localStorage.getItem("bigv-comments-opened") !== "1" &&
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
@@ -119,18 +142,22 @@ export default function Controller({
 
   useEffect(() => {
     videoRef.current.addEventListener("timeupdate", timeUpdate)
+    videoRef.current.addEventListener("loadedmetadata", metadataLoaded)
+    videoRef.current.addEventListener("durationchange", metadataLoaded)
     videoRef.current.addEventListener("play", play)
     videoRef.current.addEventListener("ended", ended)
     videoRef.current.addEventListener("volumechange", updateAudio)
     videoRef.current.addEventListener("seeked", updateAudio)
     return () => {
       videoRef.current.removeEventListener("timeupdate", timeUpdate)
+      videoRef.current.removeEventListener("loadedmetadata", metadataLoaded)
+      videoRef.current.removeEventListener("durationchange", metadataLoaded)
       videoRef.current.removeEventListener("play", play)
       videoRef.current.removeEventListener("ended", ended)
       videoRef.current.removeEventListener("volumechange", updateAudio)
       videoRef.current.removeEventListener("seeked", updateAudio)
     }
-  }, [videoRef, timeUpdate, play, ended, updateAudio])
+  }, [videoRef, timeUpdate, metadataLoaded, play, ended, updateAudio])
 
   useEffect(() => {
     updateAudio()
@@ -142,7 +169,7 @@ export default function Controller({
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
-    else videoRef.current.play().catch(() => { })
+    else videoRef.current.play().catch(() => {})
   }, [dragging])
 
   return (
@@ -152,18 +179,17 @@ export default function Controller({
         <DownloadButton data={downloadableMedia} label={false} inside />
       )} */}
       <div className={cn("better-ig-controller", variant)}>
-        {video && (
-          <ProgressBarHorizontal
-            variant={variant}
-            progress={progress}
-            videoDuration={videoRef.current.duration}
-            onProgress={(progress) => {
-              videoRef.current.currentTime =
-                (progress / 100) * videoRef.current.duration
-            }}
-            onDragging={setDragging}
-          />
-        )}
+        <ProgressBarHorizontal
+          variant={variant}
+          progress={progress}
+          videoDuration={duration}
+          onProgress={(progress) => {
+            if (!Number.isFinite(duration) || duration <= 0) return
+
+            videoRef.current.currentTime = (progress / 100) * duration
+          }}
+          onDragging={setDragging}
+        />
       </div>
     </>
   )

@@ -15,6 +15,14 @@ export default class IntervalInjector extends Injector {
     this.intervalMs = options?.intervalMs || this.intervalMs
   }
 
+  protected shouldInjectVideo(_video: HTMLVideoElement): boolean {
+    return true
+  }
+
+  protected shouldAttachListeners(_video: HTMLVideoElement): boolean {
+    return true
+  }
+
   public deleted(): void {
     if (this.interval) clearInterval(this.interval)
   }
@@ -24,18 +32,32 @@ export default class IntervalInjector extends Injector {
     if (videos.length === 0) return
     for (let i = 0; i < videos.length; i++) {
       const video = videos[i]
-      if (!video?.src.startsWith('blob:')) continue
-      if (
-        this.isInjected(video as HTMLVideoElement) ||
-        video.hasAttribute("bigv-attached-listeners")
-      )
-        continue
-      video.setAttribute("bigv-attached-listeners", "")
-      ;["play", "timeupdate", "playing"].forEach((event) => {
-        video.addEventListener(event, () => {
-          this.inject(video as HTMLVideoElement, video.parentElement!)
+      if (!video?.src.startsWith("blob:")) continue
+      if (!video.hasAttribute("bigv-attached-listeners")) {
+        video.setAttribute("bigv-attached-listeners", "")
+        ;[
+          "loadedmetadata",
+          "loadeddata",
+          "canplay",
+          "play",
+          "timeupdate",
+          "playing"
+        ].forEach((event) => {
+          video.addEventListener(event, () => {
+            if (!this.shouldAttachListeners(video as HTMLVideoElement)) return
+            if (!this.shouldInjectVideo(video as HTMLVideoElement)) return
+            this.inject(video as HTMLVideoElement, video.parentElement!)
+          })
         })
-      })
+      }
+
+      if (
+        !this.isInjected(video as HTMLVideoElement) &&
+        this.shouldAttachListeners(video as HTMLVideoElement) &&
+        this.shouldInjectVideo(video as HTMLVideoElement)
+      ) {
+        this.inject(video as HTMLVideoElement, video.parentElement!)
+      }
     }
   }
 

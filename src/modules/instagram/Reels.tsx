@@ -4,7 +4,10 @@ import { createRoot, type Root } from "react-dom/client"
 import { Storage } from "@plasmohq/storage"
 
 import Buttons from "~components/Buttons"
-import { IG_NEW_VOLUME_INDICATOR, IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
+import {
+  IG_NEW_VOLUME_INDICATOR,
+  IG_REELS_VOLUME_INDICATOR
+} from "~utils/constants"
 
 import { Variant, type InjectedProps } from "../Injector"
 import IntervalInjector, {
@@ -15,6 +18,55 @@ export default class Reels extends IntervalInjector {
   private commentsInterval: NodeJS.Timeout | null = null
   private pauseOnComments = true
   private list: [Root, HTMLElement, HTMLElement][] = []
+
+  private getReelScore(video: HTMLVideoElement): number {
+    const rect = video.getBoundingClientRect()
+    if (rect.width <= 0 || rect.height <= 0) return 0
+
+    const visibleWidth =
+      Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0)
+    const visibleHeight =
+      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
+
+    if (visibleWidth <= 0 || visibleHeight <= 0) return 0
+
+    const visibleRatio =
+      (visibleWidth * visibleHeight) / (rect.width * rect.height)
+    const videoCenter = rect.top + rect.height / 2
+    const viewportCenter = window.innerHeight / 2
+    const centerPenalty =
+      Math.abs(videoCenter - viewportCenter) / Math.max(window.innerHeight, 1)
+
+    return visibleRatio - centerPenalty
+  }
+
+  private getActiveReelVideo(): HTMLVideoElement | null {
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("video")
+    ).filter((video) => video.src.startsWith("blob:"))
+
+    if (videos.length === 0) return null
+
+    return videos.reduce<HTMLVideoElement | null>((activeVideo, video) => {
+      if (!activeVideo) return video
+
+      return this.getReelScore(video) > this.getReelScore(activeVideo)
+        ? video
+        : activeVideo
+    }, null)
+  }
+
+  private muteInactiveVideos(): void {
+    const activeVideo = this.getActiveReelVideo()
+    const videos = document.querySelectorAll<HTMLVideoElement>("video")
+
+    for (const video of videos) {
+      if (!video.src.startsWith("blob:") || video === activeVideo) continue
+
+      video.muted = true
+      video.volume = 0
+    }
+  }
 
   constructor(options?: IntervalInjectorOptions) {
     super({
@@ -38,6 +90,16 @@ export default class Reels extends IntervalInjector {
   public beforeInject(): void {
     this.removeElements(IG_REELS_VOLUME_INDICATOR, true)
     this.removeElements(IG_NEW_VOLUME_INDICATOR, false)
+  }
+
+  protected shouldInjectVideo(video: HTMLVideoElement): boolean {
+    return this.getActiveReelVideo() === video
+  }
+
+  public injectMethod(): void {
+    this.muteInactiveVideos()
+    super.injectMethod()
+    this.muteInactiveVideos()
   }
 
   public beforeDelete(): void {
@@ -102,9 +164,9 @@ export default class Reels extends IntervalInjector {
 
       const commentsDialog = document.querySelector("div[role='dialog']")
       if (commentsDialog) {
-        localStorage.setItem('bigv-comments-opened', '1')
+        localStorage.setItem("bigv-comments-opened", "1")
       } else {
-        localStorage.removeItem('bigv-comments-opened')
+        localStorage.removeItem("bigv-comments-opened")
       }
     }, 750)
   }
