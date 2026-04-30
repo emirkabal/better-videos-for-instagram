@@ -1,7 +1,7 @@
 import { createRoot, type Root } from "react-dom/client"
 
 import Controller from "~components/Controller"
-import { IG_STORIES_VOLUME_INDICATOR } from "~utils/constants"
+import { IG_STORIES_INJECTOR_INDICATOR } from "~utils/constants"
 
 export type Injected = [
   HTMLVideoElement,
@@ -238,9 +238,9 @@ export default class Injector {
 
     switch (this.variant) {
       case Variant.Stories:
-        const element = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
-          .parentElement.parentElement.parentElement
-        element.parentNode.insertBefore(controller, element)
+        const el = document.querySelector(IG_STORIES_INJECTOR_INDICATOR)
+        if (!el) return
+        el.parentNode.insertBefore(controller, el)
         break
       case Variant.Reels:
         video.closest("div:has(>[data-instancekey])")?.appendChild(controller)
