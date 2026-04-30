@@ -26,28 +26,23 @@ _If you like Better Videos for Instagram, consider [sponsoring or hiring](https:
 
 After installation, you can use the extension to control video playback and adjust volume on Instagram effortlessly.
 
-![Screenshot](https://github.com/emirkabal/better-instagram-videos/assets/28771692/7b96c062-2f84-4da1-a0c3-94d45284dc8d)
+<img width="1280" height="800" alt="English" src="https://github.com/user-attachments/assets/c0f037b2-48ea-4d42-b8d9-558ef54481be" />
 
-# Example Video
-
-https://github.com/emirkabal/better-videos-for-instagram/assets/28771692/29fe5775-be3a-429f-8bc0-7f00c34b1ddb
 
 ## Contrubition
 
 We welcome contributions from the community! If you have ideas for improvements or find any issues, please open an [issue](https://github.com/emirkabal/better-videos-for-instagram/issues) or submit a pull request.
 
-**Installation:**
-
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/emirkabal/better-instagram-videos.git
+   git clone https://github.com/emirkabal/better-videos-for-instagram.git
    ```
 
 2. **Navigate to the project directory:**
 
    ```bash
-   cd better-instagram-videos
+   cd better-videos-for-instagram
    ```
 
 3. **Install dependencies:**
@@ -60,26 +55,20 @@ We welcome contributions from the community! If you have ideas for improvements 
 
    ```bash
    pnpm run dev
-   # http://localhost:5173/src/controller-demo/index.html
+   # Move builds/chrome-mv3-dev to your chrome://extensions page. You need to enable developer mode in the top right corner.
    ```
 
-5. **Build the extension:**
+5. **Lint and format:**
+
+   ```bash
+   pnpm run lint && pnpm run format
+   ```
+5. **Ensure build is working:**
 
    ```bash
    pnpm run build
    ```
 
-6. **Enable developer mode in Chrome:**
-
-   - Open Chrome and go to `chrome://extensions/`.
-   - Toggle on the "Developer mode" switch in the top right corner.
-
-7. **Load the extension:**
-   - Click on the "Load unpacked" button.
-   - Select the `dist` directory within the project folder.
-   - Or you can drag and drop `dist` directory to extensions area.
-
-The Better Videos for Instagram extension should now be installed in your Chrome browser.
 
 ## Legal
 
