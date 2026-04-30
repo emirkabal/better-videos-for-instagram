@@ -81,6 +81,12 @@ export default function Controller({
     const video = videoRef.current
     if (!video) return
 
+    if (variant === "reels" && !video.hasAttribute("bigv-active-reel")) {
+      video.volume = 0
+      video.muted = true
+      return
+    }
+
     const normalizedVolume = Math.min(volume, 1)
     video.volume = normalizedVolume
 
@@ -97,7 +103,7 @@ export default function Controller({
     }
 
     video.muted = muted
-  }, [videoRef, volume, muted])
+  }, [videoRef, volume, muted, variant])
 
   const timeUpdate = useCallback(() => {
     if (
