@@ -21,9 +21,7 @@ export default class IntervalInjector extends Injector {
 
   public injectMethod(): void {
     const videos = document.querySelectorAll("video")
-    if (videos.length === 0) return
-    for (let i = 0; i < videos.length; i++) {
-      const video = videos[i]
+    for (const video of videos) {
       if (!video?.src.startsWith('blob:')) continue
       if (
         this.isInjected(video as HTMLVideoElement) ||
@@ -37,6 +35,7 @@ export default class IntervalInjector extends Injector {
         })
       })
     }
+
   }
 
   public wayToInject(): void {
