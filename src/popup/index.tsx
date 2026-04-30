@@ -13,6 +13,14 @@ export default function Popup() {
     "bigv-max-volume-balance",
     100
   )
+  const [showStoryViewIndicator, setShowStoryViewIndicator] = useStorage(
+    "bigv-show-story-view-indicator",
+    true
+  )
+  const [openExternalReelsAsPosts, setOpenExternalReelsAsPosts] = useStorage(
+    "bigv-open-external-reels-as-posts",
+    false
+  )
 
   const getReductionLabel = (value: number) => {
     if (value === 100) return "No reduction"
@@ -58,6 +66,32 @@ export default function Popup() {
                 type="checkbox"
                 checked={pauseOnComments}
                 onChange={(e) => setPauseOnComments(e.target.checked)}
+              />
+              <span className="slider">{}</span>
+            </label>
+          </div>
+          <div className="setting-item checkbox">
+            <span>Open external Reels links as posts</span>
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={openExternalReelsAsPosts}
+                onChange={(e) => setOpenExternalReelsAsPosts(e.target.checked)}
+              />
+              <span className="slider">{}</span>
+            </label>
+          </div>
+        </div>
+
+        <div className="settings-category">
+          <h2>Stories</h2>
+          <div className="setting-item checkbox">
+            <span>Show story count indicator</span>
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={showStoryViewIndicator}
+                onChange={(e) => setShowStoryViewIndicator(e.target.checked)}
               />
               <span className="slider">{}</span>
             </label>
