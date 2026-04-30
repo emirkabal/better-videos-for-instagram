@@ -43,6 +43,7 @@
       "https://www.instagram.com/*"
     ],
     "permissions": [
+      "declarativeNetRequest",
       "storage"
     ]
   }

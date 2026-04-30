@@ -3,7 +3,8 @@ import type { PlasmoCSConfig } from "plasmo"
 import { Global, Reels, Stories } from "~modules/instagram"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://www.instagram.com/*"]
+  matches: ["https://www.instagram.com/*"],
+  run_at: "document_start"
 }
 
 const REGEX =
@@ -13,6 +14,7 @@ const reels = new Reels()
 const stories = new Stories()
 
 let previousUrl = ""
+
 const load = () => {
   const match = location.pathname.match(REGEX)
   const first = match?.[1]
