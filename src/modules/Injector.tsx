@@ -3,7 +3,13 @@ import { createRoot, type Root } from "react-dom/client"
 import Controller from "~components/Controller"
 import { IG_STORIES_INJECTOR_INDICATOR } from "~utils/constants"
 
-export type Injected = [HTMLVideoElement, HTMLElement, HTMLElement, Root, HTMLAnchorElement][]
+export type Injected = [
+  HTMLVideoElement,
+  HTMLElement,
+  HTMLElement,
+  Root,
+  HTMLAnchorElement
+][]
 export type DownloadableMedia = {
   id: string
   index?: number
@@ -34,7 +40,8 @@ export default class Injector {
   variant: Variant = Variant.Default
 
   private injectedList: Injected = []
-  private anchorEvents = new WeakMap<HTMLAnchorElement, 
+  private anchorEvents = new WeakMap<
+    HTMLAnchorElement,
     (e: MouseEvent) => void
   >()
 
@@ -58,7 +65,7 @@ export default class Injector {
    * ```
    * @returns {void}
    */
-  public beforeInject(): void { }
+  public beforeInject(): void {}
 
   /**
    * This method is called after the elements are injected.
@@ -72,7 +79,7 @@ export default class Injector {
    * injector.inject();
    * ```
    */
-  public injected(props: InjectedProps): void { }
+  public injected(props: InjectedProps): void {}
 
   /**
    * This method is called before the elements are deleted.
@@ -85,7 +92,7 @@ export default class Injector {
    * injector.delete();
    * ```
    */
-  public beforeDelete(): void { }
+  public beforeDelete(): void {}
 
   /**
    * This method is called after the elements are deleted.
@@ -98,7 +105,7 @@ export default class Injector {
    * injector.delete();
    * ```
    */
-  public deleted(): void { }
+  public deleted(): void {}
 
   /**
    * This method is custom way to inject.
@@ -113,7 +120,7 @@ export default class Injector {
    * injector.wayToInject();
    * ```
    */
-  public wayToInject(): void { }
+  public wayToInject(): void {}
 
   /**
    * This method is called when an injected element is deleted.
@@ -126,7 +133,7 @@ export default class Injector {
    * }
    * ```
    */
-  public onDelete(id: string) { }
+  public onDelete(id: string) {}
 
   get lastInjected() {
     return this.injectedList[this.injectedList.length - 1]
@@ -145,7 +152,7 @@ export default class Injector {
         root.unmount()
         controller.remove()
         if (anchor) {
-          anchor.removeEventListener('click', this.anchorEvents.get(anchor)!)
+          anchor.removeEventListener("click", this.anchorEvents.get(anchor)!)
         }
       }
     }
@@ -175,25 +182,29 @@ export default class Injector {
     this.deleted()
   }
 
-
-  private removeRedirects(anchor: HTMLAnchorElement | null, video: HTMLVideoElement) {
-    if (!anchor || anchor.dataset.betterInstagramFixed) return;
+  private removeRedirects(
+    anchor: HTMLAnchorElement | null,
+    video: HTMLVideoElement
+  ) {
+    if (!anchor || anchor.dataset.betterInstagramFixed) return
 
     const event = (e: MouseEvent) => {
-      if (e.target instanceof HTMLElement && !e.target.closest('.bigv-control')) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (video.paused) video.play();
-        else video.pause();
+      if (
+        e.target instanceof HTMLElement &&
+        !e.target.closest(".bigv-control")
+      ) {
+        e.preventDefault()
+        e.stopPropagation()
+        if (video.paused) video.play()
+        else video.pause()
       }
     }
-    anchor.addEventListener('click', event, true);
+    anchor.addEventListener("click", event, true)
 
-
-    anchor.removeAttribute('href');
-    anchor.style.cursor = 'default';
-    anchor.draggable = false;
-    anchor.dataset.betterInstagramFixed = "true";
+    anchor.removeAttribute("href")
+    anchor.style.cursor = "default"
+    anchor.draggable = false
+    anchor.dataset.betterInstagramFixed = "true"
 
     this.anchorEvents.set(anchor, event)
   }
@@ -205,12 +216,11 @@ export default class Injector {
    * @returns {void}
    */
   public inject(video: HTMLVideoElement, parent: HTMLElement): void {
-
     if (
       !video ||
       !video?.parentElement ||
       !video?.src ||
-      !video.src.startsWith('blob:') ||
+      !video.src.startsWith("blob:") ||
       video?.hasAttribute("bigv-injected")
     )
       return
@@ -233,15 +243,16 @@ export default class Injector {
         el.parentNode.insertBefore(controller, el)
         break
       case Variant.Reels:
-        video.closest('div:has(>[data-instancekey])')?.appendChild(controller)
+        video.closest("div:has(>[data-instancekey])")?.appendChild(controller)
         break
       case Variant.Default:
-        anchorElement = video.closest('a')
-        video.closest('div:has(>[data-instancekey])')?.parentElement?.appendChild(controller)
+        anchorElement = video.closest("a")
+        video
+          .closest("div:has(>[data-instancekey])")
+          ?.parentElement?.appendChild(controller)
         this.removeRedirects(anchorElement, video)
         break
     }
-
 
     video.currentTime = 0
     video.volume = 0

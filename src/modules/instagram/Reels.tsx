@@ -4,7 +4,10 @@ import { createRoot, type Root } from "react-dom/client"
 import { Storage } from "@plasmohq/storage"
 
 import Buttons from "~components/Buttons"
-import { IG_NEW_VOLUME_INDICATOR, IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
+import {
+  IG_NEW_VOLUME_INDICATOR,
+  IG_REELS_VOLUME_INDICATOR
+} from "~utils/constants"
 
 import { Variant, type InjectedProps } from "../Injector"
 import IntervalInjector, {
@@ -102,9 +105,9 @@ export default class Reels extends IntervalInjector {
 
       const commentsDialog = document.querySelector("div[role='dialog']")
       if (commentsDialog) {
-        localStorage.setItem('bigv-comments-opened', '1')
+        localStorage.setItem("bigv-comments-opened", "1")
       } else {
-        localStorage.removeItem('bigv-comments-opened')
+        localStorage.removeItem("bigv-comments-opened")
       }
     }, 750)
   }
