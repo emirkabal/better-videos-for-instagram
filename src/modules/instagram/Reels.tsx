@@ -18,7 +18,6 @@ export default class Reels extends IntervalInjector {
   private commentsInterval: NodeJS.Timeout | null = null
   private pauseOnComments = true
   private list: [Root, HTMLElement, HTMLElement][] = []
-  private reelGuardEvents = new WeakSet<HTMLVideoElement>()
 
   private getReelScore(video: HTMLVideoElement): number {
     const rect = video.getBoundingClientRect()
@@ -57,44 +56,16 @@ export default class Reels extends IntervalInjector {
     }, null)
   }
 
-  private syncReelAudioState(): void {
+  private muteInactivePlayingVideos(): void {
     const activeVideo = this.getActiveReelVideo()
     const videos = document.querySelectorAll<HTMLVideoElement>("video")
 
     for (const video of videos) {
-      if (!video.src.startsWith("blob:")) continue
+      if (!video.src.startsWith("blob:") || video === activeVideo) continue
+      if (video.paused) continue
 
-      if (video === activeVideo) {
-        video.setAttribute("bigv-active-reel", "")
-        continue
-      }
-
-      video.removeAttribute("bigv-active-reel")
       video.muted = true
       video.volume = 0
-    }
-  }
-
-  private attachReelAudioGuard(): void {
-    const videos = document.querySelectorAll<HTMLVideoElement>("video")
-
-    for (const video of videos) {
-      if (!video.src.startsWith("blob:") || this.reelGuardEvents.has(video)) {
-        continue
-      }
-
-      this.reelGuardEvents.add(video)
-      ;["play", "playing", "volumechange", "timeupdate", "seeked"].forEach(
-        (event) => {
-          video.addEventListener(
-            event,
-            () => {
-              queueMicrotask(() => this.syncReelAudioState())
-            },
-            true
-          )
-        }
-      )
     }
   }
 
@@ -126,11 +97,14 @@ export default class Reels extends IntervalInjector {
     return this.getActiveReelVideo() === video
   }
 
+  protected shouldInjectImmediately(video: HTMLVideoElement): boolean {
+    return !video.paused && this.shouldInjectVideo(video)
+  }
+
   public injectMethod(): void {
-    this.attachReelAudioGuard()
-    this.syncReelAudioState()
+    this.muteInactivePlayingVideos()
     super.injectMethod()
-    this.syncReelAudioState()
+    this.muteInactivePlayingVideos()
   }
 
   public beforeDelete(): void {

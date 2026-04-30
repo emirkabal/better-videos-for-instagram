@@ -23,6 +23,10 @@ export default class IntervalInjector extends Injector {
     return true
   }
 
+  protected shouldInjectImmediately(_video: HTMLVideoElement): boolean {
+    return false
+  }
+
   public deleted(): void {
     if (this.interval) clearInterval(this.interval)
   }
@@ -54,6 +58,7 @@ export default class IntervalInjector extends Injector {
       if (
         !this.isInjected(video as HTMLVideoElement) &&
         this.shouldAttachListeners(video as HTMLVideoElement) &&
+        this.shouldInjectImmediately(video as HTMLVideoElement) &&
         this.shouldInjectVideo(video as HTMLVideoElement)
       ) {
         this.inject(video as HTMLVideoElement, video.parentElement!)
