@@ -60,6 +60,7 @@ export default function Controller({
   variant
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(video)
+  const wasPlayingBeforeDragRef = useRef(false)
   const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
   const [duration, setDuration] = useState(
@@ -74,12 +75,63 @@ export default function Controller({
   const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
 
+  const getVideoVisibilityScore = useCallback((video: HTMLVideoElement) => {
+    const rect = video.getBoundingClientRect()
+    if (rect.width <= 0 || rect.height <= 0) return 0
+
+    const visibleWidth =
+      Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0)
+    const visibleHeight =
+      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
+
+    if (visibleWidth <= 0 || visibleHeight <= 0) return 0
+
+    const visibleRatio =
+      (visibleWidth * visibleHeight) / (rect.width * rect.height)
+    const videoCenter = rect.top + rect.height / 2
+    const viewportCenter = window.innerHeight / 2
+    const centerPenalty =
+      Math.abs(videoCenter - viewportCenter) / Math.max(window.innerHeight, 1)
+
+    return visibleRatio - centerPenalty
+  }, [])
+
+  const isActiveAudibleVideo = useCallback(() => {
+    if (variant === "stories") return true
+
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("video")
+    ).filter((video) => video.src.startsWith("blob:"))
+
+    if (videos.length <= 1) return true
+
+    const activeVideo = videos.reduce<HTMLVideoElement | null>(
+      (activeVideo, video) => {
+        if (!activeVideo) return video
+
+        return getVideoVisibilityScore(video) >
+          getVideoVisibilityScore(activeVideo)
+          ? video
+          : activeVideo
+      },
+      null
+    )
+
+    return activeVideo === videoRef.current
+  }, [getVideoVisibilityScore, variant])
+
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
 
   const updateAudio = useCallback(() => {
     const video = videoRef.current
     if (!video) return
+
+    if (!isActiveAudibleVideo()) {
+      video.volume = 0
+      video.muted = true
+      return
+    }
 
     const normalizedVolume = Math.min(volume, 1)
     video.volume = normalizedVolume
@@ -97,7 +149,7 @@ export default function Controller({
     }
 
     video.muted = muted
-  }, [videoRef, volume, muted])
+  }, [videoRef, volume, muted, isActiveAudibleVideo])
 
   const timeUpdate = useCallback(() => {
     if (
@@ -125,9 +177,6 @@ export default function Controller({
   }, [updateAudio, playbackSpeed])
 
   const ended = useCallback(() => {
-    videoRef.current.currentTime = 0
-    videoRef.current.play()
-
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
@@ -168,8 +217,16 @@ export default function Controller({
   }, [videoRef, playbackSpeed])
 
   useEffect(() => {
-    if (dragging) videoRef.current.pause()
-    else videoRef.current.play().catch(() => {})
+    if (dragging) {
+      wasPlayingBeforeDragRef.current = !videoRef.current.paused
+      videoRef.current.pause()
+      return
+    }
+
+    if (wasPlayingBeforeDragRef.current) {
+      wasPlayingBeforeDragRef.current = false
+      videoRef.current.play().catch(() => {})
+    }
   }, [dragging])
 
   return (
