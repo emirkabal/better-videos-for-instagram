@@ -75,21 +75,26 @@ export default function Controller({
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
 
   const updateAudio = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const video = videoRef.current
+    if (!video) return
 
-    const normalizedVolume = Math.min(volume, 1);
-    video.volume = normalizedVolume;
+    const normalizedVolume = Math.min(volume, 1)
+    video.volume = normalizedVolume
 
-    if ("userActivation" in navigator && !navigator.userActivation.hasBeenActive) {
-      console.warn("User has not interacted with the page yet. Muting video to allow autoplay.");
-      video.muted = true;
-      setMuted(true);
-      return;
+    if (
+      "userActivation" in navigator &&
+      !navigator.userActivation.hasBeenActive
+    ) {
+      console.warn(
+        "User has not interacted with the page yet. Muting video to allow autoplay."
+      )
+      video.muted = true
+      setMuted(true)
+      return
     }
 
-    video.muted = muted;
-  }, [videoRef, volume, muted]);
+    video.muted = muted
+  }, [videoRef, volume, muted])
 
   const timeUpdate = useCallback(() => {
     setProgress(
@@ -109,7 +114,8 @@ export default function Controller({
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
       autoSkip === "true" &&
-      (pauseOnComments && localStorage.getItem("bigv-comments-opened") !== "1") &&
+      pauseOnComments &&
+      localStorage.getItem("bigv-comments-opened") !== "1" &&
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
@@ -142,7 +148,7 @@ export default function Controller({
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
-    else videoRef.current.play().catch(() => { })
+    else videoRef.current.play().catch(() => {})
   }, [dragging])
 
   return (

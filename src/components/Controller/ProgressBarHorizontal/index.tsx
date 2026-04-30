@@ -139,9 +139,11 @@ export default function ProgressBarHorizontal({
   }
 
   return (
-    <div className="progress-bar-horizontal bigv-control" onClick={(event) => {
-      event.stopPropagation()
-    }}>
+    <div
+      className="progress-bar-horizontal bigv-control"
+      onClick={(event) => {
+        event.stopPropagation()
+      }}>
       <div className={`baseline ${isDragging ? "dragging" : ""}`}>
         <div
           ref={dragareaRef}

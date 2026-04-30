@@ -12,7 +12,7 @@ import SpeedometerIcon from "./SpeedometerIcon"
 
 const SPEED_OPTIONS = [0.25, 0.5, 1, 1.25, 1.5, 2] as const
 
-const SPEED_ANGLE: Record<typeof SPEED_OPTIONS[number], number> = {
+const SPEED_ANGLE: Record<(typeof SPEED_OPTIONS)[number], number> = {
   0.25: -90,
   0.5: -45,
   1: 0,
