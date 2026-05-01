@@ -1,9 +1,12 @@
 import { createRoot } from "react-dom/client"
 
 import { Volume } from "~components/Controller"
-import ViewIndicator from "~components/Controller/ViewIndicator"
 import { Variant } from "~modules/Injector"
-import { IG_STORIES_VOLUME_INDICATOR } from "~utils/constants"
+import {
+  IG_STORIES_BUTTONS_CONTAINER_INDICATOR,
+  IG_STORIES_PROGRESS_BARS_INDICATOR,
+  IG_STORIES_VOLUME_INDICATOR
+} from "~utils/constants"
 
 import IntervalInjector, {
   type IntervalInjectorOptions
@@ -18,46 +21,69 @@ export default class Stories extends IntervalInjector {
   }
 
   public injected(): void {
-    const igVolumeControl = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
-    if (!igVolumeControl) return
+    const volumeControl = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
 
-    const buttonsContainer = igVolumeControl.parentElement
+    const buttonsContainer = document.querySelector<HTMLElement>(
+      IG_STORIES_BUTTONS_CONTAINER_INDICATOR
+    )
+
     if (!buttonsContainer) return
-
-    buttonsContainer.parentElement.parentElement.parentElement.style.paddingBottom =
-      "64px"
 
     buttonsContainer.style.setProperty("position", "relative")
 
-    // default ig progress bar
-    const igDefaultProgressBars =
-      igVolumeControl.parentElement.parentElement.parentElement.querySelector(
-        "div"
-      )
+    const progressBars = document.querySelector<HTMLElement>(
+      IG_STORIES_PROGRESS_BARS_INDICATOR
+    )
 
-    igDefaultProgressBars.style.setProperty("display", "none")
+    progressBars?.style.setProperty("display", "none")
 
-    const [current, total] = [
-      Array.from(igDefaultProgressBars.children).findIndex((e) => e.innerHTML) +
-        1,
-      igDefaultProgressBars.childElementCount
-    ]
+    if (progressBars) {
+      this.injectViewIndicator(buttonsContainer, progressBars)
+    }
 
-    igVolumeControl.remove()
+    if (volumeControl) {
+      this.injectVolume(buttonsContainer, volumeControl)
+    }
+  }
+
+  private injectViewIndicator(
+    buttonsContainer: HTMLElement,
+    progressBars: HTMLElement
+  ): void {
+    const current =
+      Array.from(progressBars.children).findIndex(
+        (element) => element.innerHTML
+      ) + 1
+
+    const total = progressBars.childElementCount
+
+    const viewIndicator = document.createElement("div")
+
+    viewIndicator.textContent = `${current} / ${total}`
+
+    Object.assign(viewIndicator.style, {
+      position: "absolute",
+      top: "16px",
+      color: "white",
+      fontSize: "12px",
+      left: "50%",
+      transform: "translate(-50%, -50%)"
+    })
+
+    buttonsContainer.parentElement?.appendChild(viewIndicator)
+  }
+
+  private injectVolume(
+    buttonsContainer: HTMLElement,
+    volumeControl: Element
+  ): void {
+    buttonsContainer.style.setProperty("padding-bottom", "64px")
+
+    volumeControl.remove()
 
     const volumeButton = document.createElement("div")
-    const viewIndicator = document.createElement("div")
-    viewIndicator.style.setProperty("margin-right", "52px")
-
     buttonsContainer.appendChild(volumeButton)
-    buttonsContainer.insertBefore(
-      viewIndicator,
-      buttonsContainer.querySelector('div[role="button"]')
-    )
 
     createRoot(volumeButton).render(<Volume variant={this.variant} />)
-    createRoot(viewIndicator).render(
-      <ViewIndicator current={current} total={total} />
-    )
   }
 }

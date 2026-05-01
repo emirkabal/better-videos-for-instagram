@@ -239,7 +239,8 @@ export default class Injector {
     switch (this.variant) {
       case Variant.Stories:
         const element = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
-          .parentElement.parentElement.parentElement
+          ?.parentElement?.parentElement?.parentElement
+        if (!element?.parentNode) return
         element.parentNode.insertBefore(controller, element)
         break
       case Variant.Reels:

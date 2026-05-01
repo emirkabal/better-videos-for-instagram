@@ -132,16 +132,18 @@ export default function ProgressBarHorizontal({
     const tooltipWidth = 60
     const maxPosition = width - tooltipWidth / 2
     const minPosition = tooltipWidth / 2
-
+    // div[aria-busy]
     setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
     setMousePosition(x / width)
     setShowTooltip(true)
   }
 
   return (
-    <div className="progress-bar-horizontal bigv-control" onClick={(event) => {
-      event.stopPropagation()
-    }}>
+    <div
+      className="progress-bar-horizontal bigv-control"
+      onClick={(event) => {
+        event.stopPropagation()
+      }}>
       <div className={`baseline ${isDragging ? "dragging" : ""}`}>
         <div
           ref={dragareaRef}
