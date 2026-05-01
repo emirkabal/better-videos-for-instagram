@@ -15,27 +15,61 @@ export default class IntervalInjector extends Injector {
     this.intervalMs = options?.intervalMs || this.intervalMs
   }
 
+  protected shouldInjectVideo(_video: HTMLVideoElement): boolean {
+    return true
+  }
+
+  protected shouldAttachListeners(_video: HTMLVideoElement): boolean {
+    return true
+  }
+
+  protected shouldInjectImmediately(_video: HTMLVideoElement): boolean {
+    return false
+  }
+
   public deleted(): void {
     if (this.interval) clearInterval(this.interval)
   }
 
   public injectMethod(): void {
     const videos = document.querySelectorAll("video")
-    for (const video of videos) {
-      if (!video?.src.startsWith('blob:')) continue
-      if (
-        this.isInjected(video as HTMLVideoElement) ||
-        video.hasAttribute("bigv-attached-listeners")
-      )
-        continue
-      video.setAttribute("bigv-attached-listeners", "")
-      ;["play", "timeupdate", "playing"].forEach((event) => {
-        video.addEventListener(event, () => {
-          this.inject(video as HTMLVideoElement, video.parentElement!)
-        })
-      })
-    }
+    if (videos.length === 0) return
 
+    for (const video of videos) {
+      if (!video?.src.startsWith("blob:")) continue
+
+      const typedVideo = video as HTMLVideoElement
+
+      if (
+        !this.isInjected(typedVideo) &&
+        !typedVideo.hasAttribute("bigv-attached-listeners")
+      ) {
+        typedVideo.setAttribute("bigv-attached-listeners", "")
+        ;[
+          "loadedmetadata",
+          "loadeddata",
+          "canplay",
+          "play",
+          "timeupdate",
+          "playing"
+        ].forEach((event) => {
+          typedVideo.addEventListener(event, () => {
+            if (!this.shouldAttachListeners(typedVideo)) return
+            if (!this.shouldInjectVideo(typedVideo)) return
+            this.inject(typedVideo, typedVideo.parentElement!)
+          })
+        })
+      }
+
+      if (
+        !this.isInjected(typedVideo) &&
+        this.shouldAttachListeners(typedVideo) &&
+        this.shouldInjectImmediately(typedVideo) &&
+        this.shouldInjectVideo(typedVideo)
+      ) {
+        this.inject(typedVideo, typedVideo.parentElement!)
+      }
+    }
   }
 
   public wayToInject(): void {

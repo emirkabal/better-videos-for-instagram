@@ -51,8 +51,9 @@ export default class Stories extends IntervalInjector {
     progressBars: HTMLElement
   ): void {
     const current =
-      Array.from(progressBars.children).findIndex((element) => element.innerHTML) +
-      1
+      Array.from(progressBars.children).findIndex(
+        (element) => element.innerHTML
+      ) + 1
 
     const total = progressBars.childElementCount
 

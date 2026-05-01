@@ -254,9 +254,6 @@ export default class Injector {
         break
     }
 
-    video.currentTime = 0
-    video.volume = 0
-
     const id = location.pathname.split("/")[2]
     const params = new URLSearchParams(location.search)
     const index = params.get("img_index")
