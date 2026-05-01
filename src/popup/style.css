@@ -174,13 +174,11 @@ footer {
   justify-content: space-between;
 }
 
-
 footer .links {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-
 
 .github-button {
   color: #fff;

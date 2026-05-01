@@ -1,7 +1,9 @@
+import icon from "url:~/assets/icon.png"
+
 import { useStorage } from "@plasmohq/storage/hook"
 
 import { version } from "../../package.json"
-import icon from "url:~/assets/icon.png"
+
 import "./style.css"
 
 export default function Popup() {
@@ -58,7 +60,7 @@ export default function Popup() {
                 checked={pauseOnComments}
                 onChange={(e) => setPauseOnComments(e.target.checked)}
               />
-              <span className="slider">{ }</span>
+              <span className="slider">{}</span>
             </label>
           </div>
         </div>

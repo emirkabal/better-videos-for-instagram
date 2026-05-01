@@ -6,7 +6,7 @@ import { useLocalStorage } from "usehooks-ts"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
-import type { DownloadableMedia, Variant } from "~modules/Injector"
+import { Variant, type DownloadableMedia } from "~modules/Injector"
 import { IG_REELS_SNAP } from "~utils/constants"
 
 // import DownloadButton from "./Buttons/Download"

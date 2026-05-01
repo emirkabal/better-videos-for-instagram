@@ -28,7 +28,6 @@ After installation, you can use the extension to control video playback and adju
 
 <img width="1280" height="800" alt="English" src="https://github.com/user-attachments/assets/c0f037b2-48ea-4d42-b8d9-558ef54481be" />
 
-
 ## Contrubition
 
 We welcome contributions from the community! If you have ideas for improvements or find any issues, please open an [issue](https://github.com/emirkabal/better-videos-for-instagram/issues) or submit a pull request.
@@ -63,12 +62,12 @@ We welcome contributions from the community! If you have ideas for improvements 
    ```bash
    pnpm run lint && pnpm run format
    ```
-5. **Ensure build is working:**
+
+6. **Ensure build is working:**
 
    ```bash
    pnpm run build
    ```
-
 
 ## Legal
 
