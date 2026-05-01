@@ -97,7 +97,7 @@ export default function Controller({
   }, [])
 
   const isActiveAudibleVideo = useCallback(() => {
-    if (variant === "stories") return true
+    if (variant === Variant.Stories || variant === Variant.Default) return true
 
     const videos = Array.from(
       document.querySelectorAll<HTMLVideoElement>("video")
@@ -231,7 +231,7 @@ export default function Controller({
 
   return (
     <>
-      {variant !== "stories" && <Volume variant={variant} />}
+      {variant !== Variant.Stories && <Volume variant={variant} />}
       {/* {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
       )} */}
