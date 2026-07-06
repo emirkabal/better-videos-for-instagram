@@ -144,7 +144,6 @@ export default function Controller({
         "User has not interacted with the page yet. Muting video to allow autoplay."
       )
       video.muted = true
-      setMuted(true)
       return
     }
 
@@ -211,6 +210,31 @@ export default function Controller({
   useEffect(() => {
     updateAudio()
   }, [videoRef, volume, muted])
+
+  useEffect(() => {
+    if ("userActivation" in navigator && navigator.userActivation.hasBeenActive)
+      return
+
+    const handleFirstActivation = () => {
+      updateAudio()
+    }
+
+    document.addEventListener("pointerdown", handleFirstActivation, {
+      capture: true
+    })
+    document.addEventListener("keydown", handleFirstActivation, {
+      capture: true
+    })
+    document.addEventListener("touchstart", handleFirstActivation, {
+      capture: true
+    })
+
+    return () => {
+      document.removeEventListener("pointerdown", handleFirstActivation, true)
+      document.removeEventListener("keydown", handleFirstActivation, true)
+      document.removeEventListener("touchstart", handleFirstActivation, true)
+    }
+  }, [updateAudio])
 
   useEffect(() => {
     videoRef.current.playbackRate = playbackSpeed
