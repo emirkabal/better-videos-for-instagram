@@ -1,0 +1,87 @@
+.better-ig-fullscreen-button {
+  appearance: none;
+  position: absolute;
+  right: 58px;
+  bottom: 12px;
+  z-index: 999;
+  display: flex;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 50%;
+  outline: none;
+  background: rgb(17 17 17 / 78%);
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 10%);
+  color: #fff;
+  opacity: 0.78;
+  cursor: pointer;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  transition:
+    opacity 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.better-ig-fullscreen-button:hover {
+  border-color: rgb(255 255 255 / 22%);
+  background: rgb(17 17 17 / 90%);
+  opacity: 1;
+}
+
+.better-ig-fullscreen-button.default:not(.in-controls) {
+  top: auto !important;
+  right: 58px !important;
+  bottom: 12px !important;
+}
+
+.better-ig-fullscreen-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 45%));
+  pointer-events: none;
+}
+
+.bigv-fullscreen-control .better-ig-fullscreen-button.in-controls {
+  position: static;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.92;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.bigv-fullscreen-control .better-ig-fullscreen-button.in-controls:hover {
+  background: transparent;
+  opacity: 1;
+}
+
+.bigv-fullscreen-control .better-ig-fullscreen-button.in-controls svg {
+  width: 26px;
+  height: 26px;
+}
+
+.bigv-fullscreen-text {
+  margin-top: -6px;
+  line-height: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .better-ig-fullscreen-button {
+    transition: none;
+  }
+}

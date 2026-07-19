@@ -1,64 +1,86 @@
 .better-ig-progress-bar-vertical {
-  width: auto;
-  max-height: 60px;
   display: flex;
+  width: 18px;
+  height: 66px;
+  flex-shrink: 0;
   align-items: center;
-  -webkit-user-drag: unset;
+  justify-content: center;
   user-select: none;
-  transform: rotate3d(0, 0, 1, -180deg);
+  -webkit-user-drag: none;
+  touch-action: none;
 }
 
 .better-ig-progress-bar-vertical .baseline {
-  width: 3px;
-  height: 52px;
-  border-radius: 10px;
-  background: #7c7c7c;
-  cursor: pointer;
   position: relative;
-}
-
-.better-ig-progress-bar-vertical .baseline > .fill {
-  width: 3px;
-  height: 0;
-  border-radius: 10px;
-  background: #ffffff;
-  position: absolute;
-  top: 0;
-  z-index: 10;
-}
-
-.better-ig-progress-bar-vertical .baseline .chunks {
-  width: 0;
-  height: 4px;
-  border-radius: 10px;
-  background: #dbdbdb96;
-  position: absolute;
-  top: 0;
-}
-
-.better-ig-progress-bar-vertical .baseline > .pointer {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ffffff;
-  position: absolute;
-  top: -4px;
-  right: -3.5px;
-  transform: translate3d(0, -10px, 0);
-  will-change: trasform;
-  opacity: 1;
-  transition: opacity 0.2s ease-out;
-}
-
-.better-ig-progress-bar-vertical .baseline .dragarea {
-  width: 12px;
-  height: calc(100% + 6px);
+  width: 4px;
+  height: 56px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 28%);
   cursor: pointer;
-  position: absolute;
-  z-index: 20;
-  transform: translateX(-35%) translateY(-3px);
+  outline: none;
+  transition:
+    width 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease,
+    box-shadow 140ms ease;
 }
 
-.baseline:hover .pointer {
-  opacity: 1 !important;
+.better-ig-progress-bar-vertical .baseline:hover,
+.better-ig-progress-bar-vertical .baseline.dragging,
+.better-ig-progress-bar-vertical .baseline:focus-visible {
+  width: 7px;
+  background: rgb(255 255 255 / 34%);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+}
+
+.better-ig-progress-bar-vertical .fill {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  height: 0;
+  border-radius: 999px;
+  background: #fff;
+  pointer-events: none;
+  will-change: height;
+}
+
+.better-ig-progress-bar-vertical .pointer {
+  position: absolute;
+  left: 50%;
+  z-index: 4;
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgb(255 255 255 / 70%);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 32%),
+    0 0 0 1px rgb(0 0 0 / 8%);
+  opacity: 0;
+  transform: translate(-50%, 50%);
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+.better-ig-progress-bar-vertical .baseline:hover .pointer,
+.better-ig-progress-bar-vertical .baseline.dragging .pointer,
+.better-ig-progress-bar-vertical .baseline:focus-visible .pointer {
+  opacity: 1;
+}
+
+.better-ig-progress-bar-vertical .dragarea {
+  position: absolute;
+  inset: -7px;
+  z-index: 5;
+  cursor: pointer;
+  touch-action: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .better-ig-progress-bar-vertical .baseline,
+  .better-ig-progress-bar-vertical .fill,
+  .better-ig-progress-bar-vertical .pointer {
+    transition: none;
+  }
 }

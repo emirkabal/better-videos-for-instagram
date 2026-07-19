@@ -2,14 +2,21 @@ import { createRoot, type Root } from "react-dom/client"
 
 import Controller from "~components/Controller"
 import { IG_STORIES_INJECTOR_INDICATOR } from "~utils/constants"
+import { isInstagramVideo } from "~utils/video"
 
-export type Injected = [
-  HTMLVideoElement,
-  HTMLElement,
-  HTMLElement,
-  Root,
-  HTMLAnchorElement
-][]
+type InjectionRecord = {
+  video: HTMLVideoElement
+  sourceParent: HTMLElement
+  controller: HTMLElement
+  root: Root
+  restoreAnchor?: () => void
+}
+type HiddenElementSnapshot = {
+  visibility: string
+  visibilityPriority: string
+  pointerEvents: string
+  pointerEventsPriority: string
+}
 export type DownloadableMedia = {
   id: string
   index?: number
@@ -39,104 +46,37 @@ export default class Injector {
 
   variant: Variant = Variant.Default
 
-  private injectedList: Injected = []
-  private anchorEvents = new WeakMap<
-    HTMLAnchorElement,
-    (e: MouseEvent) => void
+  private injectedList: InjectionRecord[] = []
+  private hiddenElements = new Map<
+    HTMLElement | SVGElement,
+    HiddenElementSnapshot
   >()
 
   constructor(options: InjectorOptions | undefined) {
-    this.minRemoveCount = options?.minRemoveCount || this.minRemoveCount
-    this.removeCount = options?.removeCount || this.removeCount
+    this.minRemoveCount = options?.minRemoveCount ?? this.minRemoveCount
+    this.removeCount = options?.removeCount ?? this.removeCount
     this.improvePerformance =
-      options?.improvePerformance || this.improvePerformance
-    this.variant = options?.variant || this.variant
+      options?.improvePerformance ?? this.improvePerformance
+    this.variant = options?.variant ?? this.variant
   }
 
-  /**
-   * This method is called before the elements are injected.
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.beforeInject = () => {
-   *  console.log("Injecting...");
-   * }
-   * injector.inject();
-   * ```
-   * @returns {void}
-   */
   public beforeInject(): void {}
-
-  /**
-   * This method is called after the elements are injected.
-   * @param props {InjectedProps}
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.injected = () => {
-   *  console.log("Injected!");
-   * }
-   * injector.inject();
-   * ```
-   */
   public injected(props: InjectedProps): void {}
-
-  /**
-   * This method is called before the elements are deleted.
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.beforeDelete = () => {
-   *  console.log("Deleting...");
-   * }
-   * injector.delete();
-   * ```
-   */
   public beforeDelete(): void {}
-
-  /**
-   * This method is called after the elements are deleted.
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.deleted = () => {
-   *  console.log("Deleted!");
-   * }
-   * injector.delete();
-   * ```
-   */
   public deleted(): void {}
-
-  /**
-   * This method is custom way to inject.
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.wayToInject = () => {
-   *  const video = document.querySelector("video");
-   *  if (!video) return;
-   *  this.inject(video as HTMLVideoElement, video.parentElement!);
-   * }
-   * injector.wayToInject();
-   * ```
-   */
   public wayToInject(): void {}
-
-  /**
-   * This method is called when an injected element is deleted.
-   * @param id {string} - The ID of the controller that was deleted.
-   * @example
-   * ```ts
-   * const injector = new Injector();
-   * injector.onDelete = (id) => {
-   *  console.log(`Controller with ID ${id} was deleted.`);
-   * }
-   * ```
-   */
   public onDelete(id: string) {}
 
   get lastInjected() {
     return this.injectedList[this.injectedList.length - 1]
+  }
+
+  private dispose(record: InjectionRecord): void {
+    record.video.removeAttribute("bigv-injected")
+    record.restoreAnchor?.()
+    this.onDelete(record.controller.id)
+    record.root.unmount()
+    record.controller.remove()
   }
 
   private clear() {
@@ -144,55 +84,79 @@ export default class Injector {
       this.injectedList.length > this.minRemoveCount &&
       this.improvePerformance
     ) {
-      for (let i = 0; i < this.removeCount; i++) {
-        const [video, _, controller, root, anchor] = this.injectedList.shift()!
-        if (!controller || !video) continue
-        video.removeAttribute("bigv-injected")
-        this.onDelete(controller.id)
-        root.unmount()
-        controller.remove()
-        if (anchor) {
-          anchor.removeEventListener("click", this.anchorEvents.get(anchor)!)
-        }
+      const records = this.injectedList.splice(0, this.removeCount)
+      records.forEach((record) => this.dispose(record))
+    }
+  }
+
+  public hideElements(selector: string, hideParent: boolean): void {
+    for (const element of document.querySelectorAll(selector)) {
+      if (element.closest("[bigv-inject]")) continue
+
+      const target = hideParent ? element.parentElement : element
+      if (!(target instanceof HTMLElement) && !(target instanceof SVGElement))
+        continue
+      if (this.hiddenElements.has(target)) continue
+
+      this.hiddenElements.set(target, {
+        visibility: target.style.getPropertyValue("visibility"),
+        visibilityPriority: target.style.getPropertyPriority("visibility"),
+        pointerEvents: target.style.getPropertyValue("pointer-events"),
+        pointerEventsPriority:
+          target.style.getPropertyPriority("pointer-events")
+      })
+
+      target.style.setProperty("visibility", "hidden", "important")
+      target.style.setProperty("pointer-events", "none", "important")
+    }
+  }
+
+  private restoreHiddenElements(): void {
+    for (const [element, snapshot] of this.hiddenElements) {
+      if (snapshot.visibility) {
+        element.style.setProperty(
+          "visibility",
+          snapshot.visibility,
+          snapshot.visibilityPriority
+        )
+      } else {
+        element.style.removeProperty("visibility")
+      }
+
+      if (snapshot.pointerEvents) {
+        element.style.setProperty(
+          "pointer-events",
+          snapshot.pointerEvents,
+          snapshot.pointerEventsPriority
+        )
+      } else {
+        element.style.removeProperty("pointer-events")
       }
     }
+
+    this.hiddenElements.clear()
   }
 
-  public removeElements(selector: string, removeParent: boolean): void {
-    for (const el of document.querySelectorAll(selector)) {
-      removeParent ? el.parentElement?.remove() : el.remove()
-    }
-  }
-
-  /**
-   * This method deletes the injected elements.
-   * @returns {void}
-   */
   public delete() {
     this.beforeDelete()
-    for (let i = 0; i < this.injectedList.length; i++) {
-      const [video, parent, controller, root] = this.injectedList[i]
-
-      video.removeAttribute("bigv-injected")
-      controller.remove()
-      root.unmount()
-      parent.remove()
-    }
-    this.injectedList.splice(0, this.injectedList.length)
+    const records = this.injectedList.splice(0)
+    records.forEach((record) => this.dispose(record))
+    this.restoreHiddenElements()
     this.deleted()
   }
 
   private removeRedirects(
     anchor: HTMLAnchorElement | null,
     video: HTMLVideoElement
-  ) {
-    if (!anchor || anchor.dataset.betterInstagramFixed) return
+  ): (() => void) | undefined {
+    if (!anchor || anchor.dataset.betterInstagramFixed) return undefined
+
+    const originalHref = anchor.getAttribute("href")
+    const originalCursor = anchor.style.cursor
+    const originalDraggable = anchor.getAttribute("draggable")
 
     const event = (e: MouseEvent) => {
-      if (
-        e.target instanceof HTMLElement &&
-        !e.target.closest(".bigv-control")
-      ) {
+      if (e.target instanceof Element && !e.target.closest(".bigv-control")) {
         e.preventDefault()
         e.stopPropagation()
         if (video.paused) video.play()
@@ -206,53 +170,75 @@ export default class Injector {
     anchor.draggable = false
     anchor.dataset.betterInstagramFixed = "true"
 
-    this.anchorEvents.set(anchor, event)
+    return () => {
+      anchor.removeEventListener("click", event, true)
+
+      if (originalHref === null) anchor.removeAttribute("href")
+      else anchor.setAttribute("href", originalHref)
+
+      anchor.style.cursor = originalCursor
+
+      if (originalDraggable === null) anchor.removeAttribute("draggable")
+      else anchor.setAttribute("draggable", originalDraggable)
+
+      delete anchor.dataset.betterInstagramFixed
+    }
   }
 
-  /**
-   * This method inject the Controller component to the video element.
-   * @param video {HTMLVideoElement}
-   * @param parent {HTMLElement}
-   * @returns {void}
-   */
   public inject(video: HTMLVideoElement, parent: HTMLElement): void {
     if (
       !video ||
       !video?.parentElement ||
-      !video?.src ||
-      !video.src.startsWith("blob:") ||
+      !isInstagramVideo(video) ||
       video?.hasAttribute("bigv-injected")
+    )
+      return
+
+    const controller = document.createElement("div")
+    controller.id = crypto.randomUUID()
+    controller.setAttribute("bigv-inject", "")
+    controller.setAttribute("data-bigv-controller", "")
+
+    let anchorElement: HTMLAnchorElement | null = null
+    let mountParent: ParentNode | null = null
+    let insertBefore: Node | null = null
+
+    switch (this.variant) {
+      case Variant.Stories: {
+        const el = document.querySelector(IG_STORIES_INJECTOR_INDICATOR)
+        if (!el?.parentNode) return
+        mountParent = el.parentNode
+        insertBefore = el
+        break
+      }
+      case Variant.Reels: {
+        mountParent = video.closest("div:has(>[data-instancekey])")
+        break
+      }
+      case Variant.Default: {
+        mountParent = video.closest(
+          "div:has(>[data-instancekey])"
+        )?.parentElement
+        anchorElement = video.closest("a")
+        break
+      }
+    }
+
+    if (!mountParent) return
+    if (
+      mountParent instanceof Element &&
+      Array.from(mountParent.children).some((element) =>
+        element.hasAttribute("data-bigv-controller")
+      )
     )
       return
 
     this.beforeInject()
     this.clear()
+    mountParent.insertBefore(controller, insertBefore)
 
     video.setAttribute("bigv-injected", "")
-
-    const controller = document.createElement("div")
-    controller.id = crypto.randomUUID()
-    controller.setAttribute("bigv-inject", "")
-
-    let anchorElement
-
-    switch (this.variant) {
-      case Variant.Stories:
-        const el = document.querySelector(IG_STORIES_INJECTOR_INDICATOR)
-        if (!el) return
-        el.parentNode.insertBefore(controller, el)
-        break
-      case Variant.Reels:
-        video.closest("div:has(>[data-instancekey])")?.appendChild(controller)
-        break
-      case Variant.Default:
-        anchorElement = video.closest("a")
-        video
-          .closest("div:has(>[data-instancekey])")
-          ?.parentElement?.appendChild(controller)
-        this.removeRedirects(anchorElement, video)
-        break
-    }
+    const restoreAnchor = this.removeRedirects(anchorElement, video)
 
     const id = location.pathname.split("/")[2]
     const params = new URLSearchParams(location.search)
@@ -275,7 +261,13 @@ export default class Injector {
       />
     )
 
-    this.injectedList.push([video, parent, controller, root, anchorElement])
+    this.injectedList.push({
+      video,
+      sourceParent: parent,
+      controller,
+      root,
+      restoreAnchor
+    })
     this.injected({
       video,
       downloadableMedia:

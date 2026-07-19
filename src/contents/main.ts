@@ -6,17 +6,23 @@ export const config: PlasmoCSConfig = {
   matches: ["https://www.instagram.com/*"]
 }
 
-const REGEX =
-  /^(?:https?:\/\/(?:www\.)?instagram\.com)?(?:\/[\w.-]+)?\/(stories|reels)\/([\w.-]+)(?:\/([\w.-]+))?\/?$/i
 const global = new Global()
 const reels = new Reels()
 const stories = new Stories()
 
-let previousUrl = ""
+type PageMode = "global" | "reels" | "stories"
+
+const getPageMode = (): PageMode => {
+  const section = location.pathname.split("/").filter(Boolean)[0]
+  console.log("section: ", section)
+
+  if (section === "reel" || section === "reels") return "reels"
+  if (section === "stories") return "stories"
+  return "global"
+}
+
 const load = () => {
-  const match = location.pathname.match(REGEX)
-  const first = match?.[1]
-  switch (first) {
+  switch (getPageMode()) {
     case "reels":
       global.delete()
       stories.delete()
@@ -34,11 +40,16 @@ const load = () => {
   }
 }
 
-setInterval(() => {
-  if (location.href !== previousUrl) {
-    previousUrl = location.href
-    load()
-  }
-}, 100)
+let previousUrl = ""
+const loadWhenUrlChanges = () => {
+  if (location.href === previousUrl) return
 
-document.addEventListener("DOMContentLoaded", load)
+  previousUrl = location.href
+  load()
+}
+
+setInterval(() => {
+  loadWhenUrlChanges()
+}, 250)
+
+loadWhenUrlChanges()

@@ -1,120 +1,120 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import "./style.css"
 
+import cn from "classnames"
+
 type Props = {
   progress?: number
-  chunksVal?: number
   onProgress?: (progress: number) => void
   onDragging?: (dragging: boolean) => void
 }
+
+const clampProgress = (value: number) =>
+  Math.min(Math.max(Number.isFinite(value) ? value : 0, 0), 100)
 
 export default function ProgressBarVertical({
   progress = 0,
   onProgress,
   onDragging
 }: Props) {
-  const [progressBar, setProgressBar] = useState(progress)
-  const [pointerPosition, setPointerPosition] = useState(0)
+  const [displayedProgress, setDisplayedProgress] = useState(() =>
+    clampProgress(progress)
+  )
   const [isDragging, setDragging] = useState(false)
+  const baselineRef = useRef<HTMLDivElement>(null)
 
-  const dragareaRef = useRef<HTMLDivElement>(null)
+  const commitProgress = useCallback(
+    (value: number) => {
+      const nextProgress = Math.round(clampProgress(value) * 100) / 100
+      setDisplayedProgress(nextProgress)
+      onProgress?.(nextProgress)
+    },
+    [onProgress]
+  )
 
-  let lastY = 0
-  const mouseMoveEvent = (e: MouseEvent, click = false) => {
-    if ((e.clientY === lastY || !isDragging) && !click) return
-    lastY = 0
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const height = rect.height - 6
-    const y = Math.min(Math.max(-(e.clientY - rect.top) + height, 0), height)
-    const percent = Number((y / height).toFixed(4))
-    if (percent >= 0 && percent <= 1) {
-      setPointerPosition(y)
-      setProgressBar(Math.round(percent * 10000) / 100)
-      if (onProgress) onProgress(Math.round(percent * 10000) / 100)
+  const updateFromPointer = useCallback(
+    (clientY: number) => {
+      const rect = baselineRef.current?.getBoundingClientRect()
+      if (!rect || rect.height <= 0) return
+
+      const ratio = 1 - (clientY - rect.top) / rect.height
+      commitProgress(ratio * 100)
+    },
+    [commitProgress]
+  )
+
+  useEffect(() => {
+    if (!isDragging) setDisplayedProgress(clampProgress(progress))
+  }, [isDragging, progress])
+
+  useEffect(() => {
+    onDragging?.(isDragging)
+  }, [isDragging, onDragging])
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    let nextProgress: number | undefined
+
+    switch (event.key) {
+      case "ArrowUp":
+      case "ArrowRight":
+        nextProgress = displayedProgress + 5
+        break
+      case "ArrowDown":
+      case "ArrowLeft":
+        nextProgress = displayedProgress - 5
+        break
+      case "Home":
+        nextProgress = 0
+        break
+      case "End":
+        nextProgress = 100
+        break
     }
+
+    if (nextProgress === undefined) return
+
+    event.preventDefault()
+    event.stopPropagation()
+    commitProgress(nextProgress)
   }
-
-  const updateProgressBar = () => {
-    if (isNaN(progress) || isDragging) return
-    setProgressBar(progress)
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const height = rect.height - 6
-    const percent = progress / 100
-    const y = height * percent
-    setPointerPosition(y)
-  }
-
-  useEffect(() => {
-    updateProgressBar()
-  }, [progress])
-
-  useEffect(() => {
-    window.addEventListener("mousemove", mouseMoveEvent)
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMoveEvent)
-    }
-  }, [isDragging])
-
-  const resizeEvent = () => {
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-
-    const height = rect.height
-    const percent = progressBar / 100
-    const y = height * percent
-    setPointerPosition(y)
-    setProgressBar(progressBar)
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", resizeEvent)
-    return () => {
-      window.removeEventListener("resize", resizeEvent)
-    }
-  }, [progressBar])
-
-  useEffect(() => {
-    window.addEventListener("mouseup", () => {
-      setDragging(false)
-    })
-    window.addEventListener("mouseleave", () => {
-      setDragging(false)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (onDragging) onDragging(isDragging)
-  }, [isDragging])
 
   return (
     <div
       className="better-ig-progress-bar-vertical bigv-control"
-      style={isDragging ? { opacity: 1 } : undefined}>
-      <div className="baseline">
-        <div
-          ref={dragareaRef}
-          className="dragarea"
-          onMouseDown={(e) => [
-            setDragging(true),
-            mouseMoveEvent(e as any as MouseEvent, true)
-          ]}></div>
-        <div
-          className="fill"
-          style={{
-            height: `${
-              progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar
-            }%`
-          }}></div>
-        <div
-          className="pointer"
-          style={{
-            transform: `translate3d(0,${pointerPosition}px,0)`,
-            opacity: isDragging ? 1 : 0
-          }}></div>
+      onClick={(event) => event.stopPropagation()}>
+      <div
+        ref={baselineRef}
+        className={cn("baseline", { dragging: isDragging })}
+        role="slider"
+        tabIndex={0}
+        aria-label="Volume"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(displayedProgress)}
+        onKeyDown={handleKeyDown}
+        onPointerDown={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          event.currentTarget.focus({ preventScroll: true })
+          event.currentTarget.setPointerCapture(event.pointerId)
+          setDragging(true)
+          updateFromPointer(event.clientY)
+        }}
+        onPointerMove={(event) => {
+          if (isDragging) updateFromPointer(event.clientY)
+        }}
+        onPointerUp={(event) => {
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId)
+          }
+          setDragging(false)
+        }}
+        onPointerCancel={() => setDragging(false)}
+        onLostPointerCapture={() => setDragging(false)}>
+        <div className="fill" style={{ height: `${displayedProgress}%` }} />
+        <div className="pointer" style={{ bottom: `${displayedProgress}%` }} />
+        <div className="dragarea" />
       </div>
     </div>
   )

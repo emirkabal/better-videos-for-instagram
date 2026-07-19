@@ -1,4 +1,3 @@
-import { unmountComponentAtNode } from "react-dom"
 import { createRoot, type Root } from "react-dom/client"
 
 import { Storage } from "@plasmohq/storage"
@@ -8,52 +7,26 @@ import {
   IG_NEW_VOLUME_INDICATOR,
   IG_REELS_VOLUME_INDICATOR
 } from "~utils/constants"
+import { getActiveInstagramVideo, isInstagramVideo } from "~utils/video"
 
-import { Variant, type InjectedProps } from "../Injector"
+import { Variant } from "../Injector"
 import IntervalInjector, {
   type IntervalInjectorOptions
 } from "../IntervalInjector"
 
+type ButtonInjection = {
+  root: Root
+  container: HTMLElement
+  controller: HTMLElement
+}
+
 export default class Reels extends IntervalInjector {
-  private commentsInterval: NodeJS.Timeout | null = null
+  private commentsInterval: ReturnType<typeof setInterval> | null = null
   private pauseOnComments = true
-  private list: [Root, HTMLElement, HTMLElement][] = []
-
-  private getReelScore(video: HTMLVideoElement): number {
-    const rect = video.getBoundingClientRect()
-    if (rect.width <= 0 || rect.height <= 0) return 0
-
-    const visibleWidth =
-      Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0)
-    const visibleHeight =
-      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-
-    if (visibleWidth <= 0 || visibleHeight <= 0) return 0
-
-    const visibleRatio =
-      (visibleWidth * visibleHeight) / (rect.width * rect.height)
-    const videoCenter = rect.top + rect.height / 2
-    const viewportCenter = window.innerHeight / 2
-    const centerPenalty =
-      Math.abs(videoCenter - viewportCenter) / Math.max(window.innerHeight, 1)
-
-    return visibleRatio - centerPenalty
-  }
+  private buttonInjections: ButtonInjection[] = []
 
   private getActiveReelVideo(): HTMLVideoElement | null {
-    const videos = Array.from(
-      document.querySelectorAll<HTMLVideoElement>("video")
-    ).filter((video) => video.src.startsWith("blob:"))
-
-    if (videos.length === 0) return null
-
-    return videos.reduce<HTMLVideoElement | null>((activeVideo, video) => {
-      if (!activeVideo) return video
-
-      return this.getReelScore(video) > this.getReelScore(activeVideo)
-        ? video
-        : activeVideo
-    }, null)
+    return getActiveInstagramVideo()
   }
 
   private muteInactivePlayingVideos(): void {
@@ -61,7 +34,7 @@ export default class Reels extends IntervalInjector {
     const videos = document.querySelectorAll<HTMLVideoElement>("video")
 
     for (const video of videos) {
-      if (!video.src.startsWith("blob:") || video === activeVideo) continue
+      if (!isInstagramVideo(video) || video === activeVideo) continue
       if (video.paused) continue
 
       video.muted = true
@@ -89,8 +62,9 @@ export default class Reels extends IntervalInjector {
   }
 
   public beforeInject(): void {
-    this.removeElements(IG_REELS_VOLUME_INDICATOR, true)
-    this.removeElements(IG_NEW_VOLUME_INDICATOR, false)
+    document.documentElement.setAttribute("data-bigv-reels-active", "true")
+    this.hideElements(IG_REELS_VOLUME_INDICATOR, true)
+    this.hideElements(IG_NEW_VOLUME_INDICATOR, false)
   }
 
   protected shouldInjectVideo(video: HTMLVideoElement): boolean {
@@ -102,39 +76,46 @@ export default class Reels extends IntervalInjector {
   }
 
   public injectMethod(): void {
+    document.documentElement.setAttribute("data-bigv-reels-active", "true")
     this.muteInactivePlayingVideos()
     super.injectMethod()
     this.muteInactivePlayingVideos()
   }
 
   public beforeDelete(): void {
+    document.documentElement.removeAttribute("data-bigv-reels-active")
+
     if (this.commentsInterval) {
       clearInterval(this.commentsInterval)
       this.commentsInterval = null
     }
 
-    for (const [root, container] of this.list) {
+    for (const { root, container } of this.buttonInjections) {
       root.unmount()
       container.remove()
     }
+
+    this.buttonInjections = []
+    localStorage.removeItem("bigv-comments-opened")
   }
 
   public onDelete(id: string): void {
-    const index = this.list.findIndex(
-      ([_, __, controller]) => controller.id === id
+    const index = this.buttonInjections.findIndex(
+      ({ controller }) => controller.id === id
     )
     if (index !== -1) {
-      const [root, container] = this.list[index]
+      const { root, container } = this.buttonInjections[index]
       root.unmount()
       container.remove()
-      this.list.splice(index, 1)
+      this.buttonInjections.splice(index, 1)
     }
   }
 
-  public injected(props: InjectedProps): void {
-    if (!this.lastInjected) return
+  public injected(): void {
+    const injection = this.lastInjected
+    if (!injection) return
 
-    let el = this.lastInjected[1]
+    let el: HTMLElement | null = injection.sourceParent
     while (
       el &&
       !(
@@ -156,11 +137,13 @@ export default class Reels extends IntervalInjector {
 
     const root = createRoot(buttons)
 
-    root.render(
-      <Buttons ctx={{ download: props.downloadableMedia ?? undefined }} />
-    )
+    root.render(<Buttons controllerId={injection.controller.id} />)
 
-    this.list.push([root, buttons, this.lastInjected[2]])
+    this.buttonInjections.push({
+      root,
+      container: buttons,
+      controller: injection.controller
+    })
 
     if (this.commentsInterval) clearInterval(this.commentsInterval)
 

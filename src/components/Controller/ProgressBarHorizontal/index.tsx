@@ -1,142 +1,230 @@
-import { useEffect, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent
+} from "react"
 
 import "./style.css"
 
 import cn from "classnames"
 
+import { useInstagramSpritesheet } from "~hooks/use-instagram-spritesheet"
 import type { Variant } from "~modules/Injector"
+
+import InstagramSpritePreview from "./InstagramSpritePreview"
 
 type Props = {
   progress?: number
-  chunksVal?: number
   onProgress?: (progress: number) => void
   onDragging?: (dragging: boolean) => void
   videoDuration?: number
   variant?: Variant
+  video?: HTMLVideoElement | null
+  showVideoPreview?: boolean
 }
 
 export default function ProgressBarHorizontal({
   progress = 0,
-  chunksVal = 0,
   onProgress,
   onDragging,
   videoDuration = 0,
-  variant
+  variant,
+  video,
+  showVideoPreview = true
 }: Props) {
-  const [chunks, setChunks] = useState(chunksVal)
   const [progressBar, setProgressBar] = useState(progress)
   const [isDragging, setDragging] = useState(false)
   const [tooltipPosition, setTooltipPosition] = useState(0)
   const [showTooltip, setShowTooltip] = useState(false)
-  const dragareaRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState(0)
+  const [previewRequested, setPreviewRequested] = useState(false)
+  const [detectedDuration, setDetectedDuration] = useState(0)
+
+  const dragareaRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | null>(null)
+  const progressBarRef = useRef(progress)
+
+  const duration =
+    videoDuration > 0 && Number.isFinite(videoDuration)
+      ? videoDuration
+      : detectedDuration > 0 && Number.isFinite(detectedDuration)
+        ? detectedDuration
+        : 0
+
+  const spritesheet = useInstagramSpritesheet(
+    video,
+    showVideoPreview && previewRequested
+  )
 
   const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = (seconds % 60).toFixed(1)
-    return minutes === 0
-      ? `${remainingSeconds}s`
-      : `${minutes}:${Math.floor(Number(remainingSeconds)).toString().padStart(2, "0")}`
+    const safeSeconds = Number.isFinite(seconds) ? Math.max(seconds, 0) : 0
+
+    const minutes = Math.floor(safeSeconds / 60)
+    const remainingSeconds = Math.floor(safeSeconds % 60)
+
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`
   }
 
-  let lastX = 0
-  const mouseMoveEvent = (e: MouseEvent, click = false) => {
-    if (!click && !isDragging) return
+  const setDisplayedProgress = useCallback((value: number) => {
+    progressBarRef.current = value
+    setProgressBar(value)
+  }, [])
 
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-
-    const width = rect.width
-    const x = Math.min(Math.max(e.clientX - rect.left, 0), width)
-    const percent = Number((x / width).toFixed(4))
-
-    if (percent >= 0 && percent <= 1) {
-      const newProgress = Math.round(percent * 10000) / 100
-      setProgressBar(newProgress)
-      if (onProgress) onProgress(newProgress)
-
-      const tooltipWidth = 60
-      const maxPosition = width - tooltipWidth / 2
-      const minPosition = tooltipWidth / 2
-      setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
-      setMousePosition(percent)
+  useEffect(() => {
+    if (!video) {
+      setDetectedDuration(0)
+      return
     }
 
-    lastX = e.clientX
-  }
+    const syncDuration = () => {
+      setDetectedDuration(Number.isFinite(video.duration) ? video.duration : 0)
+    }
 
-  const updateProgressBar = () => {
-    if (isDragging) setProgressBar(progress)
-    if (isNaN(progress) || isDragging) return
+    syncDuration()
+
+    video.addEventListener("loadedmetadata", syncDuration)
+    video.addEventListener("durationchange", syncDuration)
+
+    return () => {
+      video.removeEventListener("loadedmetadata", syncDuration)
+      video.removeEventListener("durationchange", syncDuration)
+    }
+  }, [video])
+
+  useEffect(() => {
+    setPreviewRequested(false)
+    if (!video) return
+
+    const resetPreviewRequest = () => setPreviewRequested(false)
+
+    video.addEventListener("emptied", resetPreviewRequest)
+    video.addEventListener("loadstart", resetPreviewRequest)
+
+    return () => {
+      video.removeEventListener("emptied", resetPreviewRequest)
+      video.removeEventListener("loadstart", resetPreviewRequest)
+    }
+  }, [video])
+
+  const updatePointer = useCallback(
+    (clientX: number, updateProgress: boolean) => {
+      const rect = dragareaRef.current?.getBoundingClientRect()
+
+      if (!rect || rect.width <= 0) return
+
+      const x = Math.min(Math.max(clientX - rect.left, 0), rect.width)
+
+      const percent = Math.min(Math.max(x / rect.width, 0), 1)
+
+      if (updateProgress) {
+        const newProgress = Math.round(percent * 10000) / 100
+
+        setDisplayedProgress(newProgress)
+        onProgress?.(newProgress)
+      }
+
+      const isLandscapePreview = Boolean(
+        video?.videoWidth &&
+          video.videoHeight &&
+          video.videoWidth > video.videoHeight
+      )
+      const tooltipWidth = spritesheet ? (isLandscapePreview ? 154 : 93) : 82
+      const halfTooltipWidth = Math.min(tooltipWidth / 2, rect.width / 2)
+
+      const clampedPosition = Math.min(
+        Math.max(x, halfTooltipWidth),
+        rect.width - halfTooltipWidth
+      )
+
+      setTooltipPosition(clampedPosition)
+      setMousePosition(percent)
+    },
+    [onProgress, setDisplayedProgress, spritesheet, video]
+  )
+
+  useEffect(() => {
+    if (Number.isNaN(progress) || isDragging) return
+
+    if (animationFrameRef.current !== null) {
+      cancelAnimationFrame(animationFrameRef.current)
+    }
 
     const animateProgress = () => {
-      setProgressBar((currentProgress) => {
-        const diff = progress - currentProgress
-        if (Math.abs(diff) < 0.1) return progress
-        return currentProgress + diff * 0.1
-      })
+      const currentProgress = progressBarRef.current
+      const difference = progress - currentProgress
+
+      if (Math.abs(difference) < 0.1) {
+        setDisplayedProgress(progress)
+        animationFrameRef.current = null
+        return
+      }
+
+      setDisplayedProgress(currentProgress + difference * 0.1)
 
       animationFrameRef.current = requestAnimationFrame(animateProgress)
     }
 
-    if (animationFrameRef.current)
-      cancelAnimationFrame(animationFrameRef.current)
     animationFrameRef.current = requestAnimationFrame(animateProgress)
-  }
 
-  useEffect(() => {
-    updateProgressBar()
     return () => {
-      if (animationFrameRef.current)
+      if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
+      }
     }
-  }, [progress])
+  }, [progress, isDragging, setDisplayedProgress])
 
   useEffect(() => {
-    window.addEventListener("mousemove", mouseMoveEvent)
-    return () => window.removeEventListener("mousemove", mouseMoveEvent)
-  }, [isDragging])
+    if (!isDragging) return
 
-  const resizeEvent = () => {
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
+    const handleMouseMove = (event: MouseEvent) => {
+      updatePointer(event.clientX, true)
+    }
 
-    setProgressBar(progressBar)
-  }
+    window.addEventListener("mousemove", handleMouseMove)
 
-  useEffect(() => {
-    window.addEventListener("resize", resizeEvent)
-    return () => window.removeEventListener("resize", resizeEvent)
-  }, [progressBar])
-
-  useEffect(() => {
-    window.addEventListener("mouseup", () => setDragging(false))
-    window.addEventListener("mouseleave", () => setDragging(false))
     return () => {
-      window.removeEventListener("mouseup", () => setDragging(false))
-      window.removeEventListener("mouseleave", () => setDragging(false))
+      window.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [isDragging, updatePointer])
+
+  useEffect(() => {
+    const stopDragging = () => {
+      setDragging(false)
+      setShowTooltip(false)
+    }
+
+    window.addEventListener("mouseup", stopDragging)
+    window.addEventListener("mouseleave", stopDragging)
+
+    return () => {
+      window.removeEventListener("mouseup", stopDragging)
+      window.removeEventListener("mouseleave", stopDragging)
     }
   }, [])
 
   useEffect(() => {
-    if (onDragging) onDragging(isDragging)
-  }, [isDragging])
+    onDragging?.(isDragging)
+  }, [isDragging, onDragging])
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-
-    const width = rect.width
-    const x = Math.min(Math.max(e.clientX - rect.left, 0), width)
-    const tooltipWidth = 60
-    const maxPosition = width - tooltipWidth / 2
-    const minPosition = tooltipWidth / 2
-    // div[aria-busy]
-    setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
-    setMousePosition(x / width)
+  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
     setShowTooltip(true)
+    if (showVideoPreview) setPreviewRequested(true)
+    updatePointer(event.clientX, false)
   }
+
+  const handleMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    setDragging(true)
+    setShowTooltip(true)
+    if (showVideoPreview) setPreviewRequested(true)
+    updatePointer(event.clientX, true)
+  }
+
+  const tooltipVisible = showTooltip || isDragging
 
   return (
     <div
@@ -144,37 +232,58 @@ export default function ProgressBarHorizontal({
       onClick={(event) => {
         event.stopPropagation()
       }}>
-      <div className={`baseline ${isDragging ? "dragging" : ""}`}>
+      <div
+        className={cn("baseline", {
+          dragging: isDragging
+        })}>
         <div
           ref={dragareaRef}
           className="dragarea"
           onMouseMove={handleMouseMove}
-          onMouseLeave={() => setShowTooltip(false)}
-          onMouseDown={(e) => [
-            setDragging(true),
-            mouseMoveEvent(e as any as MouseEvent, true)
-          ]}
+          onMouseLeave={() => {
+            if (!isDragging) {
+              setShowTooltip(false)
+            }
+          }}
+          onMouseDown={handleMouseDown}
         />
+
         <div
           className={cn("fill", {
             "no-transition": isDragging
           })}
           style={{
-            transform: `scaleX(${(progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar) / 100})`
+            transform: `scaleX(${
+              (progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar) /
+              100
+            })`
           }}
         />
-        <div className="chunks" style={{ width: `${chunks}%` }} />
-        {(showTooltip || isDragging) && (
-          <div
-            className={cn(
-              "better-ig-progress-tooltip",
-              { visible: showTooltip || isDragging },
-              variant
-            )}
-            style={{ left: tooltipPosition }}>
-            {formatTime(mousePosition * videoDuration)}
+
+        <div
+          className={cn(
+            "better-ig-progress-tooltip",
+            {
+              visible: tooltipVisible,
+              "with-video-preview": Boolean(spritesheet)
+            },
+            variant
+          )}
+          style={{ left: tooltipPosition }}
+          aria-hidden={!tooltipVisible}>
+          {spritesheet && (
+            <InstagramSpritePreview
+              video={video ?? null}
+              spritesheet={spritesheet}
+              percent={mousePosition}
+              duration={duration}
+            />
+          )}
+
+          <div className="better-ig-progress-time">
+            {formatTime(mousePosition * duration)} / {formatTime(duration)}
           </div>
-        )}
+        </div>
       </div>
     </div>
   )

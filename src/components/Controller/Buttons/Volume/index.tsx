@@ -10,12 +10,17 @@ type Props = {
 
 export default function VolumeButton({ muted, onChange }: Props) {
   return (
-    <div
+    <button
+      type="button"
       className="better-ig-volume-button bigv-control"
-      onClick={() => {
+      aria-label={muted ? "Unmute" : "Mute"}
+      aria-pressed={muted}
+      title={muted ? "Unmute" : "Mute"}
+      onClick={(event) => {
+        event.stopPropagation()
         onChange(!muted)
       }}>
       {muted ? <VolumeMutedIcon /> : <VolumeIcon />}
-    </div>
+    </button>
   )
 }

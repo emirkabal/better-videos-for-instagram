@@ -1,3 +1,5 @@
+import { isInstagramVideo } from "~utils/video"
+
 import Injector, { type InjectorOptions } from "./Injector"
 
 interface Options {
@@ -8,27 +10,26 @@ export type IntervalInjectorOptions = Options & InjectorOptions
 
 export default class IntervalInjector extends Injector {
   private intervalMs = 100
-  private interval: NodeJS.Timeout | number | undefined
+  private interval: ReturnType<typeof setInterval> | null = null
 
   constructor(options?: IntervalInjectorOptions) {
     super(options)
-    this.intervalMs = options?.intervalMs || this.intervalMs
+    this.intervalMs = options?.intervalMs ?? this.intervalMs
   }
 
   protected shouldInjectVideo(_video: HTMLVideoElement): boolean {
     return true
   }
 
-  protected shouldAttachListeners(_video: HTMLVideoElement): boolean {
-    return true
-  }
-
-  protected shouldInjectImmediately(_video: HTMLVideoElement): boolean {
-    return false
+  protected shouldInjectImmediately(video: HTMLVideoElement): boolean {
+    return video.readyState >= HTMLMediaElement.HAVE_METADATA
   }
 
   public deleted(): void {
-    if (this.interval) clearInterval(this.interval)
+    if (!this.interval) return
+
+    clearInterval(this.interval)
+    this.interval = null
   }
 
   public injectMethod(): void {
@@ -36,34 +37,11 @@ export default class IntervalInjector extends Injector {
     if (videos.length === 0) return
 
     for (const video of videos) {
-      if (!video?.src.startsWith("blob:")) continue
-
       const typedVideo = video as HTMLVideoElement
+      if (!isInstagramVideo(typedVideo)) continue
 
       if (
         !this.isInjected(typedVideo) &&
-        !typedVideo.hasAttribute("bigv-attached-listeners")
-      ) {
-        typedVideo.setAttribute("bigv-attached-listeners", "")
-        ;[
-          "loadedmetadata",
-          "loadeddata",
-          "canplay",
-          "play",
-          "timeupdate",
-          "playing"
-        ].forEach((event) => {
-          typedVideo.addEventListener(event, () => {
-            if (!this.shouldAttachListeners(typedVideo)) return
-            if (!this.shouldInjectVideo(typedVideo)) return
-            this.inject(typedVideo, typedVideo.parentElement!)
-          })
-        })
-      }
-
-      if (
-        !this.isInjected(typedVideo) &&
-        this.shouldAttachListeners(typedVideo) &&
         this.shouldInjectImmediately(typedVideo) &&
         this.shouldInjectVideo(typedVideo)
       ) {

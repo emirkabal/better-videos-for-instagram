@@ -3,6 +3,7 @@ import {
   IG_HOME_VOLUME_INDICATOR,
   IG_NEW_VOLUME_INDICATOR
 } from "~utils/constants"
+import { isVideoInViewport } from "~utils/video"
 
 import IntervalInjector, {
   type IntervalInjectorOptions
@@ -14,8 +15,12 @@ export default class Global extends IntervalInjector {
   }
 
   public beforeInject(): void {
-    this.removeElements(IG_NEW_VOLUME_INDICATOR, false)
-    this.removeElements(IG_DIRECT_VOLUME_INDICATOR, false)
-    this.removeElements(IG_HOME_VOLUME_INDICATOR, true)
+    this.hideElements(IG_NEW_VOLUME_INDICATOR, false)
+    this.hideElements(IG_DIRECT_VOLUME_INDICATOR, false)
+    this.hideElements(IG_HOME_VOLUME_INDICATOR, true)
+  }
+
+  protected shouldInjectVideo(video: HTMLVideoElement): boolean {
+    return isVideoInViewport(video)
   }
 }

@@ -1,52 +1,81 @@
-.bgv-smart-container {
+.better-ig-volume-control {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 999;
+  width: 38px;
+  height: 38px;
   margin: 12px;
-  width: 30px;
-  height: 30px;
-  border-radius: 9999px;
-  background: rgba(35, 35, 35, 0.75);
-  border: 1px solid rgba(109, 101, 101, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
-  opacity: 0.5;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 19px;
+  background: rgb(17 17 17 / 78%);
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 10%);
+  opacity: 0.78;
   box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  transition:
+    height 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
 }
 
-.bgv-smart-container:hover,
-.bgv-smart-container.active {
+.better-ig-volume-control:hover,
+.better-ig-volume-control:focus-within,
+.better-ig-volume-control.active {
+  height: 118px;
+  border-color: rgb(255 255 255 / 22%);
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 38%),
+    0 2px 8px rgb(0 0 0 / 24%),
+    inset 0 1px 0 rgb(255 255 255 / 13%);
   opacity: 1;
-  height: 96px;
 }
 
-.bgv-smart-container.stories {
-  margin: 0;
+.better-ig-volume-control.stories {
   top: 5px;
   right: 76px;
+  margin: 0;
   opacity: 1;
 }
 
-.bgv-smart-container.default {
+.better-ig-volume-control.default {
   top: auto;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
-.bgv-smart-container .content {
+.better-ig-volume-control.reels {
+  top: auto;
+  bottom: 14px;
+}
+
+.better-ig-volume-control .content {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  min-height: 116px;
+  padding: 9px 0;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
-  margin: 5px auto;
   box-sizing: border-box;
 }
 
-.bgv-smart-container.default .content {
+.better-ig-volume-control.default .content,
+.better-ig-volume-control.reels .content {
+  top: auto;
+  bottom: 0;
   flex-direction: column-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .better-ig-volume-control {
+    transition: none;
+  }
 }

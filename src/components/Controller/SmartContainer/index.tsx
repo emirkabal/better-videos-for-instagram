@@ -2,8 +2,7 @@ import cn from "classnames"
 
 import "./style.css"
 
-import debounce from "lodash.debounce"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import type { Variant } from "~modules/Injector"
 
@@ -15,35 +14,36 @@ type Props = {
 
 export default function SmartContainer({ children, dragging, variant }: Props) {
   const [active, setActive] = useState(false)
-  const debounceRef = useRef<ReturnType<typeof debounce> | null>(null)
+  const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearLeaveTimer = () => {
+    if (!leaveTimerRef.current) return
+
+    clearTimeout(leaveTimerRef.current)
+    leaveTimerRef.current = null
+  }
 
   const handleMouseEnter = () => {
-    if (debounceRef.current) {
-      debounceRef.current.cancel()
-    }
+    clearLeaveTimer()
     setActive(true)
   }
 
-  const debouncedHandleMouseLeave = useCallback(
-    debounce(() => {
+  const handleMouseLeave = () => {
+    clearLeaveTimer()
+    leaveTimerRef.current = setTimeout(() => {
       setActive(false)
-    }, 1300),
-    []
-  )
+      leaveTimerRef.current = null
+    }, 700)
+  }
 
   useEffect(() => {
-    debounceRef.current = debouncedHandleMouseLeave
-    return () => {
-      if (debounceRef.current) {
-        debounceRef.current.cancel()
-      }
-    }
-  }, [debouncedHandleMouseLeave])
+    return clearLeaveTimer
+  }, [])
 
   return (
     <div
       className={cn(
-        "bgv-smart-container",
+        "better-ig-volume-control",
         {
           active: dragging || active
         },
@@ -51,10 +51,9 @@ export default function SmartContainer({ children, dragging, variant }: Props) {
       )}
       onClick={(event) => {
         event.stopPropagation()
-        event.preventDefault()
       }}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={debouncedHandleMouseLeave}>
+      onMouseLeave={handleMouseLeave}>
       <div className="content">{children}</div>
     </div>
   )

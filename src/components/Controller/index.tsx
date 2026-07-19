@@ -1,15 +1,17 @@
 import "./style.css"
 
 import cn from "classnames"
-import { useCallback, useEffect, useId, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
 import { Variant, type DownloadableMedia } from "~modules/Injector"
 import { IG_REELS_SNAP } from "~utils/constants"
+import { getActiveInstagramVideo, isInstagramVideo } from "~utils/video"
 
 // import DownloadButton from "./Buttons/Download"
+import FullscreenButton from "./Buttons/Fullscreen"
 import VolumeButton from "./Buttons/Volume"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
@@ -34,20 +36,24 @@ export function Volume({ variant }: { variant?: Variant }) {
 
   const [volumeDragging, setVolumeDragging] = useState(false)
   const [maxVolumeBalance] = useStorage("bigv-max-volume-balance", 100)
+  const safeBalance = Number.isFinite(maxVolumeBalance)
+    ? Math.max(maxVolumeBalance, 100)
+    : 100
+  const maximumVolume = 100 / safeBalance
+
+  useEffect(() => {
+    if (volume > maximumVolume) setVolume(maximumVolume)
+  }, [maximumVolume, setVolume, volume])
 
   return (
     <SmartContainer dragging={volumeDragging} variant={variant}>
-      <VolumeButton muted={muted} onChange={(_) => setMuted(_)} />
+      <VolumeButton muted={muted} onChange={setMuted} />
       <ProgressBarVertical
-        progress={volume * maxVolumeBalance}
-        onProgress={(_) => {
-          const ps = _ / maxVolumeBalance
-          setVolume(ps)
+        progress={Math.min(volume * safeBalance, 100)}
+        onProgress={(progress) => {
+          setVolume(progress / safeBalance)
         }}
-        onDragging={(_) => {
-          setVolumeDragging(_)
-          if (!_) setVolume(volume)
-        }}
+        onDragging={setVolumeDragging}
       />
     </SmartContainer>
   )
@@ -68,60 +74,21 @@ export default function Controller({
   )
 
   const [volume] = useLocalStorage("better-instagram-videos-volume", 0.5)
-  const [muted, setMuted] = useLocalStorage(
-    "better-instagram-videos-muted",
-    false
-  )
+  const [muted] = useLocalStorage("better-instagram-videos-muted", false)
   const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
-
-  const getVideoVisibilityScore = useCallback((video: HTMLVideoElement) => {
-    const rect = video.getBoundingClientRect()
-    if (rect.width <= 0 || rect.height <= 0) return 0
-
-    const visibleWidth =
-      Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0)
-    const visibleHeight =
-      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-
-    if (visibleWidth <= 0 || visibleHeight <= 0) return 0
-
-    const visibleRatio =
-      (visibleWidth * visibleHeight) / (rect.width * rect.height)
-    const videoCenter = rect.top + rect.height / 2
-    const viewportCenter = window.innerHeight / 2
-    const centerPenalty =
-      Math.abs(videoCenter - viewportCenter) / Math.max(window.innerHeight, 1)
-
-    return visibleRatio - centerPenalty
-  }, [])
 
   const isActiveAudibleVideo = useCallback(() => {
     if (variant === Variant.Stories || variant === Variant.Default) return true
 
     const videos = Array.from(
       document.querySelectorAll<HTMLVideoElement>("video")
-    ).filter((video) => video.src.startsWith("blob:"))
+    ).filter(isInstagramVideo)
 
     if (videos.length <= 1) return true
 
-    const activeVideo = videos.reduce<HTMLVideoElement | null>(
-      (activeVideo, video) => {
-        if (!activeVideo) return video
-
-        return getVideoVisibilityScore(video) >
-          getVideoVisibilityScore(activeVideo)
-          ? video
-          : activeVideo
-      },
-      null
-    )
-
-    return activeVideo === videoRef.current
-  }, [getVideoVisibilityScore, variant])
-
-  // ig reels start
-  // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
+    return getActiveInstagramVideo() === videoRef.current
+  }, [variant])
 
   const updateAudio = useCallback(() => {
     const video = videoRef.current
@@ -133,22 +100,19 @@ export default function Controller({
       return
     }
 
-    const normalizedVolume = Math.min(volume, 1)
+    const normalizedVolume = Math.min(Math.max(volume, 0), 1)
     video.volume = normalizedVolume
 
     if (
       "userActivation" in navigator &&
       !navigator.userActivation.hasBeenActive
     ) {
-      console.warn(
-        "User has not interacted with the page yet. Muting video to allow autoplay."
-      )
       video.muted = true
       return
     }
 
     video.muted = muted
-  }, [videoRef, volume, muted, isActiveAudibleVideo])
+  }, [volume, muted, isActiveAudibleVideo])
 
   const timeUpdate = useCallback(() => {
     if (
@@ -162,13 +126,13 @@ export default function Controller({
     setProgress(
       (videoRef.current.currentTime / videoRef.current.duration) * 100
     )
-  }, [videoRef])
+  }, [])
 
   const metadataLoaded = useCallback(() => {
     const duration = videoRef.current.duration
     setDuration(Number.isFinite(duration) ? duration : 0)
     timeUpdate()
-  }, [videoRef, timeUpdate])
+  }, [timeUpdate])
 
   const play = useCallback(() => {
     updateAudio()
@@ -184,39 +148,58 @@ export default function Controller({
       document.location.pathname.startsWith("/reels")
     ) {
       const snap = document.querySelector(IG_REELS_SNAP)
-      if (snap) snap.scrollBy(0, 1000)
+      if (snap) {
+        if (
+          document.fullscreenElement?.classList.contains(
+            "bigv-reels-fullscreen-target"
+          )
+        ) {
+          snap.scrollBy({ top: snap.clientHeight, behavior: "smooth" })
+        } else {
+          snap.scrollBy(0, 1000)
+        }
+      }
     }
-  }, [videoRef])
+  }, [pauseOnComments])
 
   useEffect(() => {
-    videoRef.current.addEventListener("timeupdate", timeUpdate)
-    videoRef.current.addEventListener("loadedmetadata", metadataLoaded)
-    videoRef.current.addEventListener("durationchange", metadataLoaded)
-    videoRef.current.addEventListener("play", play)
-    videoRef.current.addEventListener("ended", ended)
-    videoRef.current.addEventListener("volumechange", updateAudio)
-    videoRef.current.addEventListener("seeked", updateAudio)
+    const videoElement = videoRef.current
+
+    videoElement.addEventListener("timeupdate", timeUpdate)
+    videoElement.addEventListener("loadedmetadata", metadataLoaded)
+    videoElement.addEventListener("durationchange", metadataLoaded)
+    videoElement.addEventListener("play", play)
+    videoElement.addEventListener("ended", ended)
+    videoElement.addEventListener("volumechange", updateAudio)
+    videoElement.addEventListener("seeked", updateAudio)
+
     return () => {
-      videoRef.current.removeEventListener("timeupdate", timeUpdate)
-      videoRef.current.removeEventListener("loadedmetadata", metadataLoaded)
-      videoRef.current.removeEventListener("durationchange", metadataLoaded)
-      videoRef.current.removeEventListener("play", play)
-      videoRef.current.removeEventListener("ended", ended)
-      videoRef.current.removeEventListener("volumechange", updateAudio)
-      videoRef.current.removeEventListener("seeked", updateAudio)
+      videoElement.removeEventListener("timeupdate", timeUpdate)
+      videoElement.removeEventListener("loadedmetadata", metadataLoaded)
+      videoElement.removeEventListener("durationchange", metadataLoaded)
+      videoElement.removeEventListener("play", play)
+      videoElement.removeEventListener("ended", ended)
+      videoElement.removeEventListener("volumechange", updateAudio)
+      videoElement.removeEventListener("seeked", updateAudio)
     }
-  }, [videoRef, timeUpdate, metadataLoaded, play, ended, updateAudio])
+  }, [timeUpdate, metadataLoaded, play, ended, updateAudio])
 
   useEffect(() => {
     updateAudio()
-  }, [videoRef, volume, muted])
+  }, [updateAudio])
 
   useEffect(() => {
     if ("userActivation" in navigator && navigator.userActivation.hasBeenActive)
       return
 
+    const removeActivationListeners = () => {
+      document.removeEventListener("pointerdown", handleFirstActivation, true)
+      document.removeEventListener("keydown", handleFirstActivation, true)
+    }
+
     const handleFirstActivation = () => {
       updateAudio()
+      removeActivationListeners()
     }
 
     document.addEventListener("pointerdown", handleFirstActivation, {
@@ -225,20 +208,13 @@ export default function Controller({
     document.addEventListener("keydown", handleFirstActivation, {
       capture: true
     })
-    document.addEventListener("touchstart", handleFirstActivation, {
-      capture: true
-    })
 
-    return () => {
-      document.removeEventListener("pointerdown", handleFirstActivation, true)
-      document.removeEventListener("keydown", handleFirstActivation, true)
-      document.removeEventListener("touchstart", handleFirstActivation, true)
-    }
+    return removeActivationListeners
   }, [updateAudio])
 
   useEffect(() => {
     videoRef.current.playbackRate = playbackSpeed
-  }, [videoRef, playbackSpeed])
+  }, [playbackSpeed])
 
   useEffect(() => {
     if (dragging) {
@@ -255,22 +231,33 @@ export default function Controller({
 
   return (
     <>
-      {variant !== Variant.Stories && <Volume variant={variant} />}
+      {variant !== Variant.Stories && (
+        <>
+          <Volume variant={variant} />
+          {variant !== Variant.Reels && (
+            <FullscreenButton controllerId={id} variant={variant} />
+          )}
+        </>
+      )}
       {/* {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
       )} */}
       <div className={cn("better-ig-controller", variant)}>
-        <ProgressBarHorizontal
-          variant={variant}
-          progress={progress}
-          videoDuration={duration}
-          onProgress={(progress) => {
-            if (!Number.isFinite(duration) || duration <= 0) return
+        {video && (
+          <ProgressBarHorizontal
+            video={video}
+            variant={variant}
+            progress={progress}
+            videoDuration={duration}
+            showVideoPreview={variant === Variant.Reels}
+            onProgress={(progress) => {
+              if (!Number.isFinite(duration) || duration <= 0) return
 
-            videoRef.current.currentTime = (progress / 100) * duration
-          }}
-          onDragging={setDragging}
-        />
+              videoRef.current.currentTime = (progress / 100) * duration
+            }}
+            onDragging={setDragging}
+          />
+        )}
       </div>
     </>
   )

@@ -1,15 +1,31 @@
 .better-ig-volume-button {
-  cursor: pointer;
-  flex-shrink: 0;
-  height: 18px;
-  width: 18px;
+  appearance: none;
   display: flex;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition:
+    opacity 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.better-ig-volume-button:hover {
+  opacity: 0.82;
 }
 
 .better-ig-volume-button svg {
-  color: white;
   width: 18px;
   height: 18px;
+  color: currentColor;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 45%));
 }

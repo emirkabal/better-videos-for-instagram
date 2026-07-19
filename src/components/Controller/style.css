@@ -34,8 +34,68 @@
   position: static;
 }
 
+.bigv-fullscreen-target:fullscreen {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+.bigv-fullscreen-target:fullscreen::backdrop {
+  background: #000;
+}
+
+.bigv-fullscreen-target:not(.bigv-reels-fullscreen-target):fullscreen video {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  background: #000 !important;
+}
+
+.bigv-reels-fullscreen-target:fullscreen {
+  overflow: hidden !important;
+}
+
+.bigv-reels-fullscreen-target:fullscreen [role="main"] > :nth-child(2) {
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.bigv-reels-fullscreen-target:fullscreen
+  [role="main"]
+  > :nth-child(2)::-webkit-scrollbar {
+  display: none;
+}
+
+.bigv-fullscreen-target:fullscreen .better-ig-controller,
+.bigv-fullscreen-target:fullscreen .better-ig-volume-control,
+.bigv-fullscreen-target:fullscreen .better-ig-fullscreen-button {
+  z-index: 2147483646;
+}
+
 .better-ig-controller img {
   border-radius: 4px;
+}
+
+.bigv-story-view-indicator {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 85%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .better-ig-controller button {
@@ -51,10 +111,6 @@
   font-family: inherit;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
-
-*:focus-visible {
-  outline: none !important;
 }
 
 .bigv-buttons {
@@ -169,7 +225,6 @@
   flex-direction: column;
   gap: 24px;
   user-select: none;
-  cursor: pointer;
 }
 
 .bigv-switch-text {
@@ -224,17 +279,17 @@
   background-color: var(--active-color);
 }
 
-input:checked + .bigv-slider {
+.bigv-switch input:checked + .bigv-slider {
   background-color: var(--active-color);
 }
 
-input:focus-visible + .bigv-slider {
+.bigv-switch input:focus-visible + .bigv-slider {
   box-shadow:
     0 0 0 2px white,
     0 0 0 4px var(--active-color);
 }
 
-input:checked + .bigv-slider:before {
+.bigv-switch input:checked + .bigv-slider:before {
   transform: translateX(calc(var(--switch-width) - var(--switch-height)));
 }
 
