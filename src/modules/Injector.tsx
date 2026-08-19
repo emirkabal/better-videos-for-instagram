@@ -225,13 +225,29 @@ export default class Injector {
     }
 
     if (!mountParent) return
-    if (
-      mountParent instanceof Element &&
-      Array.from(mountParent.children).some((element) =>
-        element.hasAttribute("data-bigv-controller")
+
+    if (mountParent instanceof Element) {
+      const existingController = Array.from(mountParent.children).find(
+        (element) => element.hasAttribute("data-bigv-controller")
       )
-    )
-      return
+
+      if (existingController) {
+        const existingIndex = this.injectedList.findIndex(
+          (record) => record.controller === existingController
+        )
+        const existingRecord =
+          existingIndex !== -1 ? this.injectedList[existingIndex] : undefined
+
+        if (existingRecord?.video === video) return
+
+        if (existingRecord) {
+          this.injectedList.splice(existingIndex, 1)
+          this.dispose(existingRecord)
+        } else {
+          existingController.remove()
+        }
+      }
+    }
 
     this.beforeInject()
     this.clear()
