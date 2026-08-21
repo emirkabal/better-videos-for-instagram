@@ -7,6 +7,7 @@ import {
   IG_STORIES_PROGRESS_BARS_INDICATOR,
   IG_STORIES_VOLUME_INDICATOR
 } from "~utils/constants"
+import { getActiveInstagramVideo } from "~utils/video"
 
 import IntervalInjector, {
   type IntervalInjectorOptions
@@ -29,6 +30,10 @@ export default class Stories extends IntervalInjector {
       ...options,
       variant: Variant.Stories
     })
+  }
+
+  protected shouldInjectVideo(video: HTMLVideoElement): boolean {
+    return getActiveInstagramVideo() === video
   }
 
   public injected(): void {
