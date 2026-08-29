@@ -1,6 +1,9 @@
 export const IG_APP_ID_REGEX = /"APP_ID":\s*"(\d+)"/i
 export const IG_REELS_SNAP = '[role="main"]>:nth-child(2)'
 
+export const CONTROLLER_ENABLED_STORAGE_KEY = "bigv-controller-enabled"
+export const UNINSTALL_FEEDBACK_URL = "https://tally.so/r/LZLR1J"
+
 export const IG_STORIES_INJECTOR_INDICATOR =
   "div:has(>div>div>div>div>div>div>span>time)"
 export const IG_STORIES_PROGRESS_BARS_INDICATOR = `${IG_STORIES_INJECTOR_INDICATOR} > div:first-child`
