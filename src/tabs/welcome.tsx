@@ -1,4 +1,5 @@
 import icon from "url:~/assets/icon.png"
+
 import { version } from "../../package.json"
 
 import "./welcome.css"
