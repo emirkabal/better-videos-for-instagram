@@ -140,9 +140,7 @@ export default function Popup() {
 
           <span>·</span>
 
-          <a href="mailto:me@emirkabal.com">
-            Contact
-          </a>
+          <a href="mailto:me@emirkabal.com">Contact</a>
         </nav>
 
         <a

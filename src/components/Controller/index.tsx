@@ -139,6 +139,12 @@ export default function Controller({
     videoRef.current.playbackRate = playbackSpeed
   }, [updateAudio, playbackSpeed])
 
+  const ratechange = useCallback(() => {
+    if (videoRef.current.playbackRate !== playbackSpeed) {
+      videoRef.current.playbackRate = playbackSpeed
+    }
+  }, [playbackSpeed])
+
   const ended = useCallback(() => {
     const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
@@ -172,6 +178,7 @@ export default function Controller({
     videoElement.addEventListener("ended", ended)
     videoElement.addEventListener("volumechange", updateAudio)
     videoElement.addEventListener("seeked", updateAudio)
+    videoElement.addEventListener("ratechange", ratechange)
 
     return () => {
       videoElement.removeEventListener("timeupdate", timeUpdate)
@@ -181,8 +188,9 @@ export default function Controller({
       videoElement.removeEventListener("ended", ended)
       videoElement.removeEventListener("volumechange", updateAudio)
       videoElement.removeEventListener("seeked", updateAudio)
+      videoElement.removeEventListener("ratechange", ratechange)
     }
-  }, [timeUpdate, metadataLoaded, play, ended, updateAudio])
+  }, [timeUpdate, metadataLoaded, play, ended, updateAudio, ratechange])
 
   useEffect(() => {
     updateAudio()
