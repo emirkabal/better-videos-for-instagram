@@ -12,6 +12,7 @@ import { getActiveInstagramVideo, isInstagramVideo } from "~utils/video"
 
 // import DownloadButton from "./Buttons/Download"
 import FullscreenButton from "./Buttons/Fullscreen"
+import PlaybackSpeed from "./Buttons/PlaybackSpeed"
 import VolumeButton from "./Buttons/Volume"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
@@ -75,7 +76,14 @@ export default function Controller({
 
   const [volume] = useLocalStorage("better-instagram-videos-volume", 0.5)
   const [muted] = useLocalStorage("better-instagram-videos-muted", false)
-  const [playbackSpeed] = useLocalStorage("bigv-playback-speed", 1)
+  const [playbackSpeed] = useStorage<number>("bigv-playback-speed", () => {
+    const legacy =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem("bigv-playback-speed")
+        : null
+    const parsed = legacy ? parseFloat(legacy) : 1
+    return Number.isFinite(parsed) ? parsed : 1
+  })
   const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
 
   const isActiveAudibleVideo = useCallback(() => {
@@ -245,6 +253,7 @@ export default function Controller({
           {variant !== Variant.Reels && (
             <FullscreenButton controllerId={id} variant={variant} />
           )}
+          <PlaybackSpeed variant={variant} placement="overlay" />
         </>
       )}
       {/* {variant === "default" && downloadableMedia && (
