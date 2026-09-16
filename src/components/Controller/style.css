@@ -77,7 +77,8 @@
 
 .bigv-fullscreen-target:fullscreen .better-ig-controller,
 .bigv-fullscreen-target:fullscreen .better-ig-volume-control,
-.bigv-fullscreen-target:fullscreen .better-ig-fullscreen-button {
+.bigv-fullscreen-target:fullscreen .better-ig-fullscreen-button,
+.bigv-fullscreen-target:fullscreen .bigv-playback-speed {
   z-index: 2147483646;
 }
 
@@ -213,6 +214,89 @@
   color: rgba(255, 255, 255, 0.9);
   margin-top: -6px;
   line-height: 12px;
+}
+
+.bigv-playback-speed.overlay {
+  position: absolute;
+  right: 104px;
+  bottom: 12px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+}
+
+.bigv-playback-speed.overlay.reels {
+  right: 58px;
+  bottom: 14px;
+}
+
+.bigv-playback-speed.overlay .bigv-speed-button {
+  appearance: none;
+  position: relative;
+  display: flex;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 50%;
+  outline: none;
+  background: rgb(17 17 17 / 78%);
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 10%);
+  color: #fff;
+  opacity: 0.78;
+  cursor: pointer;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  transition:
+    opacity 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.bigv-playback-speed.overlay .bigv-speed-button:hover {
+  border-color: rgb(255 255 255 / 22%);
+  background: rgb(17 17 17 / 90%);
+  opacity: 1;
+}
+
+.bigv-playback-speed.overlay .bigv-speed-button svg {
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 45%));
+}
+
+.bigv-speed-popup.in-overlay,
+.bigv-playback-speed.overlay .bigv-speed-popup {
+  position: absolute !important;
+  top: auto !important;
+  bottom: calc(100% + 12px) !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 10000 !important;
+}
+
+.bigv-playback-speed.overlay .bigv-speed-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  padding: 1px 4px;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 11px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 40%);
+  pointer-events: none;
 }
 
 .bigv-switch {

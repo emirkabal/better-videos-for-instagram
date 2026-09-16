@@ -1,3 +1,4 @@
+import cn from "classnames"
 import {
   useEffect,
   useId,
@@ -6,7 +7,10 @@ import {
   useState,
   type CSSProperties
 } from "react"
-import { useLocalStorage } from "usehooks-ts"
+
+import { useStorage } from "@plasmohq/storage/hook"
+
+import type { Variant } from "~modules/Injector"
 
 import SpeedometerIcon from "./SpeedometerIcon"
 
@@ -21,14 +25,37 @@ const SPEED_ANGLE: Record<(typeof SPEED_OPTIONS)[number], number> = {
   2: 90
 }
 
-export default function PlaybackSpeed() {
+type Props = {
+  placement?: "controls" | "overlay"
+  variant?: Variant
+}
+
+export default function PlaybackSpeed({
+  placement = "controls",
+  variant
+}: Props = {}) {
   const id = useId()
-  const [playbackSpeed, setPlaybackSpeed] = useLocalStorage(
+  const [playbackSpeed, setPlaybackSpeed] = useStorage<number>(
     "bigv-playback-speed",
-    1
+    () => {
+      const legacy =
+        typeof localStorage !== "undefined"
+          ? localStorage.getItem("bigv-playback-speed")
+          : null
+      const parsed = legacy ? parseFloat(legacy) : 1
+      return Number.isFinite(parsed) ? parsed : 1
+    }
   )
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (playbackSpeed !== undefined) {
+      try {
+        localStorage.setItem("bigv-playback-speed", String(playbackSpeed))
+      } catch {}
+    }
+  }, [playbackSpeed])
 
   useEffect(() => {
     if (SPEED_OPTIONS.includes(playbackSpeed as (typeof SPEED_OPTIONS)[number]))
@@ -73,37 +100,89 @@ export default function PlaybackSpeed() {
   } as CSSProperties
 
   return (
-    <div className="bigv-playback-speed" ref={rootRef}>
+    <div
+      className={cn("bigv-playback-speed", "bigv-control", variant, {
+        overlay: placement === "overlay",
+        "in-controls": placement === "controls"
+      })}
+      ref={rootRef}
+      onPointerDown={(event) => {
+        event.stopPropagation()
+      }}
+      onMouseDown={(event) => {
+        event.stopPropagation()
+      }}
+      onClick={(event) => {
+        event.stopPropagation()
+      }}>
       <button
         id={id}
         type="button"
-        className="bigv-speed-button"
+        className={cn("bigv-speed-button", "bigv-control", variant, {
+          "in-overlay": placement === "overlay",
+          "in-controls": placement === "controls"
+        })}
         aria-label="Playback speed"
         title={`Playback speed: ${speed}x`}
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen(!open)}>
+        onPointerDown={(event) => {
+          event.stopPropagation()
+        }}
+        onMouseDown={(event) => {
+          event.stopPropagation()
+        }}
+        onClick={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          setOpen(!open)
+        }}>
         <SpeedometerIcon handStyle={speedStyle} />
+        {placement === "overlay" && speed !== 1 && (
+          <span className="bigv-speed-badge">{speed}x</span>
+        )}
       </button>
 
-      <label htmlFor={id} className="bigv-switch-text bigv-speed-text">
-        {speed}x
-      </label>
+      {placement === "controls" && (
+        <label htmlFor={id} className="bigv-switch-text bigv-speed-text">
+          {speed}x
+        </label>
+      )}
 
       {open && (
         <div
-          className="bigv-speed-popup"
+          className={cn("bigv-speed-popup", "bigv-control", {
+            "in-overlay": placement === "overlay",
+            "in-controls": placement === "controls"
+          })}
           role="listbox"
-          aria-label="Playback speed">
+          aria-label="Playback speed"
+          onPointerDown={(event) => {
+            event.stopPropagation()
+          }}
+          onMouseDown={(event) => {
+            event.stopPropagation()
+          }}
+          onClick={(event) => {
+            event.stopPropagation()
+          }}>
           {SPEED_OPTIONS.map((value) => (
             <button
               key={value}
               role="option"
               type="button"
-              className="bigv-speed-option"
+              className={cn("bigv-speed-option", "bigv-control")}
               aria-selected={speed === value}
               data-active={speed === value}
-              onClick={() => {
+              onPointerDown={(event) => {
+                event.stopPropagation()
+              }}
+              onMouseDown={(event) => {
+                event.stopPropagation()
+              }}
+              onClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
                 setPlaybackSpeed(value)
                 setOpen(false)
               }}>

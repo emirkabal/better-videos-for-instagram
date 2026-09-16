@@ -27,6 +27,11 @@ export default function Popup() {
     100
   )
 
+  const [playbackSpeed, setPlaybackSpeed] = useStorage<number>(
+    "bigv-playback-speed",
+    1
+  )
+
   return (
     <main className="popup">
       <header className="header">
@@ -99,6 +104,30 @@ export default function Popup() {
                   }
                 />
                 <span>{value === 100 ? "1×" : `${value / 100}×`}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="setting">
+          <div>
+            <strong>Playback speed</strong>
+            <span>Default video speed</span>
+          </div>
+
+          <div className="volume-options speed-options">
+            {[0.5, 1, 1.25, 1.5, 2].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="playbackSpeed"
+                  value={value}
+                  checked={playbackSpeed === value}
+                  onChange={(event) =>
+                    void setPlaybackSpeed(Number(event.target.value))
+                  }
+                />
+                <span>{value}×</span>
               </label>
             ))}
           </div>

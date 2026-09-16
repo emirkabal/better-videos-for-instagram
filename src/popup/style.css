@@ -246,6 +246,11 @@ input {
   background: #f1f1f1;
 }
 
+.speed-options label span {
+  min-width: 28px;
+  padding: 0 4px;
+}
+
 .small-switch {
   position: relative;
   width: 34px;
@@ -343,6 +348,7 @@ input {
 .switch:focus-visible,
 .small-switch:has(input:focus-visible),
 .volume-options label:has(input:focus-visible),
+.speed-options label:has(input:focus-visible),
 .coffee:focus-visible,
 .github:focus-visible {
   outline: 2px solid #fff;
