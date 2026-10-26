@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Kontrol pemutaran, volume, kecepatan, dan gambar dalam gambar di Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Lewati otomatis"
+  },
+  "downloadLabel": {
+    "message": "Unduh"
+  },
+  "videoControlsLabel": {
+    "message": "Kontrol video"
+  },
+  "muteLabel": {
+    "message": "Bisukan"
+  },
+  "unmuteLabel": {
+    "message": "Aktifkan suara"
+  },
+  "volumeLabel": {
+    "message": "Volume"
+  },
+  "playbackSpeedLabel": {
+    "message": "Kecepatan pemutaran"
+  },
+  "videoProgressLabel": {
+    "message": "Progres video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Buka layar penuh"
+  },
+  "exitFullscreenLabel": {
+    "message": "Keluar layar penuh"
+  },
+  "fullscreenLabel": {
+    "message": "Layar penuh"
+  },
+  "exitLabel": {
+    "message": "Keluar"
+  },
+  "openReelLabel": {
+    "message": "Buka video ini di Reels"
+  },
+  "pipLabel": {
+    "message": "Gambar dalam gambar"
+  },
+  "exitPipLabel": {
+    "message": "Tutup gambar dalam gambar"
+  },
+  "pipErrorLabel": {
+    "message": "PiP tidak dapat dibuka. Putar video dan coba lagi."
+  },
+  "playLabel": {
+    "message": "Putar"
+  },
+  "pauseLabel": {
+    "message": "Jeda"
+  },
+  "nextReelLabel": {
+    "message": "Reel berikutnya"
+  },
+  "previousReelLabel": {
+    "message": "Reel sebelumnya"
+  },
+  "extensionEnabledLabel": {
+    "message": "Ekstensi aktif"
+  },
+  "extensionPausedLabel": {
+    "message": "Ekstensi dijeda"
+  },
+  "extensionEnabledDescription": {
+    "message": "Kontrol yang ditingkatkan aktif di Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram memakai kontrol bawaan."
+  },
+  "enableControllerLabel": {
+    "message": "Aktifkan kontrol"
+  },
+  "disableControllerLabel": {
+    "message": "Nonaktifkan kontrol"
+  },
+  "settingsLabel": {
+    "message": "Setelan"
+  },
+  "clickToPauseLabel": {
+    "message": "Klik untuk menjeda"
+  },
+  "clickToPauseDescription": {
+    "message": "Jeda video beranda alih-alih membuka Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Pengurangan volume"
+  },
+  "volumeReductionDescription": {
+    "message": "Kurangi volume maksimum"
+  },
+  "offLabel": {
+    "message": "Nonaktif"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Jeda lewati otomatis"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Saat komentar Reel terbuka"
+  },
+  "supportProjectLabel": {
+    "message": "Dukung proyek"
+  },
+  "reportBugLabel": {
+    "message": "Laporkan masalah"
+  },
+  "contactLabel": {
+    "message": "Kontak"
+  },
+  "openInstagramLabel": {
+    "message": "Buka Instagram"
+  },
+  "installedLabel": {
+    "message": "Berhasil dipasang"
+  },
+  "updatedLabel": {
+    "message": "Berhasil diperbarui"
+  },
+  "backToTopLabel": {
+    "message": "Kembali ke atas"
+  },
+  "readyLabel": {
+    "message": "Siap digunakan"
+  },
+  "noSetupLabel": {
+    "message": "Tidak perlu penyiapan."
+  },
+  "setupDescription": {
+    "message": "Buka Instagram dan putar video."
+  },
+  "openInstagramDescription": {
+    "message": "Kunjungi halaman dengan video yang didukung."
+  },
+  "playVideoDescription": {
+    "message": "Kontrol muncul saat video mulai diputar."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Ubah preferensi"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Ubah preferensi melalui ikon ekstensi."
+  },
+  "builtByLabel": {
+    "message": "Dibuat oleh"
+  }
+}

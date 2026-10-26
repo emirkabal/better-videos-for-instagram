@@ -1,12 +1,7 @@
-import {
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties
-} from "react"
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react"
 import { useLocalStorage } from "usehooks-ts"
+
+import { t } from "~utils/i18n"
 
 import SpeedometerIcon from "./SpeedometerIcon"
 
@@ -21,7 +16,13 @@ const SPEED_ANGLE: Record<(typeof SPEED_OPTIONS)[number], number> = {
   2: 90
 }
 
-export default function PlaybackSpeed() {
+export default function PlaybackSpeed({
+  placement = "controls",
+  showLabel = true
+}: {
+  placement?: "controls" | "overlay" | "dock"
+  showLabel?: boolean
+}) {
   const id = useId()
   const [playbackSpeed, setPlaybackSpeed] = useLocalStorage(
     "bigv-playback-speed",
@@ -29,6 +30,8 @@ export default function PlaybackSpeed() {
   )
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const popupRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (SPEED_OPTIONS.includes(playbackSpeed as (typeof SPEED_OPTIONS)[number]))
@@ -37,34 +40,31 @@ export default function PlaybackSpeed() {
   }, [playbackSpeed, setPlaybackSpeed])
 
   useEffect(() => {
+    if (!open) return
+    const ownerDocument = rootRef.current?.ownerDocument ?? document
+
+    popupRef.current
+      ?.querySelector<HTMLButtonElement>('[aria-pressed="true"]')
+      ?.focus({ preventScroll: true })
+
     const onPointerDown = (event: PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) {
         setOpen(false)
       }
     }
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false)
-    }
-
-    document.addEventListener("pointerdown", onPointerDown)
-    document.addEventListener("keydown", onKeyDown)
+    ownerDocument.addEventListener("pointerdown", onPointerDown)
 
     return () => {
-      document.removeEventListener("pointerdown", onPointerDown)
-      document.removeEventListener("keydown", onKeyDown)
+      ownerDocument.removeEventListener("pointerdown", onPointerDown)
     }
-  }, [])
+  }, [open])
 
-  const speed = useMemo(() => {
-    if (
-      SPEED_OPTIONS.includes(playbackSpeed as (typeof SPEED_OPTIONS)[number])
-    ) {
-      return playbackSpeed
-    }
-
-    return 1
-  }, [playbackSpeed])
+  const speed = SPEED_OPTIONS.includes(
+    playbackSpeed as (typeof SPEED_OPTIONS)[number]
+  )
+    ? playbackSpeed
+    : 1
 
   const speedStyle = {
     transform: `rotate(${SPEED_ANGLE[speed]}deg)`,
@@ -73,39 +73,62 @@ export default function PlaybackSpeed() {
   } as CSSProperties
 
   return (
-    <div className="bigv-playback-speed" ref={rootRef}>
+    <div
+      className={`bigv-playback-speed bigv-control ${placement === "controls" ? "" : "bigv-speed-overlay"}`}
+      ref={rootRef}
+      onClick={(event) => event.stopPropagation()}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false)
+      }}
+      onKeyDown={(event) => {
+        if (open && event.key === "Escape") {
+          event.preventDefault()
+          event.stopPropagation()
+          setOpen(false)
+          triggerRef.current?.focus({ preventScroll: true })
+        }
+      }}>
       <button
         id={id}
+        ref={triggerRef}
         type="button"
         className="bigv-speed-button"
-        aria-label="Playback speed"
-        title={`Playback speed: ${speed}x`}
-        aria-haspopup="listbox"
+        aria-label={t("playbackSpeedLabel")}
+        title={`${t("playbackSpeedLabel")}: ${speed}×`}
+        aria-controls={open ? `${id}-options` : undefined}
         aria-expanded={open}
-        onClick={() => setOpen(!open)}>
-        <SpeedometerIcon handStyle={speedStyle} />
+        onClick={() => setOpen((previous) => !previous)}>
+        {placement !== "controls" ? (
+          <span>{speed}×</span>
+        ) : (
+          <SpeedometerIcon handStyle={speedStyle} />
+        )}
       </button>
 
-      <label htmlFor={id} className="bigv-switch-text bigv-speed-text">
-        {speed}x
-      </label>
+      {placement === "controls" && showLabel && (
+        <label htmlFor={id} className="bigv-switch-text bigv-speed-text">
+          {speed}x
+        </label>
+      )}
 
       {open && (
         <div
+          id={`${id}-options`}
+          ref={popupRef}
           className="bigv-speed-popup"
-          role="listbox"
-          aria-label="Playback speed">
+          role="group"
+          aria-label={t("playbackSpeedLabel")}>
           {SPEED_OPTIONS.map((value) => (
             <button
               key={value}
-              role="option"
               type="button"
               className="bigv-speed-option"
-              aria-selected={speed === value}
+              aria-pressed={speed === value}
               data-active={speed === value}
               onClick={() => {
                 setPlaybackSpeed(value)
                 setOpen(false)
+                triggerRef.current?.focus({ preventScroll: true })
               }}>
               {value}x
             </button>

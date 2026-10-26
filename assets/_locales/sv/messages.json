@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Styr uppspelning, volym, hastighet och bild-i-bild på Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Automatiskt vidare"
+  },
+  "downloadLabel": {
+    "message": "Ladda ned"
+  },
+  "videoControlsLabel": {
+    "message": "Videokontroller"
+  },
+  "muteLabel": {
+    "message": "Stäng av ljud"
+  },
+  "unmuteLabel": {
+    "message": "Slå på ljud"
+  },
+  "volumeLabel": {
+    "message": "Volym"
+  },
+  "playbackSpeedLabel": {
+    "message": "Uppspelningshastighet"
+  },
+  "videoProgressLabel": {
+    "message": "Videoförlopp"
+  },
+  "enterFullscreenLabel": {
+    "message": "Öppna helskärm"
+  },
+  "exitFullscreenLabel": {
+    "message": "Avsluta helskärm"
+  },
+  "fullscreenLabel": {
+    "message": "Helskärm"
+  },
+  "exitLabel": {
+    "message": "Stäng"
+  },
+  "openReelLabel": {
+    "message": "Öppna den här videon i Reels"
+  },
+  "pipLabel": {
+    "message": "Bild-i-bild"
+  },
+  "exitPipLabel": {
+    "message": "Avsluta bild-i-bild"
+  },
+  "pipErrorLabel": {
+    "message": "Det gick inte att öppna PiP. Spela upp videon och försök igen."
+  },
+  "playLabel": {
+    "message": "Spela upp"
+  },
+  "pauseLabel": {
+    "message": "Pausa"
+  },
+  "nextReelLabel": {
+    "message": "Nästa Reel"
+  },
+  "previousReelLabel": {
+    "message": "Föregående Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Tillägget är aktiverat"
+  },
+  "extensionPausedLabel": {
+    "message": "Tillägget är pausat"
+  },
+  "extensionEnabledDescription": {
+    "message": "Förbättrade kontroller är aktiva på Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram använder standardkontrollerna."
+  },
+  "enableControllerLabel": {
+    "message": "Aktivera kontroller"
+  },
+  "disableControllerLabel": {
+    "message": "Inaktivera kontroller"
+  },
+  "settingsLabel": {
+    "message": "Inställningar"
+  },
+  "clickToPauseLabel": {
+    "message": "Klicka för att pausa"
+  },
+  "clickToPauseDescription": {
+    "message": "Pausa flödesvideor i stället för att öppna Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Volymsänkning"
+  },
+  "volumeReductionDescription": {
+    "message": "Sänk den maximala volymen"
+  },
+  "offLabel": {
+    "message": "Av"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pausa automatisk övergång"
+  },
+  "pauseAutoskipDescription": {
+    "message": "När kommentarer till ett Reel är öppna"
+  },
+  "supportProjectLabel": {
+    "message": "Stöd projektet"
+  },
+  "reportBugLabel": {
+    "message": "Rapportera ett fel"
+  },
+  "contactLabel": {
+    "message": "Kontakt"
+  },
+  "openInstagramLabel": {
+    "message": "Öppna Instagram"
+  },
+  "installedLabel": {
+    "message": "Installerat"
+  },
+  "updatedLabel": {
+    "message": "Uppdaterat"
+  },
+  "backToTopLabel": {
+    "message": "Till toppen"
+  },
+  "readyLabel": {
+    "message": "Klart att använda"
+  },
+  "noSetupLabel": {
+    "message": "Ingen konfigurering behövs."
+  },
+  "setupDescription": {
+    "message": "Öppna Instagram och spela upp en video."
+  },
+  "openInstagramDescription": {
+    "message": "Besök en sida med en video som stöds."
+  },
+  "playVideoDescription": {
+    "message": "Kontrollerna visas när videon startar."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Ändra inställningar"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Ändra inställningar via tilläggets ikon."
+  },
+  "builtByLabel": {
+    "message": "Skapat av"
+  }
+}

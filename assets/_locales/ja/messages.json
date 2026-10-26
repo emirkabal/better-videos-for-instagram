@@ -3,13 +3,153 @@
     "message": "インスタグラムのためのより良い動画： 再生と音量"
   },
   "appDescription": {
-    "message": "インスタグラムの動画の再生と音量を簡単にコントロール。"
+    "message": "Instagramの再生、音量、速度、ピクチャーインピクチャーを操作できます。"
   },
-
   "autoskipLabel": {
-    "message": "Auto-skip"
+    "message": "自動スキップ"
   },
   "downloadLabel": {
     "message": "ダウンロード"
+  },
+  "videoControlsLabel": {
+    "message": "動画コントロール"
+  },
+  "muteLabel": {
+    "message": "ミュート"
+  },
+  "unmuteLabel": {
+    "message": "ミュート解除"
+  },
+  "volumeLabel": {
+    "message": "音量"
+  },
+  "playbackSpeedLabel": {
+    "message": "再生速度"
+  },
+  "videoProgressLabel": {
+    "message": "動画の再生位置"
+  },
+  "enterFullscreenLabel": {
+    "message": "全画面表示"
+  },
+  "exitFullscreenLabel": {
+    "message": "全画面表示を終了"
+  },
+  "fullscreenLabel": {
+    "message": "全画面"
+  },
+  "exitLabel": {
+    "message": "終了"
+  },
+  "openReelLabel": {
+    "message": "この動画をReelsで開く"
+  },
+  "pipLabel": {
+    "message": "ピクチャーインピクチャー"
+  },
+  "exitPipLabel": {
+    "message": "ピクチャーインピクチャーを終了"
+  },
+  "pipErrorLabel": {
+    "message": "PiPを開けませんでした。動画を再生してから再試行してください。"
+  },
+  "playLabel": {
+    "message": "再生"
+  },
+  "pauseLabel": {
+    "message": "一時停止"
+  },
+  "nextReelLabel": {
+    "message": "次のReel"
+  },
+  "previousReelLabel": {
+    "message": "前のリール"
+  },
+  "extensionEnabledLabel": {
+    "message": "拡張機能は有効です"
+  },
+  "extensionPausedLabel": {
+    "message": "拡張機能は一時停止中です"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagramで改善されたコントロールが有効です。"
+  },
+  "extensionPausedDescription": {
+    "message": "Instagramの標準コントロールを使用します。"
+  },
+  "enableControllerLabel": {
+    "message": "コントロールを有効化"
+  },
+  "disableControllerLabel": {
+    "message": "コントロールを無効化"
+  },
+  "settingsLabel": {
+    "message": "設定"
+  },
+  "clickToPauseLabel": {
+    "message": "クリックで一時停止"
+  },
+  "clickToPauseDescription": {
+    "message": "フィードの動画をReelsで開かずに一時停止"
+  },
+  "volumeReductionLabel": {
+    "message": "音量を抑える"
+  },
+  "volumeReductionDescription": {
+    "message": "最大音量を下げる"
+  },
+  "offLabel": {
+    "message": "オフ"
+  },
+  "pauseAutoskipLabel": {
+    "message": "自動スキップを一時停止"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reelのコメントを開いている間"
+  },
+  "supportProjectLabel": {
+    "message": "プロジェクトを支援"
+  },
+  "reportBugLabel": {
+    "message": "不具合を報告"
+  },
+  "contactLabel": {
+    "message": "お問い合わせ"
+  },
+  "openInstagramLabel": {
+    "message": "Instagramを開く"
+  },
+  "installedLabel": {
+    "message": "インストールが完了しました"
+  },
+  "updatedLabel": {
+    "message": "更新が完了しました"
+  },
+  "backToTopLabel": {
+    "message": "先頭に戻る"
+  },
+  "readyLabel": {
+    "message": "準備完了"
+  },
+  "noSetupLabel": {
+    "message": "設定は不要です。"
+  },
+  "setupDescription": {
+    "message": "Instagramを開いて動画を再生してください。"
+  },
+  "openInstagramDescription": {
+    "message": "対応する動画があるページを開いてください。"
+  },
+  "playVideoDescription": {
+    "message": "動画が始まるとコントロールが表示されます。"
+  },
+  "adjustPreferencesLabel": {
+    "message": "設定を変更"
+  },
+  "adjustPreferencesDescription": {
+    "message": "拡張機能のアイコンから設定を変更できます。"
+  },
+  "builtByLabel": {
+    "message": "開発者"
   }
 }

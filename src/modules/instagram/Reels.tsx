@@ -7,6 +7,7 @@ import {
   IG_NEW_VOLUME_INDICATOR,
   IG_REELS_VOLUME_INDICATOR
 } from "~utils/constants"
+import { pictureInPicture } from "~utils/picture-in-picture"
 import { getActiveInstagramVideo, isInstagramVideo } from "~utils/video"
 
 import { Variant } from "../Injector"
@@ -24,14 +25,14 @@ export default class Reels extends IntervalInjector {
   private commentsInterval: ReturnType<typeof setInterval> | null = null
   private pauseOnComments = true
   private buttonInjections: ButtonInjection[] = []
+  private activeVideo: HTMLVideoElement | null = null
 
   private getActiveReelVideo(): HTMLVideoElement | null {
-    return getActiveInstagramVideo()
+    return this.activeVideo
   }
 
-  private muteInactivePlayingVideos(): void {
+  private muteInactivePlayingVideos(videos: Iterable<HTMLVideoElement>): void {
     const activeVideo = this.getActiveReelVideo()
-    const videos = document.querySelectorAll<HTMLVideoElement>("video")
 
     for (const video of videos) {
       if (!isInstagramVideo(video) || video === activeVideo) continue
@@ -56,7 +57,7 @@ export default class Reels extends IntervalInjector {
     this.pauseOnComments = (await storage.get("bigv-pause-on-comments")) ?? true
     storage.watch({
       "bigv-pause-on-comments": (c) => {
-        this.pauseOnComments = c.newValue
+        this.pauseOnComments = c.newValue ?? true
       }
     })
   }
@@ -72,17 +73,25 @@ export default class Reels extends IntervalInjector {
   }
 
   protected shouldInjectImmediately(video: HTMLVideoElement): boolean {
-    return !video.paused && this.shouldInjectVideo(video)
+    return !video.paused
   }
 
   public injectMethod(): void {
     document.documentElement.setAttribute("data-bigv-reels-active", "true")
-    this.muteInactivePlayingVideos()
+    const videos = document.querySelectorAll<HTMLVideoElement>("video")
+    const previousActiveVideo = this.activeVideo
+    this.activeVideo = getActiveInstagramVideo(videos)
+    pictureInPicture.follow(this.activeVideo)
+    this.muteInactivePlayingVideos(videos)
     super.injectMethod()
-    this.muteInactivePlayingVideos()
+    if (this.activeVideo && this.activeVideo !== previousActiveVideo) {
+      this.activeVideo.dispatchEvent(new Event("volumechange"))
+    }
   }
 
   public beforeDelete(): void {
+    pictureInPicture.stopFollowing()
+    this.activeVideo = null
     document.documentElement.removeAttribute("data-bigv-reels-active")
 
     if (this.commentsInterval) {
@@ -137,7 +146,9 @@ export default class Reels extends IntervalInjector {
 
     const root = createRoot(buttons)
 
-    root.render(<Buttons controllerId={injection.controller.id} />)
+    root.render(
+      <Buttons controllerId={injection.controller.id} video={injection.video} />
+    )
 
     this.buttonInjections.push({
       root,

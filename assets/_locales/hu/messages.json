@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Vezérelje az Instagram lejátszását, hangerejét, sebességét és kép a képben módját."
+  },
+  "autoskipLabel": {
+    "message": "Automatikus továbblépés"
+  },
+  "downloadLabel": {
+    "message": "Letöltés"
+  },
+  "videoControlsLabel": {
+    "message": "Videóvezérlők"
+  },
+  "muteLabel": {
+    "message": "Némítás"
+  },
+  "unmuteLabel": {
+    "message": "Hang bekapcsolása"
+  },
+  "volumeLabel": {
+    "message": "Hangerő"
+  },
+  "playbackSpeedLabel": {
+    "message": "Lejátszási sebesség"
+  },
+  "videoProgressLabel": {
+    "message": "Videó előrehaladása"
+  },
+  "enterFullscreenLabel": {
+    "message": "Teljes képernyő megnyitása"
+  },
+  "exitFullscreenLabel": {
+    "message": "Kilépés a teljes képernyőből"
+  },
+  "fullscreenLabel": {
+    "message": "Teljes képernyő"
+  },
+  "exitLabel": {
+    "message": "Kilépés"
+  },
+  "openReelLabel": {
+    "message": "Videó megnyitása a Reelsben"
+  },
+  "pipLabel": {
+    "message": "Kép a képben"
+  },
+  "exitPipLabel": {
+    "message": "Kép a képben bezárása"
+  },
+  "pipErrorLabel": {
+    "message": "A PiP nem nyitható meg. Indítsa el a videót, és próbálja újra."
+  },
+  "playLabel": {
+    "message": "Lejátszás"
+  },
+  "pauseLabel": {
+    "message": "Szünet"
+  },
+  "nextReelLabel": {
+    "message": "Következő Reel"
+  },
+  "previousReelLabel": {
+    "message": "Előző Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Bővítmény bekapcsolva"
+  },
+  "extensionPausedLabel": {
+    "message": "Bővítmény szüneteltetve"
+  },
+  "extensionEnabledDescription": {
+    "message": "A továbbfejlesztett vezérlők aktívak az Instagramon."
+  },
+  "extensionPausedDescription": {
+    "message": "Az Instagram az alapértelmezett vezérlőket használja."
+  },
+  "enableControllerLabel": {
+    "message": "Vezérlők bekapcsolása"
+  },
+  "disableControllerLabel": {
+    "message": "Vezérlők kikapcsolása"
+  },
+  "settingsLabel": {
+    "message": "Beállítások"
+  },
+  "clickToPauseLabel": {
+    "message": "Kattintás a szünethez"
+  },
+  "clickToPauseDescription": {
+    "message": "Hírfolyamvideók szüneteltetése a Reels megnyitása helyett"
+  },
+  "volumeReductionLabel": {
+    "message": "Hangerőcsökkentés"
+  },
+  "volumeReductionDescription": {
+    "message": "Maximális hangerő csökkentése"
+  },
+  "offLabel": {
+    "message": "Ki"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Automatikus továbblépés szüneteltetése"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Amíg a Reel hozzászólásai nyitva vannak"
+  },
+  "supportProjectLabel": {
+    "message": "Projekt támogatása"
+  },
+  "reportBugLabel": {
+    "message": "Hiba jelentése"
+  },
+  "contactLabel": {
+    "message": "Kapcsolat"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram megnyitása"
+  },
+  "installedLabel": {
+    "message": "Sikeres telepítés"
+  },
+  "updatedLabel": {
+    "message": "Sikeres frissítés"
+  },
+  "backToTopLabel": {
+    "message": "Vissza a tetejére"
+  },
+  "readyLabel": {
+    "message": "Használatra kész"
+  },
+  "noSetupLabel": {
+    "message": "Nincs szükség beállításra."
+  },
+  "setupDescription": {
+    "message": "Nyissa meg az Instagramot, és indítson el egy videót."
+  },
+  "openInstagramDescription": {
+    "message": "Nyisson meg egy oldalt támogatott videóval."
+  },
+  "playVideoDescription": {
+    "message": "A vezérlők a videó indításakor jelennek meg."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Beállítások módosítása"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Módosítsa a beállításokat a bővítmény ikonjával."
+  },
+  "builtByLabel": {
+    "message": "Készítette"
+  }
+}

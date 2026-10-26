@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "控制 Instagram 视频播放、音量、速度和画中画。"
+  },
+  "autoskipLabel": {
+    "message": "自动跳过"
+  },
+  "downloadLabel": {
+    "message": "下载"
+  },
+  "videoControlsLabel": {
+    "message": "视频控制"
+  },
+  "muteLabel": {
+    "message": "静音"
+  },
+  "unmuteLabel": {
+    "message": "取消静音"
+  },
+  "volumeLabel": {
+    "message": "音量"
+  },
+  "playbackSpeedLabel": {
+    "message": "播放速度"
+  },
+  "videoProgressLabel": {
+    "message": "视频进度"
+  },
+  "enterFullscreenLabel": {
+    "message": "进入全屏"
+  },
+  "exitFullscreenLabel": {
+    "message": "退出全屏"
+  },
+  "fullscreenLabel": {
+    "message": "全屏"
+  },
+  "exitLabel": {
+    "message": "退出"
+  },
+  "openReelLabel": {
+    "message": "在 Reels 中打开此视频"
+  },
+  "pipLabel": {
+    "message": "画中画"
+  },
+  "exitPipLabel": {
+    "message": "退出画中画"
+  },
+  "pipErrorLabel": {
+    "message": "无法打开画中画。请播放视频后重试。"
+  },
+  "playLabel": {
+    "message": "播放"
+  },
+  "pauseLabel": {
+    "message": "暂停"
+  },
+  "nextReelLabel": {
+    "message": "下一个 Reel"
+  },
+  "previousReelLabel": {
+    "message": "上一个 Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "扩展已启用"
+  },
+  "extensionPausedLabel": {
+    "message": "扩展已暂停"
+  },
+  "extensionEnabledDescription": {
+    "message": "增强控制已在 Instagram 上启用。"
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram 使用默认控制。"
+  },
+  "enableControllerLabel": {
+    "message": "启用控制"
+  },
+  "disableControllerLabel": {
+    "message": "停用控制"
+  },
+  "settingsLabel": {
+    "message": "设置"
+  },
+  "clickToPauseLabel": {
+    "message": "点击暂停"
+  },
+  "clickToPauseDescription": {
+    "message": "暂停动态中的视频，而不是打开 Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "降低音量"
+  },
+  "volumeReductionDescription": {
+    "message": "降低最大音量"
+  },
+  "offLabel": {
+    "message": "关闭"
+  },
+  "pauseAutoskipLabel": {
+    "message": "暂停自动跳过"
+  },
+  "pauseAutoskipDescription": {
+    "message": "打开 Reel 评论时"
+  },
+  "supportProjectLabel": {
+    "message": "支持本项目"
+  },
+  "reportBugLabel": {
+    "message": "报告问题"
+  },
+  "contactLabel": {
+    "message": "联系"
+  },
+  "openInstagramLabel": {
+    "message": "打开 Instagram"
+  },
+  "installedLabel": {
+    "message": "安装成功"
+  },
+  "updatedLabel": {
+    "message": "更新成功"
+  },
+  "backToTopLabel": {
+    "message": "返回顶部"
+  },
+  "readyLabel": {
+    "message": "准备就绪"
+  },
+  "noSetupLabel": {
+    "message": "无需设置。"
+  },
+  "setupDescription": {
+    "message": "打开 Instagram 并播放视频即可使用。"
+  },
+  "openInstagramDescription": {
+    "message": "访问含有受支持视频的页面。"
+  },
+  "playVideoDescription": {
+    "message": "视频开始播放时显示控制。"
+  },
+  "adjustPreferencesLabel": {
+    "message": "调整偏好设置"
+  },
+  "adjustPreferencesDescription": {
+    "message": "通过扩展图标更改偏好设置。"
+  },
+  "builtByLabel": {
+    "message": "开发者"
+  }
+}

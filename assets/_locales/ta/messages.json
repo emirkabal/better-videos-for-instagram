@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Instagram இல் இயக்கம், ஒலி, வேகம் மற்றும் படத்திற்குள் படம் ஆகியவற்றைக் கட்டுப்படுத்துங்கள்."
+  },
+  "autoskipLabel": {
+    "message": "தானாக அடுத்து"
+  },
+  "downloadLabel": {
+    "message": "பதிவிறக்கு"
+  },
+  "videoControlsLabel": {
+    "message": "வீடியோ கட்டுப்பாடுகள்"
+  },
+  "muteLabel": {
+    "message": "ஒலியை அணை"
+  },
+  "unmuteLabel": {
+    "message": "ஒலியை இயக்கு"
+  },
+  "volumeLabel": {
+    "message": "ஒலி அளவு"
+  },
+  "playbackSpeedLabel": {
+    "message": "இயக்க வேகம்"
+  },
+  "videoProgressLabel": {
+    "message": "வீடியோ முன்னேற்றம்"
+  },
+  "enterFullscreenLabel": {
+    "message": "முழுத்திரையைத் திற"
+  },
+  "exitFullscreenLabel": {
+    "message": "முழுத்திரையிலிருந்து வெளியேறு"
+  },
+  "fullscreenLabel": {
+    "message": "முழுத்திரை"
+  },
+  "exitLabel": {
+    "message": "வெளியேறு"
+  },
+  "openReelLabel": {
+    "message": "இந்த வீடியோவை Reels இல் திற"
+  },
+  "pipLabel": {
+    "message": "படத்திற்குள் படம்"
+  },
+  "exitPipLabel": {
+    "message": "படத்திற்குள் படத்தை மூடு"
+  },
+  "pipErrorLabel": {
+    "message": "PiP திறக்கவில்லை. வீடியோவை இயக்கி மீண்டும் முயலவும்."
+  },
+  "playLabel": {
+    "message": "இயக்கு"
+  },
+  "pauseLabel": {
+    "message": "இடைநிறுத்து"
+  },
+  "nextReelLabel": {
+    "message": "அடுத்த Reel"
+  },
+  "previousReelLabel": {
+    "message": "முந்தைய ரீல்"
+  },
+  "extensionEnabledLabel": {
+    "message": "நீட்டிப்பு இயக்கத்தில் உள்ளது"
+  },
+  "extensionPausedLabel": {
+    "message": "நீட்டிப்பு இடைநிறுத்தப்பட்டது"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagram இல் மேம்பட்ட கட்டுப்பாடுகள் இயக்கத்தில் உள்ளன."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram இயல்புக் கட்டுப்பாடுகளைப் பயன்படுத்துகிறது."
+  },
+  "enableControllerLabel": {
+    "message": "கட்டுப்பாடுகளை இயக்கு"
+  },
+  "disableControllerLabel": {
+    "message": "கட்டுப்பாடுகளை அணை"
+  },
+  "settingsLabel": {
+    "message": "அமைப்புகள்"
+  },
+  "clickToPauseLabel": {
+    "message": "கிளிக் செய்து இடைநிறுத்து"
+  },
+  "clickToPauseDescription": {
+    "message": "Reels திறப்பதற்குப் பதிலாக ஊட்ட வீடியோக்களை இடைநிறுத்து"
+  },
+  "volumeReductionLabel": {
+    "message": "ஒலி குறைப்பு"
+  },
+  "volumeReductionDescription": {
+    "message": "அதிகபட்ச ஒலியைக் குறை"
+  },
+  "offLabel": {
+    "message": "அணை"
+  },
+  "pauseAutoskipLabel": {
+    "message": "தானாக அடுத்துச் செல்வதை நிறுத்து"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reel கருத்துகள் திறந்திருக்கும் போது"
+  },
+  "supportProjectLabel": {
+    "message": "திட்டத்தை ஆதரிக்கவும்"
+  },
+  "reportBugLabel": {
+    "message": "பிழையைப் புகாரளி"
+  },
+  "contactLabel": {
+    "message": "தொடர்பு"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram திற"
+  },
+  "installedLabel": {
+    "message": "நிறுவப்பட்டது"
+  },
+  "updatedLabel": {
+    "message": "புதுப்பிக்கப்பட்டது"
+  },
+  "backToTopLabel": {
+    "message": "மேலே செல்"
+  },
+  "readyLabel": {
+    "message": "பயன்படுத்தத் தயார்"
+  },
+  "noSetupLabel": {
+    "message": "அமைத்தல் தேவையில்லை."
+  },
+  "setupDescription": {
+    "message": "Instagram திறந்து வீடியோவை இயக்கவும்."
+  },
+  "openInstagramDescription": {
+    "message": "ஆதரிக்கப்படும் வீடியோ உள்ள பக்கத்தைத் திறக்கவும்."
+  },
+  "playVideoDescription": {
+    "message": "வீடியோ தொடங்கும்போது கட்டுப்பாடுகள் தோன்றும்."
+  },
+  "adjustPreferencesLabel": {
+    "message": "விருப்பங்களை மாற்று"
+  },
+  "adjustPreferencesDescription": {
+    "message": "நீட்டிப்பு ஐகான் மூலம் விருப்பங்களை மாற்றவும்."
+  },
+  "builtByLabel": {
+    "message": "உருவாக்கியவர்"
+  }
+}

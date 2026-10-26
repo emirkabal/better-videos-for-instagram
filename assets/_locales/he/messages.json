@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "שליטה בהפעלה, בעוצמת הקול, במהירות ובתמונה בתוך תמונה ב-Instagram."
+  },
+  "autoskipLabel": {
+    "message": "דילוג אוטומטי"
+  },
+  "downloadLabel": {
+    "message": "הורדה"
+  },
+  "videoControlsLabel": {
+    "message": "פקדי וידאו"
+  },
+  "muteLabel": {
+    "message": "השתקה"
+  },
+  "unmuteLabel": {
+    "message": "ביטול השתקה"
+  },
+  "volumeLabel": {
+    "message": "עוצמת קול"
+  },
+  "playbackSpeedLabel": {
+    "message": "מהירות הפעלה"
+  },
+  "videoProgressLabel": {
+    "message": "התקדמות הסרטון"
+  },
+  "enterFullscreenLabel": {
+    "message": "פתיחת מסך מלא"
+  },
+  "exitFullscreenLabel": {
+    "message": "יציאה ממסך מלא"
+  },
+  "fullscreenLabel": {
+    "message": "מסך מלא"
+  },
+  "exitLabel": {
+    "message": "יציאה"
+  },
+  "openReelLabel": {
+    "message": "פתיחת הסרטון הזה ב-Reels"
+  },
+  "pipLabel": {
+    "message": "תמונה בתוך תמונה"
+  },
+  "exitPipLabel": {
+    "message": "סגירת תמונה בתוך תמונה"
+  },
+  "pipErrorLabel": {
+    "message": "לא ניתן לפתוח PiP. הפעילו את הסרטון ונסו שוב."
+  },
+  "playLabel": {
+    "message": "הפעלה"
+  },
+  "pauseLabel": {
+    "message": "השהיה"
+  },
+  "nextReelLabel": {
+    "message": "ה-Reel הבא"
+  },
+  "previousReelLabel": {
+    "message": "הריל הקודם"
+  },
+  "extensionEnabledLabel": {
+    "message": "התוסף פעיל"
+  },
+  "extensionPausedLabel": {
+    "message": "התוסף מושהה"
+  },
+  "extensionEnabledDescription": {
+    "message": "הפקדים המשופרים פעילים ב-Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram משתמש בפקדי ברירת המחדל."
+  },
+  "enableControllerLabel": {
+    "message": "הפעלת הפקדים"
+  },
+  "disableControllerLabel": {
+    "message": "השבתת הפקדים"
+  },
+  "settingsLabel": {
+    "message": "הגדרות"
+  },
+  "clickToPauseLabel": {
+    "message": "לחיצה להשהיה"
+  },
+  "clickToPauseDescription": {
+    "message": "השהיית סרטונים בפיד במקום פתיחת Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "הנמכת עוצמת הקול"
+  },
+  "volumeReductionDescription": {
+    "message": "הפחתת עוצמת הקול המרבית"
+  },
+  "offLabel": {
+    "message": "כבוי"
+  },
+  "pauseAutoskipLabel": {
+    "message": "השהיית דילוג אוטומטי"
+  },
+  "pauseAutoskipDescription": {
+    "message": "כשתגובות ה-Reel פתוחות"
+  },
+  "supportProjectLabel": {
+    "message": "תמיכה בפרויקט"
+  },
+  "reportBugLabel": {
+    "message": "דיווח על תקלה"
+  },
+  "contactLabel": {
+    "message": "יצירת קשר"
+  },
+  "openInstagramLabel": {
+    "message": "פתיחת Instagram"
+  },
+  "installedLabel": {
+    "message": "ההתקנה הושלמה"
+  },
+  "updatedLabel": {
+    "message": "העדכון הושלם"
+  },
+  "backToTopLabel": {
+    "message": "חזרה למעלה"
+  },
+  "readyLabel": {
+    "message": "מוכן לשימוש"
+  },
+  "noSetupLabel": {
+    "message": "אין צורך בהגדרה."
+  },
+  "setupDescription": {
+    "message": "פתחו את Instagram והפעילו סרטון."
+  },
+  "openInstagramDescription": {
+    "message": "בקרו בדף עם סרטון נתמך."
+  },
+  "playVideoDescription": {
+    "message": "הפקדים מופיעים כשהסרטון מתחיל."
+  },
+  "adjustPreferencesLabel": {
+    "message": "שינוי העדפות"
+  },
+  "adjustPreferencesDescription": {
+    "message": "שנו העדפות דרך סמל התוסף."
+  },
+  "builtByLabel": {
+    "message": "נוצר על ידי"
+  }
+}

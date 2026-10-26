@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Kontrolin ang playback, volume, bilis at picture-in-picture sa Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Awtomatikong laktaw"
+  },
+  "downloadLabel": {
+    "message": "I-download"
+  },
+  "videoControlsLabel": {
+    "message": "Mga kontrol ng video"
+  },
+  "muteLabel": {
+    "message": "I-mute"
+  },
+  "unmuteLabel": {
+    "message": "I-unmute"
+  },
+  "volumeLabel": {
+    "message": "Volume"
+  },
+  "playbackSpeedLabel": {
+    "message": "Bilis ng pag-play"
+  },
+  "videoProgressLabel": {
+    "message": "Progreso ng video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Buksan ang buong screen"
+  },
+  "exitFullscreenLabel": {
+    "message": "Lumabas sa buong screen"
+  },
+  "fullscreenLabel": {
+    "message": "Buong screen"
+  },
+  "exitLabel": {
+    "message": "Lumabas"
+  },
+  "openReelLabel": {
+    "message": "Buksan ang video na ito sa Reels"
+  },
+  "pipLabel": {
+    "message": "Picture-in-Picture"
+  },
+  "exitPipLabel": {
+    "message": "Isara ang Picture-in-Picture"
+  },
+  "pipErrorLabel": {
+    "message": "Hindi mabuksan ang PiP. I-play ang video at subukang muli."
+  },
+  "playLabel": {
+    "message": "I-play"
+  },
+  "pauseLabel": {
+    "message": "I-pause"
+  },
+  "nextReelLabel": {
+    "message": "Susunod na Reel"
+  },
+  "previousReelLabel": {
+    "message": "Nakaraang Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Naka-enable ang extension"
+  },
+  "extensionPausedLabel": {
+    "message": "Naka-pause ang extension"
+  },
+  "extensionEnabledDescription": {
+    "message": "Aktibo ang mas mahusay na mga kontrol sa Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Ginagamit ng Instagram ang mga default na kontrol."
+  },
+  "enableControllerLabel": {
+    "message": "I-enable ang mga kontrol"
+  },
+  "disableControllerLabel": {
+    "message": "I-disable ang mga kontrol"
+  },
+  "settingsLabel": {
+    "message": "Mga setting"
+  },
+  "clickToPauseLabel": {
+    "message": "I-click para i-pause"
+  },
+  "clickToPauseDescription": {
+    "message": "I-pause ang mga video sa feed sa halip na buksan ang Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Pagbawas ng volume"
+  },
+  "volumeReductionDescription": {
+    "message": "Ibaba ang pinakamataas na volume"
+  },
+  "offLabel": {
+    "message": "Naka-off"
+  },
+  "pauseAutoskipLabel": {
+    "message": "I-pause ang awtomatikong laktaw"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Habang bukas ang mga komento ng Reel"
+  },
+  "supportProjectLabel": {
+    "message": "Suportahan ang proyekto"
+  },
+  "reportBugLabel": {
+    "message": "Mag-ulat ng bug"
+  },
+  "contactLabel": {
+    "message": "Makipag-ugnayan"
+  },
+  "openInstagramLabel": {
+    "message": "Buksan ang Instagram"
+  },
+  "installedLabel": {
+    "message": "Matagumpay na na-install"
+  },
+  "updatedLabel": {
+    "message": "Matagumpay na na-update"
+  },
+  "backToTopLabel": {
+    "message": "Bumalik sa itaas"
+  },
+  "readyLabel": {
+    "message": "Handa nang gamitin"
+  },
+  "noSetupLabel": {
+    "message": "Walang kailangang i-setup."
+  },
+  "setupDescription": {
+    "message": "Buksan ang Instagram at mag-play ng video."
+  },
+  "openInstagramDescription": {
+    "message": "Bumisita sa pahinang may suportadong video."
+  },
+  "playVideoDescription": {
+    "message": "Lalabas ang mga kontrol kapag nagsimula ang video."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Baguhin ang mga kagustuhan"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Baguhin ang mga kagustuhan mula sa icon ng extension."
+  },
+  "builtByLabel": {
+    "message": "Ginawa ni"
+  }
+}

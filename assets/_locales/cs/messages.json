@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Ovládejte přehrávání, hlasitost, rychlost a obraz v obraze na Instagramu."
+  },
+  "autoskipLabel": {
+    "message": "Automaticky přejít"
+  },
+  "downloadLabel": {
+    "message": "Stáhnout"
+  },
+  "videoControlsLabel": {
+    "message": "Ovládání videa"
+  },
+  "muteLabel": {
+    "message": "Ztlumit"
+  },
+  "unmuteLabel": {
+    "message": "Zapnout zvuk"
+  },
+  "volumeLabel": {
+    "message": "Hlasitost"
+  },
+  "playbackSpeedLabel": {
+    "message": "Rychlost přehrávání"
+  },
+  "videoProgressLabel": {
+    "message": "Průběh videa"
+  },
+  "enterFullscreenLabel": {
+    "message": "Celá obrazovka"
+  },
+  "exitFullscreenLabel": {
+    "message": "Ukončit celou obrazovku"
+  },
+  "fullscreenLabel": {
+    "message": "Celá obrazovka"
+  },
+  "exitLabel": {
+    "message": "Zavřít"
+  },
+  "openReelLabel": {
+    "message": "Otevřít toto video v Reels"
+  },
+  "pipLabel": {
+    "message": "Obraz v obraze"
+  },
+  "exitPipLabel": {
+    "message": "Ukončit obraz v obraze"
+  },
+  "pipErrorLabel": {
+    "message": "PiP nelze otevřít. Spusťte video a zkuste to znovu."
+  },
+  "playLabel": {
+    "message": "Přehrát"
+  },
+  "pauseLabel": {
+    "message": "Pozastavit"
+  },
+  "nextReelLabel": {
+    "message": "Další Reel"
+  },
+  "previousReelLabel": {
+    "message": "Předchozí Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Rozšíření zapnuto"
+  },
+  "extensionPausedLabel": {
+    "message": "Rozšíření pozastaveno"
+  },
+  "extensionEnabledDescription": {
+    "message": "Vylepšené ovládání je na Instagramu aktivní."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram používá výchozí ovládání."
+  },
+  "enableControllerLabel": {
+    "message": "Zapnout ovládání"
+  },
+  "disableControllerLabel": {
+    "message": "Vypnout ovládání"
+  },
+  "settingsLabel": {
+    "message": "Nastavení"
+  },
+  "clickToPauseLabel": {
+    "message": "Kliknutím pozastavit"
+  },
+  "clickToPauseDescription": {
+    "message": "Pozastavit videa v kanálu místo otevření Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Snížení hlasitosti"
+  },
+  "volumeReductionDescription": {
+    "message": "Snížit maximální hlasitost"
+  },
+  "offLabel": {
+    "message": "Vypnuto"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pozastavit automatický přechod"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Při otevřených komentářích Reelu"
+  },
+  "supportProjectLabel": {
+    "message": "Podpořit projekt"
+  },
+  "reportBugLabel": {
+    "message": "Nahlásit chybu"
+  },
+  "contactLabel": {
+    "message": "Kontakt"
+  },
+  "openInstagramLabel": {
+    "message": "Otevřít Instagram"
+  },
+  "installedLabel": {
+    "message": "Úspěšně nainstalováno"
+  },
+  "updatedLabel": {
+    "message": "Úspěšně aktualizováno"
+  },
+  "backToTopLabel": {
+    "message": "Nahoru"
+  },
+  "readyLabel": {
+    "message": "Připraveno"
+  },
+  "noSetupLabel": {
+    "message": "Nastavení není potřeba."
+  },
+  "setupDescription": {
+    "message": "Otevřete Instagram a přehrajte video."
+  },
+  "openInstagramDescription": {
+    "message": "Navštivte stránku s podporovaným videem."
+  },
+  "playVideoDescription": {
+    "message": "Ovládání se zobrazí při spuštění videa."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Změnit předvolby"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Předvolby změníte přes ikonu rozšíření."
+  },
+  "builtByLabel": {
+    "message": "Vytvořil"
+  }
+}

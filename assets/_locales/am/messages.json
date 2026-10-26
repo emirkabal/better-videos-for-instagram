@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "የInstagram ቪዲዮ ማጫወቻ፣ ድምፅ፣ ፍጥነት እና በምስል ውስጥ ምስል ይቆጣጠሩ።"
+  },
+  "autoskipLabel": {
+    "message": "በራስ ሰር ቀጣይ"
+  },
+  "downloadLabel": {
+    "message": "አውርድ"
+  },
+  "videoControlsLabel": {
+    "message": "የቪዲዮ መቆጣጠሪያዎች"
+  },
+  "muteLabel": {
+    "message": "ድምፅ አጥፋ"
+  },
+  "unmuteLabel": {
+    "message": "ድምፅ አብራ"
+  },
+  "volumeLabel": {
+    "message": "የድምፅ መጠን"
+  },
+  "playbackSpeedLabel": {
+    "message": "የመጫወቻ ፍጥነት"
+  },
+  "videoProgressLabel": {
+    "message": "የቪዲዮ ሂደት"
+  },
+  "enterFullscreenLabel": {
+    "message": "ሙሉ ማያ ገጽ ክፈት"
+  },
+  "exitFullscreenLabel": {
+    "message": "ከሙሉ ማያ ገጽ ውጣ"
+  },
+  "fullscreenLabel": {
+    "message": "ሙሉ ማያ ገጽ"
+  },
+  "exitLabel": {
+    "message": "ውጣ"
+  },
+  "openReelLabel": {
+    "message": "ይህን ቪዲዮ በReels ክፈት"
+  },
+  "pipLabel": {
+    "message": "በምስል ውስጥ ምስል"
+  },
+  "exitPipLabel": {
+    "message": "በምስል ውስጥ ምስል ዝጋ"
+  },
+  "pipErrorLabel": {
+    "message": "PiP መክፈት አልተቻለም። ቪዲዮውን አጫውተው እንደገና ይሞክሩ።"
+  },
+  "playLabel": {
+    "message": "አጫውት"
+  },
+  "pauseLabel": {
+    "message": "ለአፍታ አቁም"
+  },
+  "nextReelLabel": {
+    "message": "ቀጣይ Reel"
+  },
+  "previousReelLabel": {
+    "message": "ቀዳሚው ሪል"
+  },
+  "extensionEnabledLabel": {
+    "message": "ቅጥያው ነቅቷል"
+  },
+  "extensionPausedLabel": {
+    "message": "ቅጥያው ቆሟል"
+  },
+  "extensionEnabledDescription": {
+    "message": "የተሻሻሉ መቆጣጠሪያዎች በInstagram ነቅተዋል።"
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram ነባሪ መቆጣጠሪያዎቹን ይጠቀማል።"
+  },
+  "enableControllerLabel": {
+    "message": "መቆጣጠሪያዎችን አንቃ"
+  },
+  "disableControllerLabel": {
+    "message": "መቆጣጠሪያዎችን አሰናክል"
+  },
+  "settingsLabel": {
+    "message": "ቅንብሮች"
+  },
+  "clickToPauseLabel": {
+    "message": "ለማቆም ጠቅ ያድርጉ"
+  },
+  "clickToPauseDescription": {
+    "message": "Reels ከመክፈት ይልቅ የፊድ ቪዲዮዎችን አቁም"
+  },
+  "volumeReductionLabel": {
+    "message": "ድምፅ መቀነስ"
+  },
+  "volumeReductionDescription": {
+    "message": "ከፍተኛውን የድምፅ መጠን ቀንስ"
+  },
+  "offLabel": {
+    "message": "ጠፍቷል"
+  },
+  "pauseAutoskipLabel": {
+    "message": "ራስ ሰር መቀጠልን አቁም"
+  },
+  "pauseAutoskipDescription": {
+    "message": "የReel አስተያየቶች ሲከፈቱ"
+  },
+  "supportProjectLabel": {
+    "message": "ፕሮጀክቱን ይደግፉ"
+  },
+  "reportBugLabel": {
+    "message": "ስህተት ሪፖርት ያድርጉ"
+  },
+  "contactLabel": {
+    "message": "ያግኙን"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram ክፈት"
+  },
+  "installedLabel": {
+    "message": "በተሳካ ሁኔታ ተጭኗል"
+  },
+  "updatedLabel": {
+    "message": "በተሳካ ሁኔታ ተዘምኗል"
+  },
+  "backToTopLabel": {
+    "message": "ወደ ላይ ተመለስ"
+  },
+  "readyLabel": {
+    "message": "ለመጠቀም ዝግጁ"
+  },
+  "noSetupLabel": {
+    "message": "ማዋቀር አያስፈልግም።"
+  },
+  "setupDescription": {
+    "message": "Instagram ከፍተው ቪዲዮ ያጫውቱ።"
+  },
+  "openInstagramDescription": {
+    "message": "የሚደገፍ ቪዲዮ ያለበትን ገጽ ይክፈቱ።"
+  },
+  "playVideoDescription": {
+    "message": "ቪዲዮው ሲጀምር መቆጣጠሪያዎች ይታያሉ።"
+  },
+  "adjustPreferencesLabel": {
+    "message": "ምርጫዎችን ቀይር"
+  },
+  "adjustPreferencesDescription": {
+    "message": "በቅጥያው አዶ ምርጫዎችን ይቀይሩ።"
+  },
+  "builtByLabel": {
+    "message": "ያዘጋጀው"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Vadiet Instagram atskaņošanu, skaļumu, ātrumu un attēlu attēlā."
+  },
+  "autoskipLabel": {
+    "message": "Automātiski tālāk"
+  },
+  "downloadLabel": {
+    "message": "Lejupielādēt"
+  },
+  "videoControlsLabel": {
+    "message": "Video vadīklas"
+  },
+  "muteLabel": {
+    "message": "Izslēgt skaņu"
+  },
+  "unmuteLabel": {
+    "message": "Ieslēgt skaņu"
+  },
+  "volumeLabel": {
+    "message": "Skaļums"
+  },
+  "playbackSpeedLabel": {
+    "message": "Atskaņošanas ātrums"
+  },
+  "videoProgressLabel": {
+    "message": "Video norise"
+  },
+  "enterFullscreenLabel": {
+    "message": "Atvērt pilnekrāna režīmu"
+  },
+  "exitFullscreenLabel": {
+    "message": "Iziet no pilnekrāna režīma"
+  },
+  "fullscreenLabel": {
+    "message": "Pilnekrāns"
+  },
+  "exitLabel": {
+    "message": "Iziet"
+  },
+  "openReelLabel": {
+    "message": "Atvērt šo video Reels"
+  },
+  "pipLabel": {
+    "message": "Attēls attēlā"
+  },
+  "exitPipLabel": {
+    "message": "Aizvērt attēlu attēlā"
+  },
+  "pipErrorLabel": {
+    "message": "Neizdevās atvērt PiP. Palaidiet video un mēģiniet vēlreiz."
+  },
+  "playLabel": {
+    "message": "Atskaņot"
+  },
+  "pauseLabel": {
+    "message": "Pauzēt"
+  },
+  "nextReelLabel": {
+    "message": "Nākamais Reel"
+  },
+  "previousReelLabel": {
+    "message": "Iepriekšējais Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Paplašinājums ieslēgts"
+  },
+  "extensionPausedLabel": {
+    "message": "Paplašinājums pauzēts"
+  },
+  "extensionEnabledDescription": {
+    "message": "Uzlabotās vadīklas darbojas Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram izmanto noklusējuma vadīklas."
+  },
+  "enableControllerLabel": {
+    "message": "Ieslēgt vadīklas"
+  },
+  "disableControllerLabel": {
+    "message": "Izslēgt vadīklas"
+  },
+  "settingsLabel": {
+    "message": "Iestatījumi"
+  },
+  "clickToPauseLabel": {
+    "message": "Klikšķis pauzei"
+  },
+  "clickToPauseDescription": {
+    "message": "Pauzēt plūsmas video, nevis atvērt Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Skaļuma samazināšana"
+  },
+  "volumeReductionDescription": {
+    "message": "Samazināt maksimālo skaļumu"
+  },
+  "offLabel": {
+    "message": "Izslēgts"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pauzēt automātisko pāreju"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Kamēr Reel komentāri ir atvērti"
+  },
+  "supportProjectLabel": {
+    "message": "Atbalstīt projektu"
+  },
+  "reportBugLabel": {
+    "message": "Ziņot par kļūdu"
+  },
+  "contactLabel": {
+    "message": "Kontakti"
+  },
+  "openInstagramLabel": {
+    "message": "Atvērt Instagram"
+  },
+  "installedLabel": {
+    "message": "Instalēts"
+  },
+  "updatedLabel": {
+    "message": "Atjaunināts"
+  },
+  "backToTopLabel": {
+    "message": "Uz augšu"
+  },
+  "readyLabel": {
+    "message": "Gatavs lietošanai"
+  },
+  "noSetupLabel": {
+    "message": "Nav jāiestata."
+  },
+  "setupDescription": {
+    "message": "Atveriet Instagram un palaidiet video."
+  },
+  "openInstagramDescription": {
+    "message": "Apmeklējiet lapu ar atbalstītu video."
+  },
+  "playVideoDescription": {
+    "message": "Vadīklas parādās, kad sākas video."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Mainīt preferences"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Mainiet preferences ar paplašinājuma ikonu."
+  },
+  "builtByLabel": {
+    "message": "Izstrādāja"
+  }
+}

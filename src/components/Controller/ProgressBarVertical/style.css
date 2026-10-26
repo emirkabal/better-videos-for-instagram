@@ -12,7 +12,7 @@
 
 .better-ig-progress-bar-vertical .baseline {
   position: relative;
-  width: 4px;
+  width: 3px;
   height: 56px;
   border-radius: 999px;
   background: rgb(255 255 255 / 28%);
@@ -26,8 +26,9 @@
 
 .better-ig-progress-bar-vertical .baseline:hover,
 .better-ig-progress-bar-vertical .baseline.dragging,
-.better-ig-progress-bar-vertical .baseline:focus-visible {
-  width: 7px;
+.better-ig-progress-bar-vertical
+  .baseline:focus-visible:not([data-bigv-pointer-focus]) {
+  width: 4px;
   background: rgb(255 255 255 / 34%);
   box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
 }
@@ -42,21 +43,18 @@
   border-radius: 999px;
   background: #fff;
   pointer-events: none;
-  will-change: height;
 }
 
 .better-ig-progress-bar-vertical .pointer {
   position: absolute;
   left: 50%;
   z-index: 4;
-  width: 11px;
-  height: 11px;
-  border: 2px solid rgb(255 255 255 / 70%);
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
   border-radius: 50%;
   background: #fff;
-  box-shadow:
-    0 2px 6px rgb(0 0 0 / 32%),
-    0 0 0 1px rgb(0 0 0 / 8%);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 32%);
   opacity: 0;
   transform: translate(-50%, 50%);
   transition: opacity 120ms ease;
@@ -65,7 +63,9 @@
 
 .better-ig-progress-bar-vertical .baseline:hover .pointer,
 .better-ig-progress-bar-vertical .baseline.dragging .pointer,
-.better-ig-progress-bar-vertical .baseline:focus-visible .pointer {
+.better-ig-progress-bar-vertical
+  .baseline:focus-visible:not([data-bigv-pointer-focus])
+  .pointer {
   opacity: 1;
 }
 

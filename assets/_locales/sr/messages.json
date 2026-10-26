@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Управљајте репродукцијом, јачином звука, брзином и сликом у слици на Instagram-у."
+  },
+  "autoskipLabel": {
+    "message": "Аутоматски даље"
+  },
+  "downloadLabel": {
+    "message": "Преузми"
+  },
+  "videoControlsLabel": {
+    "message": "Контроле видеа"
+  },
+  "muteLabel": {
+    "message": "Искључи звук"
+  },
+  "unmuteLabel": {
+    "message": "Укључи звук"
+  },
+  "volumeLabel": {
+    "message": "Јачина звука"
+  },
+  "playbackSpeedLabel": {
+    "message": "Брзина репродукције"
+  },
+  "videoProgressLabel": {
+    "message": "Напредак видеа"
+  },
+  "enterFullscreenLabel": {
+    "message": "Отвори цео екран"
+  },
+  "exitFullscreenLabel": {
+    "message": "Изађи из целог екрана"
+  },
+  "fullscreenLabel": {
+    "message": "Цео екран"
+  },
+  "exitLabel": {
+    "message": "Изађи"
+  },
+  "openReelLabel": {
+    "message": "Отвори овај видео у Reels-у"
+  },
+  "pipLabel": {
+    "message": "Слика у слици"
+  },
+  "exitPipLabel": {
+    "message": "Затвори слику у слици"
+  },
+  "pipErrorLabel": {
+    "message": "Није могуће отворити PiP. Покрените видео и покушајте поново."
+  },
+  "playLabel": {
+    "message": "Пусти"
+  },
+  "pauseLabel": {
+    "message": "Паузирај"
+  },
+  "nextReelLabel": {
+    "message": "Следећи Reel"
+  },
+  "previousReelLabel": {
+    "message": "Претходни Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Проширење је укључено"
+  },
+  "extensionPausedLabel": {
+    "message": "Проширење је паузирано"
+  },
+  "extensionEnabledDescription": {
+    "message": "Побољшане контроле су активне на Instagram-у."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram користи подразумеване контроле."
+  },
+  "enableControllerLabel": {
+    "message": "Укључи контроле"
+  },
+  "disableControllerLabel": {
+    "message": "Искључи контроле"
+  },
+  "settingsLabel": {
+    "message": "Подешавања"
+  },
+  "clickToPauseLabel": {
+    "message": "Клик за паузу"
+  },
+  "clickToPauseDescription": {
+    "message": "Паузирај видео у фиду уместо отварања Reels-а"
+  },
+  "volumeReductionLabel": {
+    "message": "Смањење јачине звука"
+  },
+  "volumeReductionDescription": {
+    "message": "Смањи највећу јачину звука"
+  },
+  "offLabel": {
+    "message": "Искључено"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Паузирај аутоматски прелазак"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Док су коментари Reel-а отворени"
+  },
+  "supportProjectLabel": {
+    "message": "Подржите пројекат"
+  },
+  "reportBugLabel": {
+    "message": "Пријави грешку"
+  },
+  "contactLabel": {
+    "message": "Контакт"
+  },
+  "openInstagramLabel": {
+    "message": "Отвори Instagram"
+  },
+  "installedLabel": {
+    "message": "Успешно инсталирано"
+  },
+  "updatedLabel": {
+    "message": "Успешно ажурирано"
+  },
+  "backToTopLabel": {
+    "message": "На врх"
+  },
+  "readyLabel": {
+    "message": "Спремно за употребу"
+  },
+  "noSetupLabel": {
+    "message": "Подешавање није потребно."
+  },
+  "setupDescription": {
+    "message": "Отворите Instagram и пустите видео."
+  },
+  "openInstagramDescription": {
+    "message": "Посетите страницу са подржаним видеом."
+  },
+  "playVideoDescription": {
+    "message": "Контроле се појављују при покретању видеа."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Измени подешавања"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Измените подешавања преко иконе проширења."
+  },
+  "builtByLabel": {
+    "message": "Аутор"
+  }
+}

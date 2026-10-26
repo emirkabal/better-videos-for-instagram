@@ -10,9 +10,15 @@ type Props = {
   children: React.ReactNode
   dragging?: boolean
   variant?: Variant
+  placement?: "overlay" | "dock"
 }
 
-export default function SmartContainer({ children, dragging, variant }: Props) {
+export default function SmartContainer({
+  children,
+  dragging,
+  variant,
+  placement = "overlay"
+}: Props) {
   const [active, setActive] = useState(false)
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -45,7 +51,8 @@ export default function SmartContainer({ children, dragging, variant }: Props) {
       className={cn(
         "better-ig-volume-control",
         {
-          active: dragging || active
+          active: dragging || active,
+          "in-dock": placement === "dock"
         },
         variant
       )}

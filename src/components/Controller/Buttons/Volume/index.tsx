@@ -3,6 +3,8 @@ import "./style.css"
 import VolumeMutedIcon from "react:../../icons/volume-off.svg"
 import VolumeIcon from "react:../../icons/volume.svg"
 
+import { t } from "~utils/i18n"
+
 type Props = {
   muted: boolean
   onChange: (muted: boolean) => void
@@ -13,9 +15,9 @@ export default function VolumeButton({ muted, onChange }: Props) {
     <button
       type="button"
       className="better-ig-volume-button bigv-control"
-      aria-label={muted ? "Unmute" : "Mute"}
+      aria-label={t(muted ? "unmuteLabel" : "muteLabel")}
       aria-pressed={muted}
-      title={muted ? "Unmute" : "Mute"}
+      title={t(muted ? "unmuteLabel" : "muteLabel")}
       onClick={(event) => {
         event.stopPropagation()
         onChange(!muted)

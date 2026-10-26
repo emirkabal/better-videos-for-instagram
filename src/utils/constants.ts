@@ -2,6 +2,7 @@ export const IG_APP_ID_REGEX = /"APP_ID":\s*"(\d+)"/i
 export const IG_REELS_SNAP = '[role="main"]>:nth-child(2)'
 
 export const CONTROLLER_ENABLED_STORAGE_KEY = "bigv-controller-enabled"
+export const CLICK_TO_PAUSE_STORAGE_KEY = "bigv-click-to-pause"
 export const UNINSTALL_FEEDBACK_URL = "https://tally.so/r/LZLR1J"
 
 export const IG_STORIES_INJECTOR_INDICATOR =

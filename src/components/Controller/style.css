@@ -1,19 +1,19 @@
 :root {
-  --switch-width: 40px;
-  --switch-height: 22px;
-  --knob-size: 12px;
-  --active-color: #0c1014;
-  --inactive-color: #dbdfe4;
-  --knob-color: #fff;
-  --active-knob-color: #f8f9f9;
-  --animation-speed: 150ms;
+  --bigv-switch-width: 40px;
+  --bigv-switch-height: 22px;
+  --bigv-knob-size: 12px;
+  --bigv-active-color: #0c1014;
+  --bigv-inactive-color: #dbdfe4;
+  --bigv-knob-color: #fff;
+  --bigv-active-knob-color: #f8f9f9;
+  --bigv-animation-speed: 150ms;
 }
 
-.__fb-dark-mode:root {
-  --active-color: #f8f9f9;
-  --inactive-color: #2c2f33;
-  --knob-color: #ffffff;
-  --active-knob-color: #0c1014;
+.__fb-dark-mode {
+  --bigv-active-color: #f8f9f9;
+  --bigv-inactive-color: #2c2f33;
+  --bigv-knob-color: #ffffff;
+  --bigv-active-knob-color: #0c1014;
 }
 
 .better-ig-controller {
@@ -77,6 +77,7 @@
 
 .bigv-fullscreen-target:fullscreen .better-ig-controller,
 .bigv-fullscreen-target:fullscreen .better-ig-volume-control,
+.bigv-fullscreen-target:fullscreen .bigv-player-dock,
 .bigv-fullscreen-target:fullscreen .better-ig-fullscreen-button {
   z-index: 2147483646;
 }
@@ -118,8 +119,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex: 0 0 auto;
+  color: var(--bigv-active-color);
 }
 
 .bigv-buttons > div {
@@ -127,11 +130,249 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 44px;
+  min-height: 36px;
+  flex: 0 0 auto;
 }
 
 .bigv-playback-speed {
   position: relative;
+}
+
+.bigv-player-dock {
+  --bigv-dock-events: none;
+  --bigv-dock-size: 28px;
+  --bigv-dock-speed-size: 38px;
+  --bigv-active-color: #f8f9f9;
+  --bigv-inactive-color: #2c2f33;
+  --bigv-active-knob-color: #141414;
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  max-width: calc(100% - 16px);
+  padding: 3px;
+  box-sizing: border-box;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 8px;
+  background: rgb(20 20 20 / 88%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 22%);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  isolation: isolate;
+  opacity: 0;
+  transform: translateY(3px);
+  pointer-events: none;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.bigv-player-dock.is-visible,
+.bigv-player-dock:has(:focus-visible:not([data-bigv-pointer-focus])) {
+  --bigv-dock-events: auto;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.bigv-player-dock.is-compact {
+  --bigv-dock-size: 24px;
+  --bigv-dock-speed-size: 32px;
+  padding: 2px;
+  gap: 0;
+}
+
+.bigv-player-dock.reels {
+  overflow: visible;
+}
+
+.bigv-player-dock.is-persistent {
+  --bigv-dock-events: auto;
+  opacity: 0.5;
+  transform: none;
+  pointer-events: auto;
+}
+
+.bigv-player-dock.is-persistent.is-visible,
+.bigv-player-dock.is-persistent:hover,
+.bigv-player-dock.is-persistent:has(
+    :focus-visible:not([data-bigv-pointer-focus])
+  ) {
+  opacity: 1;
+}
+
+.bigv-story-controls-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bigv-player-dock.stories {
+  top: 62%;
+  bottom: auto;
+  flex-direction: column;
+  transform: translate(calc(100% + 2px), -50%);
+}
+
+.bigv-player-dock.stories.is-visible,
+.bigv-player-dock.stories:hover,
+.bigv-player-dock.stories:has(:focus-visible:not([data-bigv-pointer-focus])) {
+  transform: translateY(-50%);
+}
+
+.bigv-player-dock.stories .bigv-playback-speed {
+  flex: none;
+  min-width: 0;
+}
+
+.bigv-player-dock.stories .bigv-speed-button {
+  width: var(--bigv-dock-size);
+}
+
+.bigv-player-dock.stories .bigv-speed-popup {
+  top: 0;
+  right: calc(100% + 8px);
+  bottom: auto;
+  width: 136px;
+}
+
+.bigv-player-dock button {
+  flex: 0 1 var(--bigv-dock-size);
+  appearance: none;
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--bigv-dock-size);
+  min-width: var(--bigv-dock-size);
+  height: var(--bigv-dock-size);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  opacity: 1;
+  font:
+    600 11px/1 system-ui,
+    sans-serif;
+  cursor: pointer;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.bigv-player-dock button:hover {
+  background: rgb(255 255 255 / 12%);
+}
+
+.bigv-player-dock button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.bigv-player-dock .bigv-playback-speed {
+  position: static;
+  flex: 0 1 var(--bigv-dock-speed-size);
+  min-width: var(--bigv-dock-speed-size);
+}
+
+.bigv-player-dock .bigv-speed-button {
+  width: var(--bigv-dock-speed-size);
+  max-width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.bigv-player-dock .bigv-speed-popup {
+  top: auto;
+  right: 0;
+  bottom: calc(100% + 8px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: max(100%, 136px);
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 6px;
+  border-radius: 10px;
+  transform: none;
+}
+
+.bigv-player-dock .bigv-speed-option {
+  width: 100%;
+  height: 30px;
+}
+
+.bigv-player-dock .bigv-speed-option[data-active="true"] {
+  background: #f8f9f9;
+  color: #141414;
+}
+
+.bigv-player-dock:has(.bigv-speed-button[aria-expanded="true"])
+  .better-ig-progress-bar-vertical {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bigv-player-dock .better-ig-fullscreen-button svg {
+  width: 18px;
+  height: 18px;
+  filter: none;
+}
+
+.bigv-pip-control {
+  position: relative;
+  flex: 0 1 var(--bigv-dock-size);
+}
+
+.bigv-pip-button svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+.bigv-pip-control.in-controls .bigv-pip-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--bigv-active-color);
+  cursor: pointer;
+}
+
+.bigv-control-error {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 20;
+  width: 200px;
+  padding: 8px;
+  border-radius: 6px;
+  background: #141414;
+  color: #fff;
+  font:
+    12px/1.4 system-ui,
+    sans-serif;
+}
+
+.bigv-open-reel-button svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
 }
 
 .bigv-speed-button {
@@ -145,9 +386,9 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--bigv-active-color);
   opacity: 0.92;
-  transition: opacity var(--animation-speed) ease;
+  transition: opacity var(--bigv-animation-speed) ease;
   cursor: pointer;
 }
 
@@ -158,7 +399,6 @@
 .bigv-speed-button svg {
   width: 36px;
   height: 36px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 .bigv-speed-popup {
@@ -173,8 +413,8 @@
   gap: 2px;
   padding: 6px;
   border-radius: 13px;
-  background: rgba(20, 20, 20, 0.26);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: var(--bigv-active-knob-color);
+  border: 1px solid var(--bigv-inactive-color);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   box-shadow:
@@ -197,20 +437,20 @@
   letter-spacing: 0;
   font-weight: 600;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--bigv-active-color);
+  cursor: pointer;
 }
 
 .bigv-speed-option:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--bigv-inactive-color);
 }
 
 .bigv-speed-option[data-active="true"] {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: var(--bigv-active-color);
+  color: var(--bigv-active-knob-color);
 }
 
 .bigv-speed-text {
-  color: rgba(255, 255, 255, 0.9);
   margin-top: -6px;
   line-height: 12px;
 }
@@ -218,8 +458,8 @@
 .bigv-switch {
   position: relative;
   display: inline-block;
-  width: var(--switch-width);
-  height: var(--switch-height);
+  width: var(--bigv-switch-width);
+  height: var(--bigv-switch-height);
   cursor: pointer;
 
   flex-direction: column;
@@ -233,7 +473,7 @@
   user-select: none;
   cursor: pointer;
   width: auto;
-  color: var(--active-color);
+  color: var(--bigv-active-color);
   margin-top: 4px;
   font-size: 12px;
   font-weight: 400;
@@ -252,45 +492,47 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--inactive-color);
-  border-radius: var(--switch-height);
-  transition: background-color var(--animation-speed) ease-in-out;
+  background-color: var(--bigv-inactive-color);
+  border-radius: var(--bigv-switch-height);
+  transition: background-color var(--bigv-animation-speed) ease-in-out;
 }
 
 .bigv-slider:before {
   position: absolute;
   content: "";
-  height: var(--knob-size);
-  width: var(--knob-size);
+  height: var(--bigv-knob-size);
+  width: var(--bigv-knob-size);
 
-  left: calc((var(--switch-height) - var(--knob-size)) / 2);
-  bottom: calc((var(--switch-height) - var(--knob-size)) / 2);
+  left: calc((var(--bigv-switch-height) - var(--bigv-knob-size)) / 2);
+  bottom: calc((var(--bigv-switch-height) - var(--bigv-knob-size)) / 2);
 
-  background-color: var(--knob-color);
+  background-color: var(--bigv-knob-color);
   border-radius: 50%;
-  transition: transform var(--animation-speed) ease-in-out;
+  transition: transform var(--bigv-animation-speed) ease-in-out;
 }
 
 .bigv-switch input:checked + .bigv-slider:before {
-  background-color: var(--active-knob-color);
+  background-color: var(--bigv-active-knob-color);
 }
 
 .bigv-switch input:checked + .bigv-slider:hover {
-  background-color: var(--active-color);
+  background-color: var(--bigv-active-color);
 }
 
 .bigv-switch input:checked + .bigv-slider {
-  background-color: var(--active-color);
+  background-color: var(--bigv-active-color);
 }
 
 .bigv-switch input:focus-visible + .bigv-slider {
   box-shadow:
     0 0 0 2px white,
-    0 0 0 4px var(--active-color);
+    0 0 0 4px var(--bigv-active-color);
 }
 
 .bigv-switch input:checked + .bigv-slider:before {
-  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+  transform: translateX(
+    calc(var(--bigv-switch-width) - var(--bigv-switch-height))
+  );
 }
 
 .bigv-buttons svg {
@@ -306,4 +548,20 @@
 
 .bigv-buttons div[role="button"]:hover {
   opacity: 0.5;
+}
+
+.bigv-buttons button:focus-visible,
+.bigv-control:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bigv-speed-button,
+  .bigv-player-dock,
+  .bigv-speed-button svg g,
+  .bigv-slider,
+  .bigv-slider::before {
+    transition: none !important;
+  }
 }

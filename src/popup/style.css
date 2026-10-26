@@ -109,7 +109,8 @@ input {
 }
 
 .controller p {
-  margin: 5px 0 0 15px;
+  margin: 5px 0 0;
+  margin-inline-start: 15px;
   color: #aaa;
   font-size: 11px;
   line-height: 1.45;
@@ -208,6 +209,7 @@ input {
 }
 
 .volume-options {
+  flex-shrink: 0;
   display: flex;
   gap: 3px;
   padding: 3px;
@@ -229,6 +231,7 @@ input {
 .volume-options label span {
   display: flex;
   min-width: 34px;
+  padding: 0 4px;
   height: 27px;
   align-items: center;
   justify-content: center;

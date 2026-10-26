@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Điều khiển phát, âm lượng, tốc độ và hình trong hình trên Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Tự động chuyển"
+  },
+  "downloadLabel": {
+    "message": "Tải xuống"
+  },
+  "videoControlsLabel": {
+    "message": "Điều khiển video"
+  },
+  "muteLabel": {
+    "message": "Tắt tiếng"
+  },
+  "unmuteLabel": {
+    "message": "Bật tiếng"
+  },
+  "volumeLabel": {
+    "message": "Âm lượng"
+  },
+  "playbackSpeedLabel": {
+    "message": "Tốc độ phát"
+  },
+  "videoProgressLabel": {
+    "message": "Tiến trình video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Mở toàn màn hình"
+  },
+  "exitFullscreenLabel": {
+    "message": "Thoát toàn màn hình"
+  },
+  "fullscreenLabel": {
+    "message": "Toàn màn hình"
+  },
+  "exitLabel": {
+    "message": "Thoát"
+  },
+  "openReelLabel": {
+    "message": "Mở video này trong Reels"
+  },
+  "pipLabel": {
+    "message": "Hình trong hình"
+  },
+  "exitPipLabel": {
+    "message": "Thoát hình trong hình"
+  },
+  "pipErrorLabel": {
+    "message": "Không thể mở PiP. Hãy phát video rồi thử lại."
+  },
+  "playLabel": {
+    "message": "Phát"
+  },
+  "pauseLabel": {
+    "message": "Tạm dừng"
+  },
+  "nextReelLabel": {
+    "message": "Reel tiếp theo"
+  },
+  "previousReelLabel": {
+    "message": "Reel trước"
+  },
+  "extensionEnabledLabel": {
+    "message": "Tiện ích đã bật"
+  },
+  "extensionPausedLabel": {
+    "message": "Tiện ích đã tạm dừng"
+  },
+  "extensionEnabledDescription": {
+    "message": "Điều khiển nâng cao đang hoạt động trên Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram dùng điều khiển mặc định."
+  },
+  "enableControllerLabel": {
+    "message": "Bật điều khiển"
+  },
+  "disableControllerLabel": {
+    "message": "Tắt điều khiển"
+  },
+  "settingsLabel": {
+    "message": "Cài đặt"
+  },
+  "clickToPauseLabel": {
+    "message": "Nhấp để tạm dừng"
+  },
+  "clickToPauseDescription": {
+    "message": "Tạm dừng video trên bảng tin thay vì mở Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Giảm âm lượng"
+  },
+  "volumeReductionDescription": {
+    "message": "Giảm âm lượng tối đa"
+  },
+  "offLabel": {
+    "message": "Tắt"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Tạm dừng tự động chuyển"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Khi đang mở bình luận của Reel"
+  },
+  "supportProjectLabel": {
+    "message": "Ủng hộ dự án"
+  },
+  "reportBugLabel": {
+    "message": "Báo lỗi"
+  },
+  "contactLabel": {
+    "message": "Liên hệ"
+  },
+  "openInstagramLabel": {
+    "message": "Mở Instagram"
+  },
+  "installedLabel": {
+    "message": "Cài đặt thành công"
+  },
+  "updatedLabel": {
+    "message": "Cập nhật thành công"
+  },
+  "backToTopLabel": {
+    "message": "Về đầu trang"
+  },
+  "readyLabel": {
+    "message": "Sẵn sàng sử dụng"
+  },
+  "noSetupLabel": {
+    "message": "Không cần thiết lập."
+  },
+  "setupDescription": {
+    "message": "Mở Instagram và phát video."
+  },
+  "openInstagramDescription": {
+    "message": "Truy cập trang có video được hỗ trợ."
+  },
+  "playVideoDescription": {
+    "message": "Điều khiển xuất hiện khi video bắt đầu."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Đổi tùy chọn"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Đổi tùy chọn qua biểu tượng tiện ích."
+  },
+  "builtByLabel": {
+    "message": "Phát triển bởi"
+  }
+}

@@ -76,4 +76,6 @@ Instagram is a registered trademark. This extension was developed independently 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Copyright (c) 2023-2026 Emir Kabal.
+
+This project is licensed under the GNU General Public License version 3.0 (GPL-3.0-only). See the [LICENSE](LICENSE) file for the full license text.

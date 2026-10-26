@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Kawal main balik, kelantangan, kelajuan dan gambar dalam gambar di Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Langkau automatik"
+  },
+  "downloadLabel": {
+    "message": "Muat turun"
+  },
+  "videoControlsLabel": {
+    "message": "Kawalan video"
+  },
+  "muteLabel": {
+    "message": "Bisukan"
+  },
+  "unmuteLabel": {
+    "message": "Nyahbisukan"
+  },
+  "volumeLabel": {
+    "message": "Kelantangan"
+  },
+  "playbackSpeedLabel": {
+    "message": "Kelajuan main balik"
+  },
+  "videoProgressLabel": {
+    "message": "Kemajuan video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Buka skrin penuh"
+  },
+  "exitFullscreenLabel": {
+    "message": "Keluar skrin penuh"
+  },
+  "fullscreenLabel": {
+    "message": "Skrin penuh"
+  },
+  "exitLabel": {
+    "message": "Keluar"
+  },
+  "openReelLabel": {
+    "message": "Buka video ini dalam Reels"
+  },
+  "pipLabel": {
+    "message": "Gambar dalam gambar"
+  },
+  "exitPipLabel": {
+    "message": "Tutup gambar dalam gambar"
+  },
+  "pipErrorLabel": {
+    "message": "PiP tidak dapat dibuka. Mainkan video dan cuba lagi."
+  },
+  "playLabel": {
+    "message": "Main"
+  },
+  "pauseLabel": {
+    "message": "Jeda"
+  },
+  "nextReelLabel": {
+    "message": "Reel seterusnya"
+  },
+  "previousReelLabel": {
+    "message": "Reel sebelumnya"
+  },
+  "extensionEnabledLabel": {
+    "message": "Sambungan didayakan"
+  },
+  "extensionPausedLabel": {
+    "message": "Sambungan dijeda"
+  },
+  "extensionEnabledDescription": {
+    "message": "Kawalan dipertingkat aktif di Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram menggunakan kawalan lalai."
+  },
+  "enableControllerLabel": {
+    "message": "Dayakan kawalan"
+  },
+  "disableControllerLabel": {
+    "message": "Lumpuhkan kawalan"
+  },
+  "settingsLabel": {
+    "message": "Tetapan"
+  },
+  "clickToPauseLabel": {
+    "message": "Klik untuk menjeda"
+  },
+  "clickToPauseDescription": {
+    "message": "Jeda video suapan dan bukannya membuka Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Pengurangan kelantangan"
+  },
+  "volumeReductionDescription": {
+    "message": "Kurangkan kelantangan maksimum"
+  },
+  "offLabel": {
+    "message": "Dimatikan"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Jeda langkau automatik"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Semasa komen Reel dibuka"
+  },
+  "supportProjectLabel": {
+    "message": "Sokong projek"
+  },
+  "reportBugLabel": {
+    "message": "Laporkan pepijat"
+  },
+  "contactLabel": {
+    "message": "Hubungi"
+  },
+  "openInstagramLabel": {
+    "message": "Buka Instagram"
+  },
+  "installedLabel": {
+    "message": "Berjaya dipasang"
+  },
+  "updatedLabel": {
+    "message": "Berjaya dikemas kini"
+  },
+  "backToTopLabel": {
+    "message": "Kembali ke atas"
+  },
+  "readyLabel": {
+    "message": "Sedia digunakan"
+  },
+  "noSetupLabel": {
+    "message": "Tiada persediaan diperlukan."
+  },
+  "setupDescription": {
+    "message": "Buka Instagram dan mainkan video."
+  },
+  "openInstagramDescription": {
+    "message": "Lawati halaman dengan video yang disokong."
+  },
+  "playVideoDescription": {
+    "message": "Kawalan muncul apabila video bermula."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Ubah keutamaan"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Ubah keutamaan melalui ikon sambungan."
+  },
+  "builtByLabel": {
+    "message": "Dibangunkan oleh"
+  }
+}

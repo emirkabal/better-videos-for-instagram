@@ -1,11 +1,12 @@
 import { createRoot, type Root } from "react-dom/client"
 
-import { Volume } from "~components/Controller"
-import { Variant } from "~modules/Injector"
+import PlaybackSpeed from "~components/Controller/Buttons/PlaybackSpeed"
+import PlayerControls from "~components/Controller/PlayerControls"
+import Volume from "~components/Controller/Volume"
+import { Variant, type InjectedProps } from "~modules/Injector"
 import {
   IG_STORIES_BUTTONS_CONTAINER_INDICATOR,
-  IG_STORIES_PROGRESS_BARS_INDICATOR,
-  IG_STORIES_VOLUME_INDICATOR
+  IG_STORIES_PROGRESS_BARS_INDICATOR
 } from "~utils/constants"
 import { getActiveInstagramVideo } from "~utils/video"
 
@@ -36,15 +37,14 @@ export default class Stories extends IntervalInjector {
     return getActiveInstagramVideo() === video
   }
 
-  public injected(): void {
+  public injected({ video }: InjectedProps): void {
+    this.cleanupStoryUi()
+    this.injectControls(video)
     const buttonsContainer = document.querySelector<HTMLElement>(
       IG_STORIES_BUTTONS_CONTAINER_INDICATOR
     )
 
     if (!buttonsContainer) return
-
-    this.cleanupStoryUi()
-    this.setTemporaryStyle(buttonsContainer, "position", "relative")
 
     const progressBars = document.querySelector<HTMLElement>(
       IG_STORIES_PROGRESS_BARS_INDICATOR
@@ -53,14 +53,6 @@ export default class Stories extends IntervalInjector {
     if (progressBars) {
       this.setTemporaryStyle(progressBars, "display", "none")
       this.injectViewIndicator(buttonsContainer, progressBars)
-    }
-
-    const volumeControl = Array.from(
-      document.querySelectorAll<HTMLElement>(IG_STORIES_VOLUME_INDICATOR)
-    ).find((element) => !element.closest("[bigv-inject]"))
-
-    if (volumeControl) {
-      this.injectVolume(buttonsContainer, volumeControl)
     }
   }
 
@@ -119,19 +111,26 @@ export default class Stories extends IntervalInjector {
     this.addedElements.push(viewIndicator)
   }
 
-  private injectVolume(
-    buttonsContainer: HTMLElement,
-    volumeControl: HTMLElement
-  ): void {
-    this.setTemporaryStyle(buttonsContainer, "padding-bottom", "64px")
-    this.setTemporaryStyle(volumeControl, "display", "none", "important")
+  private injectControls(video: HTMLVideoElement): void {
+    const videoContainer =
+      video.closest<HTMLElement>("div:has(>[data-instancekey])") ??
+      video.parentElement
+    if (!videoContainer) return
+    if (getComputedStyle(videoContainer).position === "static")
+      this.setTemporaryStyle(videoContainer, "position", "relative")
 
     const volumeButton = document.createElement("div")
     volumeButton.setAttribute("bigv-inject", "")
-    buttonsContainer.appendChild(volumeButton)
+    volumeButton.className = "bigv-story-controls-viewport"
+    videoContainer.appendChild(volumeButton)
 
     const root = createRoot(volumeButton)
-    root.render(<Volume variant={this.variant} />)
+    root.render(
+      <PlayerControls video={video} variant={this.variant}>
+        <Volume video={video} variant={this.variant} placement="dock" />
+        <PlaybackSpeed placement="dock" />
+      </PlayerControls>
+    )
 
     this.roots.push(root)
     this.addedElements.push(volumeButton)

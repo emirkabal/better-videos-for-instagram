@@ -33,6 +33,7 @@ export default class IntervalInjector extends Injector {
   }
 
   public injectMethod(): void {
+    this.pruneDisconnected()
     const videos = document.querySelectorAll("video")
     if (videos.length === 0) return
 

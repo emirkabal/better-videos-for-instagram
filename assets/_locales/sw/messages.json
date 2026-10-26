@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Dhibiti uchezaji, sauti, kasi na picha ndani ya picha kwenye Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Ruka kiotomatiki"
+  },
+  "downloadLabel": {
+    "message": "Pakua"
+  },
+  "videoControlsLabel": {
+    "message": "Vidhibiti vya video"
+  },
+  "muteLabel": {
+    "message": "Zima sauti"
+  },
+  "unmuteLabel": {
+    "message": "Washa sauti"
+  },
+  "volumeLabel": {
+    "message": "Kiwango cha sauti"
+  },
+  "playbackSpeedLabel": {
+    "message": "Kasi ya kucheza"
+  },
+  "videoProgressLabel": {
+    "message": "Maendeleo ya video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Fungua skrini nzima"
+  },
+  "exitFullscreenLabel": {
+    "message": "Ondoka skrini nzima"
+  },
+  "fullscreenLabel": {
+    "message": "Skrini nzima"
+  },
+  "exitLabel": {
+    "message": "Ondoka"
+  },
+  "openReelLabel": {
+    "message": "Fungua video hii kwenye Reels"
+  },
+  "pipLabel": {
+    "message": "Picha ndani ya picha"
+  },
+  "exitPipLabel": {
+    "message": "Funga picha ndani ya picha"
+  },
+  "pipErrorLabel": {
+    "message": "PiP haikufunguka. Cheza video kisha ujaribu tena."
+  },
+  "playLabel": {
+    "message": "Cheza"
+  },
+  "pauseLabel": {
+    "message": "Sitisha"
+  },
+  "nextReelLabel": {
+    "message": "Reel inayofuata"
+  },
+  "previousReelLabel": {
+    "message": "Reel iliyotangulia"
+  },
+  "extensionEnabledLabel": {
+    "message": "Kiendelezi kimewashwa"
+  },
+  "extensionPausedLabel": {
+    "message": "Kiendelezi kimesitishwa"
+  },
+  "extensionEnabledDescription": {
+    "message": "Vidhibiti vilivyoboreshwa vinafanya kazi kwenye Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram inatumia vidhibiti chaguomsingi."
+  },
+  "enableControllerLabel": {
+    "message": "Washa vidhibiti"
+  },
+  "disableControllerLabel": {
+    "message": "Zima vidhibiti"
+  },
+  "settingsLabel": {
+    "message": "Mipangilio"
+  },
+  "clickToPauseLabel": {
+    "message": "Bofya ili kusitisha"
+  },
+  "clickToPauseDescription": {
+    "message": "Sitisha video za mlisho badala ya kufungua Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Kupunguza sauti"
+  },
+  "volumeReductionDescription": {
+    "message": "Punguza sauti ya juu kabisa"
+  },
+  "offLabel": {
+    "message": "Imezimwa"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Sitisha kuruka kiotomatiki"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Maoni ya Reel yanapokuwa wazi"
+  },
+  "supportProjectLabel": {
+    "message": "Saidia mradi"
+  },
+  "reportBugLabel": {
+    "message": "Ripoti hitilafu"
+  },
+  "contactLabel": {
+    "message": "Wasiliana"
+  },
+  "openInstagramLabel": {
+    "message": "Fungua Instagram"
+  },
+  "installedLabel": {
+    "message": "Imesakinishwa"
+  },
+  "updatedLabel": {
+    "message": "Imesasishwa"
+  },
+  "backToTopLabel": {
+    "message": "Rudi juu"
+  },
+  "readyLabel": {
+    "message": "Tayari kutumika"
+  },
+  "noSetupLabel": {
+    "message": "Hakuna usanidi unaohitajika."
+  },
+  "setupDescription": {
+    "message": "Fungua Instagram na ucheze video."
+  },
+  "openInstagramDescription": {
+    "message": "Tembelea ukurasa wenye video inayotumika."
+  },
+  "playVideoDescription": {
+    "message": "Vidhibiti huonekana video inapoanza."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Badilisha mapendeleo"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Badilisha mapendeleo kupitia aikoni ya kiendelezi."
+  },
+  "builtByLabel": {
+    "message": "Imetengenezwa na"
+  }
+}

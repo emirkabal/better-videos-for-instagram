@@ -3,13 +3,153 @@
     "message": "Καλύτερα βίντεο για το Instagram: Αναπαραγωγή & Ένταση"
   },
   "appDescription": {
-    "message": "Ελέγξτε εύκολα την αναπαραγωγή και την ένταση οποιουδήποτε βίντεο του Instagram."
+    "message": "Ελέγξτε αναπαραγωγή, ένταση, ταχύτητα και εικόνα σε εικόνα στο Instagram."
   },
-
   "autoskipLabel": {
-    "message": "Αυτόματη παράλειψη"
+    "message": "Αυτόματη μετάβαση"
   },
   "downloadLabel": {
     "message": "Λήψη"
+  },
+  "videoControlsLabel": {
+    "message": "Στοιχεία ελέγχου βίντεο"
+  },
+  "muteLabel": {
+    "message": "Σίγαση"
+  },
+  "unmuteLabel": {
+    "message": "Ενεργοποίηση ήχου"
+  },
+  "volumeLabel": {
+    "message": "Ένταση"
+  },
+  "playbackSpeedLabel": {
+    "message": "Ταχύτητα αναπαραγωγής"
+  },
+  "videoProgressLabel": {
+    "message": "Πρόοδος βίντεο"
+  },
+  "enterFullscreenLabel": {
+    "message": "Πλήρης οθόνη"
+  },
+  "exitFullscreenLabel": {
+    "message": "Έξοδος από πλήρη οθόνη"
+  },
+  "fullscreenLabel": {
+    "message": "Πλήρης οθόνη"
+  },
+  "exitLabel": {
+    "message": "Έξοδος"
+  },
+  "openReelLabel": {
+    "message": "Άνοιγμα αυτού του βίντεο στα Reels"
+  },
+  "pipLabel": {
+    "message": "Εικόνα σε εικόνα"
+  },
+  "exitPipLabel": {
+    "message": "Κλείσιμο εικόνας σε εικόνα"
+  },
+  "pipErrorLabel": {
+    "message": "Δεν ήταν δυνατό το άνοιγμα PiP. Παίξτε το βίντεο και δοκιμάστε ξανά."
+  },
+  "playLabel": {
+    "message": "Αναπαραγωγή"
+  },
+  "pauseLabel": {
+    "message": "Παύση"
+  },
+  "nextReelLabel": {
+    "message": "Επόμενο Reel"
+  },
+  "previousReelLabel": {
+    "message": "Προηγούμενο Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Η επέκταση είναι ενεργή"
+  },
+  "extensionPausedLabel": {
+    "message": "Η επέκταση είναι σε παύση"
+  },
+  "extensionEnabledDescription": {
+    "message": "Τα βελτιωμένα στοιχεία ελέγχου είναι ενεργά στο Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Το Instagram χρησιμοποιεί τα προεπιλεγμένα στοιχεία ελέγχου."
+  },
+  "enableControllerLabel": {
+    "message": "Ενεργοποίηση ελέγχου"
+  },
+  "disableControllerLabel": {
+    "message": "Απενεργοποίηση ελέγχου"
+  },
+  "settingsLabel": {
+    "message": "Ρυθμίσεις"
+  },
+  "clickToPauseLabel": {
+    "message": "Κλικ για παύση"
+  },
+  "clickToPauseDescription": {
+    "message": "Παύση βίντεο στη ροή αντί για άνοιγμα Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Μείωση έντασης"
+  },
+  "volumeReductionDescription": {
+    "message": "Μείωση της μέγιστης έντασης"
+  },
+  "offLabel": {
+    "message": "Ανενεργό"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Παύση αυτόματης μετάβασης"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Όταν είναι ανοιχτά τα σχόλια του Reel"
+  },
+  "supportProjectLabel": {
+    "message": "Υποστήριξη του έργου"
+  },
+  "reportBugLabel": {
+    "message": "Αναφορά σφάλματος"
+  },
+  "contactLabel": {
+    "message": "Επικοινωνία"
+  },
+  "openInstagramLabel": {
+    "message": "Άνοιγμα Instagram"
+  },
+  "installedLabel": {
+    "message": "Επιτυχής εγκατάσταση"
+  },
+  "updatedLabel": {
+    "message": "Επιτυχής ενημέρωση"
+  },
+  "backToTopLabel": {
+    "message": "Επιστροφή στην κορυφή"
+  },
+  "readyLabel": {
+    "message": "Έτοιμο για χρήση"
+  },
+  "noSetupLabel": {
+    "message": "Δεν απαιτείται ρύθμιση."
+  },
+  "setupDescription": {
+    "message": "Ανοίξτε το Instagram και παίξτε ένα βίντεο."
+  },
+  "openInstagramDescription": {
+    "message": "Επισκεφτείτε σελίδα με υποστηριζόμενο βίντεο."
+  },
+  "playVideoDescription": {
+    "message": "Τα στοιχεία ελέγχου εμφανίζονται όταν ξεκινά το βίντεο."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Αλλαγή προτιμήσεων"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Αλλάξτε προτιμήσεις από το εικονίδιο της επέκτασης."
+  },
+  "builtByLabel": {
+    "message": "Δημιουργήθηκε από"
   }
 }
