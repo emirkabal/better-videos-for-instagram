@@ -21,7 +21,7 @@ type ButtonInjection = {
 }
 
 export default class Reels extends IntervalInjector {
-  private commentsInterval: ReturnType<typeof setInterval> | null = null
+  private commentsObserver: MutationObserver | null = null
   private pauseOnComments = true
   private buttonInjections: ButtonInjection[] = []
 
@@ -85,9 +85,9 @@ export default class Reels extends IntervalInjector {
   public beforeDelete(): void {
     document.documentElement.removeAttribute("data-bigv-reels-active")
 
-    if (this.commentsInterval) {
-      clearInterval(this.commentsInterval)
-      this.commentsInterval = null
+    if (this.commentsObserver) {
+      this.commentsObserver.disconnect()
+      this.commentsObserver = null
     }
 
     for (const { root, container } of this.buttonInjections) {
@@ -145,17 +145,23 @@ export default class Reels extends IntervalInjector {
       controller: injection.controller
     })
 
-    if (this.commentsInterval) clearInterval(this.commentsInterval)
-
-    this.commentsInterval = setInterval(() => {
-      if (!this.pauseOnComments) return
-
-      const commentsDialog = document.querySelector("div[role='dialog']")
-      if (commentsDialog) {
-        localStorage.setItem("bigv-comments-opened", "1")
-      } else {
-        localStorage.removeItem("bigv-comments-opened")
+    if (!this.commentsObserver) {
+      const syncCommentsState = () => {
+        if (this.pauseOnComments && document.querySelector('[role="dialog"]')) {
+          localStorage.setItem("bigv-comments-opened", "1")
+        } else {
+          localStorage.removeItem("bigv-comments-opened")
+        }
       }
-    }, 750)
+
+      this.commentsObserver = new MutationObserver(syncCommentsState)
+      this.commentsObserver.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["role", "aria-modal"]
+      })
+      syncCommentsState()
+    }
   }
 }

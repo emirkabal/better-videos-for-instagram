@@ -3,7 +3,8 @@ import {
   useEffect,
   useRef,
   useState,
-  type MouseEvent as ReactMouseEvent
+  type KeyboardEvent as ReactKeyboardEvent,
+  type PointerEvent as ReactPointerEvent
 } from "react"
 
 import "./style.css"
@@ -178,50 +179,80 @@ export default function ProgressBarHorizontal({
   useEffect(() => {
     if (!isDragging) return
 
-    const handleMouseMove = (event: MouseEvent) => {
+    const handlePointerMove = (event: PointerEvent) => {
       updatePointer(event.clientX, true)
     }
 
-    window.addEventListener("mousemove", handleMouseMove)
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [isDragging, updatePointer])
-
-  useEffect(() => {
     const stopDragging = () => {
       setDragging(false)
       setShowTooltip(false)
     }
 
-    window.addEventListener("mouseup", stopDragging)
-    window.addEventListener("mouseleave", stopDragging)
+    window.addEventListener("pointermove", handlePointerMove)
+    window.addEventListener("pointerup", stopDragging)
+    window.addEventListener("pointercancel", stopDragging)
 
     return () => {
-      window.removeEventListener("mouseup", stopDragging)
-      window.removeEventListener("mouseleave", stopDragging)
+      window.removeEventListener("pointermove", handlePointerMove)
+      window.removeEventListener("pointerup", stopDragging)
+      window.removeEventListener("pointercancel", stopDragging)
     }
-  }, [])
+  }, [isDragging, updatePointer])
 
   useEffect(() => {
     onDragging?.(isDragging)
   }, [isDragging, onDragging])
 
-  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     setShowTooltip(true)
     if (showVideoPreview) setPreviewRequested(true)
     updatePointer(event.clientX, false)
   }
 
-  const handleMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return
     event.preventDefault()
     event.stopPropagation()
 
+    event.currentTarget.setPointerCapture(event.pointerId)
     setDragging(true)
     setShowTooltip(true)
     if (showVideoPreview) setPreviewRequested(true)
     updatePointer(event.clientX, true)
+  }
+
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (!duration || !Number.isFinite(duration)) return
+
+    const step = event.shiftKey ? 10 : 5
+    let nextProgress: number
+
+    switch (event.key) {
+      case "ArrowLeft":
+        nextProgress = progressBar - (step / duration) * 100
+        break
+      case "ArrowRight":
+        nextProgress = progressBar + (step / duration) * 100
+        break
+      case "Home":
+        nextProgress = 0
+        break
+      case "End":
+        nextProgress = 100
+        break
+      default:
+        return
+    }
+
+    event.preventDefault()
+    event.stopPropagation()
+    nextProgress = Math.min(Math.max(nextProgress, 0), 100)
+    setDisplayedProgress(nextProgress)
+    onProgress?.(nextProgress)
+    setMousePosition(nextProgress / 100)
+    const width = dragareaRef.current?.clientWidth ?? 0
+    setTooltipPosition((width * nextProgress) / 100)
+    setShowTooltip(true)
   }
 
   const tooltipVisible = showTooltip || isDragging
@@ -239,13 +270,25 @@ export default function ProgressBarHorizontal({
         <div
           ref={dragareaRef}
           className="dragarea"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={() => {
-            if (!isDragging) {
+          role="slider"
+          tabIndex={0}
+          aria-label="Video progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progressBar)}
+          aria-valuetext={`${formatTime((progressBar / 100) * duration)} of ${formatTime(duration)}`}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setShowTooltip(true)}
+          onBlur={() => {
+            if (!isDragging) setShowTooltip(false)
+          }}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={() => {
+            if (!isDragging && document.activeElement !== dragareaRef.current) {
               setShowTooltip(false)
             }
           }}
-          onMouseDown={handleMouseDown}
+          onPointerDown={handlePointerDown}
         />
 
         <div

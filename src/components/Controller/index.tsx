@@ -7,7 +7,6 @@ import { useLocalStorage } from "usehooks-ts"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import { Variant, type DownloadableMedia } from "~modules/Injector"
-import { IG_REELS_SNAP } from "~utils/constants"
 import { getActiveInstagramVideo, isInstagramVideo } from "~utils/video"
 
 // import DownloadButton from "./Buttons/Download"
@@ -146,24 +145,67 @@ export default function Controller({
   }, [playbackSpeed])
 
   const ended = useCallback(() => {
-    const autoSkip = localStorage.getItem("bigv-autoskip")
+    let autoSkip = false
+    try {
+      autoSkip = JSON.parse(localStorage.getItem("bigv-autoskip") ?? "false")
+    } catch {
+      autoSkip = false
+    }
+
     if (
-      autoSkip === "true" &&
-      pauseOnComments &&
-      localStorage.getItem("bigv-comments-opened") !== "1" &&
+      autoSkip === true &&
       document.location.pathname.startsWith("/reels")
     ) {
-      const snap = document.querySelector(IG_REELS_SNAP)
-      if (snap) {
-        if (
-          document.fullscreenElement?.classList.contains(
-            "bigv-reels-fullscreen-target"
-          )
-        ) {
-          snap.scrollBy({ top: snap.clientHeight, behavior: "smooth" })
+      if (
+        pauseOnComments &&
+        document.querySelector('[role="dialog"]')
+      ) return
+
+      if (getActiveInstagramVideo() !== videoRef.current) return
+
+      const video = videoRef.current
+      let scrollContainer: HTMLElement | null = video.parentElement
+      while (scrollContainer && scrollContainer !== document.body) {
+        const { overflowY } = getComputedStyle(scrollContainer)
+        if (/(auto|scroll|overlay)/.test(overflowY)) break
+        scrollContainer = scrollContainer.parentElement
+      }
+
+      const fullscreenContainer = document.fullscreenElement?.querySelector<HTMLElement>(
+        '[role="main"] > :nth-child(2)'
+      )
+      const container = fullscreenContainer ?? scrollContainer
+
+      if (container) {
+        const currentTop = video.getBoundingClientRect().top
+        const candidates = Array.from(document.querySelectorAll<HTMLVideoElement>("video"))
+          .filter((candidate) => candidate !== video && isInstagramVideo(candidate))
+          .map((candidate) => ({
+            video: candidate,
+            distance: candidate.getBoundingClientRect().top - currentTop
+          }))
+          .filter(({ distance }) => distance > 1)
+          .sort((a, b) => a.distance - b.distance)
+
+        if (candidates[0]) {
+          candidates[0].video.scrollIntoView({ behavior: "smooth", block: "start" })
         } else {
-          snap.scrollBy(0, 1000)
+          container.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key: "ArrowDown",
+              bubbles: true,
+              cancelable: true
+            })
+          )
         }
+      } else {
+        window.dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key: "ArrowDown",
+            bubbles: true,
+            cancelable: true
+          })
+        )
       }
     }
   }, [pauseOnComments])
