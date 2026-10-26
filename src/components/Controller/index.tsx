@@ -146,26 +146,25 @@ export default function Controller({
   }, [playbackSpeed])
 
   const ended = useCallback(() => {
-    const autoSkip = localStorage.getItem("bigv-autoskip")
     if (
-      autoSkip === "true" &&
-      pauseOnComments &&
-      localStorage.getItem("bigv-comments-opened") !== "1" &&
-      document.location.pathname.startsWith("/reels")
-    ) {
-      const snap = document.querySelector(IG_REELS_SNAP)
-      if (snap) {
-        if (
-          document.fullscreenElement?.classList.contains(
-            "bigv-reels-fullscreen-target"
-          )
-        ) {
-          snap.scrollBy({ top: snap.clientHeight, behavior: "smooth" })
-        } else {
-          snap.scrollBy(0, 1000)
-        }
-      }
-    }
+      !location.pathname.startsWith("/reels") ||
+      localStorage.getItem("bigv-autoskip") !== "true" ||
+      (pauseOnComments && localStorage.getItem("bigv-comments-opened") === "1")
+    )
+      return
+
+    const snap = document.querySelector<HTMLElement>(IG_REELS_SNAP)
+    if (!snap) return
+
+    const isFullscreen = document.fullscreenElement?.classList.contains(
+      "bigv-reels-fullscreen-target"
+    )
+
+    snap.scrollBy(
+      isFullscreen
+        ? { top: snap.clientHeight, behavior: "smooth" }
+        : { top: 1000 }
+    )
   }, [pauseOnComments])
 
   useEffect(() => {
@@ -177,7 +176,7 @@ export default function Controller({
     videoElement.addEventListener("play", play)
     videoElement.addEventListener("ended", ended)
     videoElement.addEventListener("volumechange", updateAudio)
-    videoElement.addEventListener("seeked", updateAudio)
+    // videoElement.addEventListener("seeked", updateAudio)
     videoElement.addEventListener("ratechange", ratechange)
 
     return () => {
@@ -187,7 +186,7 @@ export default function Controller({
       videoElement.removeEventListener("play", play)
       videoElement.removeEventListener("ended", ended)
       videoElement.removeEventListener("volumechange", updateAudio)
-      videoElement.removeEventListener("seeked", updateAudio)
+      // videoElement.removeEventListener("seeked", updateAudio)
       videoElement.removeEventListener("ratechange", ratechange)
     }
   }, [timeUpdate, metadataLoaded, play, ended, updateAudio, ratechange])
