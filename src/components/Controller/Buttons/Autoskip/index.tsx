@@ -1,24 +1,35 @@
 import { useId } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
-export default function Autoskip() {
+import { t } from "~utils/i18n"
+
+export default function Autoskip({
+  placement = "controls"
+}: {
+  placement?: "controls" | "dock"
+}) {
   const id = useId()
   const [autoSkip, setAutoSkip] = useLocalStorage("bigv-autoskip", false)
 
   return (
-    <div>
-      <label className="bigv-switch">
+    <div
+      className={`bigv-control bigv-autoskip ${placement === "dock" ? "in-dock" : ""}`}
+      onClick={(event) => event.stopPropagation()}>
+      <label className="bigv-switch" title={t("autoskipLabel")}>
         <input
           id={id}
           type="checkbox"
+          aria-label={t("autoskipLabel")}
           checked={autoSkip}
-          onChange={() => setAutoSkip(!autoSkip)}
+          onChange={(event) => setAutoSkip(event.target.checked)}
         />
         <span className="bigv-slider"></span>
       </label>
-      <label htmlFor={id} className="bigv-switch-text">
-        {chrome.i18n.getMessage("autoskipLabel")}
-      </label>
+      {placement === "controls" && (
+        <label htmlFor={id} className="bigv-switch-text">
+          {t("autoskipLabel")}
+        </label>
+      )}
     </div>
   )
 }

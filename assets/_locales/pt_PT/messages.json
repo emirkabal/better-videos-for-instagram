@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Controle a reprodução, o volume, a velocidade e o picture-in-picture no Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Avanço automático"
+  },
+  "downloadLabel": {
+    "message": "Transferir"
+  },
+  "videoControlsLabel": {
+    "message": "Controlos de vídeo"
+  },
+  "muteLabel": {
+    "message": "Silenciar"
+  },
+  "unmuteLabel": {
+    "message": "Ativar som"
+  },
+  "volumeLabel": {
+    "message": "Volume"
+  },
+  "playbackSpeedLabel": {
+    "message": "Velocidade de reprodução"
+  },
+  "videoProgressLabel": {
+    "message": "Progresso do vídeo"
+  },
+  "enterFullscreenLabel": {
+    "message": "Abrir ecrã inteiro"
+  },
+  "exitFullscreenLabel": {
+    "message": "Sair do ecrã inteiro"
+  },
+  "fullscreenLabel": {
+    "message": "Ecrã inteiro"
+  },
+  "exitLabel": {
+    "message": "Sair"
+  },
+  "openReelLabel": {
+    "message": "Abrir este vídeo nos Reels"
+  },
+  "pipLabel": {
+    "message": "Picture-in-picture"
+  },
+  "exitPipLabel": {
+    "message": "Sair do picture-in-picture"
+  },
+  "pipErrorLabel": {
+    "message": "Não foi possível abrir o PiP. Reproduza o vídeo e tente novamente."
+  },
+  "playLabel": {
+    "message": "Reproduzir"
+  },
+  "pauseLabel": {
+    "message": "Pausar"
+  },
+  "nextReelLabel": {
+    "message": "Próximo Reel"
+  },
+  "previousReelLabel": {
+    "message": "Reel anterior"
+  },
+  "extensionEnabledLabel": {
+    "message": "Extensão ativada"
+  },
+  "extensionPausedLabel": {
+    "message": "Extensão em pausa"
+  },
+  "extensionEnabledDescription": {
+    "message": "Os controlos melhorados estão ativos no Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "O Instagram utiliza os controlos predefinidos."
+  },
+  "enableControllerLabel": {
+    "message": "Ativar controlos"
+  },
+  "disableControllerLabel": {
+    "message": "Desativar controlos"
+  },
+  "settingsLabel": {
+    "message": "Definições"
+  },
+  "clickToPauseLabel": {
+    "message": "Clicar para pausar"
+  },
+  "clickToPauseDescription": {
+    "message": "Pausar vídeos do feed em vez de abrir os Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Redução de volume"
+  },
+  "volumeReductionDescription": {
+    "message": "Reduzir o volume máximo"
+  },
+  "offLabel": {
+    "message": "Desativado"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pausar avanço automático"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Enquanto os comentários do Reel estiverem abertos"
+  },
+  "supportProjectLabel": {
+    "message": "Apoiar o projeto"
+  },
+  "reportBugLabel": {
+    "message": "Comunicar um erro"
+  },
+  "contactLabel": {
+    "message": "Contacto"
+  },
+  "openInstagramLabel": {
+    "message": "Abrir Instagram"
+  },
+  "installedLabel": {
+    "message": "Instalação concluída"
+  },
+  "updatedLabel": {
+    "message": "Atualização concluída"
+  },
+  "backToTopLabel": {
+    "message": "Voltar ao topo"
+  },
+  "readyLabel": {
+    "message": "Pronto a utilizar"
+  },
+  "noSetupLabel": {
+    "message": "Não requer configuração."
+  },
+  "setupDescription": {
+    "message": "Abra o Instagram e reproduza um vídeo."
+  },
+  "openInstagramDescription": {
+    "message": "Visite uma página com um vídeo compatível."
+  },
+  "playVideoDescription": {
+    "message": "Os controlos aparecem quando o vídeo começa."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Ajustar preferências"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Altere as preferências através do ícone da extensão."
+  },
+  "builtByLabel": {
+    "message": "Criado por"
+  }
+}

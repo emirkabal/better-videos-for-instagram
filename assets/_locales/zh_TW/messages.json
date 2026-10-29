@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "控制 Instagram 影片播放、音量、速度和子母畫面。"
+  },
+  "autoskipLabel": {
+    "message": "自動略過"
+  },
+  "downloadLabel": {
+    "message": "下載"
+  },
+  "videoControlsLabel": {
+    "message": "影片控制"
+  },
+  "muteLabel": {
+    "message": "靜音"
+  },
+  "unmuteLabel": {
+    "message": "取消靜音"
+  },
+  "volumeLabel": {
+    "message": "音量"
+  },
+  "playbackSpeedLabel": {
+    "message": "播放速度"
+  },
+  "videoProgressLabel": {
+    "message": "影片進度"
+  },
+  "enterFullscreenLabel": {
+    "message": "進入全螢幕"
+  },
+  "exitFullscreenLabel": {
+    "message": "離開全螢幕"
+  },
+  "fullscreenLabel": {
+    "message": "全螢幕"
+  },
+  "exitLabel": {
+    "message": "離開"
+  },
+  "openReelLabel": {
+    "message": "在 Reels 中開啟這部影片"
+  },
+  "pipLabel": {
+    "message": "子母畫面"
+  },
+  "exitPipLabel": {
+    "message": "關閉子母畫面"
+  },
+  "pipErrorLabel": {
+    "message": "無法開啟子母畫面。請播放影片後再試一次。"
+  },
+  "playLabel": {
+    "message": "播放"
+  },
+  "pauseLabel": {
+    "message": "暫停"
+  },
+  "nextReelLabel": {
+    "message": "下一個 Reel"
+  },
+  "previousReelLabel": {
+    "message": "上一個 Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "擴充功能已啟用"
+  },
+  "extensionPausedLabel": {
+    "message": "擴充功能已暫停"
+  },
+  "extensionEnabledDescription": {
+    "message": "增強控制已在 Instagram 上啟用。"
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram 使用預設控制。"
+  },
+  "enableControllerLabel": {
+    "message": "啟用控制"
+  },
+  "disableControllerLabel": {
+    "message": "停用控制"
+  },
+  "settingsLabel": {
+    "message": "設定"
+  },
+  "clickToPauseLabel": {
+    "message": "點擊暫停"
+  },
+  "clickToPauseDescription": {
+    "message": "暫停動態中的影片，而非開啟 Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "降低音量"
+  },
+  "volumeReductionDescription": {
+    "message": "降低最高音量"
+  },
+  "offLabel": {
+    "message": "關閉"
+  },
+  "pauseAutoskipLabel": {
+    "message": "暫停自動略過"
+  },
+  "pauseAutoskipDescription": {
+    "message": "開啟 Reel 留言時"
+  },
+  "supportProjectLabel": {
+    "message": "支持本專案"
+  },
+  "reportBugLabel": {
+    "message": "回報問題"
+  },
+  "contactLabel": {
+    "message": "聯絡"
+  },
+  "openInstagramLabel": {
+    "message": "開啟 Instagram"
+  },
+  "installedLabel": {
+    "message": "安裝成功"
+  },
+  "updatedLabel": {
+    "message": "更新成功"
+  },
+  "backToTopLabel": {
+    "message": "返回頂端"
+  },
+  "readyLabel": {
+    "message": "準備就緒"
+  },
+  "noSetupLabel": {
+    "message": "無須設定。"
+  },
+  "setupDescription": {
+    "message": "開啟 Instagram 並播放影片即可使用。"
+  },
+  "openInstagramDescription": {
+    "message": "造訪含有支援影片的頁面。"
+  },
+  "playVideoDescription": {
+    "message": "影片開始播放時顯示控制。"
+  },
+  "adjustPreferencesLabel": {
+    "message": "調整偏好設定"
+  },
+  "adjustPreferencesDescription": {
+    "message": "透過擴充功能圖示變更偏好設定。"
+  },
+  "builtByLabel": {
+    "message": "開發者"
+  }
+}

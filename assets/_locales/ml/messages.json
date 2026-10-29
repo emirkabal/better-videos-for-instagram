@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Instagram പ്ലേബാക്ക്, ശബ്ദം, വേഗം, പിക്ചർ-ഇൻ-പിക്ചർ എന്നിവ നിയന്ത്രിക്കുക."
+  },
+  "autoskipLabel": {
+    "message": "സ്വയം അടുത്തതിലേക്ക്"
+  },
+  "downloadLabel": {
+    "message": "ഡൗൺലോഡ്"
+  },
+  "videoControlsLabel": {
+    "message": "വീഡിയോ നിയന്ത്രണങ്ങൾ"
+  },
+  "muteLabel": {
+    "message": "ശബ്ദം നിർത്തുക"
+  },
+  "unmuteLabel": {
+    "message": "ശബ്ദം ഓണാക്കുക"
+  },
+  "volumeLabel": {
+    "message": "ശബ്ദനില"
+  },
+  "playbackSpeedLabel": {
+    "message": "പ്ലേബാക്ക് വേഗം"
+  },
+  "videoProgressLabel": {
+    "message": "വീഡിയോ പുരോഗതി"
+  },
+  "enterFullscreenLabel": {
+    "message": "പൂർണ്ണ സ്ക്രീൻ തുറക്കുക"
+  },
+  "exitFullscreenLabel": {
+    "message": "പൂർണ്ണ സ്ക്രീനിൽ നിന്ന് പുറത്തുകടക്കുക"
+  },
+  "fullscreenLabel": {
+    "message": "പൂർണ്ണ സ്ക്രീൻ"
+  },
+  "exitLabel": {
+    "message": "പുറത്തുകടക്കുക"
+  },
+  "openReelLabel": {
+    "message": "ഈ വീഡിയോ Reels-ൽ തുറക്കുക"
+  },
+  "pipLabel": {
+    "message": "പിക്ചർ-ഇൻ-പിക്ചർ"
+  },
+  "exitPipLabel": {
+    "message": "പിക്ചർ-ഇൻ-പിക്ചർ അടയ്ക്കുക"
+  },
+  "pipErrorLabel": {
+    "message": "PiP തുറക്കാനായില്ല. വീഡിയോ പ്ലേ ചെയ്ത് വീണ്ടും ശ്രമിക്കുക."
+  },
+  "playLabel": {
+    "message": "പ്ലേ ചെയ്യുക"
+  },
+  "pauseLabel": {
+    "message": "താൽക്കാലികമായി നിർത്തുക"
+  },
+  "nextReelLabel": {
+    "message": "അടുത്ത Reel"
+  },
+  "previousReelLabel": {
+    "message": "മുമ്പത്തെ റീൽ"
+  },
+  "extensionEnabledLabel": {
+    "message": "എക്സ്റ്റൻഷൻ സജീവമാണ്"
+  },
+  "extensionPausedLabel": {
+    "message": "എക്സ്റ്റൻഷൻ നിർത്തിയിരിക്കുന്നു"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagram-ൽ മെച്ചപ്പെട്ട നിയന്ത്രണങ്ങൾ സജീവമാണ്."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram സാധാരണ നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കുന്നു."
+  },
+  "enableControllerLabel": {
+    "message": "നിയന്ത്രണങ്ങൾ സജീവമാക്കുക"
+  },
+  "disableControllerLabel": {
+    "message": "നിയന്ത്രണങ്ങൾ നിർജ്ജീവമാക്കുക"
+  },
+  "settingsLabel": {
+    "message": "ക്രമീകരണങ്ങൾ"
+  },
+  "clickToPauseLabel": {
+    "message": "ക്ലിക്ക് ചെയ്ത് നിർത്തുക"
+  },
+  "clickToPauseDescription": {
+    "message": "Reels തുറക്കുന്നതിനു പകരം ഫീഡ് വീഡിയോകൾ നിർത്തുക"
+  },
+  "volumeReductionLabel": {
+    "message": "ശബ്ദം കുറയ്ക്കൽ"
+  },
+  "volumeReductionDescription": {
+    "message": "പരമാവധി ശബ്ദം കുറയ്ക്കുക"
+  },
+  "offLabel": {
+    "message": "ഓഫ്"
+  },
+  "pauseAutoskipLabel": {
+    "message": "സ്വയമേവ അടുത്തതിലേക്ക് പോകുന്നത് നിർത്തുക"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reel അഭിപ്രായങ്ങൾ തുറന്നിരിക്കുമ്പോൾ"
+  },
+  "supportProjectLabel": {
+    "message": "പദ്ധതിയെ പിന്തുണയ്ക്കുക"
+  },
+  "reportBugLabel": {
+    "message": "പിശക് റിപ്പോർട്ട് ചെയ്യുക"
+  },
+  "contactLabel": {
+    "message": "ബന്ധപ്പെടുക"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram തുറക്കുക"
+  },
+  "installedLabel": {
+    "message": "ഇൻസ്റ്റാൾ ചെയ്തു"
+  },
+  "updatedLabel": {
+    "message": "അപ്ഡേറ്റ് ചെയ്തു"
+  },
+  "backToTopLabel": {
+    "message": "മുകളിലേക്ക് മടങ്ങുക"
+  },
+  "readyLabel": {
+    "message": "ഉപയോഗിക്കാൻ തയ്യാറാണ്"
+  },
+  "noSetupLabel": {
+    "message": "സജ്ജീകരണം ആവശ്യമില്ല."
+  },
+  "setupDescription": {
+    "message": "Instagram തുറന്ന് വീഡിയോ പ്ലേ ചെയ്യുക."
+  },
+  "openInstagramDescription": {
+    "message": "പിന്തുണയ്ക്കുന്ന വീഡിയോയുള്ള പേജ് തുറക്കുക."
+  },
+  "playVideoDescription": {
+    "message": "വീഡിയോ തുടങ്ങുമ്പോൾ നിയന്ത്രണങ്ങൾ കാണാം."
+  },
+  "adjustPreferencesLabel": {
+    "message": "മുൻഗണനകൾ മാറ്റുക"
+  },
+  "adjustPreferencesDescription": {
+    "message": "എക്സ്റ്റൻഷൻ ഐക്കണിലൂടെ മുൻഗണനകൾ മാറ്റുക."
+  },
+  "builtByLabel": {
+    "message": "നിർമ്മിച്ചത്"
+  }
+}

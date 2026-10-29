@@ -3,13 +3,153 @@
     "message": "Betere video's voor Instagram: Afspelen en volume"
   },
   "appDescription": {
-    "message": "Regel eenvoudig het afspelen en het volume van Instagram-video's."
+    "message": "Bedien afspelen, volume, snelheid en beeld-in-beeld op Instagram."
   },
-
   "autoskipLabel": {
-    "message": "Auto-skip"
+    "message": "Automatisch doorgaan"
   },
   "downloadLabel": {
     "message": "Downloaden"
+  },
+  "videoControlsLabel": {
+    "message": "Videobediening"
+  },
+  "muteLabel": {
+    "message": "Dempen"
+  },
+  "unmuteLabel": {
+    "message": "Geluid aan"
+  },
+  "volumeLabel": {
+    "message": "Volume"
+  },
+  "playbackSpeedLabel": {
+    "message": "Afspeelsnelheid"
+  },
+  "videoProgressLabel": {
+    "message": "Videovoortgang"
+  },
+  "enterFullscreenLabel": {
+    "message": "Volledig scherm openen"
+  },
+  "exitFullscreenLabel": {
+    "message": "Volledig scherm verlaten"
+  },
+  "fullscreenLabel": {
+    "message": "Volledig scherm"
+  },
+  "exitLabel": {
+    "message": "Sluiten"
+  },
+  "openReelLabel": {
+    "message": "Deze video in Reels openen"
+  },
+  "pipLabel": {
+    "message": "Beeld-in-beeld"
+  },
+  "exitPipLabel": {
+    "message": "Beeld-in-beeld sluiten"
+  },
+  "pipErrorLabel": {
+    "message": "PiP kon niet worden geopend. Speel de video af en probeer opnieuw."
+  },
+  "playLabel": {
+    "message": "Afspelen"
+  },
+  "pauseLabel": {
+    "message": "Pauzeren"
+  },
+  "nextReelLabel": {
+    "message": "Volgende Reel"
+  },
+  "previousReelLabel": {
+    "message": "Vorige Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Extensie ingeschakeld"
+  },
+  "extensionPausedLabel": {
+    "message": "Extensie gepauzeerd"
+  },
+  "extensionEnabledDescription": {
+    "message": "Verbeterde bediening is actief op Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram gebruikt de standaardbediening."
+  },
+  "enableControllerLabel": {
+    "message": "Bediening inschakelen"
+  },
+  "disableControllerLabel": {
+    "message": "Bediening uitschakelen"
+  },
+  "settingsLabel": {
+    "message": "Instellingen"
+  },
+  "clickToPauseLabel": {
+    "message": "Klikken om te pauzeren"
+  },
+  "clickToPauseDescription": {
+    "message": "Feedvideo’s pauzeren in plaats van Reels openen"
+  },
+  "volumeReductionLabel": {
+    "message": "Volumevermindering"
+  },
+  "volumeReductionDescription": {
+    "message": "Het maximale volume verlagen"
+  },
+  "offLabel": {
+    "message": "Uit"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Automatisch doorgaan pauzeren"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Als Reel-reacties geopend zijn"
+  },
+  "supportProjectLabel": {
+    "message": "Het project steunen"
+  },
+  "reportBugLabel": {
+    "message": "Een fout melden"
+  },
+  "contactLabel": {
+    "message": "Contact"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram openen"
+  },
+  "installedLabel": {
+    "message": "Installatie voltooid"
+  },
+  "updatedLabel": {
+    "message": "Bijwerken voltooid"
+  },
+  "backToTopLabel": {
+    "message": "Naar boven"
+  },
+  "readyLabel": {
+    "message": "Klaar voor gebruik"
+  },
+  "noSetupLabel": {
+    "message": "Geen installatie nodig."
+  },
+  "setupDescription": {
+    "message": "Open Instagram en speel een video af."
+  },
+  "openInstagramDescription": {
+    "message": "Ga naar een pagina met een ondersteunde video."
+  },
+  "playVideoDescription": {
+    "message": "De bediening verschijnt wanneer de video start."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Voorkeuren aanpassen"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Wijzig voorkeuren via het extensiepictogram."
+  },
+  "builtByLabel": {
+    "message": "Gemaakt door"
   }
 }

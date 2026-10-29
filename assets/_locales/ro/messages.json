@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Controlează redarea, volumul, viteza și imaginea în imagine pe Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Trecere automată"
+  },
+  "downloadLabel": {
+    "message": "Descarcă"
+  },
+  "videoControlsLabel": {
+    "message": "Comenzi video"
+  },
+  "muteLabel": {
+    "message": "Dezactivează sunetul"
+  },
+  "unmuteLabel": {
+    "message": "Activează sunetul"
+  },
+  "volumeLabel": {
+    "message": "Volum"
+  },
+  "playbackSpeedLabel": {
+    "message": "Viteză de redare"
+  },
+  "videoProgressLabel": {
+    "message": "Progres video"
+  },
+  "enterFullscreenLabel": {
+    "message": "Deschide ecran complet"
+  },
+  "exitFullscreenLabel": {
+    "message": "Ieși din ecran complet"
+  },
+  "fullscreenLabel": {
+    "message": "Ecran complet"
+  },
+  "exitLabel": {
+    "message": "Ieși"
+  },
+  "openReelLabel": {
+    "message": "Deschide acest videoclip în Reels"
+  },
+  "pipLabel": {
+    "message": "Imagine în imagine"
+  },
+  "exitPipLabel": {
+    "message": "Închide imaginea în imagine"
+  },
+  "pipErrorLabel": {
+    "message": "Nu s-a putut deschide PiP. Pornește videoclipul și încearcă din nou."
+  },
+  "playLabel": {
+    "message": "Redă"
+  },
+  "pauseLabel": {
+    "message": "Pauză"
+  },
+  "nextReelLabel": {
+    "message": "Următorul Reel"
+  },
+  "previousReelLabel": {
+    "message": "Reel anterior"
+  },
+  "extensionEnabledLabel": {
+    "message": "Extensie activată"
+  },
+  "extensionPausedLabel": {
+    "message": "Extensie în pauză"
+  },
+  "extensionEnabledDescription": {
+    "message": "Comenzile îmbunătățite sunt active pe Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram folosește comenzile implicite."
+  },
+  "enableControllerLabel": {
+    "message": "Activează comenzile"
+  },
+  "disableControllerLabel": {
+    "message": "Dezactivează comenzile"
+  },
+  "settingsLabel": {
+    "message": "Setări"
+  },
+  "clickToPauseLabel": {
+    "message": "Clic pentru pauză"
+  },
+  "clickToPauseDescription": {
+    "message": "Pune pe pauză videoclipurile din flux în loc să deschizi Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Reducerea volumului"
+  },
+  "volumeReductionDescription": {
+    "message": "Redu volumul maxim"
+  },
+  "offLabel": {
+    "message": "Dezactivat"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Suspendă trecerea automată"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Cât timp comentariile Reel-ului sunt deschise"
+  },
+  "supportProjectLabel": {
+    "message": "Susține proiectul"
+  },
+  "reportBugLabel": {
+    "message": "Raportează o eroare"
+  },
+  "contactLabel": {
+    "message": "Contact"
+  },
+  "openInstagramLabel": {
+    "message": "Deschide Instagram"
+  },
+  "installedLabel": {
+    "message": "Instalare reușită"
+  },
+  "updatedLabel": {
+    "message": "Actualizare reușită"
+  },
+  "backToTopLabel": {
+    "message": "Înapoi sus"
+  },
+  "readyLabel": {
+    "message": "Gata de utilizare"
+  },
+  "noSetupLabel": {
+    "message": "Nu necesită configurare."
+  },
+  "setupDescription": {
+    "message": "Deschide Instagram și redă un videoclip."
+  },
+  "openInstagramDescription": {
+    "message": "Vizitează o pagină cu un videoclip compatibil."
+  },
+  "playVideoDescription": {
+    "message": "Comenzile apar când începe videoclipul."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Modifică preferințele"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Modifică preferințele din pictograma extensiei."
+  },
+  "builtByLabel": {
+    "message": "Creat de"
+  }
+}

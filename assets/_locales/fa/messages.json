@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "پخش، صدا، سرعت و تصویر در تصویر Instagram را کنترل کنید."
+  },
+  "autoskipLabel": {
+    "message": "رد شدن خودکار"
+  },
+  "downloadLabel": {
+    "message": "بارگیری"
+  },
+  "videoControlsLabel": {
+    "message": "کنترل‌های ویدیو"
+  },
+  "muteLabel": {
+    "message": "بی‌صدا کردن"
+  },
+  "unmuteLabel": {
+    "message": "فعال کردن صدا"
+  },
+  "volumeLabel": {
+    "message": "بلندی صدا"
+  },
+  "playbackSpeedLabel": {
+    "message": "سرعت پخش"
+  },
+  "videoProgressLabel": {
+    "message": "پیشرفت ویدیو"
+  },
+  "enterFullscreenLabel": {
+    "message": "باز کردن تمام‌صفحه"
+  },
+  "exitFullscreenLabel": {
+    "message": "خروج از تمام‌صفحه"
+  },
+  "fullscreenLabel": {
+    "message": "تمام‌صفحه"
+  },
+  "exitLabel": {
+    "message": "خروج"
+  },
+  "openReelLabel": {
+    "message": "باز کردن این ویدیو در Reels"
+  },
+  "pipLabel": {
+    "message": "تصویر در تصویر"
+  },
+  "exitPipLabel": {
+    "message": "بستن تصویر در تصویر"
+  },
+  "pipErrorLabel": {
+    "message": "PiP باز نشد. ویدیو را پخش و دوباره تلاش کنید."
+  },
+  "playLabel": {
+    "message": "پخش"
+  },
+  "pauseLabel": {
+    "message": "مکث"
+  },
+  "nextReelLabel": {
+    "message": "Reel بعدی"
+  },
+  "previousReelLabel": {
+    "message": "ریل قبلی"
+  },
+  "extensionEnabledLabel": {
+    "message": "افزونه فعال است"
+  },
+  "extensionPausedLabel": {
+    "message": "افزونه متوقف است"
+  },
+  "extensionEnabledDescription": {
+    "message": "کنترل‌های بهبودیافته در Instagram فعال‌اند."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram از کنترل‌های پیش‌فرض استفاده می‌کند."
+  },
+  "enableControllerLabel": {
+    "message": "فعال کردن کنترل‌ها"
+  },
+  "disableControllerLabel": {
+    "message": "غیرفعال کردن کنترل‌ها"
+  },
+  "settingsLabel": {
+    "message": "تنظیمات"
+  },
+  "clickToPauseLabel": {
+    "message": "کلیک برای مکث"
+  },
+  "clickToPauseDescription": {
+    "message": "توقف ویدیوهای خوراک به‌جای باز کردن Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "کاهش صدا"
+  },
+  "volumeReductionDescription": {
+    "message": "کاهش بیشینهٔ بلندی صدا"
+  },
+  "offLabel": {
+    "message": "خاموش"
+  },
+  "pauseAutoskipLabel": {
+    "message": "توقف رد شدن خودکار"
+  },
+  "pauseAutoskipDescription": {
+    "message": "هنگامی که دیدگاه‌های Reel باز است"
+  },
+  "supportProjectLabel": {
+    "message": "حمایت از پروژه"
+  },
+  "reportBugLabel": {
+    "message": "گزارش خطا"
+  },
+  "contactLabel": {
+    "message": "تماس"
+  },
+  "openInstagramLabel": {
+    "message": "باز کردن Instagram"
+  },
+  "installedLabel": {
+    "message": "با موفقیت نصب شد"
+  },
+  "updatedLabel": {
+    "message": "با موفقیت به‌روز شد"
+  },
+  "backToTopLabel": {
+    "message": "بازگشت به بالا"
+  },
+  "readyLabel": {
+    "message": "آمادهٔ استفاده"
+  },
+  "noSetupLabel": {
+    "message": "نیازی به تنظیم نیست."
+  },
+  "setupDescription": {
+    "message": "Instagram را باز و یک ویدیو پخش کنید."
+  },
+  "openInstagramDescription": {
+    "message": "صفحه‌ای با ویدیوی پشتیبانی‌شده باز کنید."
+  },
+  "playVideoDescription": {
+    "message": "کنترل‌ها با شروع ویدیو ظاهر می‌شوند."
+  },
+  "adjustPreferencesLabel": {
+    "message": "تغییر ترجیحات"
+  },
+  "adjustPreferencesDescription": {
+    "message": "ترجیحات را از نماد افزونه تغییر دهید."
+  },
+  "builtByLabel": {
+    "message": "ساخته‌شده توسط"
+  }
+}

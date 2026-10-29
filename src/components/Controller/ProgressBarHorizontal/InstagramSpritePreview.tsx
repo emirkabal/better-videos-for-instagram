@@ -9,7 +9,7 @@ type Props = {
   video: HTMLVideoElement | null
 }
 
-function getSpritePosition(
+export function getSpritePosition(
   time: number,
   spritesheet: InstagramSpritesheet,
   renderWidth: number,
@@ -23,26 +23,26 @@ function getSpritePosition(
   } = spritesheet
 
   if (
+    !Number.isInteger(maxThumbnailsPerSprite) ||
     maxThumbnailsPerSprite <= 0 ||
+    !Number.isInteger(thumbnailsPerRow) ||
     thumbnailsPerRow <= 0 ||
+    !Number.isFinite(thumbnailDuration) ||
     thumbnailDuration <= 0 ||
+    !Number.isFinite(time) ||
     spriteUrls.length === 0
   ) {
     return null
   }
 
-  const spriteDuration = maxThumbnailsPerSprite * thumbnailDuration
-  const spriteIndex = Math.min(
-    spriteUrls.length - 1,
-    Math.max(0, Math.floor(time / spriteDuration))
+  const thumbnailIndex = Math.min(
+    spriteUrls.length * maxThumbnailsPerSprite - 1,
+    Math.max(0, Math.floor(time / thumbnailDuration))
   )
-  const cellIndex = Math.floor((time % spriteDuration) / thumbnailDuration)
-  const boundedCellIndex =
-    spriteIndex === spriteUrls.length - 1
-      ? Math.min(cellIndex, maxThumbnailsPerSprite - 1)
-      : cellIndex
-  const row = Math.floor(boundedCellIndex / thumbnailsPerRow)
-  const column = boundedCellIndex % thumbnailsPerRow
+  const spriteIndex = Math.floor(thumbnailIndex / maxThumbnailsPerSprite)
+  const cellIndex = thumbnailIndex % maxThumbnailsPerSprite
+  const row = Math.floor(cellIndex / thumbnailsPerRow)
+  const column = cellIndex % thumbnailsPerRow
   const rows = Math.ceil(maxThumbnailsPerSprite / thumbnailsPerRow)
 
   return {
@@ -65,7 +65,10 @@ export default function InstagramSpritePreview({
   )
   const renderWidth = isLandscape ? 140 : 79
   const renderHeight = isLandscape ? 79 : 140
-  const sampleTime = Math.min(Math.max(percent, 0), 1) * duration
+  const sampleTime = Math.min(
+    Math.min(Math.max(percent, 0), 1) * duration,
+    Math.max(duration - 0.001, 0)
+  )
   const position = getSpritePosition(
     sampleTime,
     spritesheet,

@@ -85,8 +85,9 @@ function installSpritesheetApiBridge() {
     const visited = new WeakSet<object>()
     let inspectedNodes = 0
 
-    while (queue.length > 0 && inspectedNodes < 50000) {
-      const entry = queue.shift()
+    let cursor = 0
+    while (cursor < queue.length && inspectedNodes < 50000) {
+      const entry = queue[cursor++]
       if (!entry || entry.value === null || typeof entry.value !== "object") {
         continue
       }
@@ -193,7 +194,7 @@ function installSpritesheetApiBridge() {
   window.fetch = function (input: RequestInfo | URL, init?: RequestInit) {
     void captureFetchRequest(input, init)
     const response = nativeFetch(input, init)
-    void response.then(captureFetchResponse)
+    void response.then(captureFetchResponse, () => {})
     return response
   } as typeof window.fetch
 
@@ -309,9 +310,12 @@ function installSpritesheetApiBridge() {
       if (mediaId) return mediaId
     }
 
+    const article = video.closest("article")
     let root: HTMLElement | null = video
 
     for (let depth = 0; root && depth < 10; depth += 1) {
+      // Feed lookups must not borrow another post's media id or poster.
+      if (root !== video && root.querySelectorAll("video").length > 1) break
       for (const attribute of Array.from(root.attributes)) {
         const mediaId = attribute.value.match(
           /(?:^|\D)(\d{10,}_\d+)(?:\D|$)/
@@ -340,21 +344,22 @@ function installSpritesheetApiBridge() {
         if (mediaId) return mediaId
       }
 
+      if (root === article) break
       root = root.parentElement
     }
 
     return null
   }
 
-  function getReelShortcode(video: HTMLVideoElement) {
+  function getMediaShortcode(video: HTMLVideoElement) {
     const locationMatch = window.location.pathname.match(
       /^\/(?:reel|reels|p)\/([^/?#]+)/
     )
-    if (locationMatch?.[1] && locationMatch[1] !== "audio") {
-      return locationMatch[1]
-    }
+    const locationShortcode =
+      locationMatch?.[1] !== "audio" ? locationMatch?.[1] : null
 
     const parseHref = (href: string) => {
+      if (!href) return null
       try {
         const url = new URL(href, window.location.href)
         if (url.origin !== window.location.origin) return null
@@ -368,21 +373,32 @@ function installSpritesheetApiBridge() {
       }
     }
 
+    const article = video.closest("article")
     let root: HTMLElement | null = video
 
     for (let depth = 0; root && depth < 16; depth += 1) {
+      if (root !== video && root.querySelectorAll("video").length > 1) break
       if (root instanceof HTMLAnchorElement) {
-        const shortcode = parseHref(root.href)
+        const shortcode = parseHref(
+          root.getAttribute("href") ||
+            root.getAttribute("data-bigv-original-href") || ""
+        )
         if (shortcode) return shortcode
       }
 
       const links = Array.from(
         root.querySelectorAll<HTMLAnchorElement>(
-          'a[href*="/reel/"], a[href*="/reels/"], a[href*="/p/"]'
+          'a[href*="/reel/"], a[href*="/reels/"], a[href*="/p/"], a[data-bigv-original-href]'
         )
       )
       const candidates = links
-        .map((link) => ({ link, shortcode: parseHref(link.href) }))
+        .map((link) => ({
+          link,
+          shortcode: parseHref(
+            link.getAttribute("href") ||
+              link.getAttribute("data-bigv-original-href") || ""
+          )
+        }))
         .filter(
           (
             candidate
@@ -409,10 +425,13 @@ function installSpritesheetApiBridge() {
         return candidates[0].shortcode
       }
 
+      if (root === article) break
       root = root.parentElement
     }
 
-    return null
+    return !article || document.querySelectorAll("article").length === 1
+      ? locationShortcode ?? null
+      : null
   }
 
   function getMediaId(shortcode: string) {
@@ -545,10 +564,13 @@ function installSpritesheetApiBridge() {
 
     if (
       typeof maxThumbnailsPerSprite !== "number" ||
+      !Number.isInteger(maxThumbnailsPerSprite) ||
       !Array.isArray(spriteUrls) ||
       !spriteUrls.every((url) => typeof url === "string" && url) ||
       typeof thumbnailDuration !== "number" ||
+      !Number.isFinite(thumbnailDuration) ||
       typeof thumbnailsPerRow !== "number" ||
+      !Number.isInteger(thumbnailsPerRow) ||
       maxThumbnailsPerSprite <= 0 ||
       thumbnailDuration <= 0 ||
       thumbnailsPerRow <= 0 ||
@@ -636,7 +658,7 @@ function installSpritesheetApiBridge() {
         candidate.src === blobUrl || candidate.currentSrc === blobUrl
     )
     const indexedMediaId = video ? getIndexedMediaId(video) : null
-    const shortcode = video ? getReelShortcode(video) : null
+    const shortcode = video ? getMediaShortcode(video) : null
 
     if (!video || (!indexedMediaId && !shortcode)) {
       if (video && reportedUnresolvedSources.get(video) !== blobUrl) {

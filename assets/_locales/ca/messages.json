@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Controla la reproducció, el volum, la velocitat i la imatge en imatge a Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Pas automàtic"
+  },
+  "downloadLabel": {
+    "message": "Baixa"
+  },
+  "videoControlsLabel": {
+    "message": "Controls de vídeo"
+  },
+  "muteLabel": {
+    "message": "Silencia"
+  },
+  "unmuteLabel": {
+    "message": "Activa el so"
+  },
+  "volumeLabel": {
+    "message": "Volum"
+  },
+  "playbackSpeedLabel": {
+    "message": "Velocitat de reproducció"
+  },
+  "videoProgressLabel": {
+    "message": "Progrés del vídeo"
+  },
+  "enterFullscreenLabel": {
+    "message": "Obre pantalla completa"
+  },
+  "exitFullscreenLabel": {
+    "message": "Surt de pantalla completa"
+  },
+  "fullscreenLabel": {
+    "message": "Pantalla completa"
+  },
+  "exitLabel": {
+    "message": "Surt"
+  },
+  "openReelLabel": {
+    "message": "Obre aquest vídeo a Reels"
+  },
+  "pipLabel": {
+    "message": "Imatge en imatge"
+  },
+  "exitPipLabel": {
+    "message": "Tanca imatge en imatge"
+  },
+  "pipErrorLabel": {
+    "message": "No s’ha pogut obrir PiP. Reprodueix el vídeo i torna-ho a provar."
+  },
+  "playLabel": {
+    "message": "Reprodueix"
+  },
+  "pauseLabel": {
+    "message": "Pausa"
+  },
+  "nextReelLabel": {
+    "message": "Reel següent"
+  },
+  "previousReelLabel": {
+    "message": "Reel anterior"
+  },
+  "extensionEnabledLabel": {
+    "message": "Extensió activada"
+  },
+  "extensionPausedLabel": {
+    "message": "Extensió en pausa"
+  },
+  "extensionEnabledDescription": {
+    "message": "Els controls millorats estan actius a Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram utilitza els controls predeterminats."
+  },
+  "enableControllerLabel": {
+    "message": "Activa els controls"
+  },
+  "disableControllerLabel": {
+    "message": "Desactiva els controls"
+  },
+  "settingsLabel": {
+    "message": "Configuració"
+  },
+  "clickToPauseLabel": {
+    "message": "Clic per fer pausa"
+  },
+  "clickToPauseDescription": {
+    "message": "Pausa els vídeos del canal en lloc d’obrir Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Reducció del volum"
+  },
+  "volumeReductionDescription": {
+    "message": "Redueix el volum màxim"
+  },
+  "offLabel": {
+    "message": "Desactivat"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pausa el pas automàtic"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Mentre els comentaris del Reel estiguin oberts"
+  },
+  "supportProjectLabel": {
+    "message": "Dona suport al projecte"
+  },
+  "reportBugLabel": {
+    "message": "Informa d’un error"
+  },
+  "contactLabel": {
+    "message": "Contacte"
+  },
+  "openInstagramLabel": {
+    "message": "Obre Instagram"
+  },
+  "installedLabel": {
+    "message": "Instal·lació completada"
+  },
+  "updatedLabel": {
+    "message": "Actualització completada"
+  },
+  "backToTopLabel": {
+    "message": "Torna a dalt"
+  },
+  "readyLabel": {
+    "message": "A punt"
+  },
+  "noSetupLabel": {
+    "message": "No cal configurar res."
+  },
+  "setupDescription": {
+    "message": "Obre Instagram i reprodueix un vídeo."
+  },
+  "openInstagramDescription": {
+    "message": "Visita una pàgina amb un vídeo compatible."
+  },
+  "playVideoDescription": {
+    "message": "Els controls apareixen en iniciar el vídeo."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Canvia les preferències"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Canvia les preferències des de la icona de l’extensió."
+  },
+  "builtByLabel": {
+    "message": "Creat per"
+  }
+}

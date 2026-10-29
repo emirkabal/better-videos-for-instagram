@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Instagram પર પ્લેબેક, અવાજ, ઝડપ અને પિક્ચર-ઇન-પિક્ચર નિયંત્રિત કરો."
+  },
+  "autoskipLabel": {
+    "message": "આપમેળે આગળ"
+  },
+  "downloadLabel": {
+    "message": "ડાઉનલોડ"
+  },
+  "videoControlsLabel": {
+    "message": "વિડિઓ નિયંત્રણો"
+  },
+  "muteLabel": {
+    "message": "અવાજ બંધ કરો"
+  },
+  "unmuteLabel": {
+    "message": "અવાજ ચાલુ કરો"
+  },
+  "volumeLabel": {
+    "message": "અવાજ"
+  },
+  "playbackSpeedLabel": {
+    "message": "પ્લેબેક ઝડપ"
+  },
+  "videoProgressLabel": {
+    "message": "વિડિઓ પ્રગતિ"
+  },
+  "enterFullscreenLabel": {
+    "message": "પૂર્ણ સ્ક્રીન ખોલો"
+  },
+  "exitFullscreenLabel": {
+    "message": "પૂર્ણ સ્ક્રીનમાંથી બહાર નીકળો"
+  },
+  "fullscreenLabel": {
+    "message": "પૂર્ણ સ્ક્રીન"
+  },
+  "exitLabel": {
+    "message": "બહાર નીકળો"
+  },
+  "openReelLabel": {
+    "message": "આ વિડિઓ Reels માં ખોલો"
+  },
+  "pipLabel": {
+    "message": "પિક્ચર-ઇન-પિક્ચર"
+  },
+  "exitPipLabel": {
+    "message": "પિક્ચર-ઇન-પિક્ચર બંધ કરો"
+  },
+  "pipErrorLabel": {
+    "message": "PiP ખુલ્યું નહીં. વિડિઓ ચલાવીને ફરી પ્રયાસ કરો."
+  },
+  "playLabel": {
+    "message": "ચલાવો"
+  },
+  "pauseLabel": {
+    "message": "થોભાવો"
+  },
+  "nextReelLabel": {
+    "message": "આગળનું Reel"
+  },
+  "previousReelLabel": {
+    "message": "પાછલી રીલ"
+  },
+  "extensionEnabledLabel": {
+    "message": "એક્સ્ટેન્શન ચાલુ છે"
+  },
+  "extensionPausedLabel": {
+    "message": "એક્સ્ટેન્શન થોભાવ્યું છે"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagram પર સુધારેલા નિયંત્રણો ચાલુ છે."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram તેના મૂળ નિયંત્રણો વાપરે છે."
+  },
+  "enableControllerLabel": {
+    "message": "નિયંત્રણો ચાલુ કરો"
+  },
+  "disableControllerLabel": {
+    "message": "નિયંત્રણો બંધ કરો"
+  },
+  "settingsLabel": {
+    "message": "સેટિંગ્સ"
+  },
+  "clickToPauseLabel": {
+    "message": "ક્લિક કરીને થોભાવો"
+  },
+  "clickToPauseDescription": {
+    "message": "Reels ખોલવાને બદલે ફીડના વિડિઓ થોભાવો"
+  },
+  "volumeReductionLabel": {
+    "message": "અવાજ ઘટાડો"
+  },
+  "volumeReductionDescription": {
+    "message": "મહત્તમ અવાજ ઘટાડો"
+  },
+  "offLabel": {
+    "message": "બંધ"
+  },
+  "pauseAutoskipLabel": {
+    "message": "આપમેળે આગળ જવું થોભાવો"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reel ની ટિપ્પણીઓ ખુલ્લી હોય ત્યારે"
+  },
+  "supportProjectLabel": {
+    "message": "પ્રોજેક્ટને સહયોગ આપો"
+  },
+  "reportBugLabel": {
+    "message": "ભૂલની જાણ કરો"
+  },
+  "contactLabel": {
+    "message": "સંપર્ક"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram ખોલો"
+  },
+  "installedLabel": {
+    "message": "ઇન્સ્ટોલ થઈ ગયું"
+  },
+  "updatedLabel": {
+    "message": "અપડેટ થઈ ગયું"
+  },
+  "backToTopLabel": {
+    "message": "ઉપર જાઓ"
+  },
+  "readyLabel": {
+    "message": "વાપરવા માટે તૈયાર"
+  },
+  "noSetupLabel": {
+    "message": "સેટઅપ જરૂરી નથી."
+  },
+  "setupDescription": {
+    "message": "Instagram ખોલો અને વિડિઓ ચલાવો."
+  },
+  "openInstagramDescription": {
+    "message": "સમર્થિત વિડિઓ ધરાવતું પૃષ્ઠ ખોલો."
+  },
+  "playVideoDescription": {
+    "message": "વિડિઓ શરૂ થાય ત્યારે નિયંત્રણો દેખાય છે."
+  },
+  "adjustPreferencesLabel": {
+    "message": "પસંદગીઓ બદલો"
+  },
+  "adjustPreferencesDescription": {
+    "message": "એક્સ્ટેન્શનના ચિહ્નથી પસંદગીઓ બદલો."
+  },
+  "builtByLabel": {
+    "message": "નિર્માતા"
+  }
+}

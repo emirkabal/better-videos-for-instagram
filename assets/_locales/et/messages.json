@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Juhi Instagrami videote taasesitust, helitugevust, kiirust ja pilt-pildis režiimi."
+  },
+  "autoskipLabel": {
+    "message": "Automaatne edasiminek"
+  },
+  "downloadLabel": {
+    "message": "Laadi alla"
+  },
+  "videoControlsLabel": {
+    "message": "Video juhtnupud"
+  },
+  "muteLabel": {
+    "message": "Vaigista"
+  },
+  "unmuteLabel": {
+    "message": "Lülita heli sisse"
+  },
+  "volumeLabel": {
+    "message": "Helitugevus"
+  },
+  "playbackSpeedLabel": {
+    "message": "Taasesituskiirus"
+  },
+  "videoProgressLabel": {
+    "message": "Video edenemine"
+  },
+  "enterFullscreenLabel": {
+    "message": "Ava täisekraan"
+  },
+  "exitFullscreenLabel": {
+    "message": "Välju täisekraanilt"
+  },
+  "fullscreenLabel": {
+    "message": "Täisekraan"
+  },
+  "exitLabel": {
+    "message": "Välju"
+  },
+  "openReelLabel": {
+    "message": "Ava see video Reelsis"
+  },
+  "pipLabel": {
+    "message": "Pilt pildis"
+  },
+  "exitPipLabel": {
+    "message": "Sulge pilt pildis"
+  },
+  "pipErrorLabel": {
+    "message": "PiP avamine ebaõnnestus. Käivita video ja proovi uuesti."
+  },
+  "playLabel": {
+    "message": "Esita"
+  },
+  "pauseLabel": {
+    "message": "Peata"
+  },
+  "nextReelLabel": {
+    "message": "Järgmine Reel"
+  },
+  "previousReelLabel": {
+    "message": "Eelmine Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Laiendus lubatud"
+  },
+  "extensionPausedLabel": {
+    "message": "Laiendus peatatud"
+  },
+  "extensionEnabledDescription": {
+    "message": "Täiustatud juhtnupud on Instagramis aktiivsed."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram kasutab vaikimisi juhtnuppe."
+  },
+  "enableControllerLabel": {
+    "message": "Luba juhtnupud"
+  },
+  "disableControllerLabel": {
+    "message": "Keela juhtnupud"
+  },
+  "settingsLabel": {
+    "message": "Seaded"
+  },
+  "clickToPauseLabel": {
+    "message": "Klõpsa peatamiseks"
+  },
+  "clickToPauseDescription": {
+    "message": "Peata voo videod Reelsi avamise asemel"
+  },
+  "volumeReductionLabel": {
+    "message": "Helitugevuse vähendamine"
+  },
+  "volumeReductionDescription": {
+    "message": "Vähenda maksimaalset helitugevust"
+  },
+  "offLabel": {
+    "message": "Väljas"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Peata automaatne edasiminek"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Kui Reeli kommentaarid on avatud"
+  },
+  "supportProjectLabel": {
+    "message": "Toeta projekti"
+  },
+  "reportBugLabel": {
+    "message": "Teata veast"
+  },
+  "contactLabel": {
+    "message": "Kontakt"
+  },
+  "openInstagramLabel": {
+    "message": "Ava Instagram"
+  },
+  "installedLabel": {
+    "message": "Paigaldatud"
+  },
+  "updatedLabel": {
+    "message": "Uuendatud"
+  },
+  "backToTopLabel": {
+    "message": "Tagasi üles"
+  },
+  "readyLabel": {
+    "message": "Kasutusvalmis"
+  },
+  "noSetupLabel": {
+    "message": "Seadistamine pole vajalik."
+  },
+  "setupDescription": {
+    "message": "Ava Instagram ja käivita video."
+  },
+  "openInstagramDescription": {
+    "message": "Ava toetatud videoga leht."
+  },
+  "playVideoDescription": {
+    "message": "Juhtnupud ilmuvad video käivitumisel."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Muuda eelistusi"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Muuda eelistusi laienduse ikooni kaudu."
+  },
+  "builtByLabel": {
+    "message": "Looja"
+  }
+}

@@ -3,7 +3,12 @@ import type { PlasmoCSConfig } from "plasmo"
 import { Storage, type StorageCallbackMap } from "@plasmohq/storage"
 
 import { Global, Reels, Stories } from "~modules/instagram"
-import { CONTROLLER_ENABLED_STORAGE_KEY } from "~utils/constants"
+import {
+  CLICK_TO_PAUSE_STORAGE_KEY,
+  CONTROLLER_ENABLED_STORAGE_KEY
+} from "~utils/constants"
+import { getPageMode } from "~utils/page-mode"
+import { pictureInPicture } from "~utils/picture-in-picture"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.instagram.com/*"]
@@ -16,19 +21,10 @@ const storage = new Storage()
 
 let controllerEnabled = true
 
-type PageMode = "global" | "reels" | "stories"
-
-const getPageMode = (): PageMode => {
-  const section = location.pathname.split("/").filter(Boolean)[0]
-  console.log("section: ", section)
-
-  if (section === "reel" || section === "reels") return "reels"
-  if (section === "stories") return "stories"
-  return "global"
-}
-
 const load = () => {
-  switch (getPageMode()) {
+  const mode = getPageMode(location.pathname)
+  pictureInPicture.setPageMode(mode)
+  switch (mode) {
     case "reels":
       global.delete()
       stories.delete()
@@ -47,6 +43,7 @@ const load = () => {
 }
 
 const deleteControllers = () => {
+  pictureInPicture.close()
   global.delete()
   reels.delete()
   stories.delete()
@@ -62,6 +59,9 @@ const loadWhenUrlChanges = () => {
 }
 
 const controllerWatch: StorageCallbackMap = {
+  [CLICK_TO_PAUSE_STORAGE_KEY]: ({ newValue }) => {
+    global.setClickToPause(newValue ?? true)
+  },
   [CONTROLLER_ENABLED_STORAGE_KEY]: ({ newValue }) => {
     controllerEnabled = newValue ?? true
     previousUrl = ""
@@ -72,8 +72,12 @@ const controllerWatch: StorageCallbackMap = {
 }
 
 const start = async () => {
-  controllerEnabled =
-    (await storage.get<boolean>(CONTROLLER_ENABLED_STORAGE_KEY)) ?? true
+  const [enabled, clickToPause] = await Promise.all([
+    storage.get<boolean>(CONTROLLER_ENABLED_STORAGE_KEY),
+    storage.get<boolean>(CLICK_TO_PAUSE_STORAGE_KEY)
+  ])
+  controllerEnabled = enabled ?? true
+  global.setClickToPause(clickToPause ?? true)
   storage.watch(controllerWatch)
 
   setInterval(loadWhenUrlChanges, 250)

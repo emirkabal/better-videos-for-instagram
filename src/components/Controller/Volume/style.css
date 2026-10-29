@@ -1,0 +1,92 @@
+.bigv-pip-slider-theme {
+  --bigv-slider-track: #444448;
+  --bigv-slider-track-active: #56565c;
+  --bigv-slider-fill: #e5e5e8;
+}
+
+.bigv-pip-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  width: 100%;
+  max-width: 112px;
+  min-width: 0;
+}
+
+.bigv-pip-volume-slider {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(
+      to right,
+      var(--bigv-slider-fill, #e5e5e8) var(--bigv-volume-level),
+      var(--bigv-slider-track, #444448) var(--bigv-volume-level)
+    )
+    center / 100% 4px no-repeat;
+  cursor: pointer;
+}
+
+.bigv-pip-volume-slider:is(:hover, :focus-visible, :active) {
+  --bigv-slider-track: var(--bigv-slider-track-active, #56565c);
+}
+
+.bigv-pip-volume-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+}
+
+.bigv-pip-volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bigv-slider-fill, #e5e5e8);
+}
+
+.bigv-pip-volume-slider::-moz-range-track,
+.bigv-pip-volume-slider::-moz-range-progress {
+  height: 4px;
+  background: transparent;
+}
+
+.bigv-pip-volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bigv-slider-fill, #e5e5e8);
+}
+
+.bigv-pip-volume-slider:focus-visible:not([data-bigv-pointer-focus]) {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.bigv-pip-slider-theme
+  .better-ig-controller
+  .progress-bar-horizontal
+  .baseline {
+  background: var(--bigv-slider-track);
+  box-shadow: none;
+}
+
+.bigv-pip-slider-theme
+  .better-ig-controller
+  .progress-bar-horizontal
+  .baseline:is(:hover, :focus-within, .dragging) {
+  background: var(--bigv-slider-track-active);
+}
+
+.bigv-pip-slider-theme .better-ig-controller .progress-bar-horizontal .fill {
+  background: var(--bigv-slider-fill);
+}

@@ -41,27 +41,31 @@ export function getVideoVisibilityScore(video: HTMLVideoElement) {
   return Math.max(visibleRatio - centerPenalty, 0)
 }
 
-export function getActiveInstagramVideo() {
-  const videos = Array.from(
-    document.querySelectorAll<HTMLVideoElement>("video")
-  ).filter(isInstagramVideo)
-
-  const playingVideos = videos.filter(
-    (video) => !video.paused && !video.ended && video.readyState > 0
+export function getActiveInstagramVideo(
+  videos: Iterable<HTMLVideoElement> = document.querySelectorAll<HTMLVideoElement>(
+    "video"
   )
-  const candidates = playingVideos.length > 0 ? playingVideos : videos
-
+) {
   let activeVideo: HTMLVideoElement | null = null
-  let activeScore = Number.NEGATIVE_INFINITY
+  let activeScore = 0
+  let activePlaying = false
 
-  for (const video of candidates) {
-    if (video.closest('[aria-hidden="true"]')) continue
+  for (const video of videos) {
+    if (!isInstagramVideo(video) || video.closest('[aria-hidden="true"]'))
+      continue
 
     const score = getVideoVisibilityScore(video)
+    if (score <= 0) continue
+    const playing = !video.paused && !video.ended && video.readyState > 0
 
-    if (score > activeScore) {
+    if (
+      !activeVideo ||
+      (playing && !activePlaying) ||
+      (playing === activePlaying && score > activeScore)
+    ) {
       activeVideo = video
       activeScore = score
+      activePlaying = playing
     }
   }
 

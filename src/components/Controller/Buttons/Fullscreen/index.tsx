@@ -5,17 +5,20 @@ import "./style.css"
 import cn from "classnames"
 
 import { Variant } from "~modules/Injector"
+import { t } from "~utils/i18n"
 
 type Props = {
   controllerId: string
-  placement?: "controls" | "overlay"
+  placement?: "controls" | "overlay" | "dock"
   variant?: Variant
+  showLabel?: boolean
 }
 
 export default function FullscreenButton({
   controllerId,
   placement = "overlay",
-  variant
+  variant,
+  showLabel = true
 }: Props) {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
@@ -79,11 +82,14 @@ export default function FullscreenButton({
     <button
       type="button"
       className={cn("better-ig-fullscreen-button", "bigv-control", variant, {
-        "in-controls": placement === "controls"
+        "in-controls": placement === "controls",
+        "in-dock": placement === "dock"
       })}
-      aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+      aria-label={t(
+        isFullscreen ? "exitFullscreenLabel" : "enterFullscreenLabel"
+      )}
       aria-pressed={isFullscreen}
-      title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+      title={t(isFullscreen ? "exitFullscreenLabel" : "enterFullscreenLabel")}
       onClick={(event) => {
         event.preventDefault()
         event.stopPropagation()
@@ -105,9 +111,11 @@ export default function FullscreenButton({
     return (
       <div className="bigv-fullscreen-control">
         {button}
-        <span className="bigv-switch-text bigv-fullscreen-text">
-          {isFullscreen ? "Exit" : "Fullscreen"}
-        </span>
+        {showLabel && (
+          <span className="bigv-switch-text bigv-fullscreen-text">
+            {t(isFullscreen ? "exitLabel" : "fullscreenLabel")}
+          </span>
+        )}
       </div>
     )
   }

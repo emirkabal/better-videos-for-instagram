@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Instagram ప్లేబ్యాక్, వాల్యూమ్, వేగం మరియు పిక్చర్-ఇన్-పిక్చర్‌ను నియంత్రించండి."
+  },
+  "autoskipLabel": {
+    "message": "స్వయంగా తదుపరి"
+  },
+  "downloadLabel": {
+    "message": "డౌన్‌లోడ్"
+  },
+  "videoControlsLabel": {
+    "message": "వీడియో నియంత్రణలు"
+  },
+  "muteLabel": {
+    "message": "శబ్దం ఆపు"
+  },
+  "unmuteLabel": {
+    "message": "శబ్దం ఆన్ చేయి"
+  },
+  "volumeLabel": {
+    "message": "శబ్ద స్థాయి"
+  },
+  "playbackSpeedLabel": {
+    "message": "ప్లేబ్యాక్ వేగం"
+  },
+  "videoProgressLabel": {
+    "message": "వీడియో పురోగతి"
+  },
+  "enterFullscreenLabel": {
+    "message": "పూర్తి స్క్రీన్ తెరువు"
+  },
+  "exitFullscreenLabel": {
+    "message": "పూర్తి స్క్రీన్ నుండి నిష్క్రమించు"
+  },
+  "fullscreenLabel": {
+    "message": "పూర్తి స్క్రీన్"
+  },
+  "exitLabel": {
+    "message": "నిష్క్రమించు"
+  },
+  "openReelLabel": {
+    "message": "ఈ వీడియోను Reels లో తెరువు"
+  },
+  "pipLabel": {
+    "message": "పిక్చర్-ఇన్-పిక్చర్"
+  },
+  "exitPipLabel": {
+    "message": "పిక్చర్-ఇన్-పిక్చర్ మూసివేయి"
+  },
+  "pipErrorLabel": {
+    "message": "PiP తెరవలేకపోయాం. వీడియో ప్లే చేసి మళ్లీ ప్రయత్నించండి."
+  },
+  "playLabel": {
+    "message": "ప్లే చేయి"
+  },
+  "pauseLabel": {
+    "message": "విరామం"
+  },
+  "nextReelLabel": {
+    "message": "తదుపరి Reel"
+  },
+  "previousReelLabel": {
+    "message": "మునుపటి రీల్"
+  },
+  "extensionEnabledLabel": {
+    "message": "ఎక్స్‌టెన్షన్ ఆన్‌లో ఉంది"
+  },
+  "extensionPausedLabel": {
+    "message": "ఎక్స్‌టెన్షన్ నిలిపివేయబడింది"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagramలో మెరుగైన నియంత్రణలు ఆన్‌లో ఉన్నాయి."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram సాధారణ నియంత్రణలను ఉపయోగిస్తుంది."
+  },
+  "enableControllerLabel": {
+    "message": "నియంత్రణలను ఆన్ చేయి"
+  },
+  "disableControllerLabel": {
+    "message": "నియంత్రణలను ఆఫ్ చేయి"
+  },
+  "settingsLabel": {
+    "message": "సెట్టింగ్‌లు"
+  },
+  "clickToPauseLabel": {
+    "message": "క్లిక్ చేసి నిలిపివేయి"
+  },
+  "clickToPauseDescription": {
+    "message": "Reels తెరవకుండా ఫీడ్ వీడియోలను నిలిపివేయి"
+  },
+  "volumeReductionLabel": {
+    "message": "శబ్దాన్ని తగ్గించడం"
+  },
+  "volumeReductionDescription": {
+    "message": "గరిష్ఠ శబ్దాన్ని తగ్గించు"
+  },
+  "offLabel": {
+    "message": "ఆఫ్"
+  },
+  "pauseAutoskipLabel": {
+    "message": "స్వయంగా తదుపరికి వెళ్లడం ఆపు"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reel వ్యాఖ్యలు తెరిచి ఉన్నప్పుడు"
+  },
+  "supportProjectLabel": {
+    "message": "ప్రాజెక్టుకు మద్దతు ఇవ్వండి"
+  },
+  "reportBugLabel": {
+    "message": "లోపాన్ని నివేదించు"
+  },
+  "contactLabel": {
+    "message": "సంప్రదించండి"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram తెరువు"
+  },
+  "installedLabel": {
+    "message": "ఇన్‌స్టాల్ అయింది"
+  },
+  "updatedLabel": {
+    "message": "అప్‌డేట్ అయింది"
+  },
+  "backToTopLabel": {
+    "message": "పైకి వెళ్ళు"
+  },
+  "readyLabel": {
+    "message": "వాడటానికి సిద్ధం"
+  },
+  "noSetupLabel": {
+    "message": "సెటప్ అవసరం లేదు."
+  },
+  "setupDescription": {
+    "message": "Instagram తెరిచి వీడియో ప్లే చేయండి."
+  },
+  "openInstagramDescription": {
+    "message": "మద్దతు ఉన్న వీడియో పేజీకి వెళ్లండి."
+  },
+  "playVideoDescription": {
+    "message": "వీడియో మొదలైనప్పుడు నియంత్రణలు కనిపిస్తాయి."
+  },
+  "adjustPreferencesLabel": {
+    "message": "ప్రాధాన్యతలు మార్చు"
+  },
+  "adjustPreferencesDescription": {
+    "message": "ఎక్స్‌టెన్షన్ చిహ్నం ద్వారా ప్రాధాన్యతలు మార్చండి."
+  },
+  "builtByLabel": {
+    "message": "రూపొందించినవారు"
+  }
+}

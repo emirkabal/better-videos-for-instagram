@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "ควบคุมการเล่น ระดับเสียง ความเร็ว และภาพซ้อนภาพบน Instagram"
+  },
+  "autoskipLabel": {
+    "message": "ข้ามอัตโนมัติ"
+  },
+  "downloadLabel": {
+    "message": "ดาวน์โหลด"
+  },
+  "videoControlsLabel": {
+    "message": "ตัวควบคุมวิดีโอ"
+  },
+  "muteLabel": {
+    "message": "ปิดเสียง"
+  },
+  "unmuteLabel": {
+    "message": "เปิดเสียง"
+  },
+  "volumeLabel": {
+    "message": "ระดับเสียง"
+  },
+  "playbackSpeedLabel": {
+    "message": "ความเร็วในการเล่น"
+  },
+  "videoProgressLabel": {
+    "message": "ความคืบหน้าวิดีโอ"
+  },
+  "enterFullscreenLabel": {
+    "message": "เปิดเต็มหน้าจอ"
+  },
+  "exitFullscreenLabel": {
+    "message": "ออกจากเต็มหน้าจอ"
+  },
+  "fullscreenLabel": {
+    "message": "เต็มหน้าจอ"
+  },
+  "exitLabel": {
+    "message": "ออก"
+  },
+  "openReelLabel": {
+    "message": "เปิดวิดีโอนี้ใน Reels"
+  },
+  "pipLabel": {
+    "message": "ภาพซ้อนภาพ"
+  },
+  "exitPipLabel": {
+    "message": "ปิดภาพซ้อนภาพ"
+  },
+  "pipErrorLabel": {
+    "message": "เปิด PiP ไม่ได้ โปรดเล่นวิดีโอแล้วลองอีกครั้ง"
+  },
+  "playLabel": {
+    "message": "เล่น"
+  },
+  "pauseLabel": {
+    "message": "หยุดชั่วคราว"
+  },
+  "nextReelLabel": {
+    "message": "Reel ถัดไป"
+  },
+  "previousReelLabel": {
+    "message": "Reel ก่อนหน้า"
+  },
+  "extensionEnabledLabel": {
+    "message": "เปิดใช้ส่วนขยายแล้ว"
+  },
+  "extensionPausedLabel": {
+    "message": "พักส่วนขยายแล้ว"
+  },
+  "extensionEnabledDescription": {
+    "message": "ตัวควบคุมที่ปรับปรุงแล้วทำงานบน Instagram"
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram ใช้ตัวควบคุมเริ่มต้น"
+  },
+  "enableControllerLabel": {
+    "message": "เปิดใช้ตัวควบคุม"
+  },
+  "disableControllerLabel": {
+    "message": "ปิดใช้ตัวควบคุม"
+  },
+  "settingsLabel": {
+    "message": "การตั้งค่า"
+  },
+  "clickToPauseLabel": {
+    "message": "คลิกเพื่อหยุดชั่วคราว"
+  },
+  "clickToPauseDescription": {
+    "message": "หยุดวิดีโอในฟีดแทนการเปิด Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "ลดระดับเสียง"
+  },
+  "volumeReductionDescription": {
+    "message": "ลดระดับเสียงสูงสุด"
+  },
+  "offLabel": {
+    "message": "ปิด"
+  },
+  "pauseAutoskipLabel": {
+    "message": "พักการข้ามอัตโนมัติ"
+  },
+  "pauseAutoskipDescription": {
+    "message": "ขณะเปิดความคิดเห็นของ Reel"
+  },
+  "supportProjectLabel": {
+    "message": "สนับสนุนโครงการ"
+  },
+  "reportBugLabel": {
+    "message": "รายงานข้อผิดพลาด"
+  },
+  "contactLabel": {
+    "message": "ติดต่อ"
+  },
+  "openInstagramLabel": {
+    "message": "เปิด Instagram"
+  },
+  "installedLabel": {
+    "message": "ติดตั้งสำเร็จ"
+  },
+  "updatedLabel": {
+    "message": "อัปเดตสำเร็จ"
+  },
+  "backToTopLabel": {
+    "message": "กลับด้านบน"
+  },
+  "readyLabel": {
+    "message": "พร้อมใช้งาน"
+  },
+  "noSetupLabel": {
+    "message": "ไม่ต้องตั้งค่า"
+  },
+  "setupDescription": {
+    "message": "เปิด Instagram แล้วเล่นวิดีโอ"
+  },
+  "openInstagramDescription": {
+    "message": "ไปยังหน้าที่มีวิดีโอที่รองรับ"
+  },
+  "playVideoDescription": {
+    "message": "ตัวควบคุมจะแสดงเมื่อวิดีโอเริ่มเล่น"
+  },
+  "adjustPreferencesLabel": {
+    "message": "เปลี่ยนการตั้งค่า"
+  },
+  "adjustPreferencesDescription": {
+    "message": "เปลี่ยนการตั้งค่าผ่านไอคอนส่วนขยาย"
+  },
+  "builtByLabel": {
+    "message": "พัฒนาโดย"
+  }
+}

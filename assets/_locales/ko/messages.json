@@ -3,13 +3,153 @@
     "message": "인스타그램을 위한 더 나은 동영상: 재생 및 볼륨"
   },
   "appDescription": {
-    "message": "Instagram 동영상의 재생 및 볼륨을 쉽게 제어할 수 있습니다."
+    "message": "Instagram의 재생, 음량, 속도 및 화면 속 화면을 제어하세요."
   },
-
   "autoskipLabel": {
-    "message": "자동 스킵"
+    "message": "자동 넘기기"
   },
   "downloadLabel": {
     "message": "다운로드"
+  },
+  "videoControlsLabel": {
+    "message": "동영상 제어"
+  },
+  "muteLabel": {
+    "message": "음소거"
+  },
+  "unmuteLabel": {
+    "message": "음소거 해제"
+  },
+  "volumeLabel": {
+    "message": "음량"
+  },
+  "playbackSpeedLabel": {
+    "message": "재생 속도"
+  },
+  "videoProgressLabel": {
+    "message": "동영상 진행률"
+  },
+  "enterFullscreenLabel": {
+    "message": "전체 화면 열기"
+  },
+  "exitFullscreenLabel": {
+    "message": "전체 화면 종료"
+  },
+  "fullscreenLabel": {
+    "message": "전체 화면"
+  },
+  "exitLabel": {
+    "message": "종료"
+  },
+  "openReelLabel": {
+    "message": "이 동영상을 Reels에서 열기"
+  },
+  "pipLabel": {
+    "message": "화면 속 화면"
+  },
+  "exitPipLabel": {
+    "message": "화면 속 화면 종료"
+  },
+  "pipErrorLabel": {
+    "message": "PiP를 열 수 없습니다. 동영상을 재생한 후 다시 시도하세요."
+  },
+  "playLabel": {
+    "message": "재생"
+  },
+  "pauseLabel": {
+    "message": "일시 정지"
+  },
+  "nextReelLabel": {
+    "message": "다음 Reel"
+  },
+  "previousReelLabel": {
+    "message": "이전 릴스"
+  },
+  "extensionEnabledLabel": {
+    "message": "확장 프로그램 사용 중"
+  },
+  "extensionPausedLabel": {
+    "message": "확장 프로그램 일시 중지됨"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagram에서 개선된 제어 기능이 활성화되었습니다."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram의 기본 제어 기능을 사용합니다."
+  },
+  "enableControllerLabel": {
+    "message": "제어 기능 켜기"
+  },
+  "disableControllerLabel": {
+    "message": "제어 기능 끄기"
+  },
+  "settingsLabel": {
+    "message": "설정"
+  },
+  "clickToPauseLabel": {
+    "message": "클릭하여 일시 정지"
+  },
+  "clickToPauseDescription": {
+    "message": "피드 동영상을 Reels로 열지 않고 일시 정지"
+  },
+  "volumeReductionLabel": {
+    "message": "음량 줄이기"
+  },
+  "volumeReductionDescription": {
+    "message": "최대 음량 낮추기"
+  },
+  "offLabel": {
+    "message": "꺼짐"
+  },
+  "pauseAutoskipLabel": {
+    "message": "자동 넘기기 일시 정지"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reel 댓글을 열어 놓은 동안"
+  },
+  "supportProjectLabel": {
+    "message": "프로젝트 후원"
+  },
+  "reportBugLabel": {
+    "message": "오류 신고"
+  },
+  "contactLabel": {
+    "message": "문의"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram 열기"
+  },
+  "installedLabel": {
+    "message": "설치 완료"
+  },
+  "updatedLabel": {
+    "message": "업데이트 완료"
+  },
+  "backToTopLabel": {
+    "message": "맨 위로"
+  },
+  "readyLabel": {
+    "message": "사용 준비 완료"
+  },
+  "noSetupLabel": {
+    "message": "설정이 필요 없습니다."
+  },
+  "setupDescription": {
+    "message": "Instagram을 열고 동영상을 재생하세요."
+  },
+  "openInstagramDescription": {
+    "message": "지원되는 동영상이 있는 페이지를 방문하세요."
+  },
+  "playVideoDescription": {
+    "message": "동영상이 시작되면 제어 기능이 표시됩니다."
+  },
+  "adjustPreferencesLabel": {
+    "message": "환경설정 변경"
+  },
+  "adjustPreferencesDescription": {
+    "message": "확장 프로그램 아이콘에서 환경설정을 변경하세요."
+  },
+  "builtByLabel": {
+    "message": "개발자"
   }
 }

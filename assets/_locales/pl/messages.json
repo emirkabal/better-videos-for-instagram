@@ -3,13 +3,153 @@
     "message": "Lepsze filmy na Instagram: Odtwarzanie i głośność"
   },
   "appDescription": {
-    "message": "Z łatwością kontroluj odtwarzanie i głośność dowolnych filmów na Instagramie."
+    "message": "Steruj odtwarzaniem, głośnością, szybkością i obrazem w obrazie na Instagramie."
   },
-
   "autoskipLabel": {
-    "message": "Auto-skip"
+    "message": "Automatyczne przejście"
   },
   "downloadLabel": {
     "message": "Pobierz"
+  },
+  "videoControlsLabel": {
+    "message": "Sterowanie wideo"
+  },
+  "muteLabel": {
+    "message": "Wycisz"
+  },
+  "unmuteLabel": {
+    "message": "Włącz dźwięk"
+  },
+  "volumeLabel": {
+    "message": "Głośność"
+  },
+  "playbackSpeedLabel": {
+    "message": "Szybkość odtwarzania"
+  },
+  "videoProgressLabel": {
+    "message": "Postęp wideo"
+  },
+  "enterFullscreenLabel": {
+    "message": "Włącz pełny ekran"
+  },
+  "exitFullscreenLabel": {
+    "message": "Wyjdź z pełnego ekranu"
+  },
+  "fullscreenLabel": {
+    "message": "Pełny ekran"
+  },
+  "exitLabel": {
+    "message": "Wyjdź"
+  },
+  "openReelLabel": {
+    "message": "Otwórz ten film w Reels"
+  },
+  "pipLabel": {
+    "message": "Obraz w obrazie"
+  },
+  "exitPipLabel": {
+    "message": "Zamknij obraz w obrazie"
+  },
+  "pipErrorLabel": {
+    "message": "Nie udało się otworzyć PiP. Odtwórz film i spróbuj ponownie."
+  },
+  "playLabel": {
+    "message": "Odtwórz"
+  },
+  "pauseLabel": {
+    "message": "Wstrzymaj"
+  },
+  "nextReelLabel": {
+    "message": "Następna rolka"
+  },
+  "previousReelLabel": {
+    "message": "Poprzedni Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Rozszerzenie włączone"
+  },
+  "extensionPausedLabel": {
+    "message": "Rozszerzenie wstrzymane"
+  },
+  "extensionEnabledDescription": {
+    "message": "Ulepszone sterowanie działa na Instagramie."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram używa domyślnego sterowania."
+  },
+  "enableControllerLabel": {
+    "message": "Włącz sterowanie"
+  },
+  "disableControllerLabel": {
+    "message": "Wyłącz sterowanie"
+  },
+  "settingsLabel": {
+    "message": "Ustawienia"
+  },
+  "clickToPauseLabel": {
+    "message": "Kliknij, aby wstrzymać"
+  },
+  "clickToPauseDescription": {
+    "message": "Wstrzymuj filmy w aktualnościach zamiast otwierać Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Redukcja głośności"
+  },
+  "volumeReductionDescription": {
+    "message": "Zmniejsz maksymalną głośność"
+  },
+  "offLabel": {
+    "message": "Wyłączone"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Wstrzymaj automatyczne przejście"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Gdy komentarze rolki są otwarte"
+  },
+  "supportProjectLabel": {
+    "message": "Wesprzyj projekt"
+  },
+  "reportBugLabel": {
+    "message": "Zgłoś błąd"
+  },
+  "contactLabel": {
+    "message": "Kontakt"
+  },
+  "openInstagramLabel": {
+    "message": "Otwórz Instagram"
+  },
+  "installedLabel": {
+    "message": "Instalacja zakończona"
+  },
+  "updatedLabel": {
+    "message": "Aktualizacja zakończona"
+  },
+  "backToTopLabel": {
+    "message": "Powrót na górę"
+  },
+  "readyLabel": {
+    "message": "Gotowe do użycia"
+  },
+  "noSetupLabel": {
+    "message": "Bez konfiguracji."
+  },
+  "setupDescription": {
+    "message": "Otwórz Instagram i odtwórz film."
+  },
+  "openInstagramDescription": {
+    "message": "Odwiedź stronę z obsługiwanym filmem."
+  },
+  "playVideoDescription": {
+    "message": "Sterowanie pojawia się po uruchomieniu filmu."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Zmień preferencje"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Zmień preferencje za pomocą ikony rozszerzenia."
+  },
+  "builtByLabel": {
+    "message": "Autor"
   }
 }

@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Valdykite Instagram atkūrimą, garsumą, greitį ir vaizdą vaizde."
+  },
+  "autoskipLabel": {
+    "message": "Automatiškai toliau"
+  },
+  "downloadLabel": {
+    "message": "Atsisiųsti"
+  },
+  "videoControlsLabel": {
+    "message": "Vaizdo valdikliai"
+  },
+  "muteLabel": {
+    "message": "Nutildyti"
+  },
+  "unmuteLabel": {
+    "message": "Įjungti garsą"
+  },
+  "volumeLabel": {
+    "message": "Garsumas"
+  },
+  "playbackSpeedLabel": {
+    "message": "Atkūrimo greitis"
+  },
+  "videoProgressLabel": {
+    "message": "Vaizdo įrašo eiga"
+  },
+  "enterFullscreenLabel": {
+    "message": "Atverti visą ekraną"
+  },
+  "exitFullscreenLabel": {
+    "message": "Išeiti iš viso ekrano"
+  },
+  "fullscreenLabel": {
+    "message": "Visas ekranas"
+  },
+  "exitLabel": {
+    "message": "Išeiti"
+  },
+  "openReelLabel": {
+    "message": "Atverti šį vaizdo įrašą Reels"
+  },
+  "pipLabel": {
+    "message": "Vaizdas vaizde"
+  },
+  "exitPipLabel": {
+    "message": "Uždaryti vaizdą vaizde"
+  },
+  "pipErrorLabel": {
+    "message": "Nepavyko atverti PiP. Paleiskite vaizdo įrašą ir bandykite dar kartą."
+  },
+  "playLabel": {
+    "message": "Leisti"
+  },
+  "pauseLabel": {
+    "message": "Pristabdyti"
+  },
+  "nextReelLabel": {
+    "message": "Kitas Reel"
+  },
+  "previousReelLabel": {
+    "message": "Ankstesnis Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Plėtinys įjungtas"
+  },
+  "extensionPausedLabel": {
+    "message": "Plėtinys pristabdytas"
+  },
+  "extensionEnabledDescription": {
+    "message": "Patobulinti valdikliai veikia Instagrame."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram naudoja numatytuosius valdiklius."
+  },
+  "enableControllerLabel": {
+    "message": "Įjungti valdiklius"
+  },
+  "disableControllerLabel": {
+    "message": "Išjungti valdiklius"
+  },
+  "settingsLabel": {
+    "message": "Nustatymai"
+  },
+  "clickToPauseLabel": {
+    "message": "Spustelėti norint pristabdyti"
+  },
+  "clickToPauseDescription": {
+    "message": "Pristabdyti srauto vaizdo įrašus užuot atvėrus Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Garsumo mažinimas"
+  },
+  "volumeReductionDescription": {
+    "message": "Sumažinti didžiausią garsumą"
+  },
+  "offLabel": {
+    "message": "Išjungta"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pristabdyti automatinį perėjimą"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Kai Reel komentarai atverti"
+  },
+  "supportProjectLabel": {
+    "message": "Paremti projektą"
+  },
+  "reportBugLabel": {
+    "message": "Pranešti apie klaidą"
+  },
+  "contactLabel": {
+    "message": "Kontaktai"
+  },
+  "openInstagramLabel": {
+    "message": "Atverti Instagram"
+  },
+  "installedLabel": {
+    "message": "Įdiegta"
+  },
+  "updatedLabel": {
+    "message": "Atnaujinta"
+  },
+  "backToTopLabel": {
+    "message": "Į viršų"
+  },
+  "readyLabel": {
+    "message": "Paruošta naudoti"
+  },
+  "noSetupLabel": {
+    "message": "Nereikia nustatyti."
+  },
+  "setupDescription": {
+    "message": "Atverkite Instagram ir paleiskite vaizdo įrašą."
+  },
+  "openInstagramDescription": {
+    "message": "Aplankykite puslapį su palaikomu vaizdo įrašu."
+  },
+  "playVideoDescription": {
+    "message": "Valdikliai pasirodo paleidus vaizdo įrašą."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Keisti nuostatas"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Keiskite nuostatas plėtinio piktograma."
+  },
+  "builtByLabel": {
+    "message": "Sukūrė"
+  }
+}

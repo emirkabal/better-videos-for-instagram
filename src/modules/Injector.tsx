@@ -2,7 +2,7 @@ import { createRoot, type Root } from "react-dom/client"
 
 import Controller from "~components/Controller"
 import { IG_STORIES_INJECTOR_INDICATOR } from "~utils/constants"
-import { isInstagramVideo } from "~utils/video"
+import { isInstagramVideo, isVideoInViewport } from "~utils/video"
 
 type InjectionRecord = {
   video: HTMLVideoElement
@@ -43,6 +43,7 @@ export default class Injector {
   private improvePerformance = true
   private minRemoveCount = 4
   private removeCount = 3
+  private clickToPause = true
 
   variant: Variant = Variant.Default
 
@@ -67,6 +68,17 @@ export default class Injector {
   public wayToInject(): void {}
   public onDelete(id: string) {}
 
+  public setClickToPause(enabled: boolean): void {
+    if (this.clickToPause === enabled) return
+    this.clickToPause = enabled
+    for (const record of this.injectedList) {
+      record.restoreAnchor?.()
+      record.restoreAnchor = enabled
+        ? this.removeRedirects(record.video.closest("a"), record.video)
+        : undefined
+    }
+  }
+
   get lastInjected() {
     return this.injectedList[this.injectedList.length - 1]
   }
@@ -84,8 +96,28 @@ export default class Injector {
       this.injectedList.length > this.minRemoveCount &&
       this.improvePerformance
     ) {
-      const records = this.injectedList.splice(0, this.removeCount)
-      records.forEach((record) => this.dispose(record))
+      const removable = this.injectedList
+        .filter((record) => !isVideoInViewport(record.video))
+        .slice(0, this.removeCount)
+      for (const record of removable) {
+        this.injectedList.splice(this.injectedList.indexOf(record), 1)
+        this.dispose(record)
+      }
+    }
+  }
+
+  protected pruneDisconnected(): void {
+    for (let index = this.injectedList.length - 1; index >= 0; index -= 1) {
+      const record = this.injectedList[index]
+      if (record.video.isConnected && record.controller.isConnected) continue
+      this.injectedList.splice(index, 1)
+      this.dispose(record)
+    }
+    for (const [element, snapshot] of this.hiddenElements) {
+      if (!element.isConnected) {
+        this.restoreHiddenElement(element, snapshot)
+        this.hiddenElements.delete(element)
+      }
     }
   }
 
@@ -111,29 +143,35 @@ export default class Injector {
     }
   }
 
-  private restoreHiddenElements(): void {
-    for (const [element, snapshot] of this.hiddenElements) {
-      if (snapshot.visibility) {
-        element.style.setProperty(
-          "visibility",
-          snapshot.visibility,
-          snapshot.visibilityPriority
-        )
-      } else {
-        element.style.removeProperty("visibility")
-      }
-
-      if (snapshot.pointerEvents) {
-        element.style.setProperty(
-          "pointer-events",
-          snapshot.pointerEvents,
-          snapshot.pointerEventsPriority
-        )
-      } else {
-        element.style.removeProperty("pointer-events")
-      }
+  private restoreHiddenElement(
+    element: HTMLElement | SVGElement,
+    snapshot: HiddenElementSnapshot
+  ): void {
+    if (snapshot.visibility) {
+      element.style.setProperty(
+        "visibility",
+        snapshot.visibility,
+        snapshot.visibilityPriority
+      )
+    } else {
+      element.style.removeProperty("visibility")
     }
 
+    if (snapshot.pointerEvents) {
+      element.style.setProperty(
+        "pointer-events",
+        snapshot.pointerEvents,
+        snapshot.pointerEventsPriority
+      )
+    } else {
+      element.style.removeProperty("pointer-events")
+    }
+  }
+
+  private restoreHiddenElements(): void {
+    for (const [element, snapshot] of this.hiddenElements) {
+      this.restoreHiddenElement(element, snapshot)
+    }
     this.hiddenElements.clear()
   }
 
@@ -154,12 +192,19 @@ export default class Injector {
     const originalHref = anchor.getAttribute("href")
     const originalCursor = anchor.style.cursor
     const originalDraggable = anchor.getAttribute("draggable")
+    if (originalHref)
+      anchor.setAttribute("data-bigv-original-href", originalHref)
 
     const event = (e: MouseEvent) => {
-      if (e.target instanceof Element && !e.target.closest(".bigv-control")) {
+      if (
+        e.target instanceof Element &&
+        !e.target.closest(
+          '.bigv-control, button, input, select, textarea, [role="button"], [role="slider"], [contenteditable="true"]'
+        )
+      ) {
         e.preventDefault()
         e.stopPropagation()
-        if (video.paused) video.play()
+        if (video.paused) void video.play().catch(() => {})
         else video.pause()
       }
     }
@@ -182,6 +227,7 @@ export default class Injector {
       else anchor.setAttribute("draggable", originalDraggable)
 
       delete anchor.dataset.betterInstagramFixed
+      anchor.removeAttribute("data-bigv-original-href")
     }
   }
 
@@ -198,6 +244,9 @@ export default class Injector {
     controller.id = crypto.randomUUID()
     controller.setAttribute("bigv-inject", "")
     controller.setAttribute("data-bigv-controller", "")
+    // Controls can live inside the restored native anchor. Their clicks must
+    // operate the player without also following that anchor's default action.
+    controller.addEventListener("click", (event) => event.preventDefault())
 
     let anchorElement: HTMLAnchorElement | null = null
     let mountParent: ParentNode | null = null
@@ -254,7 +303,9 @@ export default class Injector {
     mountParent.insertBefore(controller, insertBefore)
 
     video.setAttribute("bigv-injected", "")
-    const restoreAnchor = this.removeRedirects(anchorElement, video)
+    const restoreAnchor = this.clickToPause
+      ? this.removeRedirects(anchorElement, video)
+      : undefined
 
     const id = location.pathname.split("/")[2]
     const params = new URLSearchParams(location.search)

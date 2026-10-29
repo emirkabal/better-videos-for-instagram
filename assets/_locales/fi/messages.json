@@ -1,0 +1,155 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram"
+  },
+  "appDescription": {
+    "message": "Hallitse Instagramin toistoa, äänenvoimakkuutta, nopeutta ja kuva kuvassa -tilaa."
+  },
+  "autoskipLabel": {
+    "message": "Automaattinen siirtyminen"
+  },
+  "downloadLabel": {
+    "message": "Lataa"
+  },
+  "videoControlsLabel": {
+    "message": "Videon säätimet"
+  },
+  "muteLabel": {
+    "message": "Mykistä"
+  },
+  "unmuteLabel": {
+    "message": "Poista mykistys"
+  },
+  "volumeLabel": {
+    "message": "Äänenvoimakkuus"
+  },
+  "playbackSpeedLabel": {
+    "message": "Toistonopeus"
+  },
+  "videoProgressLabel": {
+    "message": "Videon eteneminen"
+  },
+  "enterFullscreenLabel": {
+    "message": "Avaa koko näyttö"
+  },
+  "exitFullscreenLabel": {
+    "message": "Poistu koko näytöstä"
+  },
+  "fullscreenLabel": {
+    "message": "Koko näyttö"
+  },
+  "exitLabel": {
+    "message": "Poistu"
+  },
+  "openReelLabel": {
+    "message": "Avaa tämä video Reelsissä"
+  },
+  "pipLabel": {
+    "message": "Kuva kuvassa"
+  },
+  "exitPipLabel": {
+    "message": "Sulje kuva kuvassa"
+  },
+  "pipErrorLabel": {
+    "message": "PiP ei avaudu. Käynnistä video ja yritä uudelleen."
+  },
+  "playLabel": {
+    "message": "Toista"
+  },
+  "pauseLabel": {
+    "message": "Keskeytä"
+  },
+  "nextReelLabel": {
+    "message": "Seuraava Reel"
+  },
+  "previousReelLabel": {
+    "message": "Edellinen Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Laajennus käytössä"
+  },
+  "extensionPausedLabel": {
+    "message": "Laajennus keskeytetty"
+  },
+  "extensionEnabledDescription": {
+    "message": "Parannetut säätimet ovat käytössä Instagramissa."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram käyttää oletussäätimiä."
+  },
+  "enableControllerLabel": {
+    "message": "Ota säätimet käyttöön"
+  },
+  "disableControllerLabel": {
+    "message": "Poista säätimet käytöstä"
+  },
+  "settingsLabel": {
+    "message": "Asetukset"
+  },
+  "clickToPauseLabel": {
+    "message": "Keskeytä napsauttamalla"
+  },
+  "clickToPauseDescription": {
+    "message": "Keskeytä syötteen videot Reelsin avaamisen sijaan"
+  },
+  "volumeReductionLabel": {
+    "message": "Äänenvoimakkuuden vähennys"
+  },
+  "volumeReductionDescription": {
+    "message": "Pienennä enimmäisäänenvoimakkuutta"
+  },
+  "offLabel": {
+    "message": "Pois"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Keskeytä automaattinen siirtyminen"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Kun Reelin kommentit ovat auki"
+  },
+  "supportProjectLabel": {
+    "message": "Tue projektia"
+  },
+  "reportBugLabel": {
+    "message": "Ilmoita virheestä"
+  },
+  "contactLabel": {
+    "message": "Yhteystiedot"
+  },
+  "openInstagramLabel": {
+    "message": "Avaa Instagram"
+  },
+  "installedLabel": {
+    "message": "Asennus valmis"
+  },
+  "updatedLabel": {
+    "message": "Päivitys valmis"
+  },
+  "backToTopLabel": {
+    "message": "Takaisin ylös"
+  },
+  "readyLabel": {
+    "message": "Valmis käyttöön"
+  },
+  "noSetupLabel": {
+    "message": "Ei määrityksiä."
+  },
+  "setupDescription": {
+    "message": "Avaa Instagram ja toista video."
+  },
+  "openInstagramDescription": {
+    "message": "Avaa sivu, jolla on tuettu video."
+  },
+  "playVideoDescription": {
+    "message": "Säätimet näkyvät videon käynnistyessä."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Muuta asetuksia"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Muuta asetuksia laajennuksen kuvakkeesta."
+  },
+  "builtByLabel": {
+    "message": "Tekijä"
+  }
+}

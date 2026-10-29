@@ -35,7 +35,7 @@
   opacity: 1;
 }
 
-.better-ig-fullscreen-button.default:not(.in-controls) {
+.better-ig-fullscreen-button.default:not(.in-controls):not(.in-dock) {
   top: auto !important;
   right: 58px !important;
   bottom: 12px !important;
@@ -60,6 +60,7 @@
   border: 0;
   background: transparent;
   box-shadow: none;
+  color: var(--bigv-active-color);
   opacity: 0.92;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -73,6 +74,7 @@
 .bigv-fullscreen-control .better-ig-fullscreen-button.in-controls svg {
   width: 26px;
   height: 26px;
+  filter: none;
 }
 
 .bigv-fullscreen-text {

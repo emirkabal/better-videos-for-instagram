@@ -3,9 +3,11 @@ import icon from "url:~/assets/icon.png"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import {
+  CLICK_TO_PAUSE_STORAGE_KEY,
   CONTROLLER_ENABLED_STORAGE_KEY,
   UNINSTALL_FEEDBACK_URL
 } from "~utils/constants"
+import { getUiDirection, t } from "~utils/i18n"
 
 import { version } from "../../package.json"
 
@@ -22,13 +24,21 @@ export default function Popup() {
     true
   )
 
+  const [clickToPause, setClickToPause] = useStorage<boolean>(
+    CLICK_TO_PAUSE_STORAGE_KEY,
+    (stored) => stored ?? true
+  )
+
   const [volumeReduction, setVolumeReduction] = useStorage(
     "bigv-max-volume-balance",
     100
   )
 
   return (
-    <main className="popup">
+    <main
+      className="popup"
+      dir={getUiDirection()}
+      lang={chrome.i18n.getUILanguage?.() || "en"}>
       <header className="header">
         <div className="brand">
           <img src={icon} alt="" />
@@ -55,14 +65,20 @@ export default function Popup() {
               className={`status-dot ${controllerEnabled ? "enabled" : ""}`}
             />
             <strong>
-              {controllerEnabled ? "Extension enabled" : "Extension paused"}
+              {t(
+                controllerEnabled
+                  ? "extensionEnabledLabel"
+                  : "extensionPausedLabel"
+              )}
             </strong>
           </div>
 
           <p>
-            {controllerEnabled
-              ? "Better controls are active on Instagram."
-              : "Instagram will use its default video controls."}
+            {t(
+              controllerEnabled
+                ? "extensionEnabledDescription"
+                : "extensionPausedDescription"
+            )}
           </p>
         </div>
 
@@ -71,19 +87,40 @@ export default function Popup() {
           className="switch"
           role="switch"
           aria-checked={controllerEnabled}
-          aria-label={`${controllerEnabled ? "Disable" : "Enable"} controller`}
+          aria-label={t(
+            controllerEnabled
+              ? "disableControllerLabel"
+              : "enableControllerLabel"
+          )}
           onClick={() => void setControllerEnabled(!controllerEnabled)}>
           <span />
         </button>
       </section>
 
       <fieldset className="settings" disabled={!controllerEnabled}>
-        <legend>Settings</legend>
+        <legend>{t("settingsLabel")}</legend>
 
         <div className="setting">
           <div>
-            <strong>Max volume</strong>
-            <span>Boost quieter videos</span>
+            <strong>{t("clickToPauseLabel")}</strong>
+            <span>{t("clickToPauseDescription")}</span>
+          </div>
+
+          <label className="small-switch">
+            <input
+              type="checkbox"
+              aria-label={t("clickToPauseDescription")}
+              checked={clickToPause}
+              onChange={(event) => void setClickToPause(event.target.checked)}
+            />
+            <span />
+          </label>
+        </div>
+
+        <div className="setting">
+          <div>
+            <strong>{t("volumeReductionLabel")}</strong>
+            <span>{t("volumeReductionDescription")}</span>
           </div>
 
           <div className="volume-options">
@@ -98,7 +135,13 @@ export default function Popup() {
                     void setVolumeReduction(Number(event.target.value))
                   }
                 />
-                <span>{value === 100 ? "1×" : `${value / 100}×`}</span>
+                <span>
+                  {value === 100 ? (
+                    t("offLabel")
+                  ) : (
+                    <bdi dir="ltr">÷{value / 100}</bdi>
+                  )}
+                </span>
               </label>
             ))}
           </div>
@@ -106,13 +149,14 @@ export default function Popup() {
 
         <div className="setting">
           <div>
-            <strong>Pause auto-skip</strong>
-            <span>While Reel comments are open</span>
+            <strong>{t("pauseAutoskipLabel")}</strong>
+            <span>{t("pauseAutoskipDescription")}</span>
           </div>
 
           <label className="small-switch">
             <input
               type="checkbox"
+              aria-label={`${t("pauseAutoskipLabel")}: ${t("pauseAutoskipDescription")}`}
               checked={pauseOnComments}
               onChange={(event) =>
                 void setPauseOnComments(event.target.checked)
@@ -129,18 +173,18 @@ export default function Popup() {
         target="_blank"
         rel="noreferrer">
         <span>☕</span>
-        Support the project
+        {t("supportProjectLabel")}
       </a>
 
       <footer>
         <nav>
           <a href={UNINSTALL_FEEDBACK_URL} target="_blank" rel="noreferrer">
-            Report a bug
+            {t("reportBugLabel")}
           </a>
 
           <span>·</span>
 
-          <a href="mailto:me@emirkabal.com">Contact</a>
+          <a href="mailto:me@emirkabal.com">{t("contactLabel")}</a>
         </nav>
 
         <a
