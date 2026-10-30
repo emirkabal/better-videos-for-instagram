@@ -6,12 +6,13 @@ A browser extension that makes Instagram videos easier to watch and control. Ava
 
 ## Features
 
-- Play, pause, and change video speed
-- Adjust volume with saved preferences
-- Picture-in-Picture and fullscreen modes
-- Auto-skip Reels
-- Keyboard shortcuts for playback, seeking, and volume
-- Support for Feed, Reels, and Stories
+- Playback & Speed control support
+- Volume control (remembered) support
+- Picture in Picture support
+- Fullscreen support
+- Autoskip support
+- Keyboard shortcuts
+- Supports all videos on the Instagram
 
 ## Install
 
