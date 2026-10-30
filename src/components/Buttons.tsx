@@ -1,6 +1,6 @@
 // import DownloadButton from "./Controller/Buttons/Download"
 
-import { Variant } from "~modules/Injector"
+import { Variant } from "@/features/player/Injector"
 
 import Autoskip from "./Controller/Buttons/Autoskip"
 import FullscreenButton from "./Controller/Buttons/Fullscreen"

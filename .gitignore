@@ -32,3 +32,9 @@ dist/
 # typescript
 .tsbuildinfo
 *.tsbuildinfo
+
+# WXT
+.wxt/
+.output/
+
+outputs/

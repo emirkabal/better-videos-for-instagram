@@ -36,6 +36,7 @@ function setup(native = false) {
       getAttribute: (key) => attributes.get(key)
     },
     querySelector: () => scroller,
+    scrollingElement: scroller,
     querySelectorAll: () => [],
     hidden: false,
     hasFocus: () => true,
@@ -152,7 +153,7 @@ function setup(native = false) {
     mainDocument.pictureInPictureElement = null
   }
   const { PictureInPictureController } = loadSource(
-    "src/utils/picture-in-picture.ts",
+    "src/utils/pip/controller.ts",
     {
       window: opener,
       document: mainDocument,
@@ -160,6 +161,7 @@ function setup(native = false) {
       chrome: { i18n: { getMessage: () => "", getUILanguage: () => "en" } },
       localStorage: { setItem() {} },
       StorageEvent: Event,
+      HTMLElement: Object,
       Event
     }
   )
@@ -368,6 +370,72 @@ test("a variant change cancels a PiP window that is still opening", async () => 
   const { controller, video, pipWindow } = setup()
   controller.setPageMode("reels")
   const opening = controller.toggle(video("source"), true)
+  controller.setPageMode("global")
+  await opening
+  assert.equal(pipWindow.closed, true)
+  assert.equal(controller.getSnapshot(), false)
+  assert.equal(controller.getPending(), false)
+})
+
+test("Story photo PiP follows photo/video/photo changes in one window and disposes captured tracks", async () => {
+  const { controller, video, nodes, windowRequests, captured, pipWindow } =
+    setup()
+  const updates = []
+  controller.setControlsRenderer(() => ({
+    update: (media) => updates.push(media.id),
+    updateImage: (media) => updates.push(media.id),
+    destroy() {}
+  }))
+  const first = {
+    tagName: "IMG",
+    id: "photo1",
+    currentSrc: "https://cdninstagram.com/1.jpg"
+  }
+  const second = {
+    tagName: "IMG",
+    id: "photo2",
+    currentSrc: "https://cdninstagram.com/2.jpg"
+  }
+  controller.setPageMode("stories")
+  await controller.toggleImageStory(first)
+  const photo = nodes.find((node) => node.tag === "img")
+  assert.equal(photo.src, first.currentSrc)
+  controller.followStory(second)
+  assert.equal(photo.src, second.currentSrc)
+  const clip = video("story-video")
+  clip.paused = true
+  controller.followStory(clip)
+  assert.equal(photo.hidden, true)
+  assert.equal(clip.paused, false)
+  controller.followStory(first)
+  assert.equal(photo.hidden, false)
+  assert.equal(photo.src, first.currentSrc)
+  assert.equal(clip.paused, true)
+  assert.equal(captured[0].stopped, true)
+  assert.equal(windowRequests.length, 1)
+  assert.deepEqual(updates, ["photo1", "photo2", "story-video", "photo1"])
+  controller.close()
+  assert.equal(pipWindow.closed, true)
+  controller.followStory(second)
+  assert.equal(
+    windowRequests.length,
+    1,
+    "closed Story PiP never reopens on navigation"
+  )
+})
+
+test("photo Story support is capability based and pending opens are cancelled on page changes", async () => {
+  const nativeOnly = setup(true)
+  assert.equal(nativeOnly.controller.supportedImageStory(), false)
+  await assert.rejects(() =>
+    nativeOnly.controller.toggleImageStory({ tagName: "IMG", src: "photo.jpg" })
+  )
+  const { controller, pipWindow } = setup()
+  controller.setPageMode("stories")
+  const opening = controller.toggleImageStory({
+    tagName: "IMG",
+    src: "photo.jpg"
+  })
   controller.setPageMode("global")
   await opening
   assert.equal(pipWindow.closed, true)

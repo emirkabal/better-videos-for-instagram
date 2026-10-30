@@ -1,18 +1,22 @@
 import { useState, useSyncExternalStore } from "react"
 
-import { t } from "~utils/i18n"
-import { pictureInPicture } from "~utils/picture-in-picture"
+import { t } from "@/utils/i18n"
+import { pictureInPicture } from "@/utils/pip/controller"
 
 import { renderPipControls } from "../../PipControls"
 
 export default function PictureInPictureButton({
   video,
+  image,
   followReels = false,
+  followStories = false,
   placement = "dock",
   showLabel = true
 }: {
-  video: HTMLVideoElement
+  video?: HTMLVideoElement
+  image?: HTMLImageElement
   followReels?: boolean
+  followStories?: boolean
   placement?: "dock" | "controls"
   showLabel?: boolean
 }) {
@@ -25,7 +29,12 @@ export default function PictureInPictureButton({
     pictureInPicture.getPending
   )
   const [error, setError] = useState(false)
-  if (!pictureInPicture.supported(video)) return null
+  if (
+    !(image
+      ? pictureInPicture.supportedImageStory()
+      : video && pictureInPicture.supported(video))
+  )
+    return null
   const label = t(active ? "exitPipLabel" : "pipLabel")
   return (
     <div
@@ -42,9 +51,12 @@ export default function PictureInPictureButton({
           event.stopPropagation()
           setError(false)
           pictureInPicture.setControlsRenderer(renderPipControls)
-          void pictureInPicture
-            .toggle(video, followReels)
-            .catch(() => setError(true))
+          const result = image
+            ? pictureInPicture.toggleImageStory(image)
+            : video
+              ? pictureInPicture.toggle(video, followReels, followStories)
+              : Promise.resolve()
+          void result.catch(() => setError(true))
         }}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="3" y="4" width="18" height="16" rx="2" />

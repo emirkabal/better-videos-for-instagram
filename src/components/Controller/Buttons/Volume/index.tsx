@@ -1,9 +1,9 @@
 import "./style.css"
 
-import VolumeMutedIcon from "react:../../icons/volume-off.svg"
-import VolumeIcon from "react:../../icons/volume.svg"
+import VolumeMutedIcon from "../../icons/volume-off.svg?react"
+import VolumeIcon from "../../icons/volume.svg?react"
 
-import { t } from "~utils/i18n"
+import { t } from "@/utils/i18n"
 
 type Props = {
   muted: boolean

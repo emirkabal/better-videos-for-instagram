@@ -1,0 +1,254 @@
+{
+  "appName": {
+    "message": "Better Videos for Instagram: Playback & Volume"
+  },
+  "appDescription": {
+    "message": "Control Instagram playback, volume, speed and picture-in-picture."
+  },
+  "autoskipLabel": {
+    "message": "Auto-skip"
+  },
+  "downloadLabel": {
+    "message": "Download"
+  },
+  "videoControlsLabel": {
+    "message": "Video controls"
+  },
+  "muteLabel": {
+    "message": "Mute"
+  },
+  "unmuteLabel": {
+    "message": "Unmute"
+  },
+  "volumeLabel": {
+    "message": "Volume"
+  },
+  "playbackSpeedLabel": {
+    "message": "Playback speed"
+  },
+  "videoProgressLabel": {
+    "message": "Video progress"
+  },
+  "enterFullscreenLabel": {
+    "message": "Enter fullscreen"
+  },
+  "exitFullscreenLabel": {
+    "message": "Exit fullscreen"
+  },
+  "fullscreenLabel": {
+    "message": "Fullscreen"
+  },
+  "exitLabel": {
+    "message": "Exit"
+  },
+  "openReelLabel": {
+    "message": "Open this video in Reels"
+  },
+  "pipLabel": {
+    "message": "Picture-in-Picture"
+  },
+  "exitPipLabel": {
+    "message": "Exit Picture-in-Picture"
+  },
+  "pipErrorLabel": {
+    "message": "Could not open PiP. Play the video and try again."
+  },
+  "playLabel": {
+    "message": "Play"
+  },
+  "pauseLabel": {
+    "message": "Pause"
+  },
+  "nextReelLabel": {
+    "message": "Next Reel"
+  },
+  "previousReelLabel": {
+    "message": "Previous Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Extension enabled"
+  },
+  "extensionPausedLabel": {
+    "message": "Extension paused"
+  },
+  "extensionEnabledDescription": {
+    "message": "Enabled for Instagram. Check this page’s connection below."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram uses its default controls."
+  },
+  "enableControllerLabel": {
+    "message": "Enable controller"
+  },
+  "disableControllerLabel": {
+    "message": "Disable controller"
+  },
+  "settingsLabel": {
+    "message": "Settings"
+  },
+  "clickToPauseLabel": {
+    "message": "Click to pause"
+  },
+  "clickToPauseDescription": {
+    "message": "Pause feed videos instead of opening Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Volume reduction"
+  },
+  "volumeReductionDescription": {
+    "message": "Lower the maximum volume"
+  },
+  "offLabel": {
+    "message": "Off"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Pause auto-skip"
+  },
+  "pauseAutoskipDescription": {
+    "message": "While Reel comments are open"
+  },
+  "supportProjectLabel": {
+    "message": "Support the project"
+  },
+  "reportBugLabel": {
+    "message": "Report a bug"
+  },
+  "contactLabel": {
+    "message": "Contact"
+  },
+  "openInstagramLabel": {
+    "message": "Open Instagram"
+  },
+  "installedLabel": {
+    "message": "Installed successfully"
+  },
+  "updatedLabel": {
+    "message": "Updated successfully"
+  },
+  "backToTopLabel": {
+    "message": "Back to top"
+  },
+  "readyLabel": {
+    "message": "Ready to go"
+  },
+  "noSetupLabel": {
+    "message": "No setup required."
+  },
+  "setupDescription": {
+    "message": "Open Instagram and play a video to use the controls."
+  },
+  "openInstagramDescription": {
+    "message": "Visit any page with a supported video."
+  },
+  "playVideoDescription": {
+    "message": "The controls appear when a video starts."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Adjust preferences"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Change your preferences from the extension icon."
+  },
+  "builtByLabel": {
+    "message": "Built by"
+  },
+  "diagnosticsLabel": {
+    "message": "Troubleshoot this page"
+  },
+  "diagnosticsOpenInstagram": {
+    "message": "Open an Instagram tab, then check again."
+  },
+  "diagnosticsReady": {
+    "message": "Video controls are connected. You can copy these details into a bug report."
+  },
+  "diagnosticsNoControls": {
+    "message": "No controls are attached yet. Show a video, then check again. The details below can help with a bug report."
+  },
+  "diagnosticsReload": {
+    "message": "This tab is not connected to the extension. Reload Instagram after installing or updating, and check site access in your browser settings."
+  },
+  "diagnosticsCheck": {
+    "message": "Check again"
+  },
+  "diagnosticsReloadButton": {
+    "message": "Reload Instagram"
+  },
+  "whatsNewLabel": {
+    "message": "What’s new"
+  },
+  "clickBehaviorLabel": {
+    "message": "Video clicks"
+  },
+  "clickModeNative": {
+    "message": "Native"
+  },
+  "clickModePause": {
+    "message": "Pause"
+  },
+  "clickModePauseReels": {
+    "message": "Pause + Reels"
+  },
+  "clickModeNativeDescription": {
+    "message": "Keep Instagram’s default click behavior."
+  },
+  "clickModePauseDescription": {
+    "message": "Click a video to pause or resume it."
+  },
+  "clickModePauseReelsDescription": {
+    "message": "Click to pause or play. Use the Reels button to open the same video in Instagram’s Reels view."
+  },
+  "featureUpdatesLabel": {
+    "message": "Show feature updates"
+  },
+  "featureUpdatesDescription": {
+    "message": "Open what’s new for feature releases, such as 1.6.0. Bug-fix updates stay quiet."
+  },
+  "previousStoryLabel": {
+    "message": "Previous Story"
+  },
+  "nextStoryLabel": {
+    "message": "Next Story"
+  },
+  "secondsShortLabel": {
+    "message": "s"
+  },
+  "seekBackwardLabel": {
+    "message": "Seek backward"
+  },
+  "seekForwardLabel": {
+    "message": "Seek forward"
+  },
+  "playingFeedback": {
+    "message": "Playing"
+  },
+  "pausedFeedback": {
+    "message": "Paused"
+  },
+  "mutedFeedback": {
+    "message": "Muted"
+  },
+  "unmutedFeedback": {
+    "message": "Sound on"
+  },
+  "keyboardShortcutsLabel": {
+    "message": "Keyboard shortcuts"
+  },
+  "playPauseShortcutLabel": {
+    "message": "Play / pause"
+  },
+  "seek5ShortcutLabel": {
+    "message": "Seek ±5 seconds"
+  },
+  "seek10ShortcutLabel": {
+    "message": "Seek ±10 seconds"
+  },
+  "volumeShortcutLabel": {
+    "message": "Volume ±5%"
+  },
+  "muteShortcutLabel": {
+    "message": "Mute / unmute"
+  },
+  "keyboardShortcutsHint": {
+    "message": "Reels: Space keeps Instagram’s behavior; use K to play/pause. Feed, Story videos and PiP also accept Space for playback. Reels/Stories: ↑ / ↓ keeps native navigation; use + / − for volume. Feed/PiP also accepts ↑ / ↓ for volume. In Feed, hover or select a video first. Text fields and menus keep their keys. Photo Story PiP: ← / → switches Stories."
+  }
+}

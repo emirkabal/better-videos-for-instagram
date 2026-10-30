@@ -1,0 +1,91 @@
+.bigv-update-preferences {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-block: 18px 0;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  color: #f5f5f5;
+  background: #141414;
+  font:
+    12px/1.4 system-ui,
+    sans-serif;
+}
+.bigv-update-preferences > div {
+  min-width: 0;
+}
+.bigv-update-preferences label {
+  cursor: pointer;
+  font-weight: 600;
+}
+.bigv-update-preferences p {
+  margin: 4px 0 0;
+  color: #aaa;
+  font-size: 11px;
+}
+.bigv-update-preferences.is-floating {
+  position: fixed;
+  inset-inline: 16px;
+  bottom: 16px;
+  width: min(720px, calc(100% - 32px));
+  margin-inline: auto;
+  z-index: 100;
+  padding: 16px 20px;
+  box-shadow: 0 8px 36px #0009;
+}
+.bigv-update-switch {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+.bigv-update-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.bigv-update-switch span {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  background: #454545;
+  pointer-events: none;
+}
+.bigv-update-switch span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 3px;
+  inset-inline-start: 3px;
+  border-radius: 50%;
+  background: #eee;
+  transition: transform 120ms;
+}
+.bigv-update-switch input:checked + span {
+  background: #f1f1f1;
+}
+.bigv-update-switch input:checked + span::after {
+  background: #111;
+  transform: translateX(16px);
+}
+[dir="rtl"] .bigv-update-switch input:checked + span::after {
+  transform: translateX(-16px);
+}
+.bigv-update-switch input:focus-visible + span {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+html.bigv-welcome-document body {
+  padding-bottom: 110px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigv-update-switch span::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "chrome-mv3-prod": {
+    "permissions": ["storage", "scripting"],
+    "host_permissions": ["https://www.instagram.com/*"],
+    "default_locale": "en",
+    "matches": ["https://www.instagram.com/*"]
+  },
+  "firefox-mv2-prod": {
+    "permissions": ["storage", "scripting", "https://www.instagram.com/*"],
+    "default_locale": "en",
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "7f5862eb-3ab3-424c-aa6b-cf9311fba52f@emirkabal.com"
+      }
+    },
+    "matches": ["https://www.instagram.com/*"]
+  }
+}

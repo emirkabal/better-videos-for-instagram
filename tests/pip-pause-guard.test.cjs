@@ -2,6 +2,61 @@ const assert = require("node:assert/strict")
 const test = require("node:test")
 const loadSource = require("./load-source.cjs")
 
+test("Feed fullscreen pins its source and blocks other autoplay, while explicit pause and exit work", async () => {
+  class Media {
+    pauses = 0
+    plays = 0
+    pause() {
+      this.pauses++
+    }
+    play() {
+      this.plays++
+      return Promise.resolve()
+    }
+  }
+  class Video extends Media {
+    ended = false
+    intended = "true"
+    getAttribute() {
+      return this.intended
+    }
+  }
+  const source = new Video()
+  const background = new Video()
+  const doc = {
+    hidden: false,
+    hasFocus: () => true,
+    fullscreenElement: { contains: (value) => value === source },
+    querySelector: () => source
+  }
+  loadSource("src/features/instagram/bridges/pip-pause-guard.ts", {
+    window: {},
+    document: doc,
+    HTMLMediaElement: Media,
+    HTMLVideoElement: Video
+  }).installPipPauseGuard()
+  source.pause()
+  assert.equal(
+    source.pauses,
+    0,
+    "Instagram's reflow pause cannot stop the selected source"
+  )
+  await background.play()
+  assert.equal(background.plays, 0, "the second Feed video cannot start")
+  source.intended = "false"
+  source.pause()
+  assert.equal(source.pauses, 1, "user pause still works")
+  doc.fullscreenElement = null
+  await background.play()
+  source.pause()
+  assert.equal(background.plays, 1)
+  assert.equal(
+    source.pauses,
+    2,
+    "stale markers cannot affect ordinary playback"
+  )
+})
+
 test("the MAIN-world guard protects only a playing source in a live PiP session", () => {
   class Media {
     pauses = 0
@@ -23,12 +78,12 @@ test("the MAIN-world guard protects only a playing source in a live PiP session"
     pictureInPictureElement: null
   }
   const window = { documentPictureInPicture: { window: pipWindow } }
-  loadSource("src/contents/instagram-pip-main.ts", {
+  loadSource("src/features/instagram/bridges/pip-pause-guard.ts", {
     window,
     document,
     HTMLMediaElement: Media,
     HTMLVideoElement: Video
-  })
+  }).installPipPauseGuard()
   const source = new Video()
   source.pause()
   assert.equal(source.pauses, 0)
@@ -88,13 +143,13 @@ test("only live Reel PiP keeps pagination visible/focused and native state retur
   const document = new Doc(),
     pip = { closed: false }
   const window = { documentPictureInPicture: { window: pip } }
-  loadSource("src/contents/instagram-pip-main.ts", {
+  loadSource("src/features/instagram/bridges/pip-pause-guard.ts", {
     Document: Doc,
     window,
     document,
     HTMLMediaElement: Media,
     HTMLVideoElement: Video
-  })
+  }).installPipPauseGuard()
   assert.equal(
     document.hidden,
     true,

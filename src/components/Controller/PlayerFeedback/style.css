@@ -1,0 +1,55 @@
+.bigv-player-feedback {
+  position: absolute;
+  z-index: 30;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 76px;
+  min-height: 76px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 50%;
+  background: rgb(20 20 22 / 78%);
+  color: #fff;
+  font: 600 13px/18px system-ui;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
+  backdrop-filter: blur(12px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 140ms ease;
+  pointer-events: none;
+  user-select: none;
+}
+.bigv-player-feedback.is-visible {
+  opacity: 1;
+}
+.bigv-player-feedback.is-backward {
+  left: 28%;
+}
+.bigv-player-feedback.is-forward {
+  left: 72%;
+}
+.bigv-player-feedback svg {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+.bigv-feedback-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigv-player-feedback {
+    transition: none;
+  }
+}

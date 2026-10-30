@@ -2,13 +2,15 @@ import { useCallback, useEffect, useState } from "react"
 
 import "./style.css"
 
-import cn from "classnames"
+import { cn } from "cn"
 
-import { Variant } from "~modules/Injector"
-import { t } from "~utils/i18n"
+import { Variant } from "@/features/player/Injector"
+import { t } from "@/utils/i18n"
+import { prepareFullscreenVideo } from "@/utils/fullscreen/playback"
 
 type Props = {
   controllerId: string
+  video?: HTMLVideoElement
   placement?: "controls" | "overlay" | "dock"
   variant?: Variant
   showLabel?: boolean
@@ -16,6 +18,7 @@ type Props = {
 
 export default function FullscreenButton({
   controllerId,
+  video,
   placement = "overlay",
   variant,
   showLabel = true
@@ -57,10 +60,13 @@ export default function FullscreenButton({
     const target = getFullscreenTarget()
     if (!target) return
 
+    let cancelPreparation: (() => void) | undefined
     try {
       if (document.fullscreenElement === target) {
         await document.exitFullscreen()
       } else if (!document.fullscreenElement) {
+        if (video && variant !== Variant.Reels)
+          cancelPreparation = prepareFullscreenVideo(video)
         target.classList.add("bigv-fullscreen-target")
         target.classList.toggle(
           "bigv-reels-fullscreen-target",
@@ -69,6 +75,7 @@ export default function FullscreenButton({
         await target.requestFullscreen()
       }
     } catch {
+      cancelPreparation?.()
       target.classList.remove(
         "bigv-fullscreen-target",
         "bigv-reels-fullscreen-target"

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
-import { useStorage } from "@plasmohq/storage/hook"
+import { useSetting } from "@/hooks/use-setting"
+import { settings } from "@/utils/storage/settings"
 
-import { useVideoMuted } from "~hooks/use-video-muted"
-import type { Variant } from "~modules/Injector"
+import { useVideoMuted } from "@/hooks/use-video-muted"
+import type { Variant } from "@/features/player/Injector"
+import { setUserAudio } from "@/utils/media/audio"
 
 import VolumeControl from "./Control"
 
@@ -26,7 +28,7 @@ export default function Volume({
   const [, setMuted] = useLocalStorage("better-instagram-videos-muted", false)
   const muted = useVideoMuted(video)
   const [volumeDragging, setVolumeDragging] = useState(false)
-  const [maxVolumeBalance] = useStorage("bigv-max-volume-balance", 100)
+  const [maxVolumeBalance] = useSetting(settings.maxVolumeBalance)
   const safeBalance = Number.isFinite(maxVolumeBalance)
     ? Math.max(maxVolumeBalance, 100)
     : 100
@@ -50,16 +52,14 @@ export default function Volume({
       orientation={orientation}
       onMuted={(nextMuted) => {
         setMuted(nextMuted)
-        video.muted = nextMuted
+        setUserAudio(video, { volume: video.volume, muted: nextMuted })
       }}
       onProgress={(progress) => {
         const nextVolume = Math.min(Math.max(progress / safeBalance, 0), 1)
         setVolume(nextVolume)
-        video.volume = nextVolume
-        if (orientation === "horizontal") {
-          setMuted(false)
-          video.muted = false
-        }
+        const nextMuted = nextVolume === 0
+        setMuted(nextMuted)
+        setUserAudio(video, { volume: nextVolume, muted: nextMuted })
       }}
     />
   )

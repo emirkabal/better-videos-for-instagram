@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-import type { InstagramSpritesheet } from "~utils/instagram-spritesheet-bridge"
+import type { InstagramSpritesheet } from "@/features/instagram/bridges/spritesheet-client"
 
 type Props = {
   duration: number
@@ -60,8 +60,8 @@ export default function InstagramSpritePreview({
 }: Props) {
   const isLandscape = Boolean(
     video?.videoWidth &&
-      video.videoHeight &&
-      video.videoWidth > video.videoHeight
+    video.videoHeight &&
+    video.videoWidth > video.videoHeight
   )
   const renderWidth = isLandscape ? 140 : 79
   const renderHeight = isLandscape ? 79 : 140

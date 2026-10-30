@@ -2,8 +2,8 @@ const assert = require("node:assert/strict")
 const test = require("node:test")
 const loadSource = require("./load-source.cjs")
 const { navigateReel, getReelScroller } = loadSource(
-  "src/utils/reel-navigation.ts",
-  { Event }
+  "src/features/instagram/navigation/reels.ts",
+  { Event, HTMLElement: Object }
 )
 
 function setup() {
@@ -31,6 +31,7 @@ function setup() {
   })
   const doc = {
     querySelector: () => scroller,
+    scrollingElement: scroller,
     defaultView: { getComputedStyle: (node) => node.style }
   }
   const video = { ownerDocument: doc, parentElement: null }
@@ -90,6 +91,7 @@ test("navigation uses the video's real scroll ancestor instead of an unrelated m
   const { video, scroller } = setup()
   const nested = {
     clientHeight: 500,
+    scrollHeight: 1500,
     style: { overflowY: "auto", scrollSnapType: "none" },
     parentElement: null
   }

@@ -13,7 +13,7 @@ function setup() {
     paused: false,
     ended: false
   })
-  const api = loadSource("src/utils/playback-progress.ts", {
+  const api = loadSource("src/utils/playback/progress.ts", {
     document,
     requestAnimationFrame: (callback) => {
       frames.set(++nextFrame, callback)

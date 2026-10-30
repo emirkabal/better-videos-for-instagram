@@ -1,0 +1,230 @@
+{
+  "appName": {
+    "message": "Улучшенное видео для Instagram: Воспроизведение и громкость"
+  },
+  "appDescription": {
+    "message": "Управляйте воспроизведением, громкостью, скоростью и режимом «картинка в картинке» в Instagram."
+  },
+  "autoskipLabel": {
+    "message": "Автопереход"
+  },
+  "downloadLabel": {
+    "message": "Скачать"
+  },
+  "videoControlsLabel": {
+    "message": "Управление видео"
+  },
+  "muteLabel": {
+    "message": "Выключить звук"
+  },
+  "unmuteLabel": {
+    "message": "Включить звук"
+  },
+  "volumeLabel": {
+    "message": "Громкость"
+  },
+  "playbackSpeedLabel": {
+    "message": "Скорость воспроизведения"
+  },
+  "videoProgressLabel": {
+    "message": "Прогресс видео"
+  },
+  "enterFullscreenLabel": {
+    "message": "Во весь экран"
+  },
+  "exitFullscreenLabel": {
+    "message": "Выйти из полноэкранного режима"
+  },
+  "fullscreenLabel": {
+    "message": "Полный экран"
+  },
+  "exitLabel": {
+    "message": "Выйти"
+  },
+  "openReelLabel": {
+    "message": "Открыть это видео в Reels"
+  },
+  "pipLabel": {
+    "message": "Картинка в картинке"
+  },
+  "exitPipLabel": {
+    "message": "Закрыть картинку в картинке"
+  },
+  "pipErrorLabel": {
+    "message": "Не удалось открыть PiP. Запустите видео и повторите попытку."
+  },
+  "playLabel": {
+    "message": "Воспроизвести"
+  },
+  "pauseLabel": {
+    "message": "Пауза"
+  },
+  "nextReelLabel": {
+    "message": "Следующий Reel"
+  },
+  "previousReelLabel": {
+    "message": "Предыдущий Reels"
+  },
+  "extensionEnabledLabel": {
+    "message": "Расширение включено"
+  },
+  "extensionPausedLabel": {
+    "message": "Расширение приостановлено"
+  },
+  "extensionEnabledDescription": {
+    "message": "Улучшенное управление активно в Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram использует стандартное управление."
+  },
+  "enableControllerLabel": {
+    "message": "Включить управление"
+  },
+  "disableControllerLabel": {
+    "message": "Отключить управление"
+  },
+  "settingsLabel": {
+    "message": "Настройки"
+  },
+  "clickToPauseLabel": {
+    "message": "Нажатие для паузы"
+  },
+  "clickToPauseDescription": {
+    "message": "Приостанавливать видео в ленте вместо открытия Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "Снижение громкости"
+  },
+  "volumeReductionDescription": {
+    "message": "Уменьшить максимальную громкость"
+  },
+  "offLabel": {
+    "message": "Выкл."
+  },
+  "pauseAutoskipLabel": {
+    "message": "Приостановить автопереход"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Когда открыты комментарии Reel"
+  },
+  "supportProjectLabel": {
+    "message": "Поддержать проект"
+  },
+  "reportBugLabel": {
+    "message": "Сообщить об ошибке"
+  },
+  "contactLabel": {
+    "message": "Контакты"
+  },
+  "openInstagramLabel": {
+    "message": "Открыть Instagram"
+  },
+  "installedLabel": {
+    "message": "Установка завершена"
+  },
+  "updatedLabel": {
+    "message": "Обновление завершено"
+  },
+  "backToTopLabel": {
+    "message": "Наверх"
+  },
+  "readyLabel": {
+    "message": "Всё готово"
+  },
+  "noSetupLabel": {
+    "message": "Настройка не требуется."
+  },
+  "setupDescription": {
+    "message": "Откройте Instagram и запустите видео."
+  },
+  "openInstagramDescription": {
+    "message": "Откройте страницу с поддерживаемым видео."
+  },
+  "playVideoDescription": {
+    "message": "Управление появится при запуске видео."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Изменить настройки"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Меняйте настройки через значок расширения."
+  },
+  "builtByLabel": {
+    "message": "Разработчик"
+  },
+  "clickBehaviorLabel": {
+    "message": "Нажатие на видео"
+  },
+  "clickModeNative": {
+    "message": "Instagram"
+  },
+  "clickModePause": {
+    "message": "Пауза"
+  },
+  "clickModePauseReels": {
+    "message": "Пауза + Reels"
+  },
+  "clickModeNativeDescription": {
+    "message": "Сохранить стандартное поведение Instagram."
+  },
+  "clickModePauseDescription": {
+    "message": "Нажмите, чтобы приостановить или продолжить видео."
+  },
+  "clickModePauseReelsDescription": {
+    "message": "Нажатие ставит на паузу или запускает видео. Кнопка Reels открывает это же видео в Reels."
+  },
+  "featureUpdatesLabel": {
+    "message": "Показывать новые функции"
+  },
+  "featureUpdatesDescription": {
+    "message": "Открывать страницу новинок в версиях вроде 1.6.0. Исправления ошибок не открывают страницу."
+  },
+  "previousStoryLabel": {
+    "message": "Предыдущая история"
+  },
+  "nextStoryLabel": {
+    "message": "Следующая история"
+  },
+  "secondsShortLabel": {
+    "message": "с"
+  },
+  "seekBackwardLabel": {
+    "message": "Перемотать назад"
+  },
+  "seekForwardLabel": {
+    "message": "Перемотать вперёд"
+  },
+  "playingFeedback": {
+    "message": "Воспроизведение"
+  },
+  "pausedFeedback": {
+    "message": "Пауза"
+  },
+  "mutedFeedback": {
+    "message": "Звук выключен"
+  },
+  "unmutedFeedback": {
+    "message": "Звук включён"
+  },
+  "keyboardShortcutsLabel": {
+    "message": "Горячие клавиши"
+  },
+  "playPauseShortcutLabel": {
+    "message": "Воспроизвести / пауза"
+  },
+  "seek5ShortcutLabel": {
+    "message": "Назад / вперёд на 5 с"
+  },
+  "seek10ShortcutLabel": {
+    "message": "Назад / вперёд на 10 с"
+  },
+  "volumeShortcutLabel": {
+    "message": "Громкость ±5 %"
+  },
+  "muteShortcutLabel": {
+    "message": "Выключить / включить звук"
+  },
+  "keyboardShortcutsHint": {
+    "message": "Reels: Space сохраняет поведение Instagram; K — воспроизведение/пауза. В ленте, видеоисториях и PiP для этого также работает Space. Reels/истории: ↑ / ↓ сохраняет навигацию Instagram; + / − меняет громкость. В ленте/PiP громкость также меняется ↑ / ↓. В ленте сначала наведите указатель на видео или выберите его. В текстовых полях и меню клавиши работают как обычно. Фотоистория в PiP: ← / → переключает истории."
+  }
+}

@@ -1,13 +1,15 @@
 {
-  "extends": "plasmo/templates/tsconfig.base",
-  "exclude": ["node_modules"],
-  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "extends": "./.wxt/tsconfig.json",
+  "exclude": ["node_modules", "build", "dist", "outputs", ".output", ".plasmo"],
+  "include": [".wxt/wxt.d.ts", "src/**/*.ts", "src/**/*.tsx", "wxt.config.ts"],
   "compilerOptions": {
-    "paths": {
-      "~*": ["./src/*"],
-      "~~*": ["./*"]
-    },
-    "baseUrl": ".",
-    "types": ["node", "@types/react", "@types/chrome"]
+    "jsx": "react-jsx",
+    "types": [
+      "node",
+      "react",
+      "chrome",
+      "vite/client",
+      "vite-plugin-svgr/client"
+    ]
   }
 }

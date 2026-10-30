@@ -16,6 +16,20 @@
   --bigv-active-knob-color: #0c1014;
 }
 
+.bigv-controller-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bigv-controller-host .better-ig-controller {
+  pointer-events: auto;
+  width: calc(100% - 16px);
+  left: 8px;
+  bottom: 4px;
+}
+
 .better-ig-controller {
   display: flex;
   flex-direction: column;
@@ -29,9 +43,7 @@
 }
 
 .better-ig-controller.stories {
-  top: 4px;
-  bottom: auto;
-  position: static;
+  position: absolute;
 }
 
 .bigv-fullscreen-target:fullscreen {
@@ -47,6 +59,11 @@
 
 .bigv-fullscreen-target:fullscreen::backdrop {
   background: #000;
+}
+
+[data-bigv-fullscreen-link],
+[data-bigv-fullscreen-surface] {
+  cursor: default !important;
 }
 
 .bigv-fullscreen-target:not(.bigv-reels-fullscreen-target):fullscreen video {
@@ -164,11 +181,9 @@
   -webkit-backdrop-filter: blur(10px);
   isolation: isolate;
   opacity: 0;
-  transform: translateY(3px);
+  transform: none;
   pointer-events: none;
-  transition:
-    opacity 160ms ease,
-    transform 160ms ease;
+  transition: opacity 160ms ease;
 }
 
 .bigv-player-dock.is-visible,
@@ -177,6 +192,17 @@
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+
+/* Keep seeking clear of the button dock without moving the timeline. */
+:is(.bigv-controller-host, .bigv-pip-controls-host):has(
+    .better-ig-controller .progress-bar-horizontal:hover,
+    .better-ig-controller .baseline.dragging
+  )
+  .bigv-player-dock:not(:has(:focus-visible:not([data-bigv-pointer-focus]))) {
+  --bigv-dock-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .bigv-player-dock.is-compact {
@@ -213,16 +239,14 @@
 }
 
 .bigv-player-dock.stories {
-  top: 62%;
-  bottom: auto;
-  flex-direction: column;
-  transform: translate(calc(100% + 2px), -50%);
+  bottom: 28px;
+  transform: none;
 }
 
 .bigv-player-dock.stories.is-visible,
 .bigv-player-dock.stories:hover,
 .bigv-player-dock.stories:has(:focus-visible:not([data-bigv-pointer-focus])) {
-  transform: translateY(-50%);
+  transform: none;
 }
 
 .bigv-player-dock.stories .bigv-playback-speed {
@@ -315,10 +339,26 @@
 }
 
 .bigv-player-dock:has(.bigv-speed-button[aria-expanded="true"])
+  .better-ig-volume-control.in-dock
   .better-ig-progress-bar-vertical {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition: none;
+}
+
+.bigv-player-dock .bigv-autoskip.in-dock svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bigv-player-dock .bigv-autoskip.in-dock[aria-pressed="true"] {
+  color: #141414;
+  background: #f8f9f9;
 }
 
 .bigv-player-dock .better-ig-fullscreen-button svg {

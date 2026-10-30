@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 
-export function usePlayerControls(video: HTMLVideoElement) {
+import { getVideoContainer } from "@/utils/media/container"
+
+export function usePlayerControls(video: HTMLVideoElement | HTMLImageElement) {
   const controlsRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [compact, setCompact] = useState(false)
@@ -8,45 +10,63 @@ export function usePlayerControls(video: HTMLVideoElement) {
   useEffect(() => {
     const controls = controlsRef.current
     if (!controls) return
-    const surface =
-      video.closest("div:has(>[data-instancekey])") ?? video.parentElement
+    const surface = getVideoContainer(video)
     let timer: ReturnType<typeof setTimeout> | undefined
-    let interacted = false
+    let pointer: { x: number; y: number } | undefined
 
     const clearTimer = () => {
       clearTimeout(timer)
       timer = undefined
     }
-    const isInteracting = () =>
-      controls.matches(":hover") ||
-      controls.querySelector(
-        ':focus-visible:not([data-bigv-pointer-focus]), [aria-expanded="true"], .baseline.dragging'
-      ) !== null
+    const isInteracting = () => {
+      const volume = controls.querySelector<HTMLElement>(
+        ".better-ig-progress-bar-vertical"
+      )
+      // Firefox can retain :hover on a native range until the next pointer
+      // move after releasing its thumb outside the panel.
+      const rect = controls.getBoundingClientRect()
+      const hovered =
+        controls.matches(":hover") &&
+        (!pointer ||
+          (pointer.x >= rect.left &&
+            pointer.x <= rect.right &&
+            pointer.y >= rect.top &&
+            pointer.y <= rect.bottom))
+      return (
+        hovered ||
+        controls.querySelector(
+          ':focus-visible:not([data-bigv-pointer-focus]), [aria-expanded="true"], .baseline.dragging, .better-ig-volume-control.active, input[type="range"]:active'
+        ) !== null ||
+        Boolean(volume && getComputedStyle(volume).visibility === "visible")
+      )
+    }
+    const hideWhenIdle = () => {
+      if (isInteracting()) timer = setTimeout(hideWhenIdle, 150)
+      else setVisible(false)
+    }
     const show = () => {
       clearTimer()
       setVisible(true)
-      if (video.paused || video.ended) return
-      timer = setTimeout(() => {
-        if (!isInteracting()) setVisible(false)
-      }, 1400)
+      timer = setTimeout(hideWhenIdle, 1400)
     }
-    const reveal = () => {
-      interacted = true
+    const reveal = (event: Event) => {
+      if (event instanceof MouseEvent)
+        pointer = { x: event.clientX, y: event.clientY }
       show()
     }
-    const syncPlayback = () => {
-      // Autoplay and scroll-driven pauses must not reveal a newly injected UI.
-      if (interacted) show()
+    const leave = () => {
+      clearTimer()
+      timer = setTimeout(hideWhenIdle, 300)
     }
     const reset = () => {
       clearTimer()
-      interacted = false
       setVisible(false)
     }
 
     reset()
 
     const resizeObserver = new ResizeObserver(([entry]) => {
+      if (!entry) return
       setCompact(entry.contentRect.width < 320)
     })
     resizeObserver.observe(video)
@@ -54,20 +74,19 @@ export function usePlayerControls(video: HTMLVideoElement) {
     // Reveal only on an actual pointer movement or press on the video.
     for (const event of ["pointermove", "pointerdown"])
       surface?.addEventListener(event, reveal)
+    surface?.addEventListener("pointerleave", leave)
     for (const event of [
       "pointerenter",
-      "pointerleave",
       "pointerup",
       "pointercancel",
       "lostpointercapture",
       "focusin",
-      "focusout",
       "click"
     ])
       controls.addEventListener(event, reveal)
-    for (const event of ["play", "pause", "ended"])
-      video.addEventListener(event, syncPlayback)
-    for (const event of ["loadstart", "emptied"])
+    controls.addEventListener("pointerleave", leave)
+    controls.addEventListener("focusout", leave)
+    for (const event of ["loadstart", "emptied", "load"])
       video.addEventListener(event, reset)
 
     return () => {
@@ -75,20 +94,19 @@ export function usePlayerControls(video: HTMLVideoElement) {
       resizeObserver.disconnect()
       for (const event of ["pointermove", "pointerdown"])
         surface?.removeEventListener(event, reveal)
+      surface?.removeEventListener("pointerleave", leave)
       for (const event of [
         "pointerenter",
-        "pointerleave",
         "pointerup",
         "pointercancel",
         "lostpointercapture",
         "focusin",
-        "focusout",
         "click"
       ])
         controls.removeEventListener(event, reveal)
-      for (const event of ["play", "pause", "ended"])
-        video.removeEventListener(event, syncPlayback)
-      for (const event of ["loadstart", "emptied"])
+      controls.removeEventListener("pointerleave", leave)
+      controls.removeEventListener("focusout", leave)
+      for (const event of ["loadstart", "emptied", "load"])
         video.removeEventListener(event, reset)
     }
   }, [video])

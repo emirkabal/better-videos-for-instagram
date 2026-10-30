@@ -1,4 +1,4 @@
-import english from "../../assets/_locales/en/messages.json"
+import english from "../../public/_locales/en/messages.json"
 
 export type MessageKey = keyof typeof english
 

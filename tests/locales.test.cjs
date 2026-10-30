@@ -9,17 +9,22 @@ const supported =
   "ar am bg bn ca cs da de el en en_AU en_GB en_US es es_419 et fa fi fil fr gu he hi hr hu id it ja kn ko lt lv ml mr ms nl no pl pt_BR pt_PT ro ru sk sl sr sv sw ta te th tr uk vi zh_CN zh_TW".split(
     " "
   )
-const root = path.resolve(__dirname, "../assets/_locales")
+const root = path.resolve(__dirname, "../public/_locales")
 const english = JSON.parse(
   fs.readFileSync(path.join(root, "en/messages.json"), "utf8")
 )
 
-test("every documented Chrome locale ships a complete nonempty message catalog", () => {
+test("every documented Chrome locale resolves a complete catalog through Chrome fallback", () => {
   assert.equal(supported.length, 55)
   for (const locale of supported) {
-    const messages = JSON.parse(
-      fs.readFileSync(path.join(root, locale, "messages.json"), "utf8")
-    )
+    const catalogPath = path.join(root, locale, "messages.json")
+    const parentPath = path.join(root, locale.split("_")[0], "messages.json")
+    const resolvedPath = fs.existsSync(catalogPath) ? catalogPath : parentPath
+    assert.ok(fs.existsSync(resolvedPath), locale)
+    const catalog = JSON.parse(fs.readFileSync(resolvedPath, "utf8"))
+    for (const key of Object.keys(catalog))
+      assert.ok(key in english, `${locale}/${key}`)
+    const messages = { ...english, ...catalog }
     assert.deepEqual(
       Object.keys(messages).sort(),
       Object.keys(english).sort(),

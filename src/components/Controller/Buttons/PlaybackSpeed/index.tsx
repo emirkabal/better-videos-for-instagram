@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
-import { t } from "~utils/i18n"
+import { t } from "@/utils/i18n"
+import { formatPlaybackSpeed } from "@/utils/playback/speed"
 
 import SpeedometerIcon from "./SpeedometerIcon"
 
@@ -63,7 +64,7 @@ export default function PlaybackSpeed({
   const speed = SPEED_OPTIONS.includes(
     playbackSpeed as (typeof SPEED_OPTIONS)[number]
   )
-    ? playbackSpeed
+    ? (playbackSpeed as (typeof SPEED_OPTIONS)[number])
     : 1
 
   const speedStyle = {
@@ -94,12 +95,12 @@ export default function PlaybackSpeed({
         type="button"
         className="bigv-speed-button"
         aria-label={t("playbackSpeedLabel")}
-        title={`${t("playbackSpeedLabel")}: ${speed}×`}
+        title={`${t("playbackSpeedLabel")}: ${formatPlaybackSpeed(speed)}`}
         aria-controls={open ? `${id}-options` : undefined}
         aria-expanded={open}
         onClick={() => setOpen((previous) => !previous)}>
         {placement !== "controls" ? (
-          <span>{speed}×</span>
+          <span>{formatPlaybackSpeed(speed)}</span>
         ) : (
           <SpeedometerIcon handStyle={speedStyle} />
         )}
@@ -107,7 +108,7 @@ export default function PlaybackSpeed({
 
       {placement === "controls" && showLabel && (
         <label htmlFor={id} className="bigv-switch-text bigv-speed-text">
-          {speed}x
+          {formatPlaybackSpeed(speed)}
         </label>
       )}
 
@@ -130,7 +131,7 @@ export default function PlaybackSpeed({
                 setOpen(false)
                 triggerRef.current?.focus({ preventScroll: true })
               }}>
-              {value}x
+              {formatPlaybackSpeed(value)}
             </button>
           ))}
         </div>

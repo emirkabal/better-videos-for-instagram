@@ -1,7 +1,9 @@
 const assert = require("node:assert/strict")
 const test = require("node:test")
 const loadSource = require("./load-source.cjs")
-const { getPageMode } = loadSource("src/utils/page-mode.ts")
+const { getPageMode } = loadSource(
+  "src/features/instagram/runtime/page-mode.ts"
+)
 
 test("Reel URL changes keep the same variant; home, posts and messages use the global variant", () => {
   for (const route of ["/reels/", "/reel/first/", "/reels/next/"])

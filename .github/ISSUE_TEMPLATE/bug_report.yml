@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a problem with Better Videos for Instagram.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check existing issues first. You can report in English or Turkish.
+
+        Keep the affected Instagram tab open while collecting troubleshooting details.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where does the problem happen?
+      multiple: true
+      options:
+        - Home feed
+        - Reels
+        - Stories
+        - Picture-in-Picture
+        - Fullscreen
+        - Extension popup or settings
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen instead.
+      placeholder: "Example: The current Reel pauses when I enter fullscreen, but I expected it to keep playing."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include relevant settings, keyboard shortcuts, and whether this happens every time or intermittently.
+      placeholder: |
+        1. Open Instagram and go to ...
+        2. Set ...
+        3. Click or press ...
+        4. The problem happens when ...
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Troubleshooting output
+      description: |
+        With the affected Instagram tab active, open the extension popup and expand **Troubleshoot this page**. Click **Check again**, then copy the complete details from the text box below the status message and paste them here.
+
+        If no details appear, paste the exact status/error message instead and fill in your browser, operating system, and extension version below. A failed connection is still useful to report.
+      placeholder: Paste the complete troubleshooting output, or the exact message if no output is available.
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Required information if troubleshooting output is unavailable; otherwise add anything missing from it.
+      placeholder: "Browser and version, operating system, extension version, and install source (store or unpacked)."
+  - type: textarea
+    id: context
+    attributes:
+      label: Screenshots and additional context
+      description: |
+        Optional: attach a screenshot or recording. Mention other Instagram extensions, VPN/proxy use, or whether the problem affects only certain videos/accounts. Country/region is optional if it seems relevant.
+
+        Remove private messages and account details from attachments before posting.

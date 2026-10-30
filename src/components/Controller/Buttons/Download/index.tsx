@@ -1,13 +1,13 @@
-import DownloadIcon from "react:../../icons/download.svg"
-import LoaderIcon from "react:../../icons/loader.svg"
+import DownloadIcon from "../../icons/download.svg?react"
+import LoaderIcon from "../../icons/loader.svg?react"
 
 import "./style.css"
 
 import { useMemo, useState } from "react"
 
-import { Variant, type DownloadableMedia } from "~modules/Injector"
-import { IG_APP_ID_REGEX } from "~utils/constants"
-import { idToPk } from "~utils/functions"
+import { Variant, type DownloadableMedia } from "@/features/player/Injector"
+import { IG_APP_ID_REGEX } from "@/utils/constants"
+import { idToPk } from "@/features/instagram/media/shortcode"
 
 export default function DownloadButton({
   data,
@@ -25,11 +25,12 @@ export default function DownloadButton({
 
     try {
       const appId = document.body.innerHTML.match(IG_APP_ID_REGEX)?.[1]
-      const videoId = idToPk(
+      const shortcode =
         data.variant === Variant.Reels
           ? location.pathname.split("/")[2]
           : data.id
-      )
+      if (!appId || !shortcode) return
+      const videoId = idToPk(shortcode)
 
       const result = await fetch(
         `https://www.instagram.com/api/v1/media/${videoId}/info/`,

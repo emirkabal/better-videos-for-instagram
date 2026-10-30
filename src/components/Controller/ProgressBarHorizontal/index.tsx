@@ -10,15 +10,15 @@ import {
 
 import "./style.css"
 
-import cn from "classnames"
+import { cn } from "cn"
 
-import { useInstagramSpritesheet } from "~hooks/use-instagram-spritesheet"
-import type { Variant } from "~modules/Injector"
-import { t } from "~utils/i18n"
+import { useInstagramSpritesheet } from "@/hooks/use-instagram-spritesheet"
+import type { Variant } from "@/features/player/Injector"
+import { t } from "@/utils/i18n"
 import {
   getPlaybackProgress,
   observePlaybackProgress
-} from "~utils/playback-progress"
+} from "@/utils/playback/progress"
 
 import InstagramSpritePreview from "./InstagramSpritePreview"
 
@@ -81,8 +81,7 @@ export default function ProgressBarHorizontal({
 
   const paintProgress = useCallback((value: number) => {
     const percent = clampProgress(value)
-    if (fillRef.current)
-      fillRef.current.style.transform = `scaleX(${percent / 100})`
+    if (fillRef.current) fillRef.current.style.width = `${percent}%`
     if (handleRef.current)
       handleRef.current.style.left = `clamp(4px, ${percent}%, calc(100% - 4px))`
   }, [])
@@ -160,8 +159,8 @@ export default function ProgressBarHorizontal({
 
       const isLandscapePreview = Boolean(
         video?.videoWidth &&
-          video.videoHeight &&
-          video.videoWidth > video.videoHeight
+        video.videoHeight &&
+        video.videoWidth > video.videoHeight
       )
       const tooltipWidth =
         spritesheet || renderPreview ? (isLandscapePreview ? 154 : 93) : 82
@@ -284,7 +283,9 @@ export default function ProgressBarHorizontal({
           onLostPointerCapture={stopDragging}
         />
 
-        <div ref={fillRef} className="fill" />
+        <div className="progress-track" aria-hidden="true">
+          <div ref={fillRef} className="fill" />
+        </div>
 
         <div ref={handleRef} className="progress-handle" aria-hidden="true" />
 

@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react"
 
-import type { Variant } from "~modules/Injector"
-import { t } from "~utils/i18n"
+import type { Variant } from "@/features/player/Injector"
+import { t } from "@/utils/i18n"
 
 import VolumeButton from "../Buttons/Volume"
 import ProgressBarVertical from "../ProgressBarVertical"

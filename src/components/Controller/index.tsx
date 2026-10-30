@@ -1,29 +1,46 @@
 import "./style.css"
 
-import cn from "classnames"
+import { cn } from "cn"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
-import { useStorage } from "@plasmohq/storage/hook"
+import { useSetting } from "@/hooks/use-setting"
+import { settings } from "@/utils/storage/settings"
 
-import { Variant, type DownloadableMedia } from "~modules/Injector"
-import { IG_REELS_SNAP } from "~utils/constants"
-import { pictureInPicture } from "~utils/picture-in-picture"
-import { getActiveInstagramVideo } from "~utils/video"
+import { Variant, type DownloadableMedia } from "@/features/player/Injector"
+import { observeAutoSkip } from "@/utils/playback/auto-skip"
+import type { ClickMode } from "@/utils/playback/click-mode"
+import { setVideoPlaying } from "@/utils/fullscreen/playback"
+import { pictureInPicture } from "@/utils/pip/controller"
+import { navigateReel } from "@/features/instagram/navigation/reels"
+import {
+  hideNativeVideoAudio,
+  observeNativeAudioIntent
+} from "@/features/instagram/media/native-audio-controls"
+import { setVideoAudioLimit, type VideoAudioIntent } from "@/utils/media/audio"
+import {
+  getActiveInstagramVideo,
+  isVideoInViewport
+} from "@/features/instagram/media/video"
 
+import Autoskip from "./Buttons/Autoskip"
 // import DownloadButton from "./Buttons/Download"
 import FullscreenButton from "./Buttons/Fullscreen"
+import OpenInReels from "./Buttons/OpenInReels"
 import PictureInPictureButton from "./Buttons/PictureInPicture"
 import PlaybackSpeed from "./Buttons/PlaybackSpeed"
 import PlayerControls from "./PlayerControls"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import Volume from "./Volume"
+import StoryControls from "./StoryControls"
+import PlayerFeedback from "./PlayerFeedback"
 
 type Props = {
   id: string
   downloadableMedia?: DownloadableMedia
   video: HTMLVideoElement
   variant?: Variant
+  clickMode?: ClickMode
 }
 
 export { default as Volume } from "./Volume"
@@ -32,7 +49,8 @@ export default function Controller({
   id,
   video,
   downloadableMedia,
-  variant = Variant.Default
+  variant = Variant.Default,
+  clickMode = "pause"
 }: Props) {
   const wasPlayingBeforeDragRef = useRef(false)
   const [progress, setProgress] = useState(0)
@@ -53,9 +71,23 @@ export default function Controller({
   const safePlaybackSpeed = [0.25, 0.5, 1, 1.25, 1.5, 2].includes(playbackSpeed)
     ? playbackSpeed
     : 1
-  const [pauseOnComments] = useStorage("bigv-pause-on-comments", true)
+  const [pauseOnComments] = useSetting(settings.pauseOnComments)
+  const [maxVolumeBalance] = useSetting(settings.maxVolumeBalance)
+  const volumeLimit =
+    100 /
+    (Number.isFinite(maxVolumeBalance) ? Math.max(maxVolumeBalance, 100) : 100)
+  const [autoSkip] = useLocalStorage("bigv-autoskip", false)
+  const expectedAudio = useRef<{ volume: number; muted: boolean } | null>(null)
+  const nativeAudioIntent = useRef(false)
+  useEffect(() => setVideoAudioLimit(video, volumeLimit), [video, volumeLimit])
+
+  useEffect(() => {
+    document.getElementById(id)?.setAttribute("data-bigv-ready", "")
+  }, [id])
 
   const isActiveAudibleVideo = useCallback(() => {
+    const fullscreen = document.fullscreenElement
+    if (fullscreen && !fullscreen.contains(video)) return false
     if (variant === Variant.Stories || variant === Variant.Default) return true
 
     return getActiveInstagramVideo() === video
@@ -63,41 +95,99 @@ export default function Controller({
 
   const updateAudio = useCallback(() => {
     if (!isActiveAudibleVideo()) {
-      video.volume = 0
-      video.muted = true
+      expectedAudio.current = { volume: video.volume, muted: true }
+      if (!video.muted) video.muted = true
       return
     }
 
     const normalizedVolume = Number.isFinite(volume)
-      ? Math.min(Math.max(volume, 0), 1)
-      : 0.5
-    video.volume = normalizedVolume
+      ? Math.min(Math.max(volume, 0), volumeLimit)
+      : Math.min(0.5, volumeLimit)
+    const nextMuted =
+      "userActivation" in navigator && !navigator.userActivation.hasBeenActive
+        ? true
+        : muted
+    expectedAudio.current = { volume: normalizedVolume, muted: nextMuted }
+    if (video.volume !== normalizedVolume) video.volume = normalizedVolume
+    if (video.muted !== nextMuted) video.muted = nextMuted
+  }, [video, volume, muted, volumeLimit, isActiveAudibleVideo])
 
-    if (
-      "userActivation" in navigator &&
-      !navigator.userActivation.hasBeenActive
-    ) {
-      video.muted = true
-      return
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", updateAudio)
+    video.addEventListener("bigv-activechange", updateAudio)
+    return () => {
+      document.removeEventListener("fullscreenchange", updateAudio)
+      video.removeEventListener("bigv-activechange", updateAudio)
     }
-
-    video.muted = muted
-  }, [video, volume, muted, isActiveAudibleVideo])
+  }, [updateAudio])
 
   const volumeChanged = useCallback(() => {
-    if (variant !== Variant.Stories) {
+    if (nativeAudioIntent.current) return
+    if (!isActiveAudibleVideo()) {
       updateAudio()
       return
     }
+    if (
+      expectedAudio.current?.volume === video.volume &&
+      expectedAudio.current?.muted === video.muted
+    )
+      return
     if (
       "userActivation" in navigator &&
       !navigator.userActivation.hasBeenActive
     )
       return
-    // Keep Instagram's own Story controls usable alongside the fixed side dock.
-    if (video.muted !== muted) setMuted(video.muted)
-    if (video.volume !== volume) setVolume(video.volume)
-  }, [video, variant, muted, volume, setMuted, setVolume, updateAudio])
+    // Instagram mutes newly inserted/autoplay videos. Reapply the user's
+    // saved choice without copying that temporary mute into shared storage.
+    updateAudio()
+  }, [
+    video,
+    muted,
+    volume,
+    setMuted,
+    setVolume,
+    updateAudio,
+    isActiveAudibleVideo
+  ])
+
+  useEffect(() => {
+    nativeAudioIntent.current = false
+    const stop = observeNativeAudioIntent(
+      video,
+      () => {
+        nativeAudioIntent.current = false
+        if (!isActiveAudibleVideo()) return
+        expectedAudio.current = { volume: video.volume, muted: video.muted }
+        setMuted(video.muted)
+        setVolume(video.volume)
+      },
+      () => {
+        nativeAudioIntent.current = true
+      }
+    )
+    return () => {
+      stop()
+      nativeAudioIntent.current = false
+    }
+  }, [video, isActiveAudibleVideo, setMuted, setVolume])
+
+  useEffect(() => {
+    const intent = (event: Event) => {
+      const audio = (event as CustomEvent<VideoAudioIntent>).detail
+      expectedAudio.current = audio
+      if (audio.savePreference) {
+        setVolume(audio.volume)
+        setMuted(audio.muted)
+      }
+    }
+    video.addEventListener("bigv-audio-intent", intent)
+    return () => video.removeEventListener("bigv-audio-intent", intent)
+  }, [video, setVolume, setMuted])
+
+  useEffect(() => {
+    if (variant === Variant.Reels || variant === Variant.Default)
+      return hideNativeVideoAudio(video)
+  }, [variant, video])
 
   const timeUpdate = useCallback(() => {
     setDuration(
@@ -126,63 +216,60 @@ export default function Controller({
     }
   }, [video, safePlaybackSpeed])
 
-  const ended = useCallback(() => {
-    if (
-      variant !== Variant.Reels ||
-      !/^\/reels?(\/|$)/.test(location.pathname) ||
-      getActiveInstagramVideo() !== video ||
-      localStorage.getItem("bigv-autoskip") !== "true" ||
-      (pauseOnComments && localStorage.getItem("bigv-comments-opened") === "1")
+  useEffect(() => {
+    if (variant !== Variant.Reels || !autoSkip) return
+    let cancelNavigation: (() => void) | undefined
+    const cleanup = observeAutoSkip(
+      video,
+      () =>
+        !dragging &&
+        /^\/reels?(\/|$)/.test(location.pathname) &&
+        getActiveInstagramVideo() === video &&
+        !(
+          pauseOnComments &&
+          Array.from(
+            document.querySelectorAll<HTMLElement>('[role="dialog"]')
+          ).some(
+            (dialog) =>
+              !dialog.contains(video) && dialog.getClientRects().length > 0
+          )
+        ),
+      () => {
+        cancelNavigation?.()
+        if (pictureInPicture.advanceReel(video)) return
+        cancelNavigation = navigateReel(video, 1, window, () => {
+          if (getActiveInstagramVideo() !== video) cancelNavigation?.()
+        })
+      }
     )
-      return
-
-    if (pictureInPicture.advanceReel(video)) return
-    const snap = document.querySelector<HTMLElement>(IG_REELS_SNAP)
-    if (!snap) return
-
-    const isFullscreen = document.fullscreenElement?.classList.contains(
-      "bigv-reels-fullscreen-target"
-    )
-
-    snap.scrollBy(
-      isFullscreen
-        ? { top: snap.clientHeight, behavior: "smooth" }
-        : { top: 1000 }
-    )
-  }, [pauseOnComments, variant, video])
+    return () => {
+      cleanup()
+      cancelNavigation?.()
+    }
+  }, [autoSkip, pauseOnComments, variant, video, dragging])
 
   useEffect(() => {
     const videoElement = video
     metadataLoaded()
 
     videoElement.addEventListener("timeupdate", timeUpdate)
-    // videoElement.addEventListener("loadedmetadata", metadataLoaded)
-    // videoElement.addEventListener("durationchange", metadataLoaded)
+    videoElement.addEventListener("loadedmetadata", metadataLoaded)
+    videoElement.addEventListener("durationchange", metadataLoaded)
     videoElement.addEventListener("play", play)
-    videoElement.addEventListener("ended", ended)
     videoElement.addEventListener("volumechange", volumeChanged)
     // videoElement.addEventListener("seeked", updateAudio)
     videoElement.addEventListener("ratechange", ratechange)
 
     return () => {
       videoElement.removeEventListener("timeupdate", timeUpdate)
-      // videoElement.removeEventListener("loadedmetadata", metadataLoaded)
-      // videoElement.removeEventListener("durationchange", metadataLoaded)
+      videoElement.removeEventListener("loadedmetadata", metadataLoaded)
+      videoElement.removeEventListener("durationchange", metadataLoaded)
       videoElement.removeEventListener("play", play)
-      videoElement.removeEventListener("ended", ended)
       videoElement.removeEventListener("volumechange", volumeChanged)
       // videoElement.removeEventListener("seeked", updateAudio)
       videoElement.removeEventListener("ratechange", ratechange)
     }
-  }, [
-    video,
-    timeUpdate,
-    metadataLoaded,
-    play,
-    ended,
-    volumeChanged,
-    ratechange
-  ])
+  }, [video, timeUpdate, metadataLoaded, play, volumeChanged, ratechange])
 
   useEffect(() => {
     updateAudio()
@@ -206,12 +293,10 @@ export default function Controller({
         return
       // Let the mute button handle its own action. Automatically unmuting on
       // pointerdown would change its action to "mute" before the click arrives.
-      if (
-        !(
-          event.target instanceof Element &&
-          event.target.closest(".better-ig-volume-button")
-        )
-      ) {
+      if (!(
+        event.target instanceof Element &&
+        event.target.closest(".better-ig-volume-button")
+      )) {
         updateAudio()
       }
       removeActivationListeners()
@@ -235,34 +320,58 @@ export default function Controller({
   useEffect(() => {
     if (dragging) {
       wasPlayingBeforeDragRef.current = !video.paused
-      video.pause()
+      void setVideoPlaying(video, false)
       return
     }
 
     if (wasPlayingBeforeDragRef.current) {
       wasPlayingBeforeDragRef.current = false
-      video.play().catch(() => {})
+      if (isVideoInViewport(video)) void setVideoPlaying(video, true)
     }
   }, [dragging, video])
 
+  const seek = (percent: number) => {
+    if (!Number.isFinite(video.duration) || video.duration <= 0) return
+    video.currentTime =
+      (Math.min(Math.max(percent, 0), 100) / 100) * video.duration
+    timeUpdate()
+  }
+  if (variant === Variant.Stories)
+    return (
+      <>
+        <PlayerFeedback video={video} />
+        <StoryControls
+          video={video}
+          controllerId={id}
+          progress={progress}
+          duration={duration}
+          onProgress={seek}
+          onDragging={setDragging}
+        />
+      </>
+    )
+
   return (
     <>
-      {variant !== Variant.Stories && (
-        <PlayerControls video={video} variant={variant}>
-          <Volume video={video} variant={variant} placement="dock" />
-          {variant === Variant.Default && (
-            <>
-              <PlaybackSpeed placement="dock" />
-              <PictureInPictureButton video={video} />
-              <FullscreenButton
-                controllerId={id}
-                variant={variant}
-                placement="dock"
-              />
-            </>
-          )}
-        </PlayerControls>
-      )}
+      <PlayerFeedback video={video} />
+      <PlayerControls video={video} variant={variant}>
+        <Volume video={video} variant={variant} placement="dock" />
+        <PlaybackSpeed placement="dock" />
+        {variant === Variant.Default && clickMode === "pause-reels" && (
+          <OpenInReels video={video} />
+        )}
+        {variant === Variant.Reels && <Autoskip placement="dock" />}
+        <PictureInPictureButton
+          video={video}
+          followReels={variant === Variant.Reels}
+        />
+        <FullscreenButton
+          video={video}
+          controllerId={id}
+          variant={variant}
+          placement="dock"
+        />
+      </PlayerControls>
       {/* {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
       )} */}
@@ -273,16 +382,7 @@ export default function Controller({
             variant={variant}
             progress={progress}
             videoDuration={duration}
-            showVideoPreview={variant !== Variant.Stories}
-            onProgress={(progress) => {
-              const currentDuration = video.duration
-              if (!Number.isFinite(currentDuration) || currentDuration <= 0)
-                return
-
-              video.currentTime =
-                (Math.min(Math.max(progress, 0), 100) / 100) * currentDuration
-              timeUpdate()
-            }}
+            onProgress={seek}
             onDragging={setDragging}
           />
         )}

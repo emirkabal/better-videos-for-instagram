@@ -1,0 +1,143 @@
+.bigv-story-player {
+  position: absolute;
+  left: 50%;
+  bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  width: min(360px, calc(100% - 32px));
+  box-sizing: border-box;
+  padding: 9px 10px 8px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 12px;
+  background: rgb(28 28 30 / 90%);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 30%);
+  backdrop-filter: blur(16px);
+  color: #fff;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.bigv-story-player.is-visible,
+.bigv-story-player:has(:focus-visible:not([data-bigv-pointer-focus])) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bigv-story-player .bigv-player-dock.stories {
+  position: relative;
+  inset: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.bigv-story-player.is-compact .bigv-player-dock {
+  --bigv-dock-size: 24px;
+  --bigv-dock-speed-size: 36px;
+  gap: 4px;
+}
+.bigv-story-player:not(.is-visible):not(
+    :has(:focus-visible:not([data-bigv-pointer-focus]))
+  )
+  .bigv-player-dock {
+  pointer-events: none;
+  --bigv-dock-events: none;
+}
+.bigv-story-player .bigv-story-options {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  justify-self: end;
+}
+.bigv-story-transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.bigv-story-player .bigv-story-navigation svg {
+  width: 18px;
+  height: 18px;
+}
+.bigv-story-player .bigv-player-dock.stories .bigv-speed-button {
+  width: var(--bigv-dock-speed-size);
+}
+.bigv-story-player .bigv-player-dock.stories .bigv-speed-popup {
+  top: auto;
+  right: 0;
+  bottom: calc(100% + 16px);
+}
+.bigv-story-player .bigv-player-dock.stories .bigv-story-play {
+  width: 32px;
+  height: 32px;
+}
+.bigv-story-player .bigv-story-play svg {
+  width: 20px;
+  height: 20px;
+}
+.bigv-story-player
+  .bigv-player-dock.stories
+  .bigv-story-transport
+  .bigv-story-play {
+  flex: 0 0 32px;
+  min-width: 32px;
+}
+.bigv-story-player.is-compact .bigv-player-dock.stories {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.bigv-story-player.is-compact .bigv-story-transport {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+.bigv-story-player .bigv-pip-volume {
+  max-width: 112px;
+}
+.bigv-story-timeline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  min-width: 0;
+}
+.bigv-story-timeline > span {
+  flex: none;
+  font: 10px/18px system-ui;
+  color: #bdbdc2;
+  font-variant-numeric: tabular-nums;
+}
+.bigv-controller-host .bigv-story-player .better-ig-controller {
+  position: relative;
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  inset: auto;
+  margin: 0;
+}
+.bigv-story-player .better-ig-controller .progress-bar-horizontal {
+  height: 18px;
+  align-items: center;
+}
+.bigv-story-player .better-ig-progress-tooltip.stories {
+  top: auto;
+  bottom: 64px;
+  transform-origin: center bottom;
+}
+.bigv-story-player.is-compact .better-ig-progress-tooltip.stories {
+  bottom: 90px;
+}
+.bigv-story-player.is-photo .bigv-player-dock.stories {
+  display: flex;
+  justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigv-story-player {
+    transition: none;
+  }
+}

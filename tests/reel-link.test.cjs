@@ -3,7 +3,7 @@ const test = require("node:test")
 const loadSource = require("./load-source.cjs")
 
 const { toInstagramReelUrl, getNativeReelUrl } = loadSource(
-  "src/utils/reel-link.ts",
+  "src/features/instagram/navigation/reel-link.ts",
   { URL }
 )
 

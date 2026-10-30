@@ -29,8 +29,38 @@ function video({
   }
 }
 
-const { getActiveInstagramVideo } = loadSource("src/utils/video.ts", {
-  window: { innerWidth: 1200, innerHeight: 800 }
+const { getActiveInstagramVideo, isInstagramVideo } = loadSource(
+  "src/features/instagram/media/video.ts",
+  {
+    URL,
+    window: { innerWidth: 1200, innerHeight: 800 }
+  }
+)
+
+test("Instagram CDN HTTPS sources and source-element currentSrc are supported", () => {
+  for (const src of [
+    "https://scontent.cdninstagram.com/video.mp4",
+    "https://video.xx.fbcdn.net/clip.mp4",
+    "https://www.instagram.com/video.mp4"
+  ])
+    assert.equal(isInstagramVideo(video({ src })), true)
+  assert.equal(
+    isInstagramVideo({
+      ...video({ src: "" }),
+      currentSrc: "https://scontent.cdninstagram.com/video.mp4"
+    }),
+    true
+  )
+  assert.equal(
+    isInstagramVideo(video({ src: "https://evilcdninstagram.com/video.mp4" })),
+    false
+  )
+  assert.equal(
+    isInstagramVideo(
+      video({ src: "https://cdninstagram.com.evil.test/video.mp4" })
+    ),
+    false
+  )
 })
 
 test("offscreen playback does not outrank a visible paused Reel", () => {

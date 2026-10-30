@@ -1,10 +1,10 @@
-import cn from "classnames"
+import { cn } from "cn"
 
 import "./style.css"
 
 import { useEffect, useRef, useState } from "react"
 
-import type { Variant } from "~modules/Injector"
+import type { Variant } from "@/features/player/Injector"
 
 type Props = {
   children: React.ReactNode

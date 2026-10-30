@@ -1,0 +1,230 @@
+{
+  "appName": {
+    "message": "مقاطع فيديو أفضل لـ Instagram: التشغيل والحجم"
+  },
+  "appDescription": {
+    "message": "تحكم في تشغيل فيديوهات Instagram والصوت والسرعة وصورة داخل صورة."
+  },
+  "autoskipLabel": {
+    "message": "تخطي تلقائي"
+  },
+  "downloadLabel": {
+    "message": "تنزيل"
+  },
+  "videoControlsLabel": {
+    "message": "عناصر تحكم الفيديو"
+  },
+  "muteLabel": {
+    "message": "كتم الصوت"
+  },
+  "unmuteLabel": {
+    "message": "تشغيل الصوت"
+  },
+  "volumeLabel": {
+    "message": "مستوى الصوت"
+  },
+  "playbackSpeedLabel": {
+    "message": "سرعة التشغيل"
+  },
+  "videoProgressLabel": {
+    "message": "تقدم الفيديو"
+  },
+  "enterFullscreenLabel": {
+    "message": "فتح ملء الشاشة"
+  },
+  "exitFullscreenLabel": {
+    "message": "الخروج من ملء الشاشة"
+  },
+  "fullscreenLabel": {
+    "message": "ملء الشاشة"
+  },
+  "exitLabel": {
+    "message": "خروج"
+  },
+  "openReelLabel": {
+    "message": "فتح هذا الفيديو في Reels"
+  },
+  "pipLabel": {
+    "message": "صورة داخل صورة"
+  },
+  "exitPipLabel": {
+    "message": "إغلاق صورة داخل صورة"
+  },
+  "pipErrorLabel": {
+    "message": "تعذر فتح PiP. شغّل الفيديو وحاول مجددًا."
+  },
+  "playLabel": {
+    "message": "تشغيل"
+  },
+  "pauseLabel": {
+    "message": "إيقاف مؤقت"
+  },
+  "nextReelLabel": {
+    "message": "Reel التالي"
+  },
+  "previousReelLabel": {
+    "message": "ريل سابق"
+  },
+  "extensionEnabledLabel": {
+    "message": "الإضافة مفعّلة"
+  },
+  "extensionPausedLabel": {
+    "message": "الإضافة متوقفة مؤقتًا"
+  },
+  "extensionEnabledDescription": {
+    "message": "عناصر التحكم المحسنة مفعّلة على Instagram."
+  },
+  "extensionPausedDescription": {
+    "message": "يستخدم Instagram عناصر التحكم الافتراضية."
+  },
+  "enableControllerLabel": {
+    "message": "تفعيل عناصر التحكم"
+  },
+  "disableControllerLabel": {
+    "message": "تعطيل عناصر التحكم"
+  },
+  "settingsLabel": {
+    "message": "الإعدادات"
+  },
+  "clickToPauseLabel": {
+    "message": "النقر للإيقاف المؤقت"
+  },
+  "clickToPauseDescription": {
+    "message": "إيقاف فيديوهات الخلاصة بدلًا من فتح Reels"
+  },
+  "volumeReductionLabel": {
+    "message": "خفض الصوت"
+  },
+  "volumeReductionDescription": {
+    "message": "خفض الحد الأقصى للصوت"
+  },
+  "offLabel": {
+    "message": "متوقف"
+  },
+  "pauseAutoskipLabel": {
+    "message": "إيقاف التخطي التلقائي"
+  },
+  "pauseAutoskipDescription": {
+    "message": "أثناء فتح تعليقات Reel"
+  },
+  "supportProjectLabel": {
+    "message": "دعم المشروع"
+  },
+  "reportBugLabel": {
+    "message": "الإبلاغ عن خطأ"
+  },
+  "contactLabel": {
+    "message": "تواصل"
+  },
+  "openInstagramLabel": {
+    "message": "فتح Instagram"
+  },
+  "installedLabel": {
+    "message": "تم التثبيت بنجاح"
+  },
+  "updatedLabel": {
+    "message": "تم التحديث بنجاح"
+  },
+  "backToTopLabel": {
+    "message": "العودة للأعلى"
+  },
+  "readyLabel": {
+    "message": "جاهز للاستخدام"
+  },
+  "noSetupLabel": {
+    "message": "لا حاجة للإعداد."
+  },
+  "setupDescription": {
+    "message": "افتح Instagram وشغّل فيديو لاستخدام عناصر التحكم."
+  },
+  "openInstagramDescription": {
+    "message": "افتح صفحة تحتوي على فيديو مدعوم."
+  },
+  "playVideoDescription": {
+    "message": "تظهر عناصر التحكم عند بدء الفيديو."
+  },
+  "adjustPreferencesLabel": {
+    "message": "تعديل التفضيلات"
+  },
+  "adjustPreferencesDescription": {
+    "message": "غيّر تفضيلاتك من أيقونة الإضافة."
+  },
+  "builtByLabel": {
+    "message": "تطوير"
+  },
+  "clickBehaviorLabel": {
+    "message": "عند النقر على الفيديو"
+  },
+  "clickModeNative": {
+    "message": "افتراضي"
+  },
+  "clickModePause": {
+    "message": "إيقاف مؤقت"
+  },
+  "clickModePauseReels": {
+    "message": "إيقاف + ريلز"
+  },
+  "clickModeNativeDescription": {
+    "message": "الاحتفاظ بسلوك النقر الافتراضي في Instagram."
+  },
+  "clickModePauseDescription": {
+    "message": "انقر على الفيديو لإيقافه مؤقتًا أو تشغيله."
+  },
+  "clickModePauseReelsDescription": {
+    "message": "انقر للإيقاف أو التشغيل. استخدم زر ريلز لفتح الفيديو نفسه في عرض ريلز."
+  },
+  "featureUpdatesLabel": {
+    "message": "عرض تحديثات الميزات"
+  },
+  "featureUpdatesDescription": {
+    "message": "فتح صفحة الميزات الجديدة في إصدارات مثل 1.6.0. لا تظهر الصفحة لتحديثات إصلاح الأخطاء."
+  },
+  "previousStoryLabel": {
+    "message": "القصة السابقة"
+  },
+  "nextStoryLabel": {
+    "message": "القصة التالية"
+  },
+  "secondsShortLabel": {
+    "message": "ث"
+  },
+  "seekBackwardLabel": {
+    "message": "ترجيع"
+  },
+  "seekForwardLabel": {
+    "message": "تقديم"
+  },
+  "playingFeedback": {
+    "message": "قيد التشغيل"
+  },
+  "pausedFeedback": {
+    "message": "متوقف مؤقتًا"
+  },
+  "mutedFeedback": {
+    "message": "الصوت مكتوم"
+  },
+  "unmutedFeedback": {
+    "message": "الصوت مفعّل"
+  },
+  "keyboardShortcutsLabel": {
+    "message": "اختصارات لوحة المفاتيح"
+  },
+  "playPauseShortcutLabel": {
+    "message": "تشغيل / إيقاف مؤقت"
+  },
+  "seek5ShortcutLabel": {
+    "message": "ترجيع / تقديم 5 ثوانٍ"
+  },
+  "seek10ShortcutLabel": {
+    "message": "ترجيع / تقديم 10 ثوانٍ"
+  },
+  "volumeShortcutLabel": {
+    "message": "مستوى الصوت ±5٪"
+  },
+  "muteShortcutLabel": {
+    "message": "كتم / تفعيل الصوت"
+  },
+  "keyboardShortcutsHint": {
+    "message": "في Reels، يحتفظ Space بسلوك Instagram؛ استخدم K للتشغيل والإيقاف المؤقت. في الموجز وفيديوهات القصص وPiP، يعمل Space أيضًا للتشغيل والإيقاف المؤقت. في Reels والقصص، يحتفظ ↑ / ↓ بالتنقل الأصلي؛ استخدم + / − للصوت. في الموجز وPiP، يمكن ضبط الصوت أيضًا باستخدام ↑ / ↓. في الموجز، مرّر المؤشر فوق الفيديو أو حدّده أولًا. تحتفظ حقول النص والقوائم بمفاتيحها. قصة الصور في PiP: ← / → يبدّل القصص."
+  }
+}

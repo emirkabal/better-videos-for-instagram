@@ -5,7 +5,7 @@ import {
   INSTAGRAM_SPRITESHEET_CHANNEL,
   type InstagramSpritesheet,
   type SpritesheetOutgoingMessage
-} from "~utils/instagram-spritesheet-bridge"
+} from "@/features/instagram/bridges/spritesheet-client"
 
 const RETRY_DELAYS = [50, 100, 200, 400, 800]
 

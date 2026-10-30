@@ -1,0 +1,16 @@
+[fmt]
+printWidth = 80
+tabWidth = 2
+semi = false
+singleQuote = false
+trailingComma = "none"
+bracketSameLine = true
+ignorePatterns = [
+  "node_modules/",
+  ".plasmo/",
+  ".wxt/",
+  ".output/",
+  "build/",
+  "dist/",
+  "outputs/"
+]

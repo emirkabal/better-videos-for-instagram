@@ -8,17 +8,6 @@
   touch-action: none;
 }
 
-html[data-bigv-reels-active="true"]
-  div:has(+ [aria-label="Video progress"][aria-valuemin="0"][role="slider"]),
-html[data-bigv-reels-active="true"]
-  [aria-label="Video progress"][aria-valuemin="0"][role="slider"]:not(
-    [bigv-inject] *
-  ) {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
 .better-ig-controller .progress-bar-horizontal .baseline {
   position: relative;
   width: 100%;
@@ -41,16 +30,22 @@ html[data-bigv-reels-active="true"]
   background: rgb(0 0 0 / 48%);
 }
 
+.better-ig-controller .progress-bar-horizontal .progress-track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
 .better-ig-controller .progress-bar-horizontal .baseline .fill {
   position: absolute;
   inset: 0;
   z-index: 3;
-  width: 100%;
+  width: 0;
   height: 100%;
   border-radius: inherit;
   background: #fff;
-  transform: scaleX(0);
-  transform-origin: left center;
   box-shadow: 0 0 2px rgb(0 0 0 / 40%);
   pointer-events: none;
 }

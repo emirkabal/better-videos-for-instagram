@@ -1,0 +1,230 @@
+{
+  "appName": {
+    "message": "Bessere Videos für Instagram: Wiedergabe & Lautstärke"
+  },
+  "appDescription": {
+    "message": "Wiedergabe, Lautstärke, Tempo und Bild-im-Bild für Instagram steuern."
+  },
+  "autoskipLabel": {
+    "message": "Automatisch weiter"
+  },
+  "downloadLabel": {
+    "message": "Herunterladen"
+  },
+  "videoControlsLabel": {
+    "message": "Videosteuerung"
+  },
+  "muteLabel": {
+    "message": "Stummschalten"
+  },
+  "unmuteLabel": {
+    "message": "Ton einschalten"
+  },
+  "volumeLabel": {
+    "message": "Lautstärke"
+  },
+  "playbackSpeedLabel": {
+    "message": "Wiedergabetempo"
+  },
+  "videoProgressLabel": {
+    "message": "Videofortschritt"
+  },
+  "enterFullscreenLabel": {
+    "message": "Vollbild öffnen"
+  },
+  "exitFullscreenLabel": {
+    "message": "Vollbild verlassen"
+  },
+  "fullscreenLabel": {
+    "message": "Vollbild"
+  },
+  "exitLabel": {
+    "message": "Schließen"
+  },
+  "openReelLabel": {
+    "message": "Dieses Video in Reels öffnen"
+  },
+  "pipLabel": {
+    "message": "Bild im Bild"
+  },
+  "exitPipLabel": {
+    "message": "Bild im Bild schließen"
+  },
+  "pipErrorLabel": {
+    "message": "PiP konnte nicht geöffnet werden. Video abspielen und erneut versuchen."
+  },
+  "playLabel": {
+    "message": "Abspielen"
+  },
+  "pauseLabel": {
+    "message": "Pausieren"
+  },
+  "nextReelLabel": {
+    "message": "Nächstes Reel"
+  },
+  "previousReelLabel": {
+    "message": "Vorheriges Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Erweiterung aktiv"
+  },
+  "extensionPausedLabel": {
+    "message": "Erweiterung pausiert"
+  },
+  "extensionEnabledDescription": {
+    "message": "Verbesserte Steuerung ist auf Instagram aktiv."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram verwendet seine eigene Steuerung."
+  },
+  "enableControllerLabel": {
+    "message": "Steuerung aktivieren"
+  },
+  "disableControllerLabel": {
+    "message": "Steuerung deaktivieren"
+  },
+  "settingsLabel": {
+    "message": "Einstellungen"
+  },
+  "clickToPauseLabel": {
+    "message": "Zum Pausieren klicken"
+  },
+  "clickToPauseDescription": {
+    "message": "Feed-Videos pausieren statt Reels zu öffnen"
+  },
+  "volumeReductionLabel": {
+    "message": "Lautstärke reduzieren"
+  },
+  "volumeReductionDescription": {
+    "message": "Maximale Lautstärke senken"
+  },
+  "offLabel": {
+    "message": "Aus"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Automatisches Weiterschalten pausieren"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Wenn Reel-Kommentare geöffnet sind"
+  },
+  "supportProjectLabel": {
+    "message": "Projekt unterstützen"
+  },
+  "reportBugLabel": {
+    "message": "Fehler melden"
+  },
+  "contactLabel": {
+    "message": "Kontakt"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram öffnen"
+  },
+  "installedLabel": {
+    "message": "Erfolgreich installiert"
+  },
+  "updatedLabel": {
+    "message": "Erfolgreich aktualisiert"
+  },
+  "backToTopLabel": {
+    "message": "Nach oben"
+  },
+  "readyLabel": {
+    "message": "Startbereit"
+  },
+  "noSetupLabel": {
+    "message": "Keine Einrichtung nötig."
+  },
+  "setupDescription": {
+    "message": "Instagram öffnen und ein Video abspielen."
+  },
+  "openInstagramDescription": {
+    "message": "Eine Seite mit einem unterstützten Video öffnen."
+  },
+  "playVideoDescription": {
+    "message": "Die Steuerung erscheint beim Videostart."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Einstellungen ändern"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Einstellungen über das Erweiterungssymbol ändern."
+  },
+  "builtByLabel": {
+    "message": "Entwickelt von"
+  },
+  "clickBehaviorLabel": {
+    "message": "Klick auf Videos"
+  },
+  "clickModeNative": {
+    "message": "Instagram"
+  },
+  "clickModePause": {
+    "message": "Pause"
+  },
+  "clickModePauseReels": {
+    "message": "Pause + Reels"
+  },
+  "clickModeNativeDescription": {
+    "message": "Das Standardverhalten von Instagram beibehalten."
+  },
+  "clickModePauseDescription": {
+    "message": "Klicken, um das Video anzuhalten oder fortzusetzen."
+  },
+  "clickModePauseReelsDescription": {
+    "message": "Klicken zum Pausieren oder Abspielen. Die Reels-Schaltfläche öffnet dasselbe Video in Reels."
+  },
+  "featureUpdatesLabel": {
+    "message": "Neue Funktionen anzeigen"
+  },
+  "featureUpdatesDescription": {
+    "message": "Die Neuigkeiten bei Funktionsversionen wie 1.6.0 öffnen. Fehlerkorrekturen bleiben ohne Hinweis."
+  },
+  "previousStoryLabel": {
+    "message": "Vorherige Story"
+  },
+  "nextStoryLabel": {
+    "message": "Nächste Story"
+  },
+  "secondsShortLabel": {
+    "message": "s"
+  },
+  "seekBackwardLabel": {
+    "message": "Zurückspulen"
+  },
+  "seekForwardLabel": {
+    "message": "Vorspulen"
+  },
+  "playingFeedback": {
+    "message": "Wiedergabe"
+  },
+  "pausedFeedback": {
+    "message": "Pausiert"
+  },
+  "mutedFeedback": {
+    "message": "Stumm"
+  },
+  "unmutedFeedback": {
+    "message": "Ton an"
+  },
+  "keyboardShortcutsLabel": {
+    "message": "Tastenkürzel"
+  },
+  "playPauseShortcutLabel": {
+    "message": "Wiedergabe / Pause"
+  },
+  "seek5ShortcutLabel": {
+    "message": "±5 Sekunden springen"
+  },
+  "seek10ShortcutLabel": {
+    "message": "±10 Sekunden springen"
+  },
+  "volumeShortcutLabel": {
+    "message": "Lautstärke ±5 %"
+  },
+  "muteShortcutLabel": {
+    "message": "Stumm / Ton an"
+  },
+  "keyboardShortcutsHint": {
+    "message": "Reels: Space behält Instagrams Verhalten; K startet/pausiert. Im Feed, bei Story-Videos und im PiP funktioniert dafür auch Space. Reels/Stories: ↑ / ↓ behält die native Navigation; + / − regelt die Lautstärke. Im Feed/PiP geht das auch mit ↑ / ↓. Im Feed zuerst auf ein Video zeigen oder es auswählen. Textfelder und Menüs behalten ihre Tasten. Foto-Story im PiP: ← / → wechselt die Story."
+  }
+}

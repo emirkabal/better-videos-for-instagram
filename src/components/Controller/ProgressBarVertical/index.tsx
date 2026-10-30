@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import "./style.css"
 
-import cn from "classnames"
+import { cn } from "cn"
 
-import { t } from "~utils/i18n"
+import { t } from "@/utils/i18n"
 
 type Props = {
   progress?: number

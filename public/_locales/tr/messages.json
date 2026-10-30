@@ -1,0 +1,254 @@
+{
+  "appName": {
+    "message": "Instagram için Daha İyi Videolar: Oynatma ve Ses"
+  },
+  "appDescription": {
+    "message": "Instagram videolarının oynatımını, sesini, hızını ve resim içinde resim modunu kontrol edin."
+  },
+  "autoskipLabel": {
+    "message": "Oto-geç"
+  },
+  "downloadLabel": {
+    "message": "İndir"
+  },
+  "videoControlsLabel": {
+    "message": "Video kontrolleri"
+  },
+  "muteLabel": {
+    "message": "Sesi kapat"
+  },
+  "unmuteLabel": {
+    "message": "Sesi aç"
+  },
+  "volumeLabel": {
+    "message": "Ses düzeyi"
+  },
+  "playbackSpeedLabel": {
+    "message": "Oynatma hızı"
+  },
+  "videoProgressLabel": {
+    "message": "Video ilerlemesi"
+  },
+  "enterFullscreenLabel": {
+    "message": "Tam ekranı aç"
+  },
+  "exitFullscreenLabel": {
+    "message": "Tam ekrandan çık"
+  },
+  "fullscreenLabel": {
+    "message": "Tam ekran"
+  },
+  "exitLabel": {
+    "message": "Çık"
+  },
+  "openReelLabel": {
+    "message": "Bu videoyu Reels'te aç"
+  },
+  "pipLabel": {
+    "message": "Resim içinde resim"
+  },
+  "exitPipLabel": {
+    "message": "Resim içinde resimden çık"
+  },
+  "pipErrorLabel": {
+    "message": "PiP açılamadı. Videoyu oynatıp yeniden deneyin."
+  },
+  "playLabel": {
+    "message": "Oynat"
+  },
+  "pauseLabel": {
+    "message": "Duraklat"
+  },
+  "nextReelLabel": {
+    "message": "Sonraki Reel"
+  },
+  "previousReelLabel": {
+    "message": "Önceki Reel"
+  },
+  "extensionEnabledLabel": {
+    "message": "Eklenti etkin"
+  },
+  "extensionPausedLabel": {
+    "message": "Eklenti duraklatıldı"
+  },
+  "extensionEnabledDescription": {
+    "message": "Instagram için etkin. Sayfa bağlantısını aşağıdan kontrol edebilirsin."
+  },
+  "extensionPausedDescription": {
+    "message": "Instagram kendi kontrollerini kullanır."
+  },
+  "enableControllerLabel": {
+    "message": "Kontrolleri etkinleştir"
+  },
+  "disableControllerLabel": {
+    "message": "Kontrolleri devre dışı bırak"
+  },
+  "settingsLabel": {
+    "message": "Ayarlar"
+  },
+  "clickToPauseLabel": {
+    "message": "Tıklayarak duraklat"
+  },
+  "clickToPauseDescription": {
+    "message": "Akış videolarını Reels'i açmak yerine duraklat"
+  },
+  "volumeReductionLabel": {
+    "message": "Ses azaltma"
+  },
+  "volumeReductionDescription": {
+    "message": "En yüksek ses düzeyini düşür"
+  },
+  "offLabel": {
+    "message": "Kapalı"
+  },
+  "pauseAutoskipLabel": {
+    "message": "Otomatik geçişi duraklat"
+  },
+  "pauseAutoskipDescription": {
+    "message": "Reels yorumları açıkken"
+  },
+  "supportProjectLabel": {
+    "message": "Projeyi destekle"
+  },
+  "reportBugLabel": {
+    "message": "Hata bildir"
+  },
+  "contactLabel": {
+    "message": "İletişim"
+  },
+  "openInstagramLabel": {
+    "message": "Instagram'ı aç"
+  },
+  "installedLabel": {
+    "message": "Başarıyla yüklendi"
+  },
+  "updatedLabel": {
+    "message": "Başarıyla güncellendi"
+  },
+  "backToTopLabel": {
+    "message": "Başa dön"
+  },
+  "readyLabel": {
+    "message": "Kullanıma hazır"
+  },
+  "noSetupLabel": {
+    "message": "Kurulum gerektirmez."
+  },
+  "setupDescription": {
+    "message": "Kontrolleri kullanmak için Instagram'ı açıp bir video oynatın."
+  },
+  "openInstagramDescription": {
+    "message": "Desteklenen bir video içeren bir sayfayı açın."
+  },
+  "playVideoDescription": {
+    "message": "Video başladığında kontroller görünür."
+  },
+  "adjustPreferencesLabel": {
+    "message": "Tercihleri düzenle"
+  },
+  "adjustPreferencesDescription": {
+    "message": "Tercihlerinizi eklenti simgesinden değiştirin."
+  },
+  "builtByLabel": {
+    "message": "Geliştiren"
+  },
+  "diagnosticsLabel": {
+    "message": "Bu sayfadaki sorunu incele"
+  },
+  "diagnosticsOpenInstagram": {
+    "message": "Bir Instagram sekmesi açıp yeniden kontrol et."
+  },
+  "diagnosticsReady": {
+    "message": "Video kontrolleri bağlı. Bu bilgileri kopyalayıp hata bildirimine ekleyebilirsin."
+  },
+  "diagnosticsNoControls": {
+    "message": "Henüz kontrol eklenmedi. Bir video açıp yeniden kontrol et. Aşağıdaki bilgiler hata bildiriminde yardımcı olabilir."
+  },
+  "diagnosticsReload": {
+    "message": "Bu sekme eklentiye bağlı değil. Kurulum veya güncellemeden sonra Instagram’ı yenile ve tarayıcı ayarlarından site erişimini kontrol et."
+  },
+  "diagnosticsCheck": {
+    "message": "Yeniden kontrol et"
+  },
+  "diagnosticsReloadButton": {
+    "message": "Instagram’ı yenile"
+  },
+  "whatsNewLabel": {
+    "message": "Yenilikler"
+  },
+  "clickBehaviorLabel": {
+    "message": "Videoya tıklayınca"
+  },
+  "clickModeNative": {
+    "message": "Instagram"
+  },
+  "clickModePause": {
+    "message": "Duraklat"
+  },
+  "clickModePauseReels": {
+    "message": "Duraklat + Reels"
+  },
+  "clickModeNativeDescription": {
+    "message": "Instagram’ın kendi tıklama davranışını korur."
+  },
+  "clickModePauseDescription": {
+    "message": "Videoya tıklayarak duraklat veya oynat."
+  },
+  "clickModePauseReelsDescription": {
+    "message": "Tıklayarak duraklat veya oynat. Reels düğmesiyle aynı videoyu Instagram’ın Reels görünümünde aç."
+  },
+  "featureUpdatesLabel": {
+    "message": "Yenilikleri göster"
+  },
+  "featureUpdatesDescription": {
+    "message": "1.6.0 gibi özellik sürümlerinde yenilik sayfasını açar. Hata düzeltme güncellemeleri sessiz kalır."
+  },
+  "previousStoryLabel": {
+    "message": "Önceki hikâye"
+  },
+  "nextStoryLabel": {
+    "message": "Sonraki hikâye"
+  },
+  "secondsShortLabel": {
+    "message": "sn"
+  },
+  "seekBackwardLabel": {
+    "message": "Geri sar"
+  },
+  "seekForwardLabel": {
+    "message": "İleri sar"
+  },
+  "playingFeedback": {
+    "message": "Oynatılıyor"
+  },
+  "pausedFeedback": {
+    "message": "Duraklatıldı"
+  },
+  "mutedFeedback": {
+    "message": "Ses kapalı"
+  },
+  "unmutedFeedback": {
+    "message": "Ses açık"
+  },
+  "keyboardShortcutsLabel": {
+    "message": "Klavye kısayolları"
+  },
+  "playPauseShortcutLabel": {
+    "message": "Oynat / duraklat"
+  },
+  "seek5ShortcutLabel": {
+    "message": "5 saniye geri / ileri"
+  },
+  "seek10ShortcutLabel": {
+    "message": "10 saniye geri / ileri"
+  },
+  "volumeShortcutLabel": {
+    "message": "Ses ±%5"
+  },
+  "muteShortcutLabel": {
+    "message": "Sesi kapat / aç"
+  },
+  "keyboardShortcutsHint": {
+    "message": "Reels’te Space Instagram’ın davranışını korur; oynat/duraklat için K kullan. Feed, Story videoları ve PiP’de Space ile de oynat/duraklat yapılır. Reels/Story’de ↑ / ↓ Instagram’ın gezinmesini korur; ses için + / − kullan. Feed/PiP’de ↑ / ↓ ile de ses ayarlanır. Feed’de önce videonun üzerine gel veya seç. Yazı alanları ve menüler kendi tuşlarını korur. Fotoğraf Story PiP’de ← / → hikâyeyi değiştirir."
+  }
+}
