@@ -56,7 +56,7 @@ For Firefox, use `bun run dev:firefox`. Run `bun run build` to build for Chrome 
 
 ## Contributing
 
-Bug reports, suggestions, and pull requests are welcome. Open an [issue](https://github.com/emirkabal/better-videos-for-instagram/issues) or read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing.
+Bug reports, suggestions, and pull requests are welcome. Open an [issue](https://github.com/emirkabal/better-videos-for-instagram/issues) or read [CONTRIBUTING](CONTRIBUTING.md) before contributing.
 
 When reporting a bug, include the output from **Troubleshoot this page** in the extension popup, if available.
 
