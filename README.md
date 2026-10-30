@@ -11,7 +11,6 @@ A browser extension that makes Instagram videos easier to watch and control. Ava
 - Picture-in-Picture and fullscreen modes
 - Auto-skip Reels
 - Keyboard shortcuts for playback, seeking, and volume
-- Video click options: Native, Pause, or Pause + Reels
 - Support for Feed, Reels, and Stories
 
 ## Install
