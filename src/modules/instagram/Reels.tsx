@@ -72,10 +72,6 @@ export default class Reels extends IntervalInjector {
     return this.getActiveReelVideo() === video
   }
 
-  protected shouldInjectImmediately(video: HTMLVideoElement): boolean {
-    return !video.paused
-  }
-
   public injectMethod(): void {
     document.documentElement.setAttribute("data-bigv-reels-active", "true")
     const videos = document.querySelectorAll<HTMLVideoElement>("video")
